@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "the-compendium": {
+    "metronic": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -12,12 +12,12 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "kt",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/the-compendium",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,12 +25,21 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/.htaccess"
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/tooltip.js/dist/umd/tooltip.min.js",
+              "node_modules/perfect-scrollbar/dist/perfect-scrollbar.js",
+              "node_modules/clipboard/dist/clipboard.js",
+              "node_modules/apexcharts/dist/apexcharts.min.js",
+              "src/assets/js/layout/extended/examples.js"
+            ],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
@@ -45,19 +54,20 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
+              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "7mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "16kb",
+                  "maximumError": "100kb"
                 }
               ]
             }
@@ -66,18 +76,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "the-compendium:build"
+            "browserTarget": "metronic:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "the-compendium:build:production"
+              "browserTarget": "metronic:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "the-compendium:build"
+            "browserTarget": "metronic:build"
           }
         },
         "test": {
@@ -87,14 +97,13 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "assets": [
+              "src/assets"
+            ]
           }
         },
         "lint": {
@@ -102,27 +111,46 @@
           "options": {
             "tsConfig": [
               "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
           }
-        },
+        }
+      }
+    },
+    "metronic-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "the-compendium:serve"
+            "devServerTarget": "metronic:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "the-compendium:serve:production"
+              "devServerTarget": "metronic:serve:production"
             }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
-    }},
-  "defaultProject": "the-compendium"
+    }
+  },
+  "defaultProject": "metronic",
+  "cli": {
+    "analytics": "b1dfc39d-aa30-4e3a-8d5a-d646228c4f05"
+  }
 }
