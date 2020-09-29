@@ -38,7 +38,7 @@
               "node_modules/clipboard/dist/clipboard.js",
               "node_modules/apexcharts/dist/apexcharts.min.js"
             ],
-            "es5BrowserSupport": true
+            "es5BrowserSupport": false
           },
           "configurations": {
             "production": {
