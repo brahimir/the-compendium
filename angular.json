@@ -36,8 +36,7 @@
               "node_modules/tooltip.js/dist/umd/tooltip.min.js",
               "node_modules/perfect-scrollbar/dist/perfect-scrollbar.js",
               "node_modules/clipboard/dist/clipboard.js",
-              "node_modules/apexcharts/dist/apexcharts.min.js",
-              "src/assets/js/layout/extended/examples.js"
+              "node_modules/apexcharts/dist/apexcharts.min.js"
             ],
             "es5BrowserSupport": true
           },
