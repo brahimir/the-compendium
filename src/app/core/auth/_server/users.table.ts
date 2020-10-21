@@ -87,7 +87,7 @@ export class UsersTable {
       refreshToken: 'access-token-234jfjs34j393jjsf3asjkf123490fja',
       roles: [2], // Dungeon Master
       pic: './assets/media/users/300_25.jpg',
-      fullname: 'Nick B.`',
+      fullname: 'Nick B.',
       occupation: 'Mohawk College Student',
       companyName: 'The Compendium',
       phone: '456669067890',

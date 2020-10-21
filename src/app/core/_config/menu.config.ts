@@ -401,30 +401,35 @@ export class MenuConfig {
           root: true,
           bullet: 'dot',
           icon: 'fas fa-quidditch',
+          page: '/weapons'
         },
         {
           title: 'Items',
           root: true,
           bullet: 'dot',
           icon: 'fas fa-mask',
+          page: '/items'
         },
         {
           title: 'Monsters & NPCs',
           root: true,
           bullet: 'dot',
           icon: 'fab fa-optin-monster',
+          page: '/monsters-and-npcs'
         },
         {
           title: 'Spells',
           root: true,
           bullet: 'dot',
           icon: 'fas fa-hat-wizard',
+          page: '/spells'
         },
         {
           title: 'Homebrew',
           root: true,
           bullet: 'dot',
           icon: 'far fa-star',
+          page: '/homebrew'
         },
         { section: 'Campaign' },
         {
@@ -432,6 +437,7 @@ export class MenuConfig {
           bullet: 'dot',
           icon: 'flaticon2-list-2',
           root: true,
+          page: '/sessions'
         },
         { section: 'DM Tools' },
         {
@@ -439,6 +445,7 @@ export class MenuConfig {
           root: true,
           bullet: 'dot',
           icon: 'fas fa-globe-americas',
+          page: '/storyboard'
         },
       ]
     },
