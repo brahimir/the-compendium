@@ -5,13 +5,13 @@ export class MenuConfig {
     // header: {
     //   self: {},
     //   items: [
-    //     // {
-    //     //   title: 'Dashboard',
-    //     //   root: true,
-    //     //   alignment: 'left',
-    //     //   page: '/dashboard',
-    //     //   translate: 'MENU.DASHBOARD',
-    //     // },
+    // {
+    //   title: 'Dashboard',
+    //   root: true,
+    //   alignment: 'left',
+    //   page: '/dashboard',
+    //   translate: 'MENU.DASHBOARD',
+    // },
     //     {
     //       title: 'Layout Builder',
     //       root: true,
@@ -453,18 +453,17 @@ export class MenuConfig {
         // DM Tools
         {
           section: 'Dungeon Master Tools',
-          permission: 'accessToDMTools',
         },
         {
           title: 'Storyboard',
           root: true,
           bullet: 'dot',
-          icon: 'fas fa-globe-americas',
+          icon: 'fas fa-chalkboard',
           page: '/storyboard',
           permission: 'accessToDMTools'
         },
         {
-          title: 'Manage Session Entries',
+          title: 'Manage Sessions',
           root: true,
           bullet: 'dot',
           icon: 'flaticon2-open-text-book',

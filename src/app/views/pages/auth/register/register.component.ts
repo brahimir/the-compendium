@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 	/*
 	 * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
-    */
+	*/
 
 	/**
 	 * On init
@@ -61,8 +61,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	}
 
 	/*
-    * On destroy
-    */
+	* On destroy
+	*/
 	ngOnDestroy(): void {
 		this.unsubscribe.next();
 		this.unsubscribe.complete();
@@ -107,6 +107,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 				Validators.maxLength(100)
 			])
 			],
+			isDM: [false],
 			agree: [false, Validators.compose([Validators.required])]
 		}, {
 			validator: ConfirmPasswordValidator.MatchPassword
@@ -132,7 +133,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		if (!controls.agree.value) {
 			// you must agree the terms and condition
 			// checkbox cannot work inside mat-form-field https://github.com/angular/material2/issues/7891
-			this.authNoticeService.setNotice('You must agree the terms and condition', 'danger');
+			this.authNoticeService.setNotice('You must agree the terms and conditions', 'danger');
 			return;
 		}
 
@@ -142,11 +143,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		_user.username = controls.username.value;
 		_user.fullname = controls.fullname.value;
 		_user.password = controls.password.value;
-		_user.roles = [];
+
+		// Assign DM role if they selected it during registration.
+		if (controls.isDM.value) {
+			_user.roles = [2];	// role = DM
+		}
+		else {
+			_user.roles = [3];	// role = player
+		}
+
 		this.auth.register(_user).pipe(
 			tap(user => {
 				if (user) {
-					this.store.dispatch(new Register({authToken: user.accessToken}));
+					this.store.dispatch(new Register({ authToken: user.accessToken }));
 					// pass notice message to the login page
 					this.authNoticeService.setNotice(this.translate.instant('AUTH.REGISTER.SUCCESS'), 'success');
 					this.router.navigateByUrl('/auth/login');

@@ -53,10 +53,8 @@ export class AuthService {
   }
 
   register(user: User): Observable<any> {
-    user.roles = [2]; // Manager
     user.accessToken = 'access-token-' + Math.random();
     user.refreshToken = 'access-token-' + Math.random();
-    user.pic = './assets/media/users/default.jpg';
 
     let httpHeaders = new HttpHeaders();
     httpHeaders = httpHeaders.set('Content-Type', 'application/json');
