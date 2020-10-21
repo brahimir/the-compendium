@@ -7,13 +7,17 @@
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none';
+
+  <!-- begin::CORs -->
+  <meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; 
+  font-src 'self' 'unsafe-inline' https://fonts.gstatic.com;
   frame-src 'self';
   script-src 'self';
-  style-src 'self' 'unsafe-inline';
-  font-src 'self';
-  img-src 'self' data:;
-  connect-src 'self'">
+  img-src 'self';">
+  <!-- end:: CORs -->
+
   <link rel="icon" type="image/x-icon" href="./assets/media/logos/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700" rel="stylesheet">
 
