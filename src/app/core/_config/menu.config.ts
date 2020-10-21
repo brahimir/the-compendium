@@ -384,6 +384,8 @@ export class MenuConfig {
     aside: {
       self: {},
       items: [
+
+        // Dashboard
         {
           title: 'Dashboard',
           root: true,
@@ -393,6 +395,7 @@ export class MenuConfig {
           bullet: 'dot',
         },
 
+        // Resources
         { section: 'Resources' },
         {
           title: 'Weapons',
@@ -429,7 +432,16 @@ export class MenuConfig {
           icon: 'far fa-star',
           page: '/homebrew'
         },
-        { section: 'Campaign' },
+
+        // Story
+        { section: 'Story' },
+        {
+          title: 'Campaigns',
+          bullet: 'dot',
+          icon: 'fas fa-globe-americas',
+          root: true,
+          page: '/sessions'
+        },
         {
           title: 'Sessions',
           bullet: 'dot',
@@ -437,7 +449,12 @@ export class MenuConfig {
           root: true,
           page: '/sessions'
         },
-        { section: 'Dungeon Master Tools' },
+
+        // DM Tools
+        {
+          section: 'Dungeon Master Tools',
+          permission: 'accessToDMTools',
+        },
         {
           title: 'Storyboard',
           root: true,
@@ -455,20 +472,34 @@ export class MenuConfig {
           permission: 'accessToDMTools'
         },
         {
-          title: 'Create Homebrew Item',
+          title: 'Create',
           root: true,
           bullet: 'dot',
-          icon: 'fas fa-plus-square',
+          icon: 'fas fa-magic',
           page: '/storyboard',
-          permission: 'accessToDMTools'
-        },
-        {
-          title: 'Create Homebrew Spell',
-          root: true,
-          bullet: 'dot',
-          icon: 'fas fa-plus-square',
-          page: '/storyboard',
-          permission: 'accessToDMTools'
+          permission: 'accessToDMTools',
+          submenu: [
+            {
+              title: 'Weapon',
+              page: '/create/homebrew-weapon',
+              permission: 'accessToDMTools'
+            },
+            {
+              title: 'Item',
+              page: '/create/homebrew-item',
+              permission: 'accessToDMTools'
+            },
+            {
+              title: 'Monster',
+              page: '/create/homebrew-monster',
+              permission: 'accessToDMTools'
+            },
+            {
+              title: 'Spell',
+              page: '/create/homebrew-spell',
+              permission: 'accessToDMTools'
+            },
+          ]
         },
       ]
     },
