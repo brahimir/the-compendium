@@ -48,13 +48,16 @@ export class BrandComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
   }
 
+  /**
+   * Brand logo "The Compendium" for aside goes here.
+   */
   getAsideLogo() {
-    let result = 'logo-light.png';
-    const brandSelfTheme = this.layoutConfigService.getConfig('brand.self.theme') || '';
-    if (brandSelfTheme === 'light') {
-      result = 'logo-dark.png';
-    }
-    return `./assets/media/logos/${result}`;
+    // let result = 'logo-light.png';
+    // const brandSelfTheme = this.layoutConfigService.getConfig('brand.self.theme') || '';
+    // if (brandSelfTheme === 'light') {
+    //   result = 'logo-dark.png';
+    // }
+    return `./assets/media/logos/logo-the-compendium-text.png`;
   }
 
   toggleAsideClick() {
