@@ -381,8 +381,6 @@ export class MenuConfig {
     //   ]
     // },
 
-
-    // ! ASIDE MENU
     aside: {
       self: {},
       items: [
@@ -445,6 +443,30 @@ export class MenuConfig {
           root: true,
           bullet: 'dot',
           icon: 'fas fa-globe-americas',
+          page: '/storyboard',
+          permission: 'accessToDMTools'
+        },
+        {
+          title: 'Manage Session Entries',
+          root: true,
+          bullet: 'dot',
+          icon: 'flaticon2-open-text-book',
+          page: '/storyboard',
+          permission: 'accessToDMTools'
+        },
+        {
+          title: 'Create Homebrew Item',
+          root: true,
+          bullet: 'dot',
+          icon: 'fas fa-plus-square',
+          page: '/storyboard',
+          permission: 'accessToDMTools'
+        },
+        {
+          title: 'Create Homebrew Spell',
+          root: true,
+          bullet: 'dot',
+          icon: 'fas fa-plus-square',
           page: '/storyboard',
           permission: 'accessToDMTools'
         },
