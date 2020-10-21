@@ -53,7 +53,7 @@ export const locale = {
         MIN_LENGTH: '{{name}} minimum length is {{min}}',
         AGREEMENT_REQUIRED: 'Accepting terms & conditions are required',
         NOT_FOUND: 'The requested {{name}} is not found',
-        INVALID_LOGIN: 'The login detail is incorrect',
+        INVALID_LOGIN: 'Sorry, your login credentials did not match our records.',
         REQUIRED_FIELD: 'Required field',
         MIN_LENGTH_FIELD: 'Minimum field length:',
         MAX_LENGTH_FIELD: 'Maximum field length:',
