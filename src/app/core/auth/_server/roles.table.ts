@@ -8,13 +8,13 @@ export class RolesTable {
     },
     {
       id: 2,
-      title: 'Manager',
+      title: 'Dungeon Master',
       isCoreRole: false,
       permissions: [3, 4, 10]
     },
     {
       id: 3,
-      title: 'Guest',
+      title: 'Player',
       isCoreRole: false,
       permissions: []
     }
