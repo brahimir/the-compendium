@@ -75,7 +75,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "metronic:build"
+            "browserTarget": "metronic:build",
+            "host": "0.0.0.0",
+            "port": 1900
           },
           "configurations": {
             "production": {
