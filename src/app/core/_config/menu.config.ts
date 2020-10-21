@@ -439,13 +439,14 @@ export class MenuConfig {
           root: true,
           page: '/sessions'
         },
-        { section: 'DM Tools' },
+        { section: 'Dungeon Master Tools' },
         {
           title: 'Storyboard',
           root: true,
           bullet: 'dot',
           icon: 'fas fa-globe-americas',
-          page: '/storyboard'
+          page: '/storyboard',
+          permission: 'accessToDMTools'
         },
       ]
     },

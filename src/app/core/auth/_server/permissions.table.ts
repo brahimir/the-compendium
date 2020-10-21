@@ -81,5 +81,12 @@ export class PermissionsTable {
       parentId: 3,
       title: 'Delete'
     },
+    {
+      id: 13,
+      name: 'accessToDMTools',
+      level: 2,
+      parentId: 3,
+      title: 'dmTools'
+    },
   ];
 }
