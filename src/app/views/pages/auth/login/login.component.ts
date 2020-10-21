@@ -13,14 +13,6 @@ import { AppState } from '../../../../core/reducers';
 // Auth
 import { AuthNoticeService, AuthService, Login } from '../../../../core/auth';
 
-/**
- * ! Just example => Should be removed in development
- */
-const DEMO_PARAMS = {
-	EMAIL: 'admin@demo.com',
-	PASSWORD: 'demo'
-};
-
 @Component({
 	selector: 'kt-login',
 	templateUrl: './login.component.html',
