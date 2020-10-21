@@ -7,6 +7,13 @@ import { BaseComponent } from './views/theme/base/base.component';
 // Auth
 import { AuthGuard } from './core/auth';
 
+// The Compendium Components
+import { WeaponsComponent } from './views/pages/the-compendium-pages/weapons/weapons.component';
+import { ItemsComponent } from './views/pages/the-compendium-pages/items/items.component';
+import { MonstersAndNpcsComponent } from './views/pages/the-compendium-pages/monsters-and-npcs/monsters-and-npcs.component';
+import { SpellsComponent } from './views/pages/the-compendium-pages/spells/spells.component';
+import { HomebrewComponent } from './views/pages/the-compendium-pages/homebrew/homebrew.component';
+
 const routes: Routes = [
   {path: 'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule)},
   {path: 'error', loadChildren: () => import('./views/pages/error/error.module').then(m => m.ErrorModule)},
@@ -19,6 +26,30 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./views/pages/dashboard/dashboard.module').then(m => m.DashboardModule),
       },
+
+      // begin:: The Compendium Pages
+      {
+        path: 'weapons',
+        component: WeaponsComponent
+      },
+      {
+        path: 'items',
+        component: ItemsComponent
+      },
+      {
+        path: 'monsters-and-npcs',
+        component: MonstersAndNpcsComponent
+      },
+      {
+        path: 'spells',
+        component: SpellsComponent
+      },
+      {
+        path: 'homebrew',
+        component: HomebrewComponent
+      },
+      // end:: The Compendium Pages
+
       {
         path: 'mail',
         loadChildren: () => import('./views/pages/apps/mail/mail.module').then(m => m.MailModule),
