@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "the-compendium": {
+      "hosting": {
+        "metronic": [
+          "the-compendium"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "the-compendium"
+  }
+}
