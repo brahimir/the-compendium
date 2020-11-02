@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MonstersAndNpcsComponent } from './monsters-and-npcs.component';
+import { HomebrewArmorComponent } from './homebrew-armor.component';
 
-describe('MonstersAndNpcsComponent', () => {
-  let component: MonstersAndNpcsComponent;
-  let fixture: ComponentFixture<MonstersAndNpcsComponent>;
+describe('HomebrewArmorComponent', () => {
+  let component: HomebrewArmorComponent;
+  let fixture: ComponentFixture<HomebrewArmorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MonstersAndNpcsComponent ]
+      declarations: [ HomebrewArmorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MonstersAndNpcsComponent);
+    fixture = TestBed.createComponent(HomebrewArmorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

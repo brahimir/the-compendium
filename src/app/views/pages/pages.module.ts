@@ -7,17 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 // Partials
 import { PartialsModule } from '../partials/partials.module';
 
-// Pages
-import { CoreModule } from '../../core/core.module';
-import { MailModule } from './apps/mail/mail.module';
-import { ECommerceModule } from './apps/e-commerce/e-commerce.module';
-import { UserManagementModule } from './user-management/user-management.module';
-import { WeaponsAndArmorComponent } from './the-compendium-pages/weapons-and-armor/weapons-and-armor.component';
-import { ItemsComponent } from './the-compendium-pages/items/items.component';
-import { MonstersAndNpcsComponent } from './the-compendium-pages/monsters-and-npcs/monsters-and-npcs.component';
-import { SpellsComponent } from './the-compendium-pages/spells/spells.component';
-import { HomebrewComponent } from './the-compendium-pages/homebrew/homebrew.component';
-
 // Data table
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatInputModule } from '@angular/material/input';
@@ -48,8 +37,63 @@ import { MatBottomSheetModule, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 
+// Pages
+import { CoreModule } from '../../core/core.module';
+import { MailModule } from './apps/mail/mail.module';
+import { ECommerceModule } from './apps/e-commerce/e-commerce.module';
+import { UserManagementModule } from './user-management/user-management.module';
+
+// The Compendium Pages
+import { Weapons } from './the-compendium-pages/weapons/weapons.component';
+import { ArmorComponent } from './the-compendium-pages/armor/armor.component';
+import { ItemsComponent } from './the-compendium-pages/items/items.component';
+import { NpcsComponent } from './the-compendium-pages/npcs/npcs.component';
+import { SpellsComponent } from './the-compendium-pages/spells/spells.component';
+import { CampaignsComponent } from './the-compendium-pages/campaigns/campaigns.component';
+import { SessionsComponent } from './the-compendium-pages/sessions/sessions.component';
+//Homebrew Pages
+import { HomebrewWeaponsComponent } from './the-compendium-pages/homebrew/homebrew-weapons/homebrew-weapons.component';
+import { HomebrewArmorComponent } from './the-compendium-pages/homebrew/homebrew-armor/homebrew-armor.component';
+import { HomebrewItemsComponent } from './the-compendium-pages/homebrew/homebrew-items/homebrew-items.component';
+import { HomebrewNpcsComponent } from './the-compendium-pages/homebrew/homebrew-npcs/homebrew-npcs.component';
+import { HomebrewSpellsComponent } from './the-compendium-pages/homebrew/homebrew-spells/homebrew-spells.component';
+// DM Tools Pages
+import { ManageSessionsComponent } from './the-compendium-pages/dm-tools/manage-sessions/manage-sessions.component';
+import { StoryboardComponent } from './the-compendium-pages/dm-tools/storyboard/storyboard.component';
+import { CreateWeaponComponent } from './the-compendium-pages/dm-tools/create/create-weapon/create-weapon.component';
+import { CreateArmorComponent } from './the-compendium-pages/dm-tools/create/create-armor/create-armor.component';
+import { CreateItemComponent } from './the-compendium-pages/dm-tools/create/create-item/create-item.component';
+import { CreateMonsterComponent } from './the-compendium-pages/dm-tools/create/create-monster/create-monster.component';
+import { CreateNpcComponent } from './the-compendium-pages/dm-tools/create/create-npc/create-npc.component';
+import { CreateSpellComponent } from './the-compendium-pages/dm-tools/create/create-spell/create-spell.component';
+
 @NgModule({
-  declarations: [WeaponsAndArmorComponent, ItemsComponent, MonstersAndNpcsComponent, SpellsComponent, HomebrewComponent],
+  declarations: [
+	  //The Compendium Pages
+	  Weapons, 
+	  ArmorComponent,
+	  ItemsComponent, 
+	  NpcsComponent, 
+	  SpellsComponent,
+	  StoryboardComponent, 
+	  CampaignsComponent, 
+	  SessionsComponent,
+	  // Homebrew Pages
+	  HomebrewWeaponsComponent, 
+	  HomebrewArmorComponent, 
+	  HomebrewItemsComponent, 
+	  HomebrewNpcsComponent, 
+	  HomebrewSpellsComponent,
+	  // DM Tools Pages
+	  StoryboardComponent,
+	  ManageSessionsComponent,
+	  CreateWeaponComponent, 
+	  CreateArmorComponent, 
+	  CreateItemComponent, 
+	  CreateMonsterComponent, 
+	  CreateNpcComponent, 
+	  CreateSpellComponent, 
+	],
   exports: [],
   imports: [
     // material modules

@@ -8,11 +8,27 @@ import { BaseComponent } from './views/theme/base/base.component';
 import { AuthGuard } from './core/auth';
 
 // The Compendium Components
-import { WeaponsAndArmorComponent } from './views/pages/the-compendium-pages/weapons-and-armor/weapons-and-armor.component';
+import { Weapons } from './views/pages/the-compendium-pages/weapons/weapons.component';
+import { ArmorComponent } from './views/pages/the-compendium-pages/armor/armor.component';
 import { ItemsComponent } from './views/pages/the-compendium-pages/items/items.component';
-import { MonstersAndNpcsComponent } from './views/pages/the-compendium-pages/monsters-and-npcs/monsters-and-npcs.component';
+import { NpcsComponent } from './views/pages/the-compendium-pages/npcs/npcs.component';
 import { SpellsComponent } from './views/pages/the-compendium-pages/spells/spells.component';
-import { HomebrewComponent } from './views/pages/the-compendium-pages/homebrew/homebrew.component';
+import { CampaignsComponent } from './views/pages/the-compendium-pages/campaigns/campaigns.component';
+import { SessionsComponent } from './views/pages/the-compendium-pages/sessions/sessions.component';
+//Homebrew Pages
+import { HomebrewWeaponsComponent } from './views/pages/the-compendium-pages/homebrew/homebrew-weapons/homebrew-weapons.component';
+import { HomebrewArmorComponent } from './views/pages/the-compendium-pages/homebrew/homebrew-armor/homebrew-armor.component';
+import { HomebrewItemsComponent } from './views/pages/the-compendium-pages/homebrew/homebrew-items/homebrew-items.component';
+import { HomebrewNpcsComponent } from './views/pages/the-compendium-pages/homebrew/homebrew-npcs/homebrew-npcs.component';
+import { HomebrewSpellsComponent } from './views/pages/the-compendium-pages/homebrew/homebrew-spells/homebrew-spells.component';
+// DM Tools
+import { StoryboardComponent } from './views/pages/the-compendium-pages/dm-tools/storyboard/storyboard.component';
+import { ManageSessionsComponent } from './views/pages/the-compendium-pages/dm-tools/manage-sessions/manage-sessions.component';
+import { CreateWeaponComponent } from './views/pages/the-compendium-pages/dm-tools/create/create-weapon/create-weapon.component';
+import { CreateArmorComponent } from './views/pages/the-compendium-pages/dm-tools/create/create-armor/create-armor.component';
+import { CreateItemComponent } from './views/pages/the-compendium-pages/dm-tools/create/create-item/create-item.component';
+import { CreateNpcComponent } from './views/pages/the-compendium-pages/dm-tools/create/create-npc/create-npc.component';
+import { CreateSpellComponent } from './views/pages/the-compendium-pages/dm-tools/create/create-spell/create-spell.component';
 
 const routes: Routes = [
   {path: 'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule)},
@@ -29,24 +45,78 @@ const routes: Routes = [
 
       // begin:: The Compendium Pages
       {
-        path: 'weapons-and-armor',
-        component: WeaponsAndArmorComponent
+        path: 'weapons',
+        component: Weapons
+      },
+      {
+        path: 'armor',
+        component: ArmorComponent
       },
       {
         path: 'items',
         component: ItemsComponent
       },
       {
-        path: 'monsters-and-npcs',
-        component: MonstersAndNpcsComponent
+        path: 'npcs',
+        component: NpcsComponent
       },
       {
         path: 'spells',
         component: SpellsComponent
       },
       {
-        path: 'homebrew',
-        component: HomebrewComponent
+        path: 'campaigns',
+        component: CampaignsComponent
+      },
+      {
+        path: 'sessions',
+        component: SessionsComponent
+      },
+      // Homebrew Pages
+      {
+        path: 'homebrew-weapons',
+        component: HomebrewWeaponsComponent
+      },
+      {
+        path: 'homebrew-armor',
+        component: HomebrewArmorComponent
+      },
+      {
+        path: 'homebrew-items',
+        component: HomebrewItemsComponent
+      },
+      {
+        path: 'homebrew-npcs',
+        component: HomebrewNpcsComponent
+      },
+      {
+        path: 'homebrew-spells',
+        component: HomebrewSpellsComponent
+      },
+      // DM Tools Pages
+      {
+        path: 'storyboard',
+        component: StoryboardComponent
+      },
+      {
+        path: 'create-weapon',
+        component: CreateWeaponComponent
+      },
+      {
+        path: 'create-armor',
+        component: CreateArmorComponent
+      },
+      {
+        path: 'create-item',
+        component: CreateItemComponent
+      },
+      {
+        path: 'create-npc',
+        component: CreateNpcComponent
+      },
+      {
+        path: 'create-spell',
+        component: CreateSpellComponent
       },
       // end:: The Compendium Pages
 
