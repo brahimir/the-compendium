@@ -7,10 +7,12 @@ import { Role } from '../_models/role.model';
 import { catchError, map } from 'rxjs/operators';
 import { QueryParamsModel, QueryResultsModel } from '../../_base/crud';
 import { environment } from '../../../../environments/environment';
+import { routes } from '../../../../environments/app-secrets';
 
-const API_USERS_URL = 'api/users';
-const API_PERMISSION_URL = 'api/permissions';
-const API_ROLES_URL = 'api/roles';
+// API Routes
+const API_USERS_URL = routes.API_USERS_URL;
+const API_PERMISSION_URL = routes.API_PERMISSION_URL;
+const API_ROLES_URL = routes.API_ROLES_URL;
 
 @Injectable()
 export class AuthService {
