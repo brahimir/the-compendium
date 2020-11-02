@@ -51,6 +51,16 @@ export class UsersTable {
       roles: [2], // Dungeon Master
       fullname: 'Pam',
     },
+    {
+      id: 5,
+      username: 'joe',
+      password: 'Testing123!',
+      email: 'joe@tc.com',
+      accessToken: 'access-token-123nj2k3n245192m231232k3m2904512m31',
+      refreshToken: 'access-token-455jsf903mrf923msfm903m99tr3kmm10a',
+      roles: [2], // Dungeon Master
+      fullname: 'Joe V.',
+    },
   ];
 
   public static tokens: any = [
