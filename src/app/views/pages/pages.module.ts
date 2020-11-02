@@ -12,8 +12,7 @@ import { CoreModule } from '../../core/core.module';
 import { MailModule } from './apps/mail/mail.module';
 import { ECommerceModule } from './apps/e-commerce/e-commerce.module';
 import { UserManagementModule } from './user-management/user-management.module';
-import { MyPageComponent } from './my-page/my-page.component';
-import { WeaponsComponent } from './the-compendium-pages/weapons/weapons.component';
+import { WeaponsAndArmorComponent } from './the-compendium-pages/weapons-and-armor/weapons-and-armor.component';
 import { ItemsComponent } from './the-compendium-pages/items/items.component';
 import { MonstersAndNpcsComponent } from './the-compendium-pages/monsters-and-npcs/monsters-and-npcs.component';
 import { SpellsComponent } from './the-compendium-pages/spells/spells.component';
@@ -50,7 +49,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
-  declarations: [MyPageComponent, WeaponsComponent, ItemsComponent, MonstersAndNpcsComponent, SpellsComponent, HomebrewComponent],
+  declarations: [WeaponsAndArmorComponent, ItemsComponent, MonstersAndNpcsComponent, SpellsComponent, HomebrewComponent],
   exports: [],
   imports: [
     // material modules

@@ -398,11 +398,11 @@ export class MenuConfig {
         // Resources
         { section: 'Resources' },
         {
-          title: 'Weapons',
+          title: 'Weapons and Armor',
           root: true,
           bullet: 'dot',
           icon: 'fas fa-quidditch',
-          page: '/weapons'
+          page: '/weapons-and-armor'
         },
         {
           title: 'Items',

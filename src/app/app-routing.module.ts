@@ -8,7 +8,7 @@ import { BaseComponent } from './views/theme/base/base.component';
 import { AuthGuard } from './core/auth';
 
 // The Compendium Components
-import { WeaponsComponent } from './views/pages/the-compendium-pages/weapons/weapons.component';
+import { WeaponsAndArmorComponent } from './views/pages/the-compendium-pages/weapons-and-armor/weapons-and-armor.component';
 import { ItemsComponent } from './views/pages/the-compendium-pages/items/items.component';
 import { MonstersAndNpcsComponent } from './views/pages/the-compendium-pages/monsters-and-npcs/monsters-and-npcs.component';
 import { SpellsComponent } from './views/pages/the-compendium-pages/spells/spells.component';
@@ -29,8 +29,8 @@ const routes: Routes = [
 
       // begin:: The Compendium Pages
       {
-        path: 'weapons',
-        component: WeaponsComponent
+        path: 'weapons-and-armor',
+        component: WeaponsAndArmorComponent
       },
       {
         path: 'items',

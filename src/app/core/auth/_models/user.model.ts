@@ -1,6 +1,4 @@
 import { BaseModel } from '../../_base/crud';
-import { Address } from './address.model';
-import { SocialNetworks } from './social-networks.model';
 
 export class User extends BaseModel {
   id: number;
