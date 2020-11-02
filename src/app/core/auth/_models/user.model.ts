@@ -10,13 +10,7 @@ export class User extends BaseModel {
   accessToken: string;
   refreshToken: string;
   roles: number[];
-  pic: string;
-  fullname: string;
-  occupation: string;
-  companyName: string;
-  phone: string;
-  address: Address;
-  socialNetworks: SocialNetworks;
+  fullName: string;
 
   clear(): void {
     this.id = undefined;
@@ -24,16 +18,8 @@ export class User extends BaseModel {
     this.password = '';
     this.email = '';
     this.roles = [];
-    this.fullname = '';
+    this.fullName = '';
     this.accessToken = 'access-token-' + Math.random();
     this.refreshToken = 'access-token-' + Math.random();
-    this.pic = './assets/media/users/default.jpg';
-    this.occupation = '';
-    this.companyName = '';
-    this.phone = '';
-    this.address = new Address();
-    this.address.clear();
-    this.socialNetworks = new SocialNetworks();
-    this.socialNetworks.clear();
   }
 }
