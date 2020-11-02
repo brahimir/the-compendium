@@ -71,7 +71,7 @@ export class LayoutConfig {
       "self": {
         "display": true,
         "width": "fluid",
-        "theme": "light",
+        "theme": "dark",
         "fixed": {
           "desktop": true,
           "mobile": true
@@ -80,8 +80,8 @@ export class LayoutConfig {
       "menu": {
         "self": {
           "display": true,
-          "layout": "tab",
-          "rootArrow": false,
+          "layout": "default",
+          "rootArrow": true,
           "icon-style": "duotone"
         },
         "desktop": {
@@ -136,7 +136,7 @@ export class LayoutConfig {
       },
       "menu": {
         "dropdown": false,
-        "scroll": false,
+        "scroll": true,
         "icon-style": "duotone",
         "submenu": {
           "accordion": true,

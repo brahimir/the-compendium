@@ -6,6 +6,69 @@ export class PageConfig {
         desc: ''
       },
     },
+    // The Compendium Pages
+    weapons: {
+      page: {title: 'Weapons', desc: ''}
+    }, 
+    armor: {
+      page: {title: 'Armor', desc: ''}
+    }, 
+    items: {
+      page: {title: 'Items', desc: ''}
+    }, 
+    npcs: {
+      page: {title: 'NPCs', desc: ''}
+    }, 
+    spells: {
+      page: {title: 'Spells', desc: ''}
+    }, 
+    homebrew: {
+      'weapons': {
+        page: {title: 'Weapons', desc: ''}
+      },
+      'armor': {
+        page: {title: 'Armor', desc: ''}
+      },
+      'items': {
+        page: {title: 'Items', desc: ''}
+      },
+      'npcs': {
+        page: {title: 'NPCs', desc: ''}
+      },
+      'spells': {
+        page: {title: 'Spells', desc: ''}
+      },
+    },
+    campaigns: {
+      page: {title: 'Campaigns', desc: ''}
+    },
+    sessions: {
+      page: {title: 'Sessions', desc: ''}
+    },
+    //DM Tools Pages
+    storyboard: {
+      page: {title: 'Storyboard', desc: ''}
+    },
+    manageSessions: {
+      page: {title: 'Manage Sessions', desc: ''}
+    },
+    create: {
+      'weapon': {
+        page: {title: 'Create Weapon', desc: ''}
+      },
+      'armor': {
+        page: {title: 'Create Armor', desc: ''}
+      },
+      'item': {
+        page: {title: 'Create Item', desc: ''}
+      },
+      'npc': {
+        page: {title: 'Create NPC', desc: ''}
+      },
+      'spell': {
+        page: {title: 'Create Spell', desc: ''}
+      },
+    },
     ngbootstrap: {
       accordion: {
         page: {title: 'Accordion', desc: ''}

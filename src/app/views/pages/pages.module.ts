@@ -60,12 +60,7 @@ import { HomebrewSpellsComponent } from './the-compendium-pages/homebrew/homebre
 // DM Tools Pages
 import { ManageSessionsComponent } from './the-compendium-pages/dm-tools/manage-sessions/manage-sessions.component';
 import { StoryboardComponent } from './the-compendium-pages/dm-tools/storyboard/storyboard.component';
-import { CreateWeaponComponent } from './the-compendium-pages/dm-tools/create/create-weapon/create-weapon.component';
-import { CreateArmorComponent } from './the-compendium-pages/dm-tools/create/create-armor/create-armor.component';
-import { CreateItemComponent } from './the-compendium-pages/dm-tools/create/create-item/create-item.component';
-import { CreateMonsterComponent } from './the-compendium-pages/dm-tools/create/create-monster/create-monster.component';
-import { CreateNpcComponent } from './the-compendium-pages/dm-tools/create/create-npc/create-npc.component';
-import { CreateSpellComponent } from './the-compendium-pages/dm-tools/create/create-spell/create-spell.component';
+import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.component';
 
 @NgModule({
   declarations: [
@@ -87,12 +82,7 @@ import { CreateSpellComponent } from './the-compendium-pages/dm-tools/create/cre
 	  // DM Tools Pages
 	  StoryboardComponent,
 	  ManageSessionsComponent,
-	  CreateWeaponComponent, 
-	  CreateArmorComponent, 
-	  CreateItemComponent, 
-	  CreateMonsterComponent, 
-	  CreateNpcComponent, 
-	  CreateSpellComponent, 
+	  CreateComponent, 
 	],
   exports: [],
   imports: [

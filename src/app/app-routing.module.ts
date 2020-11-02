@@ -24,11 +24,7 @@ import { HomebrewSpellsComponent } from './views/pages/the-compendium-pages/home
 // DM Tools
 import { StoryboardComponent } from './views/pages/the-compendium-pages/dm-tools/storyboard/storyboard.component';
 import { ManageSessionsComponent } from './views/pages/the-compendium-pages/dm-tools/manage-sessions/manage-sessions.component';
-import { CreateWeaponComponent } from './views/pages/the-compendium-pages/dm-tools/create/create-weapon/create-weapon.component';
-import { CreateArmorComponent } from './views/pages/the-compendium-pages/dm-tools/create/create-armor/create-armor.component';
-import { CreateItemComponent } from './views/pages/the-compendium-pages/dm-tools/create/create-item/create-item.component';
-import { CreateNpcComponent } from './views/pages/the-compendium-pages/dm-tools/create/create-npc/create-npc.component';
-import { CreateSpellComponent } from './views/pages/the-compendium-pages/dm-tools/create/create-spell/create-spell.component';
+import { CreateComponent } from './views/pages/the-compendium-pages/dm-tools/create/create.component';
 
 const routes: Routes = [
   {path: 'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule)},
@@ -99,25 +95,14 @@ const routes: Routes = [
         component: StoryboardComponent
       },
       {
-        path: 'create-weapon',
-        component: CreateWeaponComponent
+        path: 'manage-sessions',
+        component: ManageSessionsComponent
       },
       {
-        path: 'create-armor',
-        component: CreateArmorComponent
+        path: 'create',
+        component: CreateComponent
       },
-      {
-        path: 'create-item',
-        component: CreateItemComponent
-      },
-      {
-        path: 'create-npc',
-        component: CreateNpcComponent
-      },
-      {
-        path: 'create-spell',
-        component: CreateSpellComponent
-      },
+      
       // end:: The Compendium Pages
 
       {

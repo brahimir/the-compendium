@@ -503,34 +503,8 @@ export class MenuConfig {
           root: true,
           bullet: 'dot',
           icon: 'fas fa-magic',
-          permission: 'accessToDMTools',
-          submenu: [
-            {
-              title: 'Weapon',
-              page: '/create-weapon',
-              permission: 'accessToDMTools'
-            },
-            {
-              title: 'Armor',
-              page: '/create-armor',
-              permission: 'accessToDMTools'
-            },
-            {
-              title: 'Item',
-              page: '/create-item',
-              permission: 'accessToDMTools'
-            },
-            {
-              title: 'NPC',
-              page: '/create-npc',
-              permission: 'accessToDMTools'
-            },
-            {
-              title: 'Spell',
-              page: '/create-spell',
-              permission: 'accessToDMTools'
-            },
-          ]
+          page: '/create',
+          permission: 'accessToDMTools'
         },
       ]
     },
