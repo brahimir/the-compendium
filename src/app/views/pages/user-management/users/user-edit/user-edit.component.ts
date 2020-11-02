@@ -79,8 +79,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
 					if (res) {
 						this.user = res;
 						this.rolesSubject.next(this.user.roles);
-						this.addressSubject.next(this.user.address);
-						this.soicialNetworksSubject.next(this.user.socialNetworks);
 						this.oldUser = Object.assign({}, this.user);
 						this.initUser();
 					}
@@ -89,8 +87,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
 				this.user = new User();
 				this.user.clear();
 				this.rolesSubject.next(this.user.roles);
-				this.addressSubject.next(this.user.address);
-				this.soicialNetworksSubject.next(this.user.socialNetworks);
 				this.oldUser = Object.assign({}, this.user);
 				this.initUser();
 			}
@@ -130,11 +126,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
 	createForm() {
 		this.userForm = this.userFB.group({
 			username: [this.user.username, Validators.required],
-			fullname: [this.user.fullname, Validators.required],
-			email: [this.user.email, Validators.email],
-			phone: [this.user.phone],
-			companyName: [this.user.companyName],
-			occupation: [this.user.occupation]
+			fullname: [this.user.fullName, Validators.required],
+			email: [this.user.email, Validators.email]
 		});
 	}
 
@@ -213,18 +206,12 @@ export class UserEditComponent implements OnInit, OnDestroy {
 		const _user = new User();
 		_user.clear();
 		_user.roles = this.rolesSubject.value;
-		_user.address = this.addressSubject.value;
-		_user.socialNetworks = this.soicialNetworksSubject.value;
 		_user.accessToken = this.user.accessToken;
 		_user.refreshToken = this.user.refreshToken;
-		_user.pic = this.user.pic;
 		_user.id = this.user.id;
 		_user.username = controls.username.value;
 		_user.email = controls.email.value;
-		_user.fullname = controls.fullname.value;
-		_user.occupation = controls.occupation.value;
-		_user.phone = controls.phone.value;
-		_user.companyName = controls.companyName.value;
+		_user.fullName = controls.fullname.value;
 		_user.password = this.user.password;
 		return _user;
 	}
@@ -284,7 +271,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 			return result;
 		}
 
-		result = `Edit user - ${this.user.fullname}`;
+		result = `Edit user - ${this.user.fullName}`;
 		return result;
 	}
 

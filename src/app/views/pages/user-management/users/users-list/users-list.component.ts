@@ -201,7 +201,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
 		const messages = [];
 		this.selection.selected.forEach(elem => {
 			messages.push({
-				text: `${elem.fullname}, ${elem.email}`,
+				text: `${elem.fullName}, ${elem.email}`,
 				id: elem.id.toString(),
 				status: elem.username
 			});

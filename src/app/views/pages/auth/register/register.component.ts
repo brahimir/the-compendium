@@ -141,7 +141,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		_user.clear();
 		_user.email = controls.email.value;
 		_user.username = controls.username.value;
-		_user.fullname = controls.fullname.value;
+		_user.fullName = controls.fullname.value;
 		_user.password = controls.password.value;
 
 		// Assign DM role if they selected it during registration.
