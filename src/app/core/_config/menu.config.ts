@@ -398,25 +398,32 @@ export class MenuConfig {
         // Resources
         { section: 'Resources' },
         {
-          title: 'Weapons and Armor',
+          title: 'Weapons',
           root: true,
           bullet: 'dot',
-          icon: 'fas fa-quidditch',
-          page: '/weapons-and-armor'
+          icon: 'fas fa-hammer',
+          page: '/weapons'
+        },
+        {
+          title: 'Armor',
+          root: true,
+          bullet: 'dot',
+          icon: 'fas fa-shield-alt',
+          page: '/armor'
         },
         {
           title: 'Items',
           root: true,
           bullet: 'dot',
-          icon: 'fas fa-mask',
+          icon: 'fas fa-glass-martini',
           page: '/items'
         },
         {
-          title: 'Monsters & NPCs',
+          title: 'NPCs',
           root: true,
           bullet: 'dot',
           icon: 'fab fa-optin-monster',
-          page: '/monsters-and-npcs'
+          page: '/npcs'
         },
         {
           title: 'Spells',
@@ -430,7 +437,28 @@ export class MenuConfig {
           root: true,
           bullet: 'dot',
           icon: 'far fa-star',
-          page: '/homebrew'
+          submenu: [
+            {
+              title: 'Weapons',
+              page: '/homebrew-weapons',
+            },
+            {
+              title: 'Armors',
+              page: '/homebrew-armor',
+            },
+            {
+              title: 'Items',
+              page: '/homebrew-items',
+            },
+            {
+              title: 'NPCs',
+              page: '/homebrew-npcs',
+            },
+            {
+              title: 'Spells',
+              page: '/homebrew-spells',
+            },
+          ]
         },
 
         // Story
@@ -440,7 +468,7 @@ export class MenuConfig {
           bullet: 'dot',
           icon: 'fas fa-globe-americas',
           root: true,
-          page: '/sessions'
+          page: '/campaigns'
         },
         {
           title: 'Sessions',
@@ -467,7 +495,7 @@ export class MenuConfig {
           root: true,
           bullet: 'dot',
           icon: 'flaticon2-open-text-book',
-          page: '/storyboard',
+          page: '/manage-sessions',
           permission: 'accessToDMTools'
         },
         {
@@ -475,27 +503,31 @@ export class MenuConfig {
           root: true,
           bullet: 'dot',
           icon: 'fas fa-magic',
-          page: '/storyboard',
           permission: 'accessToDMTools',
           submenu: [
             {
               title: 'Weapon',
-              page: '/create/homebrew-weapon',
+              page: '/create-weapon',
+              permission: 'accessToDMTools'
+            },
+            {
+              title: 'Armor',
+              page: '/create-armor',
               permission: 'accessToDMTools'
             },
             {
               title: 'Item',
-              page: '/create/homebrew-item',
+              page: '/create-item',
               permission: 'accessToDMTools'
             },
             {
-              title: 'Monster',
-              page: '/create/homebrew-monster',
+              title: 'NPC',
+              page: '/create-npc',
               permission: 'accessToDMTools'
             },
             {
               title: 'Spell',
-              page: '/create/homebrew-spell',
+              page: '/create-spell',
               permission: 'accessToDMTools'
             },
           ]
