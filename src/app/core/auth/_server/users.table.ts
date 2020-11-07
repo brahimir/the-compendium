@@ -15,8 +15,8 @@ export class UsersTable {
       username: 'dungeon_master',
       password: 'Stuff123!',
       email: 'dungeon_master@tc.com',
-      accessToken: 'access-token-6829bba69dd3421d8762-991e9e806dbf',
-      refreshToken: 'access-token-f8e4c61a318e4d618b6c199ef96b9e55',
+      accessToken: 'access-token-6829bba69dd3421d8762991e9e806dbfs',
+      refreshToken: 'access-token-kdfk3kasofk92k1k12emfk934k921129',
       roles: [2], // Dungeon Master
       fullname: 'Dungeon Master',
 

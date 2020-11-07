@@ -1,3 +1,6 @@
+// Data
+import { ArmorsTable } from "../../../../core/officialResources/armors.table";
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArmorComponent implements OnInit {
 
-  constructor() { }
+  dataSource: any = ArmorsTable.armors;
+
+  columnsToDisplay: any[] = [
+    'name', 
+    'type',
+    'armor_class',
+    'stealth_disadvantage',
+    'strength_requirement',
+    'rarity',
+    'value'
+  ];
+
+  constructor() { 
+    console.log(this.dataSource);
+  }
 
   ngOnInit(): void {
   }

@@ -84,8 +84,6 @@ export class PermissionsTable {
     {
       id: 13,
       name: 'accessToDMTools',
-      level: 2,
-      parentId: 3,
       title: 'dmTools'
     },
   ];

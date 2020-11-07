@@ -1,1 +1,66 @@
-<p>armor works!</p>
+<kt-portlet>
+  <kt-portlet-header [class]="'card-head-lg'">
+    <ng-container ktPortletTitle>
+      <span>Armors</span>
+    </ng-container>
+  </kt-portlet-header>
+
+  <kt-portlet-body>
+    <table class="lmat-elevation-z8" mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let armor"> {{armor.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef> Type </th>
+        <td mat-cell *matCellDef="let armor"> {{armor.type}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="armor_class">
+        <th mat-header-cell *matHeaderCellDef> Armor Class </th>
+        <td mat-cell *matCellDef="let armor"> {{armor.armor_class}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="stealth_disadvantage">
+        <th mat-header-cell *matHeaderCellDef> Stealth </th>
+        <td mat-cell *matCellDef="let armor"> {{armor.stealth_disadvantage}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="strength_requirement">
+        <th mat-header-cell *matHeaderCellDef> Strength Requirement </th>
+        <td mat-cell *matCellDef="let armor"> {{armor.strength_requirement}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rarity">
+        <th mat-header-cell *matHeaderCellDef> Rarity </th>
+        <td mat-cell *matCellDef="let armor"> {{armor.rarity}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> Value </th>
+        <td mat-cell *matCellDef="let armor"> {{armor.value}} </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let armor"> {{armor.description}} </td>
+      </ng-container> -->
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+    </table>
+  </kt-portlet-body>
+
+    <!-- start: BOTTOM -->
+    <div class="mat-table-bottom">
+      <!-- MATERIAL SPINNER | Url: 'https://material.angular.io/components/progress-spinner/overview' -->
+      <mat-spinner [diameter]="20" *ngIf="dataSource.loading$ | async"></mat-spinner>
+
+      <!-- MATERIAL PAGINATOR | Binded to dasources -->
+      <!-- See off.documentations 'https://material.angular.io/components/paginator/overview' -->
+      <mat-paginator [pageSize]="50" [pageSizeOptions]="[25, 50, 100]" [length]="dataSource.paginatorTotal$ | async" [showFirstLastButtons]="true"></mat-paginator>
+    </div>
+    <!-- end: BOTTOM -->
+</kt-portlet>
