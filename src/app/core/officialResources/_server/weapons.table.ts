@@ -3,7 +3,7 @@ export class WeaponsTable {
       {
         id: 1,
         name: "Greatsword",
-        martial: true,
+        is_martial: true,
         damage: "2d6",
         damage_type: "Slashing",
         rarity: "Common",
@@ -14,7 +14,7 @@ export class WeaponsTable {
       {
         id: 2,
         name: "Club",
-        martial: false,
+        is_martial: false,
         damage: "1d4",
         damage_type: "Bludgeoning",
         rarity: "Common",
@@ -25,7 +25,7 @@ export class WeaponsTable {
       {
         id: 3,
         name: "Dagger",
-        martial: false,
+        is_martial: false,
         damage: "1d4",
         damage_type: "Piercing",
         rarity: "Common",
@@ -36,7 +36,7 @@ export class WeaponsTable {
       {
         id: 4,
         name: "Javelin",
-        martial: false,
+        is_martial: false,
         damage: "1d6",
         damage_type: "Piercing",
         rarity: "Common",
@@ -47,7 +47,7 @@ export class WeaponsTable {
       {
         id: 5,
         name: "Quarterstaff",
-        martial: false,
+        is_martial: false,
         damage: "1d6",
         damage_type: "Bludgeoning",
         rarity: "Common",
@@ -58,8 +58,8 @@ export class WeaponsTable {
       {
         id: 6,
         name: "Spear",
-        martial: false,
-        damage: "1d4, versatile (1d8)",
+        is_martial: false,
+        damage: "1d4",
         damage_type: "Bludgeoning",
         rarity: "Common",
         value: "1sp",
@@ -69,7 +69,7 @@ export class WeaponsTable {
       {
         id: 7,
         name: "Shortbow",
-        martial: false,
+        is_martial: false,
         damage: "1d6",
         damage_type: "Piercing",
         rarity: "Common",
@@ -80,8 +80,8 @@ export class WeaponsTable {
       {
         id: 8,
         name: "Battleaxe",
-        martial: true,
-        damage: "1d8, versatile (1d10)",
+        is_martial: true,
+        damage: "1d8",
         damage_type: "Slashing",
         rarity: "Common",
         value: "10gp",
@@ -91,7 +91,7 @@ export class WeaponsTable {
       {
         id: 9,
         name: "Halbred",
-        martial: true,
+        is_martial: true,
         damage: "1d10",
         damage_type: "Slashing",
         rarity: "Common",
@@ -102,7 +102,7 @@ export class WeaponsTable {
       {
         id: 10,
         name: "Lance",
-        martial: true,
+        is_martial: true,
         damage: "1d12",
         damage_type: "Piercing",
         rarity: "Common",

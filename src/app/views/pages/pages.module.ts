@@ -44,7 +44,7 @@ import { ECommerceModule } from './apps/e-commerce/e-commerce.module';
 import { UserManagementModule } from './user-management/user-management.module';
 
 // The Compendium Pages
-import { Weapons } from './the-compendium-pages/weapons/weapons.component';
+import { WeaponComponent } from './the-compendium-pages/weapons/weapons.component';
 import { ArmorComponent } from './the-compendium-pages/armor/armor.component';
 import { ItemsComponent } from './the-compendium-pages/items/items.component';
 import { NpcsComponent } from './the-compendium-pages/npcs/npcs.component';
@@ -65,7 +65,7 @@ import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.c
 @NgModule({
   declarations: [
 	  //The Compendium Pages
-	  Weapons, 
+	  WeaponComponent, 
 	  ArmorComponent,
 	  ItemsComponent, 
 	  NpcsComponent, 
