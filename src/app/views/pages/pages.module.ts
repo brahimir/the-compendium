@@ -51,6 +51,8 @@ import { NpcsComponent } from './the-compendium-pages/npcs/npcs.component';
 import { SpellsComponent } from './the-compendium-pages/spells/spells.component';
 import { CampaignsComponent } from './the-compendium-pages/campaigns/campaigns.component';
 import { SessionsComponent } from './the-compendium-pages/sessions/sessions.component';
+// Partials
+import { DetailsDialogComponent } from "./the-compendium-pages/dialogs/details-dialog/details-dialog.component";
 //Homebrew Pages
 import { HomebrewWeaponsComponent } from './the-compendium-pages/homebrew/homebrew-weapons/homebrew-weapons.component';
 import { HomebrewArmorComponent } from './the-compendium-pages/homebrew/homebrew-armor/homebrew-armor.component';
@@ -73,6 +75,8 @@ import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.c
 	  StoryboardComponent, 
 	  CampaignsComponent, 
 	  SessionsComponent,
+	  // Partials
+	  DetailsDialogComponent,
 	  // Homebrew Pages
 	  HomebrewWeaponsComponent, 
 	  HomebrewArmorComponent, 
@@ -82,7 +86,7 @@ import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.c
 	  // DM Tools Pages
 	  StoryboardComponent,
 	  ManageSessionsComponent,
-	  CreateComponent, 
+	  CreateComponent,
 	],
   exports: [],
   imports: [

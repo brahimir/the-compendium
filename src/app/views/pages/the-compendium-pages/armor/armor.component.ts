@@ -1,10 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 // Models
 import { Armor } from "../../../../core/officialResources/_models/armor.model";
-// Data
-import { ArmorsTable } from "../../../../core/officialResources/_server/armors.table";
 // Services
-import { ArmorService } from "../../../../core/officialResources/_services/armors.service";
+import { ArmorsService } from "../../../../core/officialResources/_services/armors.service";
 // MatTable
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -29,20 +27,20 @@ export class ArmorComponent implements OnInit, AfterViewInit {
     'value'
   ];
 
-  // API data
-  data: any = ArmorsTable.armors;
+  data: any;
   dataSource: any;
 
-  // Armor Objects
-  ARMOR_DATA: Armor[];
+  // Item Objects
+  ARMORS_DATA: Armor[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(armorService: ArmorService) {
-    // Get Armor objects using raw data.
-    this.ARMOR_DATA = armorService.getArmors(this.data);
-    this.dataSource = new MatTableDataSource<Armor>(this.ARMOR_DATA);
+  constructor(
+    armorsService: ArmorsService) {
+    // Get data from API and generate Npc objects
+    this.ARMORS_DATA = armorsService.getArmors();
+    this.dataSource = new MatTableDataSource<Armor>(this.ARMORS_DATA);
   }
 
   ngOnInit(): void { }

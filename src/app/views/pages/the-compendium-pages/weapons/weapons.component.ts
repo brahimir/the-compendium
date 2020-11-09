@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 // Models
 import { Weapon } from "../../../../core/officialResources/_models/weapon.model";
-// Data
-import { WeaponsTable } from "../../../../core/officialResources/_server/weapons.table";
 // Services
 import { WeaponService } from "../../../../core/officialResources/_services/weapons.service";
 // MatTable
@@ -28,21 +26,21 @@ export class WeaponComponent implements OnInit, AfterViewInit {
     'value',
     'properties'
   ];
-
-  // Raw data
-  data: any = WeaponsTable.weapons;
+  
+  data: any;
   dataSource: any;
 
-  // Weapon Objects
-  WEAPON_DATA: Weapon[];
+  // Item Objects
+  WEAPONS_DATA: Weapon[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(WeaponService: WeaponService) {
-    // Get Weapon objects using raw data.
-    this.WEAPON_DATA = WeaponService.getWeapons(this.data);
-    this.dataSource = new MatTableDataSource<Weapon>(this.WEAPON_DATA);
+  constructor(
+    weaponsService: WeaponService) {
+    // Get data from API and generate Npc objects
+    this.WEAPONS_DATA = weaponsService.getWeapons();
+    this.dataSource = new MatTableDataSource<Weapon>(this.WEAPONS_DATA);
   }
 
   ngOnInit(): void { }
