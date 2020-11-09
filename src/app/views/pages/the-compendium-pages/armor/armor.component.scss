@@ -1,7 +1,11 @@
+$tc-red: #a90000;
+
 table {
   width: 100%;
 }
 
-th.mat-sort-header-sorted {
-  color: black;
+span.link {
+  cursor: pointer;
+  color: $tc-red;
+  text-decoration: underline;
 }

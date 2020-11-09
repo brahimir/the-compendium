@@ -7,6 +7,10 @@ import { ArmorsService } from "../../../../core/officialResources/_services/armo
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+// MatDialog
+import { MatDialog } from '@angular/material/dialog';
+// Details Dialog
+import { ArmorDetailsDialogComponent } from "../dialogs/details-dialog/armor-details/armor-details-dialog.component";
 
 /**
  * @title Armors table with Pagination
@@ -27,18 +31,24 @@ export class ArmorComponent implements OnInit, AfterViewInit {
     'value'
   ];
 
+  // Data
   data: any;
   dataSource: any;
 
-  // Item Objects
+  // Dialog options
+  dialogWidth = '800px';
+  dialogHeight = '700px';
+
+  // Armor Objects
   ARMORS_DATA: Armor[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    armorsService: ArmorsService) {
-    // Get data from API and generate Npc objects
+    public armorsService: ArmorsService,
+    public dialog: MatDialog) {
+    // Get data from API and generate Armor objects
     this.ARMORS_DATA = armorsService.getArmors();
     this.dataSource = new MatTableDataSource<Armor>(this.ARMORS_DATA);
   }
@@ -48,5 +58,23 @@ export class ArmorComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  openDetails(armor: Armor): void {
+        // Pass the Armor object to the dialog here.
+        const dialogData = armor;
+
+        // Set the dialog window options here.
+        const dialogOptions = {
+          // width: this.dialogWidth,
+          // height: this.dialogHeight,
+          data: dialogData
+        }
+    
+        // Opens the dialog window.
+        const dialogRef = this.dialog.open(ArmorDetailsDialogComponent, dialogOptions);
+    
+        // Handles dialog closing - can do something when the dialog is closed.
+        dialogRef.afterClosed().subscribe(result => { });
   }
 }

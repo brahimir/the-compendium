@@ -1,0 +1,83 @@
+<div class="wrapper p-10">
+  <mat-dialog-content class="mat-typography">
+    <h1 mat-dialog-title class="pb-5">{{ dialogData.name }}</h1>
+
+    <!-- start::Armor type -->
+    <div class="row">
+      <div class="col-3">
+        <p>Type:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.type }} </p>
+      </div>
+    </div>
+    <!-- end::Armor type -->
+
+    <!-- start::Armor Class -->
+    <div class="row">
+      <div class="col-3">
+        <p>Armor Class:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.armor_class }} </p>
+      </div>
+    </div>
+    <!-- end::Armor Class -->
+
+    <!-- start::Stealth Disadvantage -->
+    <div class="row">
+      <div class="col-3">
+        <p>Stealth Disadvantage:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.stealth_disadvantage }} </p>
+      </div>
+    </div>
+    <!-- end::Stealth Disadvantage -->
+
+    <!-- start::Strength Requirement -->
+    <div class="row">
+      <div class="col-3">
+        <p>Strength Requirement:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.strength_requirement }} </p>
+      </div>
+    </div>
+    <!-- end::Strength Requirement -->
+
+    <!-- start::Rarity -->
+    <div class="row">
+      <div class="col-3">
+        <p>Rarity:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.rarity }} </p>
+      </div>
+    </div>
+    <!-- end::Rarity -->
+
+    <!-- start::Value -->
+    <div class="row">
+      <div class="col-3">
+        <p>Value:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.value }} </p>
+      </div>
+    </div>
+    <!-- end::Value -->
+
+    <!-- start::Description -->
+    <div class="row pt-5">
+      <div class="col">
+        <h3> {{ dialogData.description }} </h3>
+      </div>
+    </div>
+    <!-- end::Description -->
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</div>

@@ -66,6 +66,10 @@ import xml from 'highlight.js/lib/languages/xml';
 import json from 'highlight.js/lib/languages/json';
 import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
+
+// The Compendium Dialogs
+import { ArmorDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/armor-details/armor-details-dialog.component';
+
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelSpeed: 0.5,
@@ -124,6 +128,9 @@ export function getHighlightLanguages() {
     MatProgressSpinnerModule,
     InlineSVGModule.forRoot(),
     ThemeModule
+  ],
+  entryComponents: [
+    ArmorDetailsDialogComponent
   ],
   exports: [],
   providers: [

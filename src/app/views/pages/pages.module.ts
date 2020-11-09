@@ -52,7 +52,7 @@ import { SpellsComponent } from './the-compendium-pages/spells/spells.component'
 import { CampaignsComponent } from './the-compendium-pages/campaigns/campaigns.component';
 import { SessionsComponent } from './the-compendium-pages/sessions/sessions.component';
 // Partials
-import { DetailsDialogComponent } from "./the-compendium-pages/dialogs/details-dialog/details-dialog.component";
+import { ArmorDetailsDialogComponent } from "./the-compendium-pages/dialogs/details-dialog/armor-details/armor-details-dialog.component";
 //Homebrew Pages
 import { HomebrewWeaponsComponent } from './the-compendium-pages/homebrew/homebrew-weapons/homebrew-weapons.component';
 import { HomebrewArmorComponent } from './the-compendium-pages/homebrew/homebrew-armor/homebrew-armor.component';
@@ -63,6 +63,7 @@ import { HomebrewSpellsComponent } from './the-compendium-pages/homebrew/homebre
 import { ManageSessionsComponent } from './the-compendium-pages/dm-tools/manage-sessions/manage-sessions.component';
 import { StoryboardComponent } from './the-compendium-pages/dm-tools/storyboard/storyboard.component';
 import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -75,8 +76,8 @@ import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.c
 	  StoryboardComponent, 
 	  CampaignsComponent, 
 	  SessionsComponent,
-	  // Partials
-	  DetailsDialogComponent,
+	  // Dialogs
+	  ArmorDetailsDialogComponent,
 	  // Homebrew Pages
 	  HomebrewWeaponsComponent, 
 	  HomebrewArmorComponent, 
@@ -90,7 +91,8 @@ import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.c
 	],
   exports: [],
   imports: [
-    // material modules
+	// material modules
+		MatDialogModule,
 		MatInputModule,
 		MatFormFieldModule,
 		MatAutocompleteModule,
