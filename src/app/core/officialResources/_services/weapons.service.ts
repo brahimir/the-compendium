@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 // Models
 import { Weapon } from '../_models/weapon.model';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeaponService {
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   /**
    * Generates Weapon Objects from raw API data.
@@ -16,11 +17,13 @@ export class WeaponService {
    * @returns {Weapon[]} Array of Weapon Objects.
    * @memberof WeaponService
    */
-  getWeapons(dataArray: any[]): Weapon[] {
+  getWeapons(): Weapon[] {
     // The array of Weapon Objects.
     let WeaponObjects: Weapon[] = [];
 
-    dataArray.forEach(element => {
+    let data: any = this.apiService.getWeaponsData();
+
+    data.forEach(element => {
       WeaponObjects.push(new Weapon(
         element.id,
         element.name,

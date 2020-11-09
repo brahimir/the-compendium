@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 // Models
 import { Item } from "../../../core/officialResources/_models/item.model";
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemsService {
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   /**
    * Generates Item Objects from raw API data.
@@ -16,11 +17,13 @@ export class ItemsService {
    * @returns {Items[]} Array of Item Objects.
    * @memberof ItemsService
    */
-  getItems(dataArray: any[]): Item[] {
+  getItems(): Item[] {
     // The array of Items Objects.
     let ItemsObjects: Item[] = [];
 
-    dataArray.forEach(element => {
+    let data: any = this.apiService.getItemsData();
+
+    data.forEach(element => {
       ItemsObjects.push(new Item(
         element.id,
         element.name,

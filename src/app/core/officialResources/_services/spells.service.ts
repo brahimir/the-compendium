@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 // Models
 import { Spell } from '../_models/spell.model';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpellService {
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   /**
    * Generates Spell Objects from raw API data.
@@ -16,11 +17,13 @@ export class SpellService {
    * @returns {Spell[]} Array of Spell Objects.
    * @memberof SpellService
    */
-  getSpells(dataArray: any[]): Spell[] {
+  getSpells(): Spell[] {
     // The array of Spell Objects.
     let SpellObjects: Spell[] = [];
 
-    dataArray.forEach(element => {
+    let data: any = this.apiService.getSpellsData();
+
+    data.forEach(element => {
       SpellObjects.push(new Spell(
         element.id,
         element.name,
