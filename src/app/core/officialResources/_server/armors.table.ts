@@ -1,4 +1,3 @@
-// todo::
 export class ArmorsTable {
   public static armors: any = [
     {
