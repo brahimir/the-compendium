@@ -1,22 +1,27 @@
 <div class="wrapper p-10">
   <mat-dialog-content class="mat-typography">
-    <h1 mat-dialog-title class="pb-5">{{ dialogData.name }}</h1>
+    <div class="row">
+      <div class="col">
+        <h1 class="pb-5 tc-red">{{ dialogData.name }}</h1>
+      </div>
+    </div>
 
     <!-- start::Armor type -->
-    <div class="row">
-      <div class="col-3">
-        <p>Type:</p>
-      </div>
+    <div *ngIf="dialogData.type" class="row">
       <div class="col">
-        <p> {{ dialogData.type }} </p>
+        <p class="font-italic"> {{ dialogData.type }} </p>
       </div>
     </div>
     <!-- end::Armor type -->
 
+    <!-- start:: DIVIDER -->
+    <div class="divider"></div>
+    <!-- end:: DIVIDER -->
+
     <!-- start::Armor Class -->
-    <div class="row">
+    <div *ngIf="dialogData.armor_class" class="row">
       <div class="col-3">
-        <p>Armor Class:</p>
+        <p class="font-weight-bolder">Armor Class:</p>
       </div>
       <div class="col">
         <p> {{ dialogData.armor_class }} </p>
@@ -27,7 +32,7 @@
     <!-- start::Stealth Disadvantage -->
     <div class="row">
       <div class="col-3">
-        <p>Stealth Disadvantage:</p>
+        <p class="font-weight-bolder">Stealth Disadvantage:</p>
       </div>
       <div class="col">
         <p> {{ dialogData.stealth_disadvantage }} </p>
@@ -38,7 +43,7 @@
     <!-- start::Strength Requirement -->
     <div class="row">
       <div class="col-3">
-        <p>Strength Requirement:</p>
+        <p class="font-weight-bolder">Strength Requirement:</p>
       </div>
       <div class="col">
         <p> {{ dialogData.strength_requirement }} </p>
@@ -49,7 +54,7 @@
     <!-- start::Rarity -->
     <div class="row">
       <div class="col-3">
-        <p>Rarity:</p>
+        <p class="font-weight-bolder">Rarity:</p>
       </div>
       <div class="col">
         <p> {{ dialogData.rarity }} </p>
@@ -60,13 +65,17 @@
     <!-- start::Value -->
     <div class="row">
       <div class="col-3">
-        <p>Value:</p>
+        <p class="font-weight-bolder">Value:</p>
       </div>
       <div class="col">
         <p> {{ dialogData.value }} </p>
       </div>
     </div>
     <!-- end::Value -->
+
+    <!-- start:: DIVIDER -->
+    <div *ngIf="dialogData.description" class="divider"></div>
+    <!-- end:: DIVIDER -->
 
     <!-- start::Description -->
     <div class="row pt-5">

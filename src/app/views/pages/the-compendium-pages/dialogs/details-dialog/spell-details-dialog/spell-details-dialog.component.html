@@ -1,0 +1,114 @@
+<div class="wrapper p-10">
+  <mat-dialog-content class="mat-typography">
+    <div class="row">
+      <div class="col">
+        <h1 class="pb-5 tc-red">{{ dialogData.name }}</h1>
+      </div>
+    </div>
+
+    <!-- start::Spell Level and School-->
+    <div *ngIf="dialogData.level" class="row">
+      <div class="col">
+        <p class="font-italic">
+          <span *ngIf="dialogData.is_cantrip; else level_content">
+            Cantrip <span *ngIf="dialogData.school"> {{dialogData.school}} </span>
+          </span>
+          <ng-template #level_content>
+            Level {{ dialogData.level }} <span *ngIf="dialogData.school">{{ dialogData.school }}</span>
+          </ng-template>
+        </p>
+      </div>
+    </div>
+    <!-- end::Spell Level and School -->
+
+    <!-- start:: DIVIDER -->
+    <div class="divider"></div>
+    <!-- end:: DIVIDER -->
+
+    <!-- start::Spell Casting Time -->
+    <div *ngIf="dialogData.casting_time" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Casting Time:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.casting_time }} </p>
+      </div>
+    </div>
+    <!-- end::Spell Casting Time -->
+
+    <!-- start::Spell Range -->
+    <div *ngIf="dialogData.range" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Range:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.range }} </p>
+      </div>
+    </div>
+    <!-- end::Spell Range -->
+
+    <!-- start::Spell Components -->
+    <div *ngIf="dialogData.components" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Components:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.components }} </p>
+      </div>
+    </div>
+    <!-- end::Spell Components -->
+
+    <!-- start::Spell Duration -->
+    <div *ngIf="dialogData.duration" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Duration:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.duration }} </p>
+      </div>
+    </div>
+    <!-- end::Spell Duration -->
+
+    <!-- start::Spell Classes -->
+    <div *ngIf="dialogData.classes" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Classes:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.classes }} </p>
+      </div>
+    </div>
+    <!-- end::Spell Classes-->
+
+    <!-- start::Description -->
+    <div *ngIf="dialogData.description">
+      <!-- start:: DIVIDER -->
+      <div class="divider"></div>
+      <!-- end:: DIVIDER -->
+      <div class="row pt-5">
+        <div class="col">
+          <p> {{ dialogData.description }} </p>
+        </div>
+      </div>
+    </div>
+    <!-- end::Description -->
+
+    <!-- start::At Higher Levels-->
+    <div *ngIf="dialogData.at_higher_levels">
+      <h3 class="tc-red pt-5 font-weight-bolder">AT HIGHER LEVELS</h3>
+      <!-- start:: DIVIDER -->
+      <div class="divider"></div>
+      <!-- end:: DIVIDER -->
+      <div class="row">
+        <div class="col">
+          <p> {{ dialogData.at_higher_levels }} </p>
+        </div>
+      </div>
+    </div>
+    <!-- end::Spell At Higher Levels-->
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</div>

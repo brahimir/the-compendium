@@ -7,6 +7,8 @@ import { SpellService } from "../../../../core/officialResources/_services/spell
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { SpellDetailsDialogComponent } from '../dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component';
 
 /**
  * @title Spells table with Pagination
@@ -34,7 +36,8 @@ export class SpellsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    spellsservice: SpellService) {
+    spellsservice: SpellService,
+    public dialog: MatDialog) {
     // Get data from API and generate Npc objects
     this.SPELLS_DATA = spellsservice.getSpells();
     this.dataSource = new MatTableDataSource<Spell>(this.SPELLS_DATA);
@@ -45,6 +48,22 @@ export class SpellsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  openDetails(spell: Spell): void {
+    // Pass the Npc object to the dialog here.
+    const dialogData = spell;
+
+    // Set the dialog window options here.
+    const dialogOptions = {
+      data: dialogData
+    }
+
+    // Opens the dialog window.
+    const dialogRef = this.dialog.open(SpellDetailsDialogComponent, dialogOptions);
+
+    // Handles dialog closing - can do something when the dialog is closed.
+    dialogRef.afterClosed().subscribe(result => { });
   }
 }
 

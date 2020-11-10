@@ -57,6 +57,6 @@ export class HeaderMobileComponent implements OnInit {
         result = 'logo-dark.png';
       }
     }
-    return `./assets/media/logos/${result}`;
+    return `./assets/media/logos/logo-the-compendium-text.png`;
   }
 }

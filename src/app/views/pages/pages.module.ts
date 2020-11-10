@@ -56,6 +56,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ArmorDetailsDialogComponent } from "./the-compendium-pages/dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
 import { NpcDetailsDialogComponent } from './the-compendium-pages/dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component';
 import { WeaponDetailsDialogComponent } from './the-compendium-pages/dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component';
+import { ItemDetailsDialogComponent } from './the-compendium-pages/dialogs/details-dialog/item-details-dialog/item-details-dialog.component';
+import { SpellDetailsDialogComponent } from './the-compendium-pages/dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component';
 //Homebrew Pages
 import { HomebrewWeaponsComponent } from './the-compendium-pages/homebrew/homebrew-weapons/homebrew-weapons.component';
 import { HomebrewArmorComponent } from './the-compendium-pages/homebrew/homebrew-armor/homebrew-armor.component';
@@ -92,6 +94,8 @@ import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.c
 	  ArmorDetailsDialogComponent,
 	  NpcDetailsDialogComponent,
 	  WeaponDetailsDialogComponent,
+	  ItemDetailsDialogComponent,
+	  SpellDetailsDialogComponent,
 	],
   exports: [],
   imports: [

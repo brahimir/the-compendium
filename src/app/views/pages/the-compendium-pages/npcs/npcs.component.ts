@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
+// MatDialog
 import { NpcDetailsDialogComponent } from '../dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component';
 
 /**
@@ -52,7 +53,7 @@ export class NpcsComponent implements OnInit, AfterViewInit {
   }
 
   openDetails(npc: Npc): void {
-    // Pass the Armor object to the dialog here.
+    // Pass the Npc object to the dialog here.
     const dialogData = npc;
 
     // Set the dialog window options here.
@@ -65,7 +66,7 @@ export class NpcsComponent implements OnInit, AfterViewInit {
 
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe(result => { });
-}
+  }
 
 }
 

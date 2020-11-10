@@ -8,6 +8,8 @@ import { ItemsService } from "../../../../core/officialResources/_services/items
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { ItemDetailsDialogComponent } from '../dialogs/details-dialog/item-details-dialog/item-details-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 /**
  * @title Items table with Pagination
@@ -35,11 +37,8 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    apiService: ApiService,
-    itemsService: ItemsService) {
-    // Get data from API
-    this.data = apiService.getItemsData;
-    
+    itemsService: ItemsService,
+    public dialog: MatDialog) {
     // Get Item objects
     this.ITEMS_DATA = itemsService.getItems();
     this.dataSource = new MatTableDataSource<Item>(this.ITEMS_DATA);
@@ -50,6 +49,22 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  openDetails(item: Item): void {
+    // Pass the Npc object to the dialog here.
+    const dialogData = item;
+
+    // Set the dialog window options here.
+    const dialogOptions = {
+      data: dialogData
+    }
+
+    // Opens the dialog window.
+    const dialogRef = this.dialog.open(ItemDetailsDialogComponent, dialogOptions);
+
+    // Handles dialog closing - can do something when the dialog is closed.
+    dialogRef.afterClosed().subscribe(result => { });
   }
 }
 

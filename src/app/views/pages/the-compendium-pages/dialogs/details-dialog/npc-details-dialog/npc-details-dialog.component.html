@@ -245,7 +245,7 @@
     <!-- end::Languages -->
 
     <!-- start::Challenge Rating -->
-    <div class="row">
+    <div *ngIf="dialogData.challenge_rating" class="row">
       <div class="col-3">
         <p class="font-weight-bolder">Challenge Rating:</p>
       </div>
@@ -256,7 +256,7 @@
     <!-- end::Challenge Rating -->
 
     <!-- start::Experience -->
-    <div class="row">
+    <div *ngIf="dialogData.experience" class="row">
       <div class="col-3">
         <p class="font-weight-bolder">Experience:</p>
       </div>
@@ -269,8 +269,9 @@
     <!-- start::DISPLAY ABILITIES -->
     <div *ngIf="dialogData.abilities">
       <h3 class="tc-red pt-5 font-weight-bolder">ABILITIES</h3>
+      <!-- start:: DIVIDER -->
       <div class="divider"></div>
-
+      <!-- end:: DIVIDER -->
       <!-- start::Abilities -->
       <div *ngFor="let ability of dialogData.abilities" class="row">
         <div class="col">
@@ -284,7 +285,9 @@
     <!-- start:: DISPLAY ACTIONS -->
     <div *ngIf="dialogData.actions">
       <h3 class="tc-red pt-5 font-weight-bolder">ACTIONS</h3>
+      <!-- start:: DIVIDER -->
       <div class="divider"></div>
+      <!-- end:: DIVIDER -->
       <!-- start::Actions -->
       <div *ngFor="let action of dialogData.actions" class="row">
         <div class="col">
@@ -298,7 +301,9 @@
     <!-- start:: DISPLAY LEGENDARY ACTIONS -->
     <div *ngIf="dialogData.legendary_actions">
       <h3 class="tc-red pt-5 font-weight-bolder">LEGENDARY ACTIONS</h3>
+      <!-- start:: DIVIDER -->
       <div class="divider"></div>
+      <!-- end:: DIVIDER -->
       <!-- start::Actions -->
       <div *ngFor="let action of dialogData.legendary_actions" class="row">
         <div class="col">
