@@ -471,11 +471,11 @@ export class MenuConfig {
           page: '/campaigns'
         },
         {
-          title: 'Sessions',
+          title: 'Adventures',
           bullet: 'dot',
           icon: 'flaticon2-list-2',
           root: true,
-          page: '/sessions'
+          page: '/adventures'
         },
 
         // DM Tools

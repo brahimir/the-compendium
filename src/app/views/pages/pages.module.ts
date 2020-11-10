@@ -50,7 +50,7 @@ import { ItemsComponent } from './the-compendium-pages/items/items.component';
 import { NpcsComponent } from './the-compendium-pages/npcs/npcs.component';
 import { SpellsComponent } from './the-compendium-pages/spells/spells.component';
 import { CampaignsComponent } from './the-compendium-pages/campaigns/campaigns.component';
-import { SessionsComponent } from './the-compendium-pages/sessions/sessions.component';
+import { AdventuresComponent } from "./the-compendium-pages/adventures/adventures.component";
 // Dialogs
 import { MatDialogModule } from '@angular/material/dialog';
 import { ArmorDetailsDialogComponent } from "./the-compendium-pages/dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
@@ -80,7 +80,7 @@ import { DashboardComponent } from './the-compendium-pages/dashboard/dashboard.c
 	  SpellsComponent,
 	  StoryboardComponent, 
 	  CampaignsComponent, 
-	  SessionsComponent,
+	  AdventuresComponent,
 	  // Homebrew Pages
 	  HomebrewWeaponsComponent, 
 	  HomebrewArmorComponent, 

@@ -15,7 +15,7 @@ import { ItemsComponent } from './views/pages/the-compendium-pages/items/items.c
 import { NpcsComponent } from './views/pages/the-compendium-pages/npcs/npcs.component';
 import { SpellsComponent } from './views/pages/the-compendium-pages/spells/spells.component';
 import { CampaignsComponent } from './views/pages/the-compendium-pages/campaigns/campaigns.component';
-import { SessionsComponent } from './views/pages/the-compendium-pages/sessions/sessions.component';
+import { AdventuresComponent } from './views/pages/the-compendium-pages/adventures/adventures.component';
 //Homebrew Pages
 import { HomebrewWeaponsComponent } from './views/pages/the-compendium-pages/homebrew/homebrew-weapons/homebrew-weapons.component';
 import { HomebrewArmorComponent } from './views/pages/the-compendium-pages/homebrew/homebrew-armor/homebrew-armor.component';
@@ -66,8 +66,8 @@ const routes: Routes = [
         component: CampaignsComponent
       },
       {
-        path: 'sessions',
-        component: SessionsComponent
+        path: 'adventures',
+        component: AdventuresComponent
       },
       // Homebrew Pages
       {
