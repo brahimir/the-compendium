@@ -71,6 +71,8 @@ import typescript from 'highlight.js/lib/languages/typescript';
 import { ArmorDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component';
 import { NpcDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component';
 import { WeaponDetailsDialogComponent } from "./views/pages/the-compendium-pages/dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
+import { ItemDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/item-details-dialog/item-details-dialog.component';
+import { SpellDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component';
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -131,10 +133,13 @@ export function getHighlightLanguages() {
     InlineSVGModule.forRoot(),
     ThemeModule
   ],
+  // ! Add DialogComponents here
   entryComponents: [
     ArmorDetailsDialogComponent,
     NpcDetailsDialogComponent,
-    WeaponDetailsDialogComponent
+    WeaponDetailsDialogComponent,
+    ItemDetailsDialogComponent,
+    SpellDetailsDialogComponent
   ],
   exports: [],
   providers: [
