@@ -1,6 +1,10 @@
 <div class="wrapper p-10">
   <mat-dialog-content class="mat-typography">
-    <h1 mat-dialog-title class="pb-5">{{ dialogData.name }}</h1>
+    <div class="row">
+      <div class="col">
+        <h1 class="pb-5 tc-red">{{ dialogData.name }}</h1>
+      </div>
+    </div>
 
     <!-- start::Size -->
     <div *ngIf="dialogData.size" class="row">
@@ -12,6 +16,8 @@
       </div>
     </div>
     <!-- end::Size -->
+
+    <div class="divider"></div>
 
     <!-- start::Alignment -->
     <div *ngIf="dialogData.alignment" class="row">

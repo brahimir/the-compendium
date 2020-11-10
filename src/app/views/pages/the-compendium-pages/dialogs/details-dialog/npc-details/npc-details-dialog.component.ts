@@ -10,15 +10,6 @@ export class NpcDetailsDialogComponent implements OnInit {
 
   dialogData: any;
 
-  abilityTitles: any[];
-  abilityDescriptions: any[];
-
-  actionTitles: any[];
-  actionDescriptions: any[];
-
-  legendaryActionTitles: any[];
-  legendaryActionDescriptions: any[];
-
   constructor(
     public dialogRef: MatDialogRef<NpcDetailsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
