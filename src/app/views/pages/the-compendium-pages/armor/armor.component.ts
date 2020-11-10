@@ -10,7 +10,7 @@ import { MatSort } from '@angular/material/sort';
 // MatDialog
 import { MatDialog } from '@angular/material/dialog';
 // Details Dialog
-import { ArmorDetailsDialogComponent } from "../dialogs/details-dialog/armor-details/armor-details-dialog.component";
+import { ArmorDetailsDialogComponent } from "../dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
 
 /**
  * @title Armors table with Pagination

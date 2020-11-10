@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { NpcDetailsDialogComponent } from '../dialogs/details-dialog/npc-details/npc-details-dialog.component';
+import { NpcDetailsDialogComponent } from '../dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component';
 
 /**
  * @title Npcs table with Pagination

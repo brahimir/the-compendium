@@ -51,8 +51,11 @@ import { NpcsComponent } from './the-compendium-pages/npcs/npcs.component';
 import { SpellsComponent } from './the-compendium-pages/spells/spells.component';
 import { CampaignsComponent } from './the-compendium-pages/campaigns/campaigns.component';
 import { SessionsComponent } from './the-compendium-pages/sessions/sessions.component';
-// Partials
-import { ArmorDetailsDialogComponent } from "./the-compendium-pages/dialogs/details-dialog/armor-details/armor-details-dialog.component";
+// Dialogs
+import { MatDialogModule } from '@angular/material/dialog';
+import { ArmorDetailsDialogComponent } from "./the-compendium-pages/dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
+import { NpcDetailsDialogComponent } from './the-compendium-pages/dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component';
+import { WeaponDetailsDialogComponent } from './the-compendium-pages/dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component';
 //Homebrew Pages
 import { HomebrewWeaponsComponent } from './the-compendium-pages/homebrew/homebrew-weapons/homebrew-weapons.component';
 import { HomebrewArmorComponent } from './the-compendium-pages/homebrew/homebrew-armor/homebrew-armor.component';
@@ -63,8 +66,6 @@ import { HomebrewSpellsComponent } from './the-compendium-pages/homebrew/homebre
 import { ManageSessionsComponent } from './the-compendium-pages/dm-tools/manage-sessions/manage-sessions.component';
 import { StoryboardComponent } from './the-compendium-pages/dm-tools/storyboard/storyboard.component';
 import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { NpcDetailsDialogComponent } from './the-compendium-pages/dialogs/details-dialog/npc-details/npc-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { NpcDetailsDialogComponent } from './the-compendium-pages/dialogs/detail
 	  // Dialogs
 	  ArmorDetailsDialogComponent,
 	  NpcDetailsDialogComponent,
+	  WeaponDetailsDialogComponent,
 	],
   exports: [],
   imports: [

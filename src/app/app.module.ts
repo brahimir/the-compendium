@@ -68,8 +68,9 @@ import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
 
 // The Compendium Dialogs
-import { ArmorDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/armor-details/armor-details-dialog.component';
-import { NpcDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/npc-details/npc-details-dialog.component';
+import { ArmorDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component';
+import { NpcDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component';
+import { WeaponDetailsDialogComponent } from "./views/pages/the-compendium-pages/dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -132,7 +133,8 @@ export function getHighlightLanguages() {
   ],
   entryComponents: [
     ArmorDetailsDialogComponent,
-    NpcDetailsDialogComponent
+    NpcDetailsDialogComponent,
+    WeaponDetailsDialogComponent
   ],
   exports: [],
   providers: [
