@@ -1,0 +1,310 @@
+<div class="wrapper p-10">
+  <mat-dialog-content class="mat-typography">
+    <h1 mat-dialog-title class="pb-5">{{ dialogData.name }}</h1>
+
+    <!-- start::Size -->
+    <div *ngIf="dialogData.size" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Size:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.size }} </p>
+      </div>
+    </div>
+    <!-- end::Size -->
+
+    <!-- start::Alignment -->
+    <div *ngIf="dialogData.alignment" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Alignment:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.alignment }} </p>
+      </div>
+    </div>
+    <!-- end::Alignment -->
+
+    <!-- start::Armor Class -->
+    <div *ngIf="dialogData.armor_class" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Armor Class:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.armor_class }} </p>
+      </div>
+    </div>
+    <!-- end::Armor Class -->
+
+    <!-- start::Hit Points and Alternate Hit Points -->
+    <div *ngIf="dialogData.hit_points" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Hit Points:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.hit_points }} {{ dialogData.alt_hit_points }}</p>
+      </div>
+    </div>
+    <!-- end::Hit Points and Alternate Hit Points -->
+
+    <!-- start::Speed -->
+    <div *ngIf="dialogData.speed" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Speed:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.speed }} </p>
+      </div>
+    </div>
+    <!-- end::Speed -->
+
+    <!-- start:: ABILITY SCORES DISPLAY -->
+    <div class="pt-5 pb-7">
+      <!-- start:: Divider -->
+      <div class="divider"></div>
+      <!-- end:: Divider -->
+
+      <!-- start:: Ability Scores Titles -->
+      <div *ngIf="dialogData.ability_scores" class="row">
+        <div class="col-2 text-center"><span class="tc-red font-weight-bolder">STR</span></div>
+        <div class="col-2 text-center"><span class="tc-red font-weight-bolder">DEX</span></div>
+        <div class="col-2 text-center"><span class="tc-red font-weight-bolder">CON</span></div>
+        <div class="col-2 text-center"><span class="tc-red font-weight-bolder">INT</span></div>
+        <div class="col-2 text-center"><span class="tc-red font-weight-bolder">WIS</span></div>
+        <div class="col-2 text-center"><span class="tc-red font-weight-bolder">CHA</span></div>
+      </div>
+      <!-- end:: Ability Scores Titles -->
+
+      <!-- start::Ability Scores -->
+      <div *ngIf="dialogData.ability_scores" class="row">
+        <div class="col-2 text-center">
+          <p> {{ dialogData.ability_scores.STR }} </p>
+        </div>
+        <div class="col-2 text-center">
+          <p> {{ dialogData.ability_scores.DEX }} </p>
+        </div>
+        <div class="col-2 text-center">
+          <p> {{ dialogData.ability_scores.CON }} </p>
+        </div>
+        <div class="col-2 text-center">
+          <p> {{ dialogData.ability_scores.INT }} </p>
+        </div>
+        <div class="col-2 text-center">
+          <p> {{ dialogData.ability_scores.WIS }} </p>
+        </div>
+        <div class="col-2 text-center">
+          <p> {{ dialogData.ability_scores.CHA }} </p>
+        </div>
+      </div>
+      <!-- end::Ability Scores -->
+    </div>
+    <!-- end:: ABILITY SCORES DISPLAY -->
+
+    <!-- start::Saving Throws -->
+    <div *ngIf="dialogData.saving_throws" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Saving Throws:</p>
+      </div>
+      <div class="col">
+        <span *ngIf="dialogData.saving_throws.STR">
+          <span class="font-weight-bolder"> Str</span> {{ dialogData.saving_throws.STR }}
+        </span>
+        <span *ngIf="dialogData.saving_throws.DEX">
+          <span class="font-weight-bolder"> Dex</span> {{ dialogData.saving_throws.DEX }}
+        </span>
+        <span *ngIf="dialogData.saving_throws.CON">
+          <span class="font-weight-bolder"> Con</span> {{ dialogData.saving_throws.CON }}
+        </span>
+        <span *ngIf="dialogData.saving_throws.INT">
+          <span class="font-weight-bolder"> Int</span> {{ dialogData.saving_throws.INT }}
+        </span>
+        <span *ngIf="dialogData.saving_throws.WIS">
+          <span class="font-weight-bolder"> Wis</span> {{ dialogData.saving_throws.WIS }}
+        </span>
+        <span *ngIf="dialogData.saving_throws.CHA">
+          <span class="font-weight-bolder"> Cha</span> {{ dialogData.saving_throws.CHA }}
+        </span>
+      </div>
+    </div>
+    <!-- end::Saving Throws -->
+
+    <!-- start::Skills -->
+    <div *ngIf="dialogData.skills" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Skills:</p>
+      </div>
+      <div class="col">
+        <span *ngIf="dialogData.skills.acrobatics">
+          <span class="font-weight-bolder"> Acrobatics</span> {{ dialogData.skills.acrobatics }}
+        </span>
+        <span *ngIf="dialogData.skills.animal_handling">
+          <span class="font-weight-bolder"> Animal Handling </span> {{ dialogData.skills.animal_handling }}
+        </span>
+        <span *ngIf="dialogData.skills.arcana">
+          <span class="font-weight-bolder"> Arcana </span> {{ dialogData.skills.arcana }}
+        </span>
+        <span *ngIf="dialogData.skills.atheltics">
+          <span class="font-weight-bolder"> Athletics </span> {{ dialogData.skills.atheltics }}
+        </span>
+        <span *ngIf="dialogData.skills.deception">
+          <span class="font-weight-bolder"> Deception </span> {{ dialogData.skills.deception }}
+        </span>
+        <span *ngIf="dialogData.skills.endurance">
+          <span class="font-weight-bolder"> Endurance </span> {{ dialogData.skills.endurance }}
+        </span>
+        <span *ngIf="dialogData.skills.history">
+          <span class="font-weight-bolder"> History </span> {{ dialogData.skills.history }}
+        </span>
+        <span *ngIf="dialogData.skills.insight">
+          <span class="font-weight-bolder"> Insight </span> {{ dialogData.skills.insight }}
+        </span>
+        <span *ngIf="dialogData.skills.intimidation">
+          <span class="font-weight-bolder"> Intimidation </span> {{ dialogData.skills.intimidation }}
+        </span>
+        <span *ngIf="dialogData.skills.investigation">
+          <span class="font-weight-bolder"> Investigation </span> {{ dialogData.skills.investigation }}
+        </span>
+        <span *ngIf="dialogData.skills.medicine">
+          <span class="font-weight-bolder"> Medicine </span> {{ dialogData.skills.medicine }}
+        </span>
+        <span *ngIf="dialogData.skills.nature">
+          <span class="font-weight-bolder"> Nature </span> {{ dialogData.skills.nature }}
+        </span>
+        <span *ngIf="dialogData.skills.perception">
+          <span class="font-weight-bolder"> Perception </span> {{ dialogData.skills.perception }}
+        </span>
+        <span *ngIf="dialogData.skills.performance">
+          <span class="font-weight-bolder"> Performance </span> {{ dialogData.skills.performance }}
+        </span>
+        <span *ngIf="dialogData.skills.persuasion">
+          <span class="font-weight-bolder"> Persuasion </span> {{ dialogData.skills.persuasion }}
+        </span>
+        <span *ngIf="dialogData.skills.religion">
+          <span class="font-weight-bolder"> Religion </span> {{ dialogData.skills.religion }}
+        </span>
+        <span *ngIf="dialogData.skills.sleight_of_hand">
+          <span class="font-weight-bolder"> Sleight of Hand </span> {{ dialogData.skills.sleight_of_hand }}
+        </span>
+        <span *ngIf="dialogData.skills.stealth">
+          <span class="font-weight-bolder"> Stealth </span> {{ dialogData.skills.stealth }}
+        </span>
+        <span *ngIf="dialogData.skills.survival">
+          <span class="font-weight-bolder"> Survival </span> {{ dialogData.skills.survival }}
+        </span>
+      </div>
+    </div>
+    <!-- end::Skills -->
+
+    <!-- start::Damage Immunities -->
+    <div *ngIf="dialogData.damage_immunities" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Damage Immunities:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.damage_immunities }}</p>
+      </div>
+    </div>
+    <!-- end::Damage Immunities -->
+
+    <!-- start::Condition Immunities -->
+    <div *ngIf="dialogData.condition_immunities" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Condition Immunities:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.condition_immunities }}</p>
+      </div>
+    </div>
+    <!-- end::Condition Immunities -->
+
+    <!-- start::Senses -->
+    <div *ngIf="dialogData.senses" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Senses:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.senses }} </p>
+      </div>
+    </div>
+    <!-- end::Senses -->
+
+    <!-- start::Languages -->
+    <div *ngIf="dialogData.languages" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Languages:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.languages }} </p>
+      </div>
+    </div>
+    <!-- end::Languages -->
+
+    <!-- start::Challenge Rating -->
+    <div class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Challenge Rating:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.challenge_rating }} </p>
+      </div>
+    </div>
+    <!-- end::Challenge Rating -->
+
+    <!-- start::Experience -->
+    <div class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Experience:</p>
+      </div>
+      <div class="col">
+        <p> {{ dialogData.experience }} </p>
+      </div>
+    </div>
+    <!-- end::Experience -->
+
+    <!-- start::DISPLAY ABILITIES -->
+    <div *ngIf="dialogData.abilities">
+      <h3 class="tc-red pt-5 font-weight-bolder">ABILITIES</h3>
+      <div class="divider"></div>
+
+      <!-- start::Abilities -->
+      <div *ngFor="let ability of dialogData.abilities" class="row">
+        <div class="col">
+          <p> <span class="font-weight-bolder"> {{ ability.ability }} </span> {{ ability.description }} </p>
+        </div>
+      </div>
+      <!-- end::Abilities -->
+    </div>
+    <!-- end::DISPLAY ABILITIES -->
+
+    <!-- start:: DISPLAY ACTIONS -->
+    <div *ngIf="dialogData.actions">
+      <h3 class="tc-red pt-5 font-weight-bolder">ACTIONS</h3>
+      <div class="divider"></div>
+      <!-- start::Actions -->
+      <div *ngFor="let action of dialogData.actions" class="row">
+        <div class="col">
+          <p> <span class="font-weight-bolder font-italic">{{ action.action }} </span> {{ action.description }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- end::Actions -->
+    <!-- end:: DISPLAY ACTIONS -->
+
+    <!-- start:: DISPLAY LEGENDARY ACTIONS -->
+    <div *ngIf="dialogData.legendary_actions">
+      <h3 class="tc-red pt-5 font-weight-bolder">LEGENDARY ACTIONS</h3>
+      <div class="divider"></div>
+      <!-- start::Actions -->
+      <div *ngFor="let action of dialogData.legendary_actions" class="row">
+        <div class="col">
+          <p> <span class="font-weight-bolder font-italic"> {{ action.action }} </span> {{ action.description }} </p>
+        </div>
+      </div>
+    </div>
+    <!-- end::Actions -->
+    <!-- end:: DISPLAY LEGENDARY ACTIONS -->
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</div>

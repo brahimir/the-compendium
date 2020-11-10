@@ -35,10 +35,6 @@ export class ArmorComponent implements OnInit, AfterViewInit {
   data: any;
   dataSource: any;
 
-  // Dialog options
-  dialogWidth = '800px';
-  dialogHeight = '700px';
-
   // Armor Objects
   ARMORS_DATA: Armor[];
 
@@ -66,8 +62,6 @@ export class ArmorComponent implements OnInit, AfterViewInit {
 
         // Set the dialog window options here.
         const dialogOptions = {
-          // width: this.dialogWidth,
-          // height: this.dialogHeight,
           data: dialogData
         }
     

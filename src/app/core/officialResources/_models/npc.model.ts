@@ -7,9 +7,43 @@ export class Npc {
     hit_points: number;
     alt_hit_points: string;
     speed: string;
-    ability_scores: Object[];
-    saving_throws: Object[];
-    skills: Object[];
+    ability_scores: {
+        STR: string,
+        DEX: string,
+        CON: string,
+        INT: string,
+        WIS: string,
+        CHA: string
+    };
+    saving_throws: {
+        STR: string,
+        DEX: string,
+        CON: string,
+        INT: string,
+        WIS: string,
+        CHA: string
+    };
+    skills: {
+        acrobatics: string,
+        animal_handling: string,
+        arcana: string,
+        atheltics: string,
+        deception: string,
+        endurance: string,
+        history: string,
+        insight: string,
+        intimidation: string,
+        investigation: string,
+        medicine: string,
+        nature: string,
+        perception: string,
+        performance: string,
+        persuasion: string,
+        religion: string,
+        sleight_of_hand: string,
+        stealth: string,
+        survival: string
+    };
     damage_immunities: string[];
     condition_immunities: string[];
     senses: string[];
@@ -32,9 +66,43 @@ export class Npc {
         hit_points: number,
         alt_hit_points: string,
         speed: string,
-        ability_scores: Object[],
-        saving_throws: Object[],
-        skills: Object[],
+        ability_scores: {
+            STR: string,
+            DEX: string,
+            CON: string,
+            INT: string,
+            WIS: string,
+            CHA: string
+        },
+        saving_throws: {
+            STR: string,
+            DEX: string,
+            CON: string,
+            INT: string,
+            WIS: string,
+            CHA: string
+        },
+        skills: {
+            acrobatics: string,
+            animal_handling: string,
+            arcana: string,
+            atheltics: string,
+            deception: string,
+            endurance: string,
+            history: string,
+            insight: string,
+            intimidation: string,
+            investigation: string,
+            medicine: string,
+            nature: string,
+            perception: string,
+            performance: string,
+            persuasion: string,
+            religion: string,
+            sleight_of_hand: string,
+            stealth: string,
+            survival: string
+        },
         damage_immunities: string[],
         condition_immunities: string[],
         senses: string[],
@@ -53,7 +121,7 @@ export class Npc {
         this.hit_points = hit_points || null;
         this.alt_hit_points = alt_hit_points || null;
         this.speed = speed || null;
-        this.ability_scores = ability_scores || null;
+        this.ability_scores = ability_scores|| null;
         this.saving_throws = saving_throws || null;
         this.skills = skills || null;
         this.damage_immunities = damage_immunities || null;

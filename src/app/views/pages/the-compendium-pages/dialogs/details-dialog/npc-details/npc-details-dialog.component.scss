@@ -1,0 +1,17 @@
+$tc-red: #a90000;
+
+button:hover {
+  background-color: $tc-red;
+  color: #ffffff;
+}
+
+// Divider
+div.divider {
+  border: 1px solid $tc-red;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.tc-red {
+    color: $tc-red;
+}

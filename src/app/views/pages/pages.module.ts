@@ -64,6 +64,7 @@ import { ManageSessionsComponent } from './the-compendium-pages/dm-tools/manage-
 import { StoryboardComponent } from './the-compendium-pages/dm-tools/storyboard/storyboard.component';
 import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NpcDetailsDialogComponent } from './the-compendium-pages/dialogs/details-dialog/npc-details/npc-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -76,8 +77,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 	  StoryboardComponent, 
 	  CampaignsComponent, 
 	  SessionsComponent,
-	  // Dialogs
-	  ArmorDetailsDialogComponent,
 	  // Homebrew Pages
 	  HomebrewWeaponsComponent, 
 	  HomebrewArmorComponent, 
@@ -88,6 +87,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 	  StoryboardComponent,
 	  ManageSessionsComponent,
 	  CreateComponent,
+	  // Dialogs
+	  ArmorDetailsDialogComponent,
+	  NpcDetailsDialogComponent,
 	],
   exports: [],
   imports: [
