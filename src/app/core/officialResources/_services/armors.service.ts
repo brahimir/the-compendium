@@ -31,6 +31,7 @@ export class ArmorsService {
         element.armor_class,
         element.stealth_disadvantage,
         element.strength_requirement,
+        element.requires_attunement,
         element.rarity,
         element.value,
         element.description

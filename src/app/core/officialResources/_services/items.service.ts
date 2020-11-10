@@ -28,6 +28,7 @@ export class ItemsService {
         element.id,
         element.name,
         element.type,
+        element.requires_attunement,
         element.rarity,
         element.value,
         element.description

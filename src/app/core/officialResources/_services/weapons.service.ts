@@ -27,9 +27,11 @@ export class WeaponService {
       WeaponObjects.push(new Weapon(
         element.id,
         element.name,
+        element.type,
         element.is_martial,
         element.damage,
         element.damage_type,
+        element.requires_attunement,
         element.rarity,
         element.value,
         element.properties,
