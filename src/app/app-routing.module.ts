@@ -8,6 +8,7 @@ import { BaseComponent } from './views/theme/base/base.component';
 import { AuthGuard } from './core/auth';
 
 // The Compendium Components
+import { DashboardComponent } from './views/pages/the-compendium-pages/dashboard/dashboard.component';
 import { WeaponComponent  } from './views/pages/the-compendium-pages/weapons/weapons.component';
 import { ArmorComponent } from './views/pages/the-compendium-pages/armor/armor.component';
 import { ItemsComponent } from './views/pages/the-compendium-pages/items/items.component';
@@ -34,12 +35,12 @@ const routes: Routes = [
     component: BaseComponent,
     canActivate: [AuthGuard],
     children: [
+      // start:: The Compendium Pages
       {
         path: 'dashboard',
-        loadChildren: () => import('./views/pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+        component: DashboardComponent
       },
 
-      // begin:: The Compendium Pages
       {
         path: 'weapons',
         component: WeaponComponent
@@ -102,7 +103,6 @@ const routes: Routes = [
         path: 'create',
         component: CreateComponent
       },
-      
       // end:: The Compendium Pages
 
       {

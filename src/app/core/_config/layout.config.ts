@@ -88,7 +88,7 @@ export class LayoutConfig {
           "arrow": true,
           "toggle": "click",
           "submenu": {
-            "theme": "light",
+            "theme": "dark",
             "arrow": true
           }
         },

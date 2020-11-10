@@ -68,6 +68,7 @@ import { HomebrewSpellsComponent } from './the-compendium-pages/homebrew/homebre
 import { ManageSessionsComponent } from './the-compendium-pages/dm-tools/manage-sessions/manage-sessions.component';
 import { StoryboardComponent } from './the-compendium-pages/dm-tools/storyboard/storyboard.component';
 import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.component';
+import { DashboardComponent } from './the-compendium-pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.c
 	  WeaponDetailsDialogComponent,
 	  ItemDetailsDialogComponent,
 	  SpellDetailsDialogComponent,
+	  DashboardComponent,
 	],
   exports: [],
   imports: [

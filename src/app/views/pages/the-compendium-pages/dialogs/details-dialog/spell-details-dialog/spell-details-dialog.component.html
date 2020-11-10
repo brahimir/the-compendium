@@ -6,16 +6,13 @@
       </div>
     </div>
 
+    <!-- todo:: make an ngIf for checking if level property exists. -->
     <!-- start::Spell Level and School-->
-    <div *ngIf="dialogData.level" class="row">
+    <div class="row">
       <div class="col">
         <p class="font-italic">
-          <span *ngIf="dialogData.is_cantrip; else level_content">
-            Cantrip <span *ngIf="dialogData.school"> {{dialogData.school}} </span>
-          </span>
-          <ng-template #level_content>
-            Level {{ dialogData.level }} <span *ngIf="dialogData.school">{{ dialogData.school }}</span>
-          </ng-template>
+          <span *ngIf="dialogData.is_cantrip"> Cantrip <span *ngIf="dialogData.school"> {{dialogData.school}} </span></span>
+          <span *ngIf="!dialogData.is_cantrip"> Level {{dialogData.level}} <span *ngIf="dialogData.school"> {{dialogData.school}} </span></span>
         </p>
       </div>
     </div>
