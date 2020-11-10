@@ -2,7 +2,7 @@
   <mat-dialog-content class="mat-typography">
     <div class="row">
       <div class="col">
-        <h1 class="pb-5 tc-red">{{ dialogData.name }}</h1>
+        <h1 class="tc-red">{{ dialogData.name }}</h1>
       </div>
     </div>
 
@@ -73,17 +73,20 @@
     </div>
     <!-- end::Value -->
 
-    <!-- start:: DIVIDER -->
-    <div *ngIf="dialogData.description" class="divider"></div>
-    <!-- end:: DIVIDER -->
-
     <!-- start::Description -->
-    <div class="row pt-5">
-      <div class="col">
-        <h3> {{ dialogData.description }} </h3>
+    <div *ngIf="dialogData.description">
+      <h3 class="font-weight-bolder tc-red pt-5">DESCRIPTION</h3>
+      <!-- start:: DIVIDER -->
+      <div *ngIf="dialogData.description" class="divider"></div>
+      <!-- end:: DIVIDER -->
+      <div class="row pt-5">
+        <div class="col">
+          <h3> {{ dialogData.description }} </h3>
+        </div>
       </div>
     </div>
     <!-- end::Description -->
+
 
   </mat-dialog-content>
   <mat-dialog-actions align="end">

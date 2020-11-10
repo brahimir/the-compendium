@@ -2,7 +2,7 @@
   <mat-dialog-content class="mat-typography">
     <div class="row">
       <div class="col">
-        <h1 class="pb-5 tc-red">{{ dialogData.name }}</h1>
+        <h1 class="tc-red">{{ dialogData.name }}</h1>
       </div>
     </div>
 
@@ -79,6 +79,7 @@
 
     <!-- start::Description-->
     <div *ngIf="dialogData.description">
+      <h3 class="font-weight-bolder tc-red pt-5">DESCRIPTION</h3>
       <!-- start:: DIVIDER -->
       <div class="divider"></div>
       <!-- end:: DIVIDER -->

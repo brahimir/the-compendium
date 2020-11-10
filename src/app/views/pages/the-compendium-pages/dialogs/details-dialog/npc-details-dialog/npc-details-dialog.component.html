@@ -2,33 +2,24 @@
   <mat-dialog-content class="mat-typography">
     <div class="row">
       <div class="col">
-        <h1 class="pb-5 tc-red">{{ dialogData.name }}</h1>
+        <h1 class="tc-red">{{ dialogData.name }}</h1>
       </div>
     </div>
 
     <!-- start::Size -->
     <div *ngIf="dialogData.size" class="row">
-      <div class="col-3">
-        <p class="font-weight-bolder">Size:</p>
-      </div>
       <div class="col">
-        <p> {{ dialogData.size }} </p>
+        <p class="font-italic">
+          {{ dialogData.size }}
+          <span *ngIf="dialogData.alignment">, {{ dialogData.alignment }}</span>
+        </p>
       </div>
     </div>
     <!-- end::Size -->
 
+    <!-- start::DIVIDER -->
     <div class="divider"></div>
-
-    <!-- start::Alignment -->
-    <div *ngIf="dialogData.alignment" class="row">
-      <div class="col-3">
-        <p class="font-weight-bolder">Alignment:</p>
-      </div>
-      <div class="col">
-        <p> {{ dialogData.alignment }} </p>
-      </div>
-    </div>
-    <!-- end::Alignment -->
+    <!-- end::DIVIDER -->
 
     <!-- start::Armor Class -->
     <div *ngIf="dialogData.armor_class" class="row">
