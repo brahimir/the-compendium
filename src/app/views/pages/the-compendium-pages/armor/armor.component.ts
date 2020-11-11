@@ -64,11 +64,20 @@ export class ArmorComponent implements OnInit, AfterViewInit {
         const dialogOptions = {
           data: dialogData
         }
-    
+
         // Opens the dialog window.
         const dialogRef = this.dialog.open(ArmorDetailsDialogComponent, dialogOptions);
-    
+
         // Handles dialog closing - can do something when the dialog is closed.
         dialogRef.afterClosed().subscribe(result => { });
+  }
+
+  applyFilter(filterValue: string) {
+    // Remove whitespace
+    filterValue = filterValue.trim(); 
+
+    // MatTableDataSource defaults to lowercase matches
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 }

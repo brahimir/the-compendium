@@ -36,6 +36,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatBottomSheetModule, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 // Pages
 import { CoreModule } from '../../core/core.module';
@@ -69,39 +70,41 @@ import { ManageSessionsComponent } from './the-compendium-pages/dm-tools/manage-
 import { StoryboardComponent } from './the-compendium-pages/dm-tools/storyboard/storyboard.component';
 import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.component';
 import { DashboardComponent } from './the-compendium-pages/dashboard/dashboard.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-	  //The Compendium Pages
-	  WeaponComponent, 
-	  ArmorComponent,
-	  ItemsComponent, 
-	  NpcsComponent, 
-	  SpellsComponent,
-	  StoryboardComponent, 
-	  CampaignsComponent, 
-	  AdventuresComponent,
-	  // Homebrew Pages
-	  HomebrewWeaponsComponent, 
-	  HomebrewArmorComponent, 
-	  HomebrewItemsComponent, 
-	  HomebrewNpcsComponent, 
-	  HomebrewSpellsComponent,
-	  // DM Tools Pages
-	  StoryboardComponent,
-	  ManageSessionsComponent,
-	  CreateComponent,
-	  // Dialogs
-	  ArmorDetailsDialogComponent,
-	  NpcDetailsDialogComponent,
-	  WeaponDetailsDialogComponent,
-	  ItemDetailsDialogComponent,
-	  SpellDetailsDialogComponent,
-	  DashboardComponent,
+	declarations: [
+		//The Compendium Pages
+		WeaponComponent,
+		ArmorComponent,
+		ItemsComponent,
+		NpcsComponent,
+		SpellsComponent,
+		StoryboardComponent,
+		CampaignsComponent,
+		AdventuresComponent,
+		// Homebrew Pages
+		HomebrewWeaponsComponent,
+		HomebrewArmorComponent,
+		HomebrewItemsComponent,
+		HomebrewNpcsComponent,
+		HomebrewSpellsComponent,
+		// DM Tools Pages
+		StoryboardComponent,
+		ManageSessionsComponent,
+		CreateComponent,
+		// Dialogs
+		ArmorDetailsDialogComponent,
+		NpcDetailsDialogComponent,
+		WeaponDetailsDialogComponent,
+		ItemDetailsDialogComponent,
+		SpellDetailsDialogComponent,
+		DashboardComponent,
 	],
-  exports: [],
-  imports: [
-	// material modules
+	exports: [],
+	imports: [
+		// material modules
+		DragDropModule,
 		MatDialogModule,
 		MatInputModule,
 		MatFormFieldModule,
@@ -133,16 +136,18 @@ import { DashboardComponent } from './the-compendium-pages/dashboard/dashboard.c
 		MatButtonToggleModule,
 		PartialsModule,
 		FormsModule,
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    CoreModule,
-    PartialsModule,
-    MailModule,
-    ECommerceModule,
-    UserManagementModule,
-  ],
-  providers: []
+		CommonModule,
+		HttpClientModule,
+		FormsModule,
+		CoreModule,
+		PartialsModule,
+		MailModule,
+		ECommerceModule,
+		UserManagementModule,
+		// Router
+		RouterModule
+	],
+	providers: []
 })
 export class PagesModule {
 }

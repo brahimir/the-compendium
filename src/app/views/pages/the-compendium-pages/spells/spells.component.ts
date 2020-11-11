@@ -65,5 +65,14 @@ export class SpellsComponent implements OnInit, AfterViewInit {
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe(result => { });
   }
+
+  applyFilter(filterValue: string) {
+    // Remove whitespace
+    filterValue = filterValue.trim(); 
+
+    // MatTableDataSource defaults to lowercase matches
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
 }
 
