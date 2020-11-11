@@ -1,11 +1,19 @@
 <kt-portlet>
   <kt-portlet-header [class]="'card-head-lg'">
     <ng-container ktPortletTitle>
-      <span>Weapons</span>
+      <h1>Weapons</h1>
     </ng-container>
   </kt-portlet-header>
 
   <kt-portlet-body>
+    <!-- start:: Filter -->
+    <div class="filter-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+    <!-- end:: Filter -->
+    
     <table class="lmat-elevation-z8" mat-table matSort [dataSource]="dataSource">
 
       <ng-container matColumnDef="name">
