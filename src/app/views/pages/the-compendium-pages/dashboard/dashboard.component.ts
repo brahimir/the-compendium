@@ -1,7 +1,6 @@
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import stringCase from 'dist/assets/plugins/formvalidation/src/js/validators/stringCase';
 
 @Component({
   selector: 'kt-dashboard',
