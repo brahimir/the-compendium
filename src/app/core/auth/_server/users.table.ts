@@ -45,15 +45,9 @@ export class UsersTable {
         user_storyboard: {
           plots_main: [
             {
-              title: "Clasp and Splimffs",
-              description: "Clasp thinks that Splimffs is an ally of Dario Mohanus (also a Witcher)."
-            },
-            {
               title: "The Voidwalker",
               description: "Brandon Zimmerset has been summoned to Emon by the Council of Tal'Dorei - the 'Voidwalker' has been spotted, and is on the move."
             },
-          ],
-          plots_side: [
             {
               title: "Dwar'Gre's 'Dario' (Witcher) bounty of 5000 gold.",
               description: "Clasp trying to kill Dario Mohanus (he's a Witcher). He's a wanted member of the Clasp (previous clan member). He has identity information on senior Clasp members (level 5 members), and also stole 10000 gold from the Clasp. He disappeared into the woods during the overnight camp on Silvercut Roadway to retreat to The Shadeburrow, a secret hideout in a cave east of Westruun, previously used by the Clasp as a hideout. If Dwar’Gre comes across this cave, there is a symbol in Theive's Cant that reads 'sanctuary', and he can investigate the area to reveal a trapped entrance to The Shadeburrow."
@@ -72,13 +66,16 @@ export class UsersTable {
               title: "Vampires in Westruun",
               description: "Suspicious 'random' killing occuring in Westruun, where bodies are being drained of blood."
             },
+          ],
+          plots_done: [
+            {
+              title: "Clasp and Splimffs",
+              description: "Clasp thinks that Splimffs is an ally of Dario Mohanus (also a Witcher)."
+            },
             {
               title: "Battle in the Barracks District",
               description: "The Voidwalker reveals himself in the Battle in Barracks District. (He is Rheskal Devinou from the past)"
             },
-          ],
-          plots_done: [
-
           ]
         }
       }

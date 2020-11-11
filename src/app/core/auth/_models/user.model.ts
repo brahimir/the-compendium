@@ -16,10 +16,6 @@ export class User extends BaseModel {
         title: string,
         description: string
       },
-      plots_side:{
-        title: string,
-        description: string
-      },
       plots_in_progress:{
         title: string,
         description: string
