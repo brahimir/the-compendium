@@ -66,7 +66,6 @@ import { HomebrewItemsComponent } from './the-compendium-pages/homebrew/homebrew
 import { HomebrewNpcsComponent } from './the-compendium-pages/homebrew/homebrew-npcs/homebrew-npcs.component';
 import { HomebrewSpellsComponent } from './the-compendium-pages/homebrew/homebrew-spells/homebrew-spells.component';
 // DM Tools Pages
-import { ManageSessionsComponent } from './the-compendium-pages/dm-tools/manage-sessions/manage-sessions.component';
 import { StoryboardComponent } from './the-compendium-pages/dm-tools/storyboard/storyboard.component';
 import { CreateComponent } from './the-compendium-pages/dm-tools/create/create.component';
 import { DashboardComponent } from './the-compendium-pages/dashboard/dashboard.component';
@@ -91,7 +90,6 @@ import { RouterModule } from '@angular/router';
 		HomebrewSpellsComponent,
 		// DM Tools Pages
 		StoryboardComponent,
-		ManageSessionsComponent,
 		CreateComponent,
 		// Dialogs
 		ArmorDetailsDialogComponent,
