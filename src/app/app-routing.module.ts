@@ -24,7 +24,6 @@ import { HomebrewNpcsComponent } from './views/pages/the-compendium-pages/homebr
 import { HomebrewSpellsComponent } from './views/pages/the-compendium-pages/homebrew/homebrew-spells/homebrew-spells.component';
 // DM Tools
 import { StoryboardComponent } from './views/pages/the-compendium-pages/dm-tools/storyboard/storyboard.component';
-import { ManageSessionsComponent } from './views/pages/the-compendium-pages/dm-tools/manage-sessions/manage-sessions.component';
 import { CreateComponent } from './views/pages/the-compendium-pages/dm-tools/create/create.component';
 
 const routes: Routes = [
@@ -94,10 +93,6 @@ const routes: Routes = [
       {
         path: 'storyboard',
         component: StoryboardComponent
-      },
-      {
-        path: 'manage-sessions',
-        component: ManageSessionsComponent
       },
       {
         path: 'create',

@@ -9,6 +9,27 @@ export class User extends BaseModel {
   refreshToken: string;
   roles: number[];
   fullName: string;
+  user_settings: {
+    user_dashboard: string[],
+    user_storyboard: {
+      plots_main:{
+        title: string,
+        description: string
+      },
+      plots_side:{
+        title: string,
+        description: string
+      },
+      plots_in_progress:{
+        title: string,
+        description: string
+      },
+      plots_done:{
+        title: string,
+        description: string
+      },
+    }
+  }
 
   clear(): void {
     this.id = undefined;

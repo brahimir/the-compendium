@@ -42,8 +42,8 @@ export class PageConfig {
     campaigns: {
       page: {title: 'Campaigns', desc: ''}
     },
-    sessions: {
-      page: {title: 'Sessions', desc: ''}
+    adventures: {
+      page: {title: 'Adventures', desc: ''}
     },
     //DM Tools Pages
     storyboard: {

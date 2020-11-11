@@ -491,14 +491,6 @@ export class MenuConfig {
           permission: 'accessToDMTools'
         },
         {
-          title: 'Manage Sessions',
-          root: true,
-          bullet: 'dot',
-          icon: 'flaticon2-open-text-book',
-          page: '/manage-sessions',
-          permission: 'accessToDMTools'
-        },
-        {
           title: 'Create',
           root: true,
           bullet: 'dot',
