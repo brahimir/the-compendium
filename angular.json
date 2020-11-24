@@ -157,5 +157,10 @@
   "defaultProject": "metronic",
   "cli": {
     "analytics": "b1dfc39d-aa30-4e3a-8d5a-d646228c4f05"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "skipTests": true
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-// Data
+// Official Resource Data
 import { WeaponsTable } from "../_server/weapons.table";
 import { ArmorsTable } from "../_server/armors.table";
 import { SpellsTable } from "../_server/spells.table";
@@ -10,7 +10,7 @@ import { NpcsTable } from '../_server/npcs.table';
   providedIn: 'root'
 })
 export class ApiService {
-
+  // Official Resources
   weapons_data: any = WeaponsTable.weapons;
   armors_data: any = ArmorsTable.armors;
   spells_data: any = SpellsTable.spells;
@@ -19,6 +19,7 @@ export class ApiService {
 
   constructor() {  }
 
+  // Official Resource Data
   getWeaponsData() {
     return this.weapons_data
   }
