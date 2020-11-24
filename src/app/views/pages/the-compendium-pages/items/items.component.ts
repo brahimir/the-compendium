@@ -2,14 +2,14 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 // Models
 import { Item } from "../../../../core/officialResources/_models/item.model";
 // Services
-import { ApiService } from 'src/app/core/officialResources/_services/api.service';
 import { ItemsService } from "../../../../core/officialResources/_services/items.service";
-// MatTable
+// Angular Material
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { ItemDetailsDialogComponent } from '../dialogs/details-dialog/item-details-dialog/item-details-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
+// Dialog Component
+import { ItemDetailsDialogComponent } from '../dialogs/details-dialog/item-details-dialog/item-details-dialog.component';
 
 /**
  * @title Items table with Pagination
@@ -17,7 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'kt-items',
   templateUrl: './items.component.html',
-  styleUrls: ['./items.component.scss']
+  styleUrls: ['./items.component.scss', '../tc-global.scss']
 })
 export class ItemsComponent implements OnInit, AfterViewInit {
   columnsToDisplay: any[] = [
@@ -27,7 +27,6 @@ export class ItemsComponent implements OnInit, AfterViewInit {
     'value',
   ];
 
-  data: any;
   dataSource: any;
 
   // Item Objects
@@ -52,7 +51,7 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   }
 
   openDetails(item: Item): void {
-    // Pass the Npc object to the dialog here.
+    // Pass the Item object to the dialog here.
     const dialogData = item;
 
     // Set the dialog window options here.

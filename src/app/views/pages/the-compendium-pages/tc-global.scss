@@ -1,0 +1,19 @@
+// The Compendium Colors
+$tc-red: #a90000;
+$tc-white: #FFFFFF;
+
+// MatTables
+table {
+  width: 100%;
+}
+
+span.link {
+  cursor: pointer;
+  color: $tc-red;
+  text-decoration: underline;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}

@@ -3,13 +3,12 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Armor } from "../../../../core/officialResources/_models/armor.model";
 // Services
 import { ArmorsService } from "../../../../core/officialResources/_services/armors.service";
-// MatTable
+// Angular Material
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-// MatDialog
 import { MatDialog } from '@angular/material/dialog';
-// Details Dialog
+import { MatSort } from '@angular/material/sort';
+// Dialog Component
 import { ArmorDetailsDialogComponent } from "../dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
 
 /**
@@ -18,7 +17,7 @@ import { ArmorDetailsDialogComponent } from "../dialogs/details-dialog/armor-det
 @Component({
   selector: 'kt-armor',
   templateUrl: './armor.component.html',
-  styleUrls: ['./armor.component.scss']
+  styleUrls: ['./armor.component.scss', '../tc-global.scss']
 })
 export class ArmorComponent implements OnInit, AfterViewInit {
   columnsToDisplay: any[] = [

@@ -3,12 +3,12 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Npc } from 'src/app/core/officialResources/_models/npc.model';
 // Services
 import { NpcsService } from 'src/app/core/officialResources/_services/npcs.service';
-// MatTable
+// Angular Material
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-// MatDialog
+import { MatSort } from '@angular/material/sort';
+// Dialog Component
 import { NpcDetailsDialogComponent } from '../dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component';
 
 /**
@@ -17,7 +17,7 @@ import { NpcDetailsDialogComponent } from '../dialogs/details-dialog/npc-details
 @Component({
   selector: 'kt-npcs',
   templateUrl: './npcs.component.html',
-  styleUrls: ['./npcs.component.scss']
+  styleUrls: ['./npcs.component.scss' , '../tc-global.scss']
 })
 export class NpcsComponent implements OnInit, AfterViewInit {
   columnsToDisplay: any[] = [

@@ -3,11 +3,12 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Spell } from 'src/app/core/officialResources/_models/spell.model';
 // Services
 import { SpellService } from "../../../../core/officialResources/_services/spells.service";
-// MatTable
+// Angular Material
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
+// Dialog Component
 import { SpellDetailsDialogComponent } from '../dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component';
 
 /**
@@ -16,7 +17,7 @@ import { SpellDetailsDialogComponent } from '../dialogs/details-dialog/spell-det
 @Component({
   selector: 'kt-spells',
   templateUrl: './spells.component.html',
-  styleUrls: ['./spells.component.scss']
+  styleUrls: ['./spells.component.scss', '../tc-global.scss']
 })
 export class SpellsComponent implements OnInit, AfterViewInit {
   columnsToDisplay: any[] = [

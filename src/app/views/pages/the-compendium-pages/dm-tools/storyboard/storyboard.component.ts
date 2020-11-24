@@ -31,7 +31,7 @@ export class StoryboardComponent implements OnInit {
     this.$user = this.store.pipe(select(currentUser));
   }
 
-  // todo:: need to figure out how to access the arrays plot Objects to assign new properties with regards to their position.
+  // todo:: need to figure out how to access the arrays Plot Objects to assign new properties with regards to their position.
   // todo:: ERROR TypeError: Cannot assign to read only property '0' of object '[object Array]'
   drop(event: CdkDragDrop<string[]>) {
     console.log(event);

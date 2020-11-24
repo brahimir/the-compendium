@@ -17,7 +17,7 @@ import { WeaponDetailsDialogComponent } from '../dialogs/details-dialog/weapon-d
 @Component({
   selector: 'kt-weapons',
   templateUrl: './weapons.component.html',
-  styleUrls: ['./weapons.component.scss']
+  styleUrls: ['./weapons.component.scss', '../tc-global.scss']
 })
 export class WeaponComponent implements OnInit, AfterViewInit {
   columnsToDisplay: any[] = [
