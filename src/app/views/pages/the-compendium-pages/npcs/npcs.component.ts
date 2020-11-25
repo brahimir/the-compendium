@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 // Models
-import { Npc } from 'src/app/core/officialResources/_models/npc.model';
+import { Npc } from 'src/app/core/resources/_models/npc.model';
 // Services
-import { NpcsService } from 'src/app/core/officialResources/_services/npcs.service';
+import { NpcsService } from 'src/app/core/resources/_services//official-services/npcs.service';
 // Angular Material
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';

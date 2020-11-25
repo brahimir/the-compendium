@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 // Models
-import { Spell } from 'src/app/core/officialResources/_models/spell.model';
+import { Spell } from 'src/app/core/resources/_models/spell.model';
 // Services
-import { SpellService } from "../../../../core/officialResources/_services/spells.service";
+import { SpellService } from "../../../../core/resources/_services//official-services/spells.service";
 // Angular Material
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';

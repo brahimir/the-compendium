@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 // Models
-import { Weapon } from '../_models/weapon.model';
-import { ApiService } from './api.service';
+import { Weapon } from '../../_models/weapon.model';
+import { ApiService } from '../api.service';
 
 @Injectable({
   providedIn: 'root'

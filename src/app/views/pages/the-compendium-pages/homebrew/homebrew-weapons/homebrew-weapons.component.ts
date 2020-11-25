@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // Services
-import { HomebrewWeaponsService } from 'src/app/core/officialResources/_services/homebrew-services/homebrew-weapons.service';
+import { HomebrewWeaponsService } from '../../../../../core/resources/_services/homebrew-services/homebrew-weapons.service';
 
 @Component({
   selector: 'kt-homebrew-weapons',

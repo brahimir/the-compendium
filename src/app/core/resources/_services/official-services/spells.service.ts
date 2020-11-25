@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 // Models
-import { Spell } from '../_models/spell.model';
-import { ApiService } from './api.service';
+import { Spell } from '../../_models/spell.model';
+import { ApiService } from '../api.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 // Models
-import { Item } from "../../../../core/officialResources/_models/item.model";
+import { Item } from "../../../../core/resources/_models/item.model";
 // Services
-import { ItemsService } from "../../../../core/officialResources/_services/items.service";
+import { ItemsService } from "../../../../core/resources/_services/official-services/items.service";
 // Angular Material
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';

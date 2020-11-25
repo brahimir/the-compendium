@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 // Models
-import { Npc } from '../_models/npc.model';
+import { Npc } from '../../_models/npc.model';
 // Services
-import { ApiService } from './api.service';
+import { ApiService } from '../api.service';
 
 @Injectable({
   providedIn: 'root'
