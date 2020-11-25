@@ -41,29 +41,4 @@ export class WeaponService {
 
     return WeaponObjects;
   }
-
-  getHomebrewWeapons(): Weapon[] {
-    // The array of Weapon Objects.
-    let HomebrewWeaponObjects: Weapon[] = [];
-
-    let data: any = this.apiService.getWeaponsData();
-
-    data.forEach(element => {
-      HomebrewWeaponObjects.push(new Weapon(
-        element.id,
-        element.name,
-        element.type,
-        element.is_martial,
-        element.damage,
-        element.damage_type,
-        element.requires_attunement,
-        element.rarity,
-        element.value,
-        element.properties,
-        element.description
-      ));
-    });
-
-    return HomebrewWeaponObjects;
-  }
 }

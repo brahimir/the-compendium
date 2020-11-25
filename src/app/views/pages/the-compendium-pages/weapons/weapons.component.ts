@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-// MatDialog
+// Details Dialog
 import { WeaponDetailsDialogComponent } from '../dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component';
 
 /**

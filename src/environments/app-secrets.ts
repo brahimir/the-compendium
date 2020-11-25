@@ -1,9 +1,23 @@
-// Mongo
-export const MONGO_ADMIN_PASSWORD = '99Zsefvd66';
-
 // API Routes
 export const routes = {
-    API_USERS_URL: 'api/users',
-    API_PERMISSION_URL: 'api/permissions',
-    API_ROLES_URL: 'api/roles'
+    // Auth
+    USERS: 'api/users',
+    PERMISSIONS: 'api/permissions',
+    ROLES: 'api/roles',
+
+    // Resources
+    OFFICIAL: {
+        WEAPONS: 'http://localhost:8080/api/weapons',
+        ARMORS: 'http://localhost:8080/api/armors',
+        ITEMS: 'http://localhost:8080/api/items',
+        NPCS: 'http://localhost:8080/api/npcs',
+        SPELLS: 'http://localhost:8080/api/spells',
+    },
+    HOMEBREW: {
+        WEAPONS: 'http://lvh.me:8080/api/homebrewWeapons',
+        ARMORS: 'http://localhost:8080/api/homebrewArmors',
+        ITEMS: 'http://localhost:8080/api/homebrewItems',
+        NPCS: 'http://localhost:8080/api/homebrewNpcs',
+        SPELLS: 'http://localhost:8080/api/homebrewSpells',
+    }
 }
