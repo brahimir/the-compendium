@@ -28,16 +28,15 @@
       </div>
     </div>
     <!-- end::Armor Class -->
-
-    <!--  todo::  Need to modify this for the real data of true or false for stealth 
-          todo::  disadvantage. -->
+    
     <!-- start::Stealth Disadvantage -->
     <div class="row">
       <div class="col-3">
         <p class="font-weight-bolder">Stealth Disadvantage:</p>
       </div>
       <div class="col">
-        <p> {{ dialogData.stealth_disadvantage }} </p>
+        <p *ngIf="dialogData.stealth_disadvantage;else stealth_false">Disadvantage</p>
+        <ng-template #stealth_false>None</ng-template>
       </div>
     </div>
     <!-- end::Stealth Disadvantage -->
