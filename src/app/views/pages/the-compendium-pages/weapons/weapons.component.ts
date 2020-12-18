@@ -1,31 +1,31 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
 import { Weapon } from "../../../../core/resources/_models/weapon.model";
 // Services
 import { WeaponService } from "../../../../core/resources/_services/official-services/weapons.service";
 // MatTable
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { MatDialog } from "@angular/material/dialog";
 // Details Dialog
-import { WeaponDetailsDialogComponent } from '../dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component';
+import { WeaponDetailsDialogComponent } from "../dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
 
 /**
  * @title Weapons table with Pagination
  */
 @Component({
-  selector: 'kt-weapons',
-  templateUrl: './weapons.component.html',
-  styleUrls: ['./weapons.component.scss', '../tc-global.scss']
+  selector: "kt-weapons",
+  templateUrl: "./weapons.component.html",
+  styleUrls: ["./weapons.component.scss", "../tc-global.scss"],
 })
 export class WeaponComponent implements OnInit, AfterViewInit {
   columnsToDisplay: any[] = [
-    'name',
-    'damage',
-    'damage_type',
-    'rarity',
-    'value',
+    "name",
+    "damage",
+    "damage_type",
+    "rarity",
+    "value",
   ];
 
   data: any;
@@ -37,15 +37,13 @@ export class WeaponComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(
-    weaponsService: WeaponService,
-    public dialog: MatDialog) {
+  constructor(private weaponsService: WeaponService, public dialog: MatDialog) {}
+
+  ngOnInit(): void {
     // Get data from API and generate Npc objects
-    this.WEAPONS_DATA = weaponsService.getWeapons();
+    this.WEAPONS_DATA = this.weaponsService.getWeapons();
     this.dataSource = new MatTableDataSource<Weapon>(this.WEAPONS_DATA);
   }
-
-  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -58,14 +56,17 @@ export class WeaponComponent implements OnInit, AfterViewInit {
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData
-    }
+      data: dialogData,
+    };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(WeaponDetailsDialogComponent, dialogOptions);
+    const dialogRef = this.dialog.open(
+      WeaponDetailsDialogComponent,
+      dialogOptions
+    );
 
     // Handles dialog closing - can do something when the dialog is closed.
-    dialogRef.afterClosed().subscribe(result => { });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   applyFilter(filterValue: string) {
@@ -77,4 +78,3 @@ export class WeaponComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 }
-

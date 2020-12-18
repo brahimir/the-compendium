@@ -1,27 +1,28 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
-import { Weapon } from 'src/app/core/resources/_models/weapon.model';
+import { Weapon } from "../../../../../core/resources/_models/weapon.model";
 // Services
-import { HomebrewWeaponsService } from '../../../../../core/resources/_services/homebrew-services/homebrew-weapons.service';
+import { HomebrewWeaponsService } from "../../../../../core/resources/_services/homebrew-services/homebrew-weapons.service";
 // MatTable
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { MatDialog } from "@angular/material/dialog";
+import { WeaponDetailsDialogComponent } from "../../dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
 // Details Dialog
 
 @Component({
-  selector: 'kt-homebrew-weapons',
-  templateUrl: './homebrew-weapons.component.html',
-  styleUrls: ['./homebrew-weapons.component.scss', '../../tc-global.scss']
+  selector: "kt-homebrew-weapons",
+  templateUrl: "./homebrew-weapons.component.html",
+  styleUrls: ["./homebrew-weapons.component.scss", "../../tc-global.scss"],
 })
 export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
   columnsToDisplay: any[] = [
-    'name',
-    'damage',
-    'damage_type',
-    'rarity',
-    'value',
+    "name",
+    "damage",
+    "damage_type",
+    "rarity",
+    "value",
   ];
 
   data: any;
@@ -37,40 +38,33 @@ export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private homebrewWeaponsService: HomebrewWeaponsService,
-    public dialog: MatDialog) {
-      // todo:: need to create Weapon Objects to pass to the datasource for the MatTable.
-    this.dataSource = new MatTableDataSource<Weapon>(this.HOMEBREW_WEAPONS_DATA);
-  }
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.getHomebrewWeapons();
+    this.updateHomebrewWeapons();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  ngAfterViewInit(): void {}
 
   /**
    * Get all Homebrew Weapons from API.
+   * Set up DataSource for MatTableData.
+   * Set up Paginators and Sorts.
    */
-  getHomebrewWeapons(): void {
-    this.homebrewWeaponsService.getAll()
-      .subscribe(
-        data => {
-          this.data = data;
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
-  }
+  updateHomebrewWeapons(): void {
+    this.homebrewWeaponsService.getAll().subscribe((data: any) => {
+      this.HOMEBREW_WEAPONS_DATA = data;
 
-  /**
-   * Refresh - gets all Homebrew Weapons from API.
-   */
-  refreshList(): void {
-    this.getHomebrewWeapons();
+      // Set the DataSource for MatTableData.
+      this.dataSource = new MatTableDataSource<Weapon>(
+        this.HOMEBREW_WEAPONS_DATA
+      );
+
+      // Set Paginators and Sorts.
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   /**
@@ -83,14 +77,17 @@ export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData
-    }
+      data: dialogData,
+    };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(WeaponDetailsDialogComponent, dialogOptions);
+    const dialogRef = this.dialog.open(
+      WeaponDetailsDialogComponent,
+      dialogOptions
+    );
 
     // Handles dialog closing - can do something when the dialog is closed.
-    dialogRef.afterClosed().subscribe(result => { });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   /**
