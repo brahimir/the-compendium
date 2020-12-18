@@ -53,9 +53,31 @@ export class Npc {
     abilities: Object[];
     actions: Object[];
     legendary_actions: Object[];
+    ratings: number[];
 
     /**
-     * Instantiates an instance of an Npc object.
+     * 
+     * @param id The Npc id
+     * @param name The Npc name
+     * @param size The Npc size
+     * @param alignment The Npc alignment
+     * @param armor_class The Npc armor class
+     * @param hit_points The Npc hit points
+     * @param alt_hit_points The Npc alternate hit points 
+     * @param speed The Npc speed
+     * @param ability_scores The Npc ability scores
+     * @param saving_throws The Npc saving throws
+     * @param skills The Npc skills
+     * @param damage_immunities The Npc damage immunities
+     * @param condition_immunities The Npc condition immunities
+     * @param senses The Npc senses
+     * @param languages The Npc languages
+     * @param challenge_rating The Npc challenge rating
+     * @param experience The Npc experience
+     * @param abilities The Npc abilities
+     * @param actions The Npc actions
+     * @param legendary_actions The Npc legendary actions
+     * @param ratings The Npc ratings
      */
     constructor(
         id: number,
@@ -111,7 +133,8 @@ export class Npc {
         experience: string,
         abilities: Object[],
         actions: Object[],
-        legendary_actions: Object[]
+        legendary_actions: Object[],
+        ratings: number[]
     ) {
         this.id = id;
         this.name = name;
@@ -133,5 +156,6 @@ export class Npc {
         this.abilities = abilities || null;
         this.actions = actions || null;
         this.legendary_actions = legendary_actions || null;
+        this.ratings = ratings || null;
     }
 }
