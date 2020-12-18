@@ -6,10 +6,10 @@ import { HomebrewWeaponsService } from "../../../../../core/resources/_services/
 // MatTable
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
 import { MatDialog } from "@angular/material/dialog";
-import { WeaponDetailsDialogComponent } from "../../dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
+import { MatSort } from "@angular/material/sort";
 // Details Dialog
+import { WeaponDetailsDialogComponent } from "../../dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
 
 @Component({
   selector: "kt-homebrew-weapons",
@@ -25,12 +25,10 @@ export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
     "value",
   ];
 
-  data: any;
-
   // Datasource for MatTable
   dataSource: any;
 
-  // Weapon Objects
+  // Weapons
   HOMEBREW_WEAPONS_DATA: Weapon[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

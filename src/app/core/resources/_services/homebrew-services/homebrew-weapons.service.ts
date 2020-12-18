@@ -9,6 +9,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { map, catchError } from "rxjs/operators";
 
+// API url
 const BASE_URL = routes.HOMEBREW.WEAPONS;
 
 @Injectable({
@@ -20,7 +21,7 @@ export class HomebrewWeaponsService {
   getAll(): Observable<any> {
     return this.http.get(BASE_URL).pipe(
       map((data) => {
-        let weaponObjects = this.generateArmorObjects(data);
+        let weaponObjects = this.generateWeaponObjects(data);
         return weaponObjects;
       }),
 
@@ -61,11 +62,11 @@ export class HomebrewWeaponsService {
    * @param data Raw data from API.
    * @returns {Weapon[]} The array of Weapon Objects.
    */
-  generateArmorObjects(data: any): Weapon[] {
-    let armorObjects: Weapon[] = [];
+  generateWeaponObjects(data: any): Weapon[] {
+    let weaponObjects: Weapon[] = [];
 
     data.forEach((element) => {
-      armorObjects.push(
+      weaponObjects.push(
         new Weapon(
           element._id,
           element.name,
@@ -83,6 +84,6 @@ export class HomebrewWeaponsService {
       );
     });
 
-    return armorObjects;
+    return weaponObjects;
   }
 }
