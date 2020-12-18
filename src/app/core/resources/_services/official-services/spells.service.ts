@@ -36,7 +36,8 @@ export class SpellService {
         element.duration,
         element.components,
         element.description,
-        element.at_higher_levels
+        element.at_higher_levels,
+        element.ratings
       ));
     });
 

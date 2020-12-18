@@ -46,6 +46,7 @@ export class NpcsService {
         element.abilities,
         element.actions,
         element.legendary_actions,
+        element.ratings,
       ));
     });
 

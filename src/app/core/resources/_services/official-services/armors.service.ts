@@ -34,7 +34,8 @@ export class ArmorsService {
         element.requires_attunement,
         element.rarity,
         element.value,
-        element.description
+        element.description,
+        element.ratings
       ));
     });
 

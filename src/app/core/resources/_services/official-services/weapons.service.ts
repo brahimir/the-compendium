@@ -35,7 +35,8 @@ export class WeaponService {
         element.rarity,
         element.value,
         element.properties,
-        element.description
+        element.description,
+        element.ratings
       ));
     });
 

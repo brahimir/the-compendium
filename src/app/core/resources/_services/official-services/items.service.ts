@@ -31,7 +31,8 @@ export class ItemsService {
         element.requires_attunement,
         element.rarity,
         element.value,
-        element.description
+        element.description,
+        element.ratings
       ));
     });
 
