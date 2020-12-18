@@ -14,10 +14,10 @@ export const routes = {
         SPELLS: 'http://localhost:8080/api/spells',
     },
     HOMEBREW: {
-        WEAPONS: 'http://lvh.me:8080/api/homebrewWeapons',
-        ARMORS: 'http://localhost:8080/api/homebrewArmors',
-        ITEMS: 'http://localhost:8080/api/homebrewItems',
-        NPCS: 'http://localhost:8080/api/homebrewNpcs',
-        SPELLS: 'http://localhost:8080/api/homebrewSpells',
+        WEAPONS: 'http://brahimir.ca:8081/api/homebrewWeapons',
+        ARMORS: 'http://brahimir.ca:8081/api/homebrewArmors',
+        ITEMS: 'http://brahimir.ca:8081/api/homebrewItems',
+        NPCS: 'http://brahimir.ca:8081/api/homebrewNpcs',
+        SPELLS: 'http://brahimir.ca:8081/api/homebrewSpells',
     }
 }
