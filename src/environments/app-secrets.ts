@@ -14,10 +14,10 @@ export const routes = {
         SPELLS: 'http://localhost:8080/api/spells',
     },
     HOMEBREW: {
-        WEAPONS: 'http://brahimir.ca:8081/api/homebrewWeapons',
-        ARMORS: 'http://brahimir.ca:8081/api/homebrewArmors',
-        ITEMS: 'http://brahimir.ca:8081/api/homebrewItems',
-        NPCS: 'http://brahimir.ca:8081/api/homebrewNpcs',
-        SPELLS: 'http://brahimir.ca:8081/api/homebrewSpells',
+        WEAPONS: 'https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewWeapons',
+        ARMORS: 'https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewArmors',
+        ITEMS: 'https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewItems',
+        NPCS: 'https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewNpcs',
+        SPELLS: 'https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewSpells',
     }
 }
