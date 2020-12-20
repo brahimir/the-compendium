@@ -6,7 +6,7 @@
 /out-tsc
 
 # App Secrets
-src/environments/app-secrets.ts
+/src/environments/app-secrets.ts
 
 # Only exists if Bazel was run
 /bazel-out
