@@ -156,7 +156,7 @@ export class TypesUtilsService {
    * @param {string} data The string to format.
    * @returns The fotmatted string.
    */
-  lowercaseWords(data: string) {
+  lowercaseAllLetters(data: string) {
     let splitStr = data.toLowerCase().split(" ");
 
     for (let i = 0; i < splitStr.length; i++) {
@@ -172,7 +172,7 @@ export class TypesUtilsService {
    * @param {string} data The string to format.
    * @returns The fotmatted string.
    */
-  uppercaseWords(data: string) {
+  uppercaseAllLetters(data: string) {
     let splitStr = data.toUpperCase().split(" ");
 
     for (let i = 0; i < splitStr.length; i++) {
@@ -181,4 +181,21 @@ export class TypesUtilsService {
     }
     return splitStr.join(" ");
   }
+
+  /**
+   * Titlecases every word in a string.
+   *
+   * @param {string} data The string to format.
+   * @returns The formatted string.
+   */
+  titleCase(data: string) {
+    var splitStr = data.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        // You do not need to check if i is larger than splitStr length, as your for does that for you
+        // Assign it back to the array
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+    }
+    // Directly return the joined string
+    return splitStr.join(' '); 
+ }
 }
