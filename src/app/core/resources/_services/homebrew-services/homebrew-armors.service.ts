@@ -70,14 +70,15 @@ export class HomebrewArmorsService {
         new Armor(
           element._id,
           element.name,
-          element.type,
+          element.armor_category,
           element.armor_class,
+          element.str_minimum,
           element.stealth_disadvantage,
-          element.strength_requirement,
+          element.weight,
+          element.cost,
           element.requires_attunement,
           element.rarity,
-          element.value,
-          element.description,
+          element.desc,
           element.ratings
         )
       );

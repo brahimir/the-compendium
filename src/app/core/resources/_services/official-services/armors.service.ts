@@ -1,44 +1,68 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 // Models
-import { Armor } from '../../_models/armor.model';
-import { ApiService } from '../api.service';
+import { Armor } from "../../_models/armor.model";
+// Routes
+import { routes } from "../../../../../environments/app-secrets";
+// Http
+import { HttpClient } from "@angular/common/http";
+// RXJS
+import { Observable, throwError } from "rxjs";
+import { map, catchError } from "rxjs/operators";
+
+const BASE_URL = routes.OFFICIAL.BASE;
+const ARMOR_URL = routes.OFFICIAL.ARMORS;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ArmorsService {
-
-  constructor(private apiService: ApiService) { }
+  constructor(private http: HttpClient) {}
 
   /**
-   * Generates Armor Objects from raw API data.
+   * Gets all of the equipment from the Official API.
    *
-   * @param {any[]} dataArray The raw data array from API.
-   * @returns {Armor[]} Array of Armor Objects.
-   * @memberof ArmorsService
+   * @returns {Observable<any>} Observable of equipments.
    */
-  getArmors(): Armor[] {
-    // The array of Armor Objects.
-    let armorObjects: Armor[] = [];
+  getAllEquipment(): Observable<any> {
+    return this.http.get(ARMOR_URL).pipe(
+      map((data: any) => {
+        return data.equipment;
+      })
+    );
+  }
 
-    let data: any = this.apiService.getArmorsData();
+  /**
+   * Gets a generated Armor Object from an equipment's url.
+   *
+   * @param {string} url The equipment url.
+   * @returns {Observable<any>} Observable Armor Object.
+   */
+  getArmorObject(url: string): Observable<any> {
+    return this.http.get(BASE_URL + url).pipe(map((data: any) => {
+      return this.generateArmorObject(data);
+    }));
+  }
 
-    data.forEach(element => {
-      armorObjects.push(new Armor(
-        element.id,
-        element.name,
-        element.type,
-        element.armor_class,
-        element.stealth_disadvantage,
-        element.strength_requirement,
-        element.requires_attunement,
-        element.rarity,
-        element.value,
-        element.description,
-        element.ratings
-      ));
-    });
-
-    return armorObjects;
+  /**
+   * Returns an array of Weapon Objects (defined by the model).
+   *
+   * @param data Raw data from API.
+   * @returns {Armor[]} The array of Weapon Objects.
+   */
+  generateArmorObject(element: any): Armor {
+    return new Armor(
+      element._id,
+      element.name,
+      element.armor_category,
+      element.armor_class,
+      element.str_minimum,
+      element.stealth_disadvantage,
+      element.weight,
+      element.cost,
+      element.requires_attunement,
+      element.rarity,
+      element.desc,
+      element.ratings
+    );
   }
 }

@@ -1,17 +1,19 @@
 // API Routes
 export const routes = {
     // Auth
-    USERS: 'api/users',
-    PERMISSIONS: 'api/permissions',
-    ROLES: 'api/roles',
-
+    AUTH: {
+        USERS: 'api/users',
+        PERMISSIONS: 'api/permissions',
+        ROLES: 'api/roles',
+    },
     // Resources
     OFFICIAL: {
-        WEAPONS: 'http://localhost:8080/api/weapons',
-        ARMORS: 'http://localhost:8080/api/armors',
+        BASE: 'https://www.dnd5eapi.co',
+        WEAPONS: 'https://www.dnd5eapi.co/api/equipment-categories/weapon',
+        ARMORS: 'https://www.dnd5eapi.co/api/equipment-categories/armor',
         ITEMS: 'http://localhost:8080/api/items',
-        NPCS: 'http://localhost:8080/api/npcs',
-        SPELLS: 'http://localhost:8080/api/spells',
+        NPCS: 'https://www.dnd5eapi.co/api/monsters',
+        SPELLS: 'https://www.dnd5eapi.co/api/spells',
     },
     HOMEBREW: {
         WEAPONS: 'https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewWeapons',
