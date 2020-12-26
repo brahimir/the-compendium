@@ -20,6 +20,9 @@ import { ArmorDetailsDialogComponent } from "../dialogs/details-dialog/armor-det
   styleUrls: ["./armor.component.scss", "../tc-global.scss"],
 })
 export class ArmorComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   columnsToDisplay: any[] = [
     "name",
     "armor_category",
@@ -35,9 +38,6 @@ export class ArmorComponent implements OnInit, AfterViewInit {
   // Armors
   ARMORS_DATA: Armor[] = [];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
   constructor(private armorsService: ArmorsService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -50,11 +50,11 @@ export class ArmorComponent implements OnInit, AfterViewInit {
    * Get all Homebrew Armors from API.
    * Set up DataSource for MatTableData.
    * Set up Paginators and Sorts.
-   * 
+   *
    * TODO - refactor to set the datasource AFTER getting data from the service.
    */
   updateArmors(): void {
-    this.armorsService.getAllEquipment().subscribe((equipmentData: any) => {
+    this.armorsService.getAllArmors().subscribe((equipmentData: any) => {
       equipmentData.forEach((element) => {
         this.armorsService
           .getArmorObject(element.url)
