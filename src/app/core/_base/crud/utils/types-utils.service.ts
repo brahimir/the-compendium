@@ -1,5 +1,5 @@
 /** Angular */
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable()
 export class TypesUtilsService {
@@ -12,7 +12,7 @@ export class TypesUtilsService {
     if (this.isNumber(value)) {
       return `0${value}`.slice(-2);
     } else {
-      return '';
+      return "";
     }
   }
 
@@ -47,7 +47,7 @@ export class TypesUtilsService {
       return `${month}/${day}/${year}`;
     }
 
-    return '';
+    return "";
   }
 
   /**
@@ -56,10 +56,14 @@ export class TypesUtilsService {
    * @param date: any
    */
   dateCustomFormat(date: any): string {
-    let stringDate = '';
+    let stringDate = "";
     if (date) {
-      stringDate += this.isNumber(date.month) ? this.padNumber(date.month) + '/' : '';
-      stringDate += this.isNumber(date.day) ? this.padNumber(date.day) + '/' : '';
+      stringDate += this.isNumber(date.month)
+        ? this.padNumber(date.month) + "/"
+        : "";
+      stringDate += this.isNumber(date.day)
+        ? this.padNumber(date.day) + "/"
+        : "";
 
       stringDate += date.year;
     }
@@ -73,13 +77,13 @@ export class TypesUtilsService {
    */
   getDateFormatterFromString(dateInStr: string): any {
     if (dateInStr && dateInStr.length > 0) {
-      const dateParts = dateInStr.trim().split('/');
+      const dateParts = dateInStr.trim().split("/");
       return [
         {
           year: this.toInteger(dateParts[2]),
           month: this.toInteger(dateParts[0]),
-          day: this.toInteger(dateParts[1])
-        }
+          day: this.toInteger(dateParts[1]),
+        },
       ];
     }
 
@@ -88,8 +92,8 @@ export class TypesUtilsService {
       {
         year: date.getFullYear(),
         month: date.getMonth() + 1,
-        day: date.getDay()
-      }
+        day: date.getDay(),
+      },
     ];
   }
 
@@ -98,9 +102,9 @@ export class TypesUtilsService {
    *
    * @param dateInStr: string (format => 'MM/dd/yyyy')
    */
-  getDateFromString(dateInStr: string = ''): Date {
+  getDateFromString(dateInStr: string = ""): Date {
     if (dateInStr && dateInStr.length > 0) {
-      const dateParts = dateInStr.trim().split('/');
+      const dateParts = dateInStr.trim().split("/");
       const year = this.toInteger(dateParts[2]);
       const month = this.toInteger(dateParts[0]);
       const day = this.toInteger(dateParts[1]);
@@ -114,7 +118,6 @@ export class TypesUtilsService {
 
     return new Date();
   }
-
 
   /**
    * Convert Date to string with format 'MM/dd/yyyy'
@@ -133,8 +136,8 @@ export class TypesUtilsService {
    * @param {*} string The string to format.
    * @returns The formatted string.
    */
-  lowercaseFirstLetter(string) {
-    return string.charAt(0).toLowerCase() + string.slice(1);
+  lowercaseFirstLetter(data: string) {
+    return data.charAt(0).toLowerCase() + data.slice(1);
   }
 
   /**
@@ -143,7 +146,39 @@ export class TypesUtilsService {
    * @param {*} string The string to format.
    * @returns The formatted string.
    */
-  capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  capitalizeFirstLetter(data: string) {
+    return data.charAt(0).toUpperCase() + data.slice(1);
+  }
+
+  /**
+   * Lowercases each word in a string.
+   *
+   * @param {string} data The string to format.
+   * @returns The fotmatted string.
+   */
+  lowercaseWords(data: string) {
+    let splitStr = data.toLowerCase().split(" ");
+
+    for (let i = 0; i < splitStr.length; i++) {
+      splitStr[i] =
+        splitStr[i].charAt(0).toLowerCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(" ");
+  }
+
+  /**
+   * Uppercases each word in a string.
+   *
+   * @param {string} data The string to format.
+   * @returns The fotmatted string.
+   */
+  uppercaseWords(data: string) {
+    let splitStr = data.toUpperCase().split(" ");
+
+    for (let i = 0; i < splitStr.length; i++) {
+      splitStr[i] =
+        splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(" ");
   }
 }
