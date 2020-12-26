@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 const BASE_URL = ROUTES.OFFICIAL.BASE;
-const ARMOR_URL = ROUTES.OFFICIAL.WEAPONS;
+const WEAPON_URL = ROUTES.OFFICIAL.WEAPONS;
 
 @Injectable({
   providedIn: "root",
@@ -23,7 +23,7 @@ export class WeaponService {
    * @returns {Observable<any>} Observable of weapons.
    */
   getAllWeapons(): Observable<any> {
-    return this.http.get(ARMOR_URL).pipe(
+    return this.http.get(WEAPON_URL).pipe(
       map((data: any) => {
         return data.equipment;
       })

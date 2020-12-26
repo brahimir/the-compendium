@@ -43,10 +43,8 @@ export class ArmorsService {
   }
 
   /**
-   * Returns an array of Weapon Objects (defined by the model).
-   *
-   * @param data Raw data from API.
-   * @returns {Armor[]} The array of Weapon Objects.
+   * Generates an Armor Object from and element from raw API data.
+   * @param element Element to generate Armor Object from.
    */
   generateArmorObject(element: any): Armor {
     return new Armor(
