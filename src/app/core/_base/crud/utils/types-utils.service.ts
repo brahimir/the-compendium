@@ -126,4 +126,24 @@ export class TypesUtilsService {
     const dateToday = date.getDate();
     return `${month}/${dateToday}/${year}`;
   }
+
+  /**
+   * Lowercases first letter in a strng.
+   *
+   * @param {*} string The string to format.
+   * @returns The formatted string.
+   */
+  lowercaseFirstLetter(string) {
+    return string.charAt(0).toLowerCase() + string.slice(1);
+  }
+
+  /**
+   * Capitalizes first letter in a strng.
+   *
+   * @param {*} string The string to format.
+   * @returns The formatted string.
+   */
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 }
