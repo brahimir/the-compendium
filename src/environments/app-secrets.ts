@@ -13,7 +13,7 @@ export const ROUTES = {
         ARMORS: 'https://www.dnd5eapi.co/api/equipment-categories/armor',
         EQUIPMENT: 'https://www.dnd5eapi.co/api/equipment',
         MAGIC_ITEMS: 'https://www.dnd5eapi.co/api/magic-items',
-        NPCS: 'https://www.dnd5eapi.co/api/monsters',
+        MONSTERS: 'https://www.dnd5eapi.co/api/monsters',
         SPELLS: 'https://www.dnd5eapi.co/api/spells',
     },
     HOMEBREW: {

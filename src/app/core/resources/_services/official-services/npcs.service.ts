@@ -1,55 +1,84 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 // Models
-import { Npc } from '../../_models/npc.model';
-// Services
-import { ApiService } from '../api.service';
+import { Npc } from "../../_models/npc.model";
+// Routes
+import { ROUTES } from "../../../../../environments/app-secrets";
+// Http
+import { HttpClient } from "@angular/common/http";
+// RXJS
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+
+const BASE_URL = ROUTES.OFFICIAL.BASE;
+const ARMOR_URL = ROUTES.OFFICIAL.MONSTERS;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class NpcsService {
-
-  constructor(private apiService: ApiService) { }
+  constructor(private http: HttpClient) {}
+  /**
+   * Gets all of the monsters from the Official API.
+   *
+   * @returns {Observable<any>} Observable of equipments.
+   */
+  getAllArmors(): Observable<any> {
+    return this.http.get(ARMOR_URL).pipe(
+      map((data: any) => {
+        return data.results;
+      })
+    );
+  }
 
   /**
-   * Generates Npc Objects from raw API data.
+   * Gets a generated Npc Object from a monster's metadata url.
    *
-   * @param {any[]} dataArray The raw data array from API.
-   * @returns {Npc[]} Array of Npc Objects.
-   * @memberof NpcsService
+   * @param {string} url The monster metadata url.
+   * @returns {Observable<any>} Observable Armor Object.
    */
-  getNpcs(): Npc[] {
-    // The array of Npc Objects.
-    let npcObjects: Npc[] = [];
+  getNpcObject(url: string): Observable<any> {
+    return this.http.get(BASE_URL + url).pipe(
+      map((data: any) => {
+        return this.generateNpcObject(data);
+      })
+    );
+  }
 
-    let data: any = this.apiService.getNpcsData();
-
-    data.forEach(element => {
-      npcObjects.push(new Npc(
-        element.id,
-        element.name,
-        element.size,
-        element.alignment,
-        element.armor_class,
-        element.hit_points,
-        element.alt_hit_points,
-        element.speed,
-        element.ability_scores,
-        element.saving_throws,
-        element.skills,
-        element.damage_immunities,
-        element.condition_immunities,
-        element.senses,
-        element.languages,
-        element.challenge_rating,
-        element.experience,
-        element.abilities,
-        element.actions,
-        element.legendary_actions,
-        element.ratings,
-      ));
-    });
-
-    return npcObjects;
+  /**
+   * Generates an Npc Object from and element from raw API data.
+   * @param element Element to generate Npc Object from.
+   */
+  generateNpcObject(element: any): Npc {
+    return new Npc(
+      element._id,
+      element.name,
+      element.size,
+      element.type,
+      element.subtype,
+      element.alignment,
+      element.armor_class,
+      element.hit_points,
+      element.hit_dice,
+      element.speed,
+      element.strength,
+      element.dexterity,
+      element.constitution,
+      element.intelligence,
+      element.wisdom,
+      element.charisma,
+      element.proficiencies,
+      element.damage_vulnerabilities,
+      element.damage_resistances,
+      element.damage_immunities,
+      element.condition_immunities,
+      element.senses,
+      element.languages,
+      element.challenge_rating,
+      element.xp,
+      element.special_abilities,
+      element.actions,
+      element.legendary_actions,
+      element.ratings
+    );
   }
 }

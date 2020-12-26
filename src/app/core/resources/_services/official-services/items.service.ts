@@ -67,7 +67,7 @@ export class ItemsService {
    */
   generateItemObject(element): Item {
     return new Item(
-      element.id,
+      element._id,
       element.name,
       element.equipment_category,
       element.gear_category,
