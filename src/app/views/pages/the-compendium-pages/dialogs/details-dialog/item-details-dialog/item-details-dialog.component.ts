@@ -30,6 +30,6 @@ export class ItemDetailsDialogComponent implements OnInit {
    * @returns The formatted string.
    */
   lowercaseFirstLetter(data: string) {
-    return this.utilityService.lowercaseWords(data);
+    return this.utilityService.lowercaseAllLetters(data);
   }
 }
