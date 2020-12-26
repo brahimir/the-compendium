@@ -20,39 +20,66 @@ import { WeaponDetailsDialogComponent } from "../dialogs/details-dialog/weapon-d
   styleUrls: ["./weapons.component.scss", "../tc-global.scss"],
 })
 export class WeaponComponent implements OnInit, AfterViewInit {
-  columnsToDisplay: any[] = [
-    "name",
-    "damage",
-    "damage_type",
-    "rarity",
-    "value",
-  ];
-
-  data: any;
-  dataSource: any;
-
-  // Item Objects
-  WEAPONS_DATA: Weapon[];
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private weaponsService: WeaponService, public dialog: MatDialog) {}
+  columnsToDisplay: any[] = [
+    "name",
+    "weapon_category",
+    "damage",
+    "range",
+    "cost",
+  ];
+
+  // Datasource for MatTable
+  dataSource: any;
+
+  // Weapons
+  WEAPONS_DATA: Weapon[] = [];
+
+  constructor(
+    private weaponsService: WeaponService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    // Get data from API and generate Npc objects
-    this.WEAPONS_DATA = this.weaponsService.getWeapons();
-    this.dataSource = new MatTableDataSource<Weapon>(this.WEAPONS_DATA);
+    this.updateWeapons();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  ngAfterViewInit(): void {}
+
+  /**
+   * Get all Homebrew Armors from API.
+   * Set up DataSource for MatTableData.
+   * Set up Paginators and Sorts.
+   *
+   * TODO - refactor to set the datasource AFTER getting data from the service.
+   */
+  updateWeapons(): void {
+    this.weaponsService.getAllWeapons().subscribe((equipmentData: any) => {
+      equipmentData.forEach((element) => {
+        this.weaponsService
+          .getWeaponObject(element.url)
+          .subscribe((weaponData: any) => {
+            this.WEAPONS_DATA.push(weaponData);
+            // Set the DataSource for MatTableData.
+            this.dataSource = new MatTableDataSource<Weapon>(this.WEAPONS_DATA);
+
+            // Set Paginators and Sorts.
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          });
+      });
+    });
   }
 
-  openDetails(weapon: Weapon): void {
+  /**
+   * Opens Details Dialog for a Armor.
+   * @param Armor The Armor that was clicked.
+   */
+  openDetails(armor: Weapon): void {
     // Pass the Armor object to the dialog here.
-    const dialogData = weapon;
+    const dialogData = armor;
 
     // Set the dialog window options here.
     const dialogOptions = {
@@ -69,6 +96,10 @@ export class WeaponComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((result) => {});
   }
 
+  /**
+   * Filters the MatTable based on a passed value.
+   * @param filterValue The values to filter for in the table.
+   */
   applyFilter(filterValue: string) {
     // Remove whitespace
     filterValue = filterValue.trim();

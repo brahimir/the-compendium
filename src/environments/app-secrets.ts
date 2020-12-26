@@ -1,5 +1,5 @@
 // API Routes
-export const routes = {
+export const ROUTES = {
     // Auth
     AUTH: {
         USERS: 'api/users',
