@@ -1,6 +1,6 @@
 export class Armor {
-  // start:: Official Schema
   id: number;
+  // start:: Official Schema
   name: string;
   armor_category: string;
   armor_class: {
@@ -18,7 +18,7 @@ export class Armor {
   // end:: Official Schema
   requires_attunement: boolean;
   rarity: string;
-  desc: string;
+  desc: string[];
   ratings: number[];
 
   constructor(
@@ -39,7 +39,7 @@ export class Armor {
     },
     requires_attunement: boolean,
     rarity: string,
-    desc: string,
+    desc: string[],
     ratings: number[]
   ) {
     this.id = id;
