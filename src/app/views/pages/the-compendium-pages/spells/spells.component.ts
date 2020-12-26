@@ -1,79 +1,109 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
-import { Spell } from 'src/app/core/resources/_models/spell.model';
+import { Spell } from "src/app/core/resources/_models/spell.model";
 // Services
 import { SpellService } from "../../../../core/resources/_services//official-services/spells.service";
 // Angular Material
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSort } from "@angular/material/sort";
 // Dialog Component
-import { SpellDetailsDialogComponent } from '../dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component';
+import { SpellDetailsDialogComponent } from "../dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
 
 /**
  * @title Spells table with Pagination
  */
 @Component({
-  selector: 'kt-spells',
-  templateUrl: './spells.component.html',
-  styleUrls: ['./spells.component.scss', '../tc-global.scss']
+  selector: "kt-spells",
+  templateUrl: "./spells.component.html",
+  styleUrls: ["./spells.component.scss", "../tc-global.scss"],
 })
 export class SpellsComponent implements OnInit, AfterViewInit {
-  columnsToDisplay: any[] = [
-    'name',
-    'level',
-    'classes',
-    'casting_time',
-    'range',
-  ];
-
-  dataSource: any;
-
-  // Item Objects
-  SPELLS_DATA: Spell[];
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(
-    spellsservice: SpellService,
-    public dialog: MatDialog) {
-    // Get data from API and generate Npc objects
-    this.SPELLS_DATA = spellsservice.getSpells();
-    this.dataSource = new MatTableDataSource<Spell>(this.SPELLS_DATA);
+  columnsToDisplay: any[] = [
+    "name",
+    "level",
+    "classes",
+    "casting_time",
+    "range",
+  ];
+
+  // Datasource for MatTable
+  dataSource: any;
+
+  // Spells
+  SPELLS_DATA: Spell[] = [];
+
+  constructor(private spellsService: SpellService, public dialog: MatDialog) {}
+
+  ngOnInit(): void {
+    this.updateSpells();
   }
 
-  ngOnInit(): void { }
+  ngAfterViewInit(): void {}
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  /**
+   * Get all Homebrew Spells from API.
+   * Set up DataSource for MatTableData.
+   * Set up Paginators and Sorts.
+   *
+   * TODO - refactor to set the datasource AFTER getting data from the service.
+   */
+  updateSpells(): void {
+    this.spellsService.getAllSpells().subscribe((equipmentData: any) => {
+      equipmentData.forEach((element) => {
+        this.spellsService
+          .getSpellObject(element.url)
+          .subscribe((spellData: any) => {
+            this.SPELLS_DATA.push(spellData);
+            
+            // Set the DataSource for MatTableData.
+            this.dataSource = new MatTableDataSource<Spell>(this.SPELLS_DATA);
+
+            // Set Paginators and Sorts.
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          });
+      });
+    });
   }
 
-  openDetails(spell: Spell): void {
-    // Pass the Npc object to the dialog here.
-    const dialogData = spell;
+  /**
+   * Opens Details Dialog for a Spell.
+   * @param Armor The Spell that was clicked.
+   */
+  openDetails(armor: Spell): void {
+    // Pass the Spell object to the dialog here.
+    const dialogData = armor;
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData
-    }
+      data: dialogData,
+    };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(SpellDetailsDialogComponent, dialogOptions);
+    const dialogRef = this.dialog.open(
+      SpellDetailsDialogComponent,
+      dialogOptions
+    );
 
     // Handles dialog closing - can do something when the dialog is closed.
-    dialogRef.afterClosed().subscribe(result => { });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
+  /**
+   * Filters the MatTable based on a passed value.
+   * @param filterValue The values to filter for in the table.
+   */
   applyFilter(filterValue: string) {
     // Remove whitespace
-    filterValue = filterValue.trim(); 
+    filterValue = filterValue.trim();
 
     // MatTableDataSource defaults to lowercase matches
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 }
-

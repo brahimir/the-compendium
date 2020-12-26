@@ -26,14 +26,16 @@
       <ng-container matColumnDef="level">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Level </th>
         <td mat-cell *matCellDef="let spell">
-          <div *ngIf="spell.is_cantrip;else displayLevel"> Cantrip </div>
+          <div *ngIf="spell.level === 0;else displayLevel"> Cantrip </div>
           <ng-template #displayLevel> {{spell.level}} </ng-template>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="classes">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Classes </th>
-        <td mat-cell *matCellDef="let spell"> {{spell.classes}} </td>
+        <td mat-cell *matCellDef="let spell">
+          <span *ngFor="let item of spell.classes"> {{item.name}}, </span>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="casting_time">
@@ -50,7 +52,7 @@
       <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
 
   </kt-portlet-body>
 </kt-portlet>

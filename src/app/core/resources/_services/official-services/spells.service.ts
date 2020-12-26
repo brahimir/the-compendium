@@ -1,46 +1,74 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 // Models
-import { Spell } from '../../_models/spell.model';
-import { ApiService } from '../api.service';
+import { Spell } from "../../_models/spell.model";
+// Routes
+import { ROUTES } from "../../../../../environments/app-secrets";
+// Http
+import { HttpClient } from "@angular/common/http";
+// RXJS
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+
+const BASE_URL = ROUTES.OFFICIAL.BASE;
+const SPELL_URL = ROUTES.OFFICIAL.SPELLS;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class SpellService {
-
-  constructor(private apiService: ApiService) { }
+  constructor(private http: HttpClient) {}
 
   /**
-   * Generates Spell Objects from raw API data.
+   * Gets all of the spell results from the Official API.
    *
-   * @param {any[]} dataArray The raw data array from API.
-   * @returns {Spell[]} Array of Spell Objects.
-   * @memberof SpellService
+   * @returns {Observable<any>} Observable of spells.
    */
-  getSpells(): Spell[] {
-    // The array of Spell Objects.
-    let SpellObjects: Spell[] = [];
+  getAllSpells(): Observable<any> {
+    return this.http.get(SPELL_URL).pipe(
+      map((data: any) => {
+        return data.results;
+      })
+    );
+  }
 
-    let data: any = this.apiService.getSpellsData();
+  /**
+   * Gets a generated Armor Object from an equipment's metadata url.
+   *
+   * @param {string} url The equipment metadata url.
+   * @returns {Observable<any>} Observable Armor Object.
+   */
+  getSpellObject(url: string): Observable<any> {
+    return this.http.get(BASE_URL + url).pipe(
+      map((data: any) => {
+        return this.generateSpellObject(data);
+      })
+    );
+  }
 
-    data.forEach(element => {
-      SpellObjects.push(new Spell(
-        element.id,
-        element.name,
-        element.level,
-        element.is_cantrip,
-        element.classes,
-        element.school,
-        element.casting_time,
-        element.range,
-        element.duration,
-        element.components,
-        element.description,
-        element.at_higher_levels,
-        element.ratings
-      ));
-    });
-
-    return SpellObjects;
+  /**
+   * Generates a Spell Object from and element from raw API data.
+   * @param element Element to generate Spell Object from.
+   */
+  generateSpellObject(element: any): Spell {
+    return new Spell(
+      element._id,
+      element.name,
+      element.desc,
+      element.higher_level,
+      element.range,
+      element.components,
+      element.material,
+      element.ritual,
+      element.duration,
+      element.concentration,
+      element.casting_time,
+      element.level,
+      element.attack_type,
+      element.damage,
+      element.school,
+      element.classes,
+      element.subclasses,
+      element.ratings
+    );
   }
 }

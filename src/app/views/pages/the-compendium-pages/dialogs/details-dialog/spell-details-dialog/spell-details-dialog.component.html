@@ -6,20 +6,23 @@
       </div>
     </div>
 
-    <!-- todo:: make an ngIf for checking if level property exists. -->
     <!-- start::Spell Level and School-->
-    <div class="row">
+    <div *ngIf="dialogData.level || dialogData.school" class="row">
       <div class="col">
         <p class="font-italic">
-          <span *ngIf="dialogData.is_cantrip"> Cantrip <span *ngIf="dialogData.school"> {{dialogData.school}} </span></span>
-          <span *ngIf="!dialogData.is_cantrip"> Level {{dialogData.level}} <span *ngIf="dialogData.school"> {{dialogData.school}} </span></span>
+          <span *ngIf="dialogData.level === 0;else default">
+            Cantrip <span *ngIf="dialogData.school"> {{dialogData.school.name}} </span>
+          </span>
+          <ng-template #default>
+            Level {{dialogData.level}} <span *ngIf="dialogData.school"> {{dialogData.school.name}} </span>
+          </ng-template>
         </p>
       </div>
     </div>
     <!-- end::Spell Level and School -->
 
     <!-- start:: DIVIDER -->
-    <div class="divider"></div>
+    <div *ngIf="dialogData.level || dialogData.school" class="divider"></div>
     <!-- end:: DIVIDER -->
 
     <!-- start::Spell Casting Time -->
@@ -50,7 +53,7 @@
         <p class="font-weight-bolder">Components:</p>
       </div>
       <div class="col">
-        <p> {{ dialogData.components }} </p>
+        <span *ngFor="let item of dialogData.components" > {{ item }} </span>
       </div>
     </div>
     <!-- end::Spell Components -->
@@ -72,38 +75,42 @@
         <p class="font-weight-bolder">Classes:</p>
       </div>
       <div class="col">
-        <p> {{ dialogData.classes }} </p>
+        <span *ngFor="let item of dialogData.classes"> {{ item.name }}, </span>
       </div>
     </div>
     <!-- end::Spell Classes-->
 
     <!-- start::Description -->
-    <div *ngIf="dialogData.description">
+    <div *ngIf="dialogData.desc">
       <h3 class="font-weight-bolder tc-red pt-5">DESCRIPTION</h3>
+
       <!-- start:: DIVIDER -->
       <div class="divider"></div>
       <!-- end:: DIVIDER -->
+
       <div class="row pt-5">
         <div class="col">
-          <p> {{ dialogData.description }} </p>
+          <p *ngFor="let item of dialogData.desc"> {{ item }} </p>
         </div>
       </div>
     </div>
     <!-- end::Description -->
 
-    <!-- start::At Higher Levels-->
-    <div *ngIf="dialogData.at_higher_levels">
+    <!-- start::Spell Higher Levels-->
+    <div *ngIf="dialogData.higher_level">
       <h3 class="tc-red pt-5 font-weight-bolder">AT HIGHER LEVELS</h3>
+
       <!-- start:: DIVIDER -->
       <div class="divider"></div>
       <!-- end:: DIVIDER -->
+
       <div class="row">
         <div class="col">
-          <p> {{ dialogData.at_higher_levels }} </p>
+          <p *ngFor="let item of dialogData.higher_level"> {{ item }} </p>
         </div>
       </div>
     </div>
-    <!-- end::Spell At Higher Levels-->
+    <!-- end::Spell Higher Levels-->
 
   </mat-dialog-content>
   <mat-dialog-actions align="end">
