@@ -25,19 +25,7 @@ export class Weapon {
   ratings: number[];
 
   /**
-   *
-   * @param id The Weapon id
-   * @param name The Weapon name
-   * @param type The Weapon type
-   * @param is_martial True if the Weapon is a martial Weapon, False otherwise
-   * @param damage The Weapon damage
-   * @param damage_type The Weapon damamge type
-   * @param requires_attunement True if the Weapon requires attunement, False otherwise
-   * @param rarity The Weapon rarity (Common, Uncommon, Rare, Very Rare)
-   * @param value The Weapon value
-   * @param properties The Weapon properties
-   * @param description The Weapon description
-   * @param ratings The Weapon ratings
+   * Creates an instance of a Weapon.
    */
   constructor(
     id: number,

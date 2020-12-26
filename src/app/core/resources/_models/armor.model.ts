@@ -21,6 +21,9 @@ export class Armor {
   desc: string[];
   ratings: number[];
 
+  /**
+   *Creates an instance of an Armor.
+   */
   constructor(
     id: number,
     name: string,

@@ -1,61 +1,73 @@
 export class Spell {
-    id: number;
-    name: string;
-    level: number;
-    is_cantrip: boolean;
-    classes: string[];
-    school: string;
-    casting_time: string;
-    range: string;
-    duration: string;
-    components: string;
-    description: string;
-    at_higher_levels: string;
-    ratings: number[];
+  id: number;
+  // start:: Official Schema
+  name: string;
+  desc: string;
+  higher_level: string;
+  range: string;
+  components: string[];
+  material: string;
+  ritual: boolean;
+  duration: string;
+  concentration: boolean;
+  casting_time: string;
+  level: number;
+  attack_type: string;
+  damage: {
+    damage_type: Object;
+    damage_at_slot_level: Object;
+  };
+  school: Object;
+  classes: Object[];
+  subclasses: Object[];
+  // end:: Official Schema
+  ratings: number[];
 
-    /**
-     * 
-     * @param id The Spell id
-     * @param name The Spell name
-     * @param level The Spell level
-     * @param is_cantrip True if the Spell is a cantrip, False otherwise
-     * @param classes The Spell classes
-     * @param school The Spell school
-     * @param casting_time The Spell casting time
-     * @param range The Spell range
-     * @param duration The Spell duration
-     * @param components The Spell componenets
-     * @param description The Spell description
-     * @param at_higher_levels The Spell at higher levels
-     * @param ratings The Spell ratings
-     */
-    constructor(
-        id: number,
-        name: string,
-        level: number,
-        is_cantrip: boolean,
-        classes: string[],
-        school: string,
-        casting_time: string,
-        range: string,
-        duration: string,
-        components: string,
-        description: string,
-        at_higher_levels: string,
-        ratings: number[]
-    ) {
-        this.id = id;
-        this.name = name;
-        this.is_cantrip = is_cantrip || false;
-        this.classes = classes || null;
-        this.level = level || null;
-        this.school = school || null;
-        this.casting_time = casting_time || null;
-        this.range = range || null;
-        this.duration = duration || null;
-        this.components = components || null;
-        this.description = description || null;
-        this.at_higher_levels = at_higher_levels || null;
-        this.ratings = ratings || null;
-    }
+  /**
+   * Creates an instance of a Spell.
+   */
+  constructor(
+    id: number,
+    // start:: Official Schema
+    name: string,
+    desc: string,
+    higher_level: string,
+    range: string,
+    components: string[],
+    material: string,
+    ritual: boolean,
+    duration: string,
+    concentration: boolean,
+    casting_time: string,
+    level: number,
+    attack_type: string,
+    damage: {
+      damage_type: Object;
+      damage_at_slot_level: Object;
+    },
+    school: Object,
+    classes: Object[],
+    subclasses: Object[],
+    // end:: Official Schema
+    ratings: number[]
+  ) {
+    this.id = id;
+    this.name = name;
+    this.desc = desc;
+    this.higher_level = higher_level;
+    this.range = range;
+    this.components = components;
+    this.material = material;
+    this.ritual = ritual;
+    this.duration = duration;
+    this.concentration = concentration;
+    this.casting_time = casting_time;
+    this.level = level;
+    this.attack_type = attack_type;
+    this.damage = damage;
+    this.school = school;
+    this.classes = classes;
+    this.subclasses = subclasses;
+    this.ratings = ratings;
+  }
 }
