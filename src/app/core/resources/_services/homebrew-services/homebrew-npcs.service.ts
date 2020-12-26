@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 // Models
 import { Npc } from "../../_models/npc.model";
 // Routes
-import { routes } from "../../../../../environments/app-secrets";
+import { ROUTES } from "../../../../../environments/app-secrets";
 // Http
 import { HttpClient } from "@angular/common/http";
 // RXJS
@@ -10,7 +10,7 @@ import { Observable, throwError } from "rxjs";
 import { map, catchError } from "rxjs/operators";
 
 // API url
-const BASE_URL = routes.HOMEBREW.NPCS;
+const BASE_URL = ROUTES.HOMEBREW.NPCS;
 
 @Injectable({
   providedIn: "root",

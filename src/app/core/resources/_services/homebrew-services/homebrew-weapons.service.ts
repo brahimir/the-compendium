@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 // Models
 import { Weapon } from "../../_models/weapon.model";
 // Routes
-import { routes } from "../../../../../environments/app-secrets";
+import { ROUTES } from "../../../../../environments/app-secrets";
 // Http
 import { HttpClient } from "@angular/common/http";
 // RXJS
@@ -10,7 +10,7 @@ import { Observable, throwError } from "rxjs";
 import { map, catchError } from "rxjs/operators";
 
 // API url
-const BASE_URL = routes.HOMEBREW.WEAPONS;
+const BASE_URL = ROUTES.HOMEBREW.WEAPONS;
 
 @Injectable({
   providedIn: "root",
@@ -70,16 +70,17 @@ export class HomebrewWeaponsService {
         new Weapon(
           element._id,
           element.name,
-          element.type,
-          element.is_martial,
+          element.weapon_category,
+          element.weapon_range,
+          element.cost,
           element.damage,
-          element.damage_type,
+          element.range,
+          element.weight,
+          element.properties,
           element.requires_attunement,
           element.rarity,
-          element.value,
-          element.properties,
-          element.description,
-          element.ratings
+          element.desc,
+          element.rarity
         )
       );
     });
