@@ -1,40 +1,46 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
 // Angular
-import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { GestureConfig } from '@angular/material/core';
-import { OverlayModule } from '@angular/cdk/overlay';
+import {
+  BrowserModule,
+  HAMMER_GESTURE_CONFIG,
+} from "@angular/platform-browser";
+import { APP_INITIALIZER, NgModule } from "@angular/core";
+import { TranslateModule } from "@ngx-translate/core";
+import { HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { GestureConfig } from "@angular/material/core";
+import { OverlayModule } from "@angular/cdk/overlay";
 // Angular in memory
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 // Perfect Scroll bar
-import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import {
+  PERFECT_SCROLLBAR_CONFIG,
+  PerfectScrollbarConfigInterface,
+} from "ngx-perfect-scrollbar";
 // SVG inline
-import { InlineSVGModule } from 'ng-inline-svg';
+import { InlineSVGModule } from "ng-inline-svg";
 // Env
-import { environment } from '../environments/environment';
+import { environment } from "../environments/environment";
 // Hammer JS
-import 'hammerjs';
+import "hammerjs";
 // NGX Permissions
-import { NgxPermissionsModule } from 'ngx-permissions';
+import { NgxPermissionsModule } from "ngx-permissions";
 // NGRX
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreRouterConnectingModule } from "@ngrx/router-store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 // State
-import { metaReducers, reducers } from './core/reducers';
+import { metaReducers, reducers } from "./core/reducers";
 // Components
-import { AppComponent } from './app.component';
+import { AppComponent } from "./app.component";
 // Modules
-import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
-import { ThemeModule } from './views/theme/theme.module';
+import { AppRoutingModule } from "./app-routing.module";
+import { CoreModule } from "./core/core.module";
+import { ThemeModule } from "./views/theme/theme.module";
 // Partials
-import { PartialsModule } from './views/partials/partials.module';
+import { PartialsModule } from "./views/partials/partials.module";
 // Layout Services
 import {
   DataTableService,
@@ -47,39 +53,39 @@ import {
   MenuHorizontalService,
   PageConfigService,
   SplashScreenService,
-  SubheaderService
-} from './core/_base/layout';
+  SubheaderService,
+} from "./core/_base/layout";
 // Auth
-import { AuthModule } from './views/pages/auth/auth.module';
-import { AuthService } from './core/auth';
+import { AuthModule } from "./views/pages/auth/auth.module";
+import { AuthService } from "./core/auth";
 // CRUD
 import {
   HttpUtilsService,
   LayoutUtilsService,
-  TypesUtilsService
-} from './core/_base/crud';
+  TypesUtilsService,
+} from "./core/_base/crud";
 // Config
-import { LayoutConfig } from './core/_config/layout.config';
+import { LayoutConfig } from "./core/_config/layout.config";
 // Highlight JS
-import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
-import xml from 'highlight.js/lib/languages/xml';
-import json from 'highlight.js/lib/languages/json';
-import scss from 'highlight.js/lib/languages/scss';
-import typescript from 'highlight.js/lib/languages/typescript';
+import { HighlightModule, HIGHLIGHT_OPTIONS } from "ngx-highlightjs";
+import xml from "highlight.js/lib/languages/xml";
+import json from "highlight.js/lib/languages/json";
+import scss from "highlight.js/lib/languages/scss";
+import typescript from "highlight.js/lib/languages/typescript";
 
 // The Compendium Dialogs
-import { ArmorDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component';
-import { NpcDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component';
-import { WeaponDetailsDialogComponent } from "./views/pages/the-compendium-pages/dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
-import { ItemDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/item-details-dialog/item-details-dialog.component';
-import { SpellDetailsDialogComponent } from './views/pages/the-compendium-pages/dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component';
+import { ArmorDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
+import { NpcDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
+import { WeaponDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
+import { ItemDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
+import { SpellDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelSpeed: 0.5,
   swipeEasing: true,
   minScrollbarLength: 40,
-  maxScrollbarLength: 300
+  maxScrollbarLength: 300,
 };
 
 export function initializeLayoutConfig(appConfig: LayoutConfigService) {
@@ -97,10 +103,10 @@ export function initializeLayoutConfig(appConfig: LayoutConfigService) {
  */
 export function getHighlightLanguages() {
   return [
-    {name: 'typescript', func: typescript},
-    {name: 'scss', func: scss},
-    {name: 'xml', func: xml},
-    {name: 'json', func: json}
+    { name: "typescript", func: typescript },
+    { name: "scss", func: scss },
+    { name: "xml", func: xml },
+    { name: "json", func: json },
   ];
 }
 
@@ -114,24 +120,24 @@ export function getHighlightLanguages() {
     HttpClientModule,
     environment.isMockEnabled
       ? HttpClientInMemoryWebApiModule.forRoot(FakeApiService, {
-        passThruUnknownUrl: true,
-        dataEncapsulation: false
-      })
+          passThruUnknownUrl: true,
+          dataEncapsulation: false,
+        })
       : [],
     NgxPermissionsModule.forRoot(),
     HighlightModule,
     PartialsModule,
     CoreModule,
     OverlayModule,
-    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([]),
-    StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
+    StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
     StoreDevtoolsModule.instrument(),
     AuthModule.forRoot(),
     TranslateModule.forRoot(),
     MatProgressSpinnerModule,
     InlineSVGModule.forRoot(),
-    ThemeModule
+    ThemeModule,
   ],
   // ! Add DialogComponents here
   entryComponents: [
@@ -139,7 +145,7 @@ export function getHighlightLanguages() {
     NpcDetailsDialogComponent,
     WeaponDetailsDialogComponent,
     ItemDetailsDialogComponent,
-    SpellDetailsDialogComponent
+    SpellDetailsDialogComponent,
   ],
   exports: [],
   providers: [
@@ -153,24 +159,24 @@ export function getHighlightLanguages() {
     SplashScreenService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     {
       provide: HAMMER_GESTURE_CONFIG,
-      useClass: GestureConfig
+      useClass: GestureConfig,
     },
     {
       // layout config initializer
       provide: APP_INITIALIZER,
       useFactory: initializeLayoutConfig,
       deps: [LayoutConfigService],
-      multi: true
+      multi: true,
     },
     {
       provide: HIGHLIGHT_OPTIONS,
       useValue: {
-        languages: getHighlightLanguages
-      }
+        languages: getHighlightLanguages,
+      },
     },
     // template services
     SubheaderService,
@@ -178,8 +184,8 @@ export function getHighlightLanguages() {
     MenuAsideService,
     HttpUtilsService,
     TypesUtilsService,
-    LayoutUtilsService
+    LayoutUtilsService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

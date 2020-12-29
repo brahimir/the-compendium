@@ -417,7 +417,7 @@ export class MenuConfig {
           page: "/items",
         },
         {
-          title: "NPCs",
+          title: "Monsters",
           root: true,
           bullet: "dot",
           icon: "fab fa-optin-monster",
@@ -499,8 +499,29 @@ export class MenuConfig {
           root: true,
           bullet: "dot",
           icon: "fas fa-magic",
-          page: "/create",
           permission: "accessToDMTools",
+          submenu: [
+            {
+              title: "Weapon",
+              page: "/create-weapon",
+            },
+            {
+              title: "Armor",
+              page: "/create-armor",
+            },
+            {
+              title: "Item",
+              page: "/create-item",
+            },
+            {
+              title: "Npc",
+              page: "/create-npc",
+            },
+            {
+              title: "Spell",
+              page: "/create-spell",
+            },
+          ],
         },
       ],
     },

@@ -70,12 +70,12 @@ export class HomebrewItemsService {
         new Item(
           element._id,
           element.name,
-          element.type,
-          element.requires_attunement,
-          element.rarity,
-          element.value,
-          element.description,
-          element.ratings
+          element.equipment_category,
+          element.gear_category,
+          element.cost,
+          element.weight,
+          element.desc,
+          element.contents
         )
       );
     });

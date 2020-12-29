@@ -16,18 +16,18 @@ export class Npc {
   intelligence: number;
   wisdom: number;
   charisma: number;
-  proficiencies: Object;
-  damage_vulnerabilities: string[];
-  damage_resistances: string[];
-  damage_immunities: string[];
-  condition_immunities: string[];
+  proficiencies: [];
+  damage_vulnerabilities: [];
+  damage_resistances: [];
+  damage_immunities: [];
+  condition_immunities: [];
   senses: Object;
   languages: string;
   challenge_rating: number;
   xp: number;
-  special_abilities: Object[];
-  actions: Object[];
-  legendary_actions: Object[];
+  special_abilities: [];
+  actions: [];
+  legendary_actions: [];
   // end:: Official Schema
   ratings: number[];
 
@@ -49,18 +49,18 @@ export class Npc {
     intelligence: number,
     wisdom: number,
     charisma: number,
-    proficiencies: Object,
-    damage_vulnerabilities: string[],
-    damage_resistances: string[],
-    damage_immunities: string[],
-    condition_immunities: string[],
+    proficiencies: [],
+    damage_vulnerabilities: [],
+    damage_resistances: [],
+    damage_immunities: [],
+    condition_immunities: [],
     senses: Object,
     languages: string,
     challenge_rating: number,
     xp: number,
-    special_abilities: Object[],
-    actions: Object[],
-    legendary_actions: Object[],
+    special_abilities: [],
+    actions: [],
+    legendary_actions: [],
     // end:: Official Schema
     ratings: number[]
   ) {

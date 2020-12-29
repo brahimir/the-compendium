@@ -15,7 +15,7 @@ export class Weapon {
   range: {
       normal: number;
       long: number;
-  }
+  };
   weight: number;
   properties: string[];
   // end:: Official Schema
