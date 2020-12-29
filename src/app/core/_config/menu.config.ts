@@ -1,6 +1,5 @@
 export class MenuConfig {
   public defaults: any = {
-
     // ! TOP HEADER
     // header: {
     //   self: {},
@@ -384,121 +383,126 @@ export class MenuConfig {
     aside: {
       self: {},
       items: [
-
         // Dashboard
         {
-          title: 'Dashboard',
+          title: "Dashboard",
           root: true,
-          icon: 'flaticon2-architecture-and-city',
-          page: '/dashboard',
-          translate: 'MENU.DASHBOARD',
-          bullet: 'dot',
+          icon: "flaticon2-architecture-and-city",
+          page: "/dashboard",
+          translate: "MENU.DASHBOARD",
+          bullet: "dot",
         },
 
         // Resources
-        { section: 'Resources' },
+        { section: "Resources" },
         {
-          title: 'Weapons',
+          title: "Weapons",
           root: true,
-          bullet: 'dot',
-          icon: 'fas fa-hammer',
-          page: '/weapons'
+          bullet: "dot",
+          icon: "fas fa-hammer",
+          page: "/weapons",
         },
         {
-          title: 'Armor',
+          title: "Armor",
           root: true,
-          bullet: 'dot',
-          icon: 'fas fa-shield-alt',
-          page: '/armor'
+          bullet: "dot",
+          icon: "fas fa-shield-alt",
+          page: "/armor",
         },
         {
-          title: 'Items',
+          title: "Items",
           root: true,
-          bullet: 'dot',
-          icon: 'fas fa-glass-martini',
-          page: '/items'
+          bullet: "dot",
+          icon: "fas fa-glass-martini",
+          page: "/items",
         },
         {
-          title: 'NPCs',
+          title: "NPCs",
           root: true,
-          bullet: 'dot',
-          icon: 'fab fa-optin-monster',
-          page: '/npcs'
+          bullet: "dot",
+          icon: "fab fa-optin-monster",
+          page: "/npcs",
         },
         {
-          title: 'Spells',
+          title: "Spells",
           root: true,
-          bullet: 'dot',
-          icon: 'fas fa-hat-wizard',
-          page: '/spells'
+          bullet: "dot",
+          icon: "fas fa-hat-wizard",
+          page: "/spells",
         },
         {
-          title: 'Homebrew',
+          title: "Homebrew",
           root: true,
-          bullet: 'dot',
-          icon: 'far fa-star',
+          bullet: "dot",
+          icon: "far fa-star",
           submenu: [
             {
-              title: 'Weapons',
-              page: '/homebrew-weapons',
+              title: "Weapons",
+              page: "/homebrew-weapons",
             },
             {
-              title: 'Armors',
-              page: '/homebrew-armor',
+              title: "Armors",
+              page: "/homebrew-armor",
             },
             {
-              title: 'Items',
-              page: '/homebrew-items',
+              title: "Items",
+              page: "/homebrew-items",
             },
             {
-              title: 'NPCs',
-              page: '/homebrew-npcs',
+              title: "NPCs",
+              page: "/homebrew-npcs",
             },
             {
-              title: 'Spells',
-              page: '/homebrew-spells',
+              title: "Spells",
+              page: "/homebrew-spells",
             },
-          ]
+          ],
         },
 
-        // Story
-        { section: 'Story' },
-        {
-          title: 'Campaigns',
-          bullet: 'dot',
-          icon: 'fas fa-globe-americas',
-          root: true,
-          page: '/campaigns'
-        },
-        {
-          title: 'Adventures',
-          bullet: 'dot',
-          icon: 'flaticon2-list-2',
-          root: true,
-          page: '/adventures'
-        },
+        // // Story
+        // { section: 'Story' },
+        // {
+        //   title: 'Campaigns',
+        //   bullet: 'dot',
+        //   icon: 'fas fa-globe-americas',
+        //   root: true,
+        //   page: '/campaigns'
+        // },
+        // {
+        //   title: 'Adventures',
+        //   bullet: 'dot',
+        //   icon: 'flaticon2-list-2',
+        //   root: true,
+        //   page: '/adventures'
+        // },
 
         // DM Tools
+        { section: "Dungeon Master Tools" },
         {
-          section: 'Dungeon Master Tools',
-        },
-        {
-          title: 'Storyboard',
+          title: "Storyboard",
           root: true,
-          bullet: 'dot',
-          icon: 'fas fa-chalkboard',
-          page: '/storyboard',
-          permission: 'accessToDMTools'
+          bullet: "dot",
+          icon: "fas fa-chalkboard",
+          page: "/storyboard",
+          permission: "accessToDMTools",
         },
         {
-          title: 'Create',
+          title: "Campaigns & Sessions",
+          bullet: "dot",
+          icon: "fas fa-globe-americas",
           root: true,
-          bullet: 'dot',
-          icon: 'fas fa-magic',
-          page: '/create',
-          permission: 'accessToDMTools'
+          page: "/campaigns",
+          permission: "accessToDMTools",
         },
-      ]
+        {
+          title: "Create",
+          root: true,
+          bullet: "dot",
+          icon: "fas fa-magic",
+          page: "/create",
+          permission: "accessToDMTools",
+        },
+      ],
     },
   };
 

@@ -1,6 +1,3 @@
-import { StoreRouterConnectingModule } from "@ngrx/router-store";
-import { StringLengthLocalization } from "dist/assets/plugins/formvalidation/src/js/validators/stringLength";
-
 export class Npc {
   id: string;
   // start:: Official Schema
