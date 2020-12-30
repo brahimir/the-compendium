@@ -17,6 +17,9 @@ import { ItemDetailsDialogComponent } from "../../../_resource-dialogs/details-d
   styleUrls: ["./homebrew-items.component.scss", "../../../tc-global.scss"],
 })
 export class HomebrewItemsComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   columnsToDisplay: any[] = [
     "name", 
     "weight",
@@ -28,9 +31,6 @@ export class HomebrewItemsComponent implements OnInit, AfterViewInit {
 
   // Weapons
   HOMEBREW_ITEMS_DATA: Weapon[];
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private homebrewItemsService: HomebrewItemsService,

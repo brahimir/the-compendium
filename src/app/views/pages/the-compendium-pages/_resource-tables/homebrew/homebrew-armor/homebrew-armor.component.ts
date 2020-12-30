@@ -17,6 +17,9 @@ import { ArmorDetailsDialogComponent } from "../../../_resource-dialogs/details-
   styleUrls: ["./homebrew-armor.component.scss", "../../../tc-global.scss"],
 })
 export class HomebrewArmorComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   columnsToDisplay: any[] = [
     "name",
     "armor_category",
@@ -31,9 +34,6 @@ export class HomebrewArmorComponent implements OnInit, AfterViewInit {
 
   // Armors
   HOMEBREW_ARMORS_DATA: Armor[];
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private homebrewArmorsService: HomebrewArmorsService,

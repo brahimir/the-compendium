@@ -17,6 +17,9 @@ import { SpellDetailsDialogComponent } from "../../../_resource-dialogs/details-
   styleUrls: ["./homebrew-spells.component.scss", "../../../tc-global.scss"],
 })
 export class HomebrewSpellsComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   columnsToDisplay: any[] = [
     "name",
     "level",
@@ -30,9 +33,6 @@ export class HomebrewSpellsComponent implements OnInit, AfterViewInit {
 
   // Weapons
   HOMEBREW_WEAPONS_DATA: Spell[];
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private homebrewWeaponsService: HomebrewSpellsService,

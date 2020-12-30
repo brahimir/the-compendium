@@ -19,6 +19,9 @@ import { NpcDetailsDialogComponent } from "../../../_resource-dialogs/details-di
   styleUrls: ["./homebrew-npcs.component.scss", "../../../tc-global.scss"],
 })
 export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   columnsToDisplay: any[] = [
     "name",
     "alignment",
@@ -32,9 +35,6 @@ export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
 
   // Weapons
   HOMEBREW_NPCS_DATA: Npc[];
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private homebrewNpcsService: HomebrewNpcsService,

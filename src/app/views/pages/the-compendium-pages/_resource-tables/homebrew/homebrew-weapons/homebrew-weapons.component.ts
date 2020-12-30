@@ -17,6 +17,9 @@ import { WeaponDetailsDialogComponent } from "../../../_resource-dialogs/details
   styleUrls: ["./homebrew-weapons.component.scss", "../../../tc-global.scss"],
 })
 export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   columnsToDisplay: any[] = [
     "name",
     "weapon_category",
@@ -30,9 +33,6 @@ export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
 
   // Weapons
   HOMEBREW_WEAPONS_DATA: Weapon[];
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private homebrewWeaponsService: HomebrewWeaponsService,
