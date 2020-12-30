@@ -30,7 +30,7 @@ export class HomebrewItemsComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Weapons
-  TABLE_DATA: Weapon[];
+  TABLE_DATA: Weapon[] =[];
 
   constructor(
     private homebrewItemsService: HomebrewItemsService,

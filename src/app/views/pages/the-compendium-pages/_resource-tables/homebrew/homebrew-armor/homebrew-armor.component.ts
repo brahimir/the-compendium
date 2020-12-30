@@ -33,7 +33,7 @@ export class HomebrewArmorComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Armors
-  TABLE_DATA: Armor[];
+  TABLE_DATA: Armor[] =[];
 
   constructor(
     private homebrewArmorsService: HomebrewArmorsService,

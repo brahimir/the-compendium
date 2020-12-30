@@ -34,7 +34,7 @@ export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Weapons
-  TABLE_DATA: Npc[];
+  TABLE_DATA: Npc[] = [];
 
   constructor(
     private homebrewNpcsService: HomebrewNpcsService,

@@ -32,7 +32,7 @@ export class HomebrewSpellsComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Weapons
-  TABLE_DATA: Spell[];
+  TABLE_DATA: Spell[] = [];
 
   constructor(
     private homebrewWeaponsService: HomebrewSpellsService,
