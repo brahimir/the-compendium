@@ -29,8 +29,8 @@ export class DashboardComponent implements OnInit {
 
   // MatDialog options
   dialogOptions = {
-    minWidth: 1280,
-    maxHeight: 720,
+    minWidth: 1200,
+    maxHeight: 700,
   };
 
   constructor(public router: Router, public dialog: MatDialog) {}
