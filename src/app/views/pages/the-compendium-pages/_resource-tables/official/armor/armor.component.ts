@@ -17,7 +17,7 @@ import { ArmorDetailsDialogComponent } from "../../../_dialogs/details-dialog/ar
 @Component({
   selector: "kt-armor",
   templateUrl: "./armor.component.html",
-  styleUrls: ["./armor.component.scss", "../../../sass/tc-global.scss"],
+  styleUrls: ["./armor.component.scss"],
 })
 export class ArmorComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

@@ -15,7 +15,6 @@ export class ArmorDetailsDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) {
       // Sets the incoming data to this Component's dialogData reference.
       this.dialogData = data;
-      console.log(this.dialogData);
   }
 
   ngOnInit(): void { }

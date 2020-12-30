@@ -14,7 +14,7 @@ import { SpellDetailsDialogComponent } from "../../../_dialogs/details-dialog/sp
 @Component({
   selector: "kt-spells",
   templateUrl: "./spells.component.html",
-  styleUrls: ["./spells.component.scss", "../../../sass/tc-global.scss"],
+  styleUrls: ["./spells.component.scss"],
 })
 export class SpellsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

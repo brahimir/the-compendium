@@ -9,7 +9,6 @@ import { AuthGuard } from "./core/auth";
 
 // The Compendium Components
 import { DashboardComponent } from "./views/pages/the-compendium-pages/dashboard/dashboard.component";
-import { CampaignsComponent } from "./views/pages/the-compendium-pages/campaigns/campaigns.component";
 import { AdventuresComponent } from "./views/pages/the-compendium-pages/adventures/adventures.component";
 // Official 5E Resource Pages
 import { WeaponComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/weapons/weapons.component";

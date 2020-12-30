@@ -17,7 +17,7 @@ import { ItemDetailsDialogComponent } from "../../../_dialogs/details-dialog/ite
 @Component({
   selector: "kt-items",
   templateUrl: "./items.component.html",
-  styleUrls: ["./items.component.scss", "../../../sass/tc-global.scss"],
+  styleUrls: ["./items.component.scss"],
 })
 export class ItemsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

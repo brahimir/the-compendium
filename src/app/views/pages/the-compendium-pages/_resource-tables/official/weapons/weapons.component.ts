@@ -17,7 +17,7 @@ import { WeaponDetailsDialogComponent } from "../../../_dialogs/details-dialog/w
 @Component({
   selector: "kt-weapons",
   templateUrl: "./weapons.component.html",
-  styleUrls: ["./weapons.component.scss", "../../../sass/tc-global.scss"],
+  styleUrls: ["./weapons.component.scss"],
 })
 export class WeaponComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

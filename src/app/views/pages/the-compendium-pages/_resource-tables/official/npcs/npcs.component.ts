@@ -19,7 +19,7 @@ import { NpcDetailsDialogComponent } from "../../../_dialogs/details-dialog/npc-
 @Component({
   selector: "kt-npcs",
   templateUrl: "./npcs.component.html",
-  styleUrls: ["./npcs.component.scss", "../../../sass/tc-global.scss"],
+  styleUrls: ["./npcs.component.scss"],
 })
 export class NpcsComponent implements OnInit, AfterViewInit {
   columnsToDisplay: any[] = [

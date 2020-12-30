@@ -9,14 +9,14 @@
     <!-- start::Spell Level and School-->
     <div *ngIf="dialogData.level || dialogData.school" class="row">
       <div class="col">
-        <p class="font-italic">
+        <span class="font-italic">
           <span *ngIf="dialogData.level === 0;else default">
             Cantrip <span *ngIf="dialogData.school"> {{dialogData.school.name}} </span>
           </span>
           <ng-template #default>
             Level {{dialogData.level}} <span *ngIf="dialogData.school"> {{dialogData.school.name}} </span>
           </ng-template>
-        </p>
+        </span>
       </div>
     </div>
     <!-- end::Spell Level and School -->

@@ -18,7 +18,6 @@ export class WeaponDetailsDialogComponent implements OnInit {
   ) {
     // Sets the incoming data to this Component's dialogData reference.
     this.dialogData = data;
-    console.log(this.dialogData);
   }
 
   ngOnInit(): void {}
