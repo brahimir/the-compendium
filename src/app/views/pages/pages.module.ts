@@ -48,9 +48,7 @@ import { MailModule } from "./apps/mail/mail.module";
 import { ECommerceModule } from "./apps/e-commerce/e-commerce.module";
 import { UserManagementModule } from "./user-management/user-management.module";
 
-// The Compendium Pages
-import { CampaignsComponent } from "./the-compendium-pages/campaigns/campaigns.component";
-import { AdventuresComponent } from "./the-compendium-pages/adventures/adventures.component";
+// ! start:: The Compendium Pages
 // Official 5E Resource Pages
 import { WeaponComponent } from "./the-compendium-pages/_resource-tables/official/weapons/weapons.component";
 import { ArmorComponent } from "./the-compendium-pages/_resource-tables/official/armor/armor.component";
@@ -71,9 +69,12 @@ import { HomebrewItemsComponent } from "./the-compendium-pages/_resource-tables/
 import { HomebrewNpcsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-npcs/homebrew-npcs.component";
 import { HomebrewSpellsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-spells/homebrew-spells.component";
 // DM Tools Pages
+import { AdventuresComponent } from "./the-compendium-pages/adventures/adventures.component";
 import { StoryboardComponent } from "./the-compendium-pages/_dm-tools/storyboard/storyboard.component";
 import { CreateComponent } from "./the-compendium-pages/_dm-tools/create/create.component";
 import { DashboardComponent } from "./the-compendium-pages/dashboard/dashboard.component";
+// ! end:: The Compendium Pages
+
 import { RouterModule } from "@angular/router";
 
 @NgModule({
@@ -85,7 +86,6 @@ import { RouterModule } from "@angular/router";
     NpcsComponent,
     SpellsComponent,
     StoryboardComponent,
-    CampaignsComponent,
     AdventuresComponent,
     // Homebrew Pages
     HomebrewWeaponsComponent,

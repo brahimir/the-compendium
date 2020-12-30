@@ -487,41 +487,20 @@ export class MenuConfig {
           permission: "accessToDMTools",
         },
         {
-          title: "Campaigns & Sessions",
+          title: "Adventures",
           bullet: "dot",
           icon: "fas fa-globe-americas",
           root: true,
-          page: "/campaigns",
+          page: "/adventures",
           permission: "accessToDMTools",
         },
         {
           title: "Create",
-          root: true,
           bullet: "dot",
           icon: "fas fa-magic",
-          permission: "accessToDMTools",
-          submenu: [
-            {
-              title: "Weapon",
-              page: "/create-weapon",
-            },
-            {
-              title: "Armor",
-              page: "/create-armor",
-            },
-            {
-              title: "Item",
-              page: "/create-item",
-            },
-            {
-              title: "Npc",
-              page: "/create-npc",
-            },
-            {
-              title: "Spell",
-              page: "/create-spell",
-            },
-          ],
+          root: true,
+          page: "/create",
+          permission: "accessToDMTools"
         },
       ],
     },

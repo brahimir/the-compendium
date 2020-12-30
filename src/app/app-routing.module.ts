@@ -69,10 +69,6 @@ const routes: Routes = [
         component: SpellsComponent,
       },
       {
-        path: "campaigns",
-        component: CampaignsComponent,
-      },
-      {
         path: "adventures",
         component: AdventuresComponent,
       },
