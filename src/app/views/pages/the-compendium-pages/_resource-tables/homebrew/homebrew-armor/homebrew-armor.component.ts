@@ -33,7 +33,7 @@ export class HomebrewArmorComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Armors
-  HOMEBREW_ARMORS_DATA: Armor[];
+  TABLE_DATA: Armor[];
 
   constructor(
     private homebrewArmorsService: HomebrewArmorsService,
@@ -53,11 +53,11 @@ export class HomebrewArmorComponent implements OnInit, AfterViewInit {
    */
   updateHomebrewArmors(): void {
     this.homebrewArmorsService.getAll().subscribe((data: any) => {
-      this.HOMEBREW_ARMORS_DATA = data;
+      this.TABLE_DATA = data;
 
       // Set the DataSource for MatTableData.
       this.dataSource = new MatTableDataSource<Armor>(
-        this.HOMEBREW_ARMORS_DATA
+        this.TABLE_DATA
       );
 
       // Set Paginators and Sorts.
@@ -68,11 +68,11 @@ export class HomebrewArmorComponent implements OnInit, AfterViewInit {
 
   /**
    * Opens Details Dialog for a Armor.
-   * @param Armor The Armor that was clicked.
+   * @param element The Armor that was clicked.
    */
-  openDetails(armor: Armor): void {
+  openDetails(element: Armor): void {
     // Pass the Armor object to the dialog here.
-    const dialogData = armor;
+    const dialogData = element;
 
     // Set the dialog window options here.
     const dialogOptions = {

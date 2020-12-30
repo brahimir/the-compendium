@@ -9,59 +9,101 @@
     <!-- start:: Filter -->
     <div class="filter-header">
       <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        <input
+          matInput
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Filter"
+        />
       </mat-form-field>
     </div>
     <!-- end:: Filter -->
 
-    <table class="lmat-elevation-z8" mat-table matSort [dataSource]="dataSource">
-
+    <!-- start:: MatTable -->
+    <table
+      class="lmat-elevation-z8"
+      mat-table
+      matSort
+      [dataSource]="dataSource"
+    >
+      <!-- start:: Weapon Name -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
         <td mat-cell *matCellDef="let weapon">
-          <span class="link" (click)="openDetails(weapon)"> {{weapon.name}} </span>
+          <span class="link" (click)="openDetails(weapon)">
+            {{ weapon.name }}
+          </span>
         </td>
       </ng-container>
+      <!-- end:: Weapon Name -->
 
+      <!-- start:: Weapon Category -->
       <ng-container matColumnDef="weapon_category">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
         <td mat-cell *matCellDef="let weapon">
-          <span *ngIf="weapon.weapon_category; else no_data"> {{weapon.weapon_category}} </span>
-          <ng-template #no_data> - </ng-template>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="damage">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Damage </th>
-        <td mat-cell *matCellDef="let weapon">
-          <span *ngIf="weapon.damage;else no_data">
-            {{weapon.damage.damage_dice}} {{weapon.damage.damage_type.name}}
+          <span *ngIf="weapon.weapon_category; else no_data">
+            {{ weapon.weapon_category }}
           </span>
           <ng-template #no_data> - </ng-template>
         </td>
       </ng-container>
+      <!-- end:: Weapon Category -->
 
+      <!-- start:: Weapon Damage -->
+      <ng-container matColumnDef="damage">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Damage</th>
+        <td mat-cell *matCellDef="let weapon">
+          <span *ngIf="weapon.damage; else no_data">
+            {{ weapon.damage.damage_dice }} {{ weapon.damage.damage_type.name }}
+          </span>
+          <ng-template #no_data> - </ng-template>
+        </td>
+      </ng-container>
+      <!-- end:: Weapon Damage -->
+
+      <!-- start:: Weapon Range -->
       <ng-container matColumnDef="range">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Range </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Range</th>
         <td mat-cell *matCellDef="let weapon">
-          <span *ngIf="weapon.range;else no_data"> {{weapon.range.normal}} </span>
+          <span *ngIf="weapon.range; else no_data">
+            {{ weapon.range.normal }}
+          </span>
           <ng-template #no_data> - </ng-template>
         </td>
       </ng-container>
+      <!-- emd:: Weapon Range -->
 
+      <!-- start:: Weapon Cost -->
       <ng-container matColumnDef="cost">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Value </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Value</th>
         <td mat-cell *matCellDef="let weapon">
-          <span *ngIf="weapon.cost;else no_data"> {{weapon.cost.quantity}}{{weapon.cost.unit}} </span>
+          <span *ngIf="weapon.cost; else no_data">
+            {{ weapon.cost.quantity }}{{ weapon.cost.unit }}
+          </span>
           <ng-template #no_data> - </ng-template>
         </td>
-
       </ng-container>
+      <!-- end:: Weapon Cost -->
 
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
       <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
     </table>
+    <!-- end:: MatTable -->
 
-    <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+    <!-- start:: Loading spinner -->
+    <div class="spinner-container">
+      <mat-spinner
+        [diameter]="50"
+        style="margin: auto"
+        *ngIf="!TABLE_DATA.length"
+      ></mat-spinner>
+    </div>
+    <!-- end:: Loading spinner -->
+
+    <!-- start:: Paginator -->
+    <mat-paginator
+      [pageSizeOptions]="[25, 50, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+    <!-- end:: Paginator -->
   </kt-portlet-body>
 </kt-portlet>

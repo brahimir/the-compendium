@@ -9,28 +9,40 @@
     <!-- start:: Filter -->
     <div class="filter-header">
       <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        <input
+          matInput
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Filter"
+        />
       </mat-form-field>
     </div>
     <!-- end:: Filter -->
 
     <!-- start:: Table -->
-    <table class="lmat-elevation-z8" mat-table matSort [dataSource]="dataSource">
-
+    <table
+      class="lmat-elevation-z8"
+      mat-table
+      matSort
+      [dataSource]="dataSource"
+    >
       <!-- start:: Armor Name -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
         <td mat-cell *matCellDef="let armor">
-          <span class="link" (click)="openDetails(armor)">{{armor.name}}</span>
+          <span class="link" (click)="openDetails(armor)">{{
+            armor.name
+          }}</span>
         </td>
       </ng-container>
       <!-- end:: Armor Name -->
 
       <!-- start:: Armor Category -->
       <ng-container matColumnDef="armor_category">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
         <td mat-cell *matCellDef="let armor">
-          <span *ngIf="armor.armor_category;else no_data"> {{armor.armor_category}} </span>
+          <span *ngIf="armor.armor_category; else no_data">
+            {{ armor.armor_category }}
+          </span>
           <ng-template #no_data> - </ng-template>
         </td>
       </ng-container>
@@ -38,9 +50,11 @@
 
       <!-- start:: Armor Class -->
       <ng-container matColumnDef="armor_class.base">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Armor Class </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Armor Class</th>
         <td mat-cell *matCellDef="let armor">
-          <span *ngIf="armor.armor_class;else no_data"> {{armor.armor_class.base}} </span>
+          <span *ngIf="armor.armor_class; else no_data">
+            {{ armor.armor_class.base }}
+          </span>
           <ng-template #no_data> - </ng-template>
         </td>
       </ng-container>
@@ -48,11 +62,17 @@
 
       <!-- start:: Armor Stealth Disadvantage -->
       <ng-container matColumnDef="stealth_disadvantage">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Stealth Disadvantage </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Stealth Disadvantage
+        </th>
         <td mat-cell *matCellDef="let armor">
           <span *ngIf="armor.stealth_disadvantage == null; then no_data"></span>
-          <span *ngIf="armor.stealth_disadvantage === true;then stealth_true"></span>
-          <span *ngIf="armor.stealth_disadvantage === false;then stealth_false"></span>
+          <span
+            *ngIf="armor.stealth_disadvantage === true; then stealth_true"
+          ></span>
+          <span
+            *ngIf="armor.stealth_disadvantage === false; then stealth_false"
+          ></span>
 
           <ng-template #stealth_true> Yes </ng-template>
           <ng-template #stealth_false> No </ng-template>
@@ -63,10 +83,12 @@
 
       <!-- start:: Armor Strength Minimum -->
       <ng-container matColumnDef="str_minimum">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Required Strength </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Required Strength
+        </th>
         <td mat-cell *matCellDef="let armor">
           <span *ngIf="armor.str_minimum == null; then no_data"></span>
-          <span> {{armor.str_minimum}} </span>
+          <span> {{ armor.str_minimum }} </span>
           <ng-template #no_data> - </ng-template>
         </td>
       </ng-container>
@@ -74,9 +96,11 @@
 
       <!-- start:: Armor Cost -->
       <ng-container matColumnDef="cost">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Value </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Value</th>
         <td mat-cell *matCellDef="let armor">
-          <span *ngIf="armor.cost;else no_data"> {{armor.cost.quantity}}{{armor.cost.unit}} </span>
+          <span *ngIf="armor.cost; else no_data">
+            {{ armor.cost.quantity }}{{ armor.cost.unit }}
+          </span>
           <ng-template #no_data> - </ng-template>
         </td>
       </ng-container>
@@ -87,6 +111,21 @@
     </table>
     <!-- end:: Table -->
 
-    <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+    <!-- start:: Loading spinner -->
+    <div class="spinner-container">
+      <mat-spinner
+        [diameter]="50"
+        style="margin: auto"
+        *ngIf="!TABLE_DATA.length"
+      ></mat-spinner>
+    </div>
+    <!-- end:: Loading spinner -->
+
+    <!-- start:: Paginator -->
+    <mat-paginator
+      [pageSizeOptions]="[25, 50, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+    <!-- end:: Paginator -->
   </kt-portlet-body>
 </kt-portlet>

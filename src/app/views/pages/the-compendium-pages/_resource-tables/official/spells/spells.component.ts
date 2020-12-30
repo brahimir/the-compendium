@@ -32,7 +32,7 @@ export class SpellsComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Spells
-  SPELLS_DATA: Spell[] = [];
+  TABLE_DATA: Spell[] = [];
 
   constructor(private spellsService: SpellService, public dialog: MatDialog) {}
 
@@ -55,10 +55,10 @@ export class SpellsComponent implements OnInit, AfterViewInit {
         this.spellsService
           .getSpellObject(element.url)
           .subscribe((spellData: any) => {
-            this.SPELLS_DATA.push(spellData);
+            this.TABLE_DATA.push(spellData);
             
             // Set the DataSource for MatTableData.
-            this.dataSource = new MatTableDataSource<Spell>(this.SPELLS_DATA);
+            this.dataSource = new MatTableDataSource<Spell>(this.TABLE_DATA);
 
             // Set Paginators and Sorts.
             this.dataSource.paginator = this.paginator;
@@ -72,9 +72,9 @@ export class SpellsComponent implements OnInit, AfterViewInit {
    * Opens Details Dialog for a Spell.
    * @param Armor The Spell that was clicked.
    */
-  openDetails(armor: Spell): void {
+  openDetails(element: Spell): void {
     // Pass the Spell object to the dialog here.
-    const dialogData = armor;
+    const dialogData = element;
 
     // Set the dialog window options here.
     const dialogOptions = {

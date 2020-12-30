@@ -34,7 +34,7 @@ export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Weapons
-  HOMEBREW_NPCS_DATA: Npc[];
+  TABLE_DATA: Npc[];
 
   constructor(
     private homebrewNpcsService: HomebrewNpcsService,
@@ -55,10 +55,10 @@ export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
    */
   updateHomebrewWeapons(): void {
     this.homebrewNpcsService.getAll().subscribe((data: any) => {
-      this.HOMEBREW_NPCS_DATA = data;
+      this.TABLE_DATA = data;
 
       // Set the DataSource for MatTableData.
-      this.dataSource = new MatTableDataSource<Npc>(this.HOMEBREW_NPCS_DATA);
+      this.dataSource = new MatTableDataSource<Npc>(this.TABLE_DATA);
 
       // Set Paginators and Sorts.
       this.dataSource.paginator = this.paginator;
@@ -67,12 +67,12 @@ export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Opens Details Dialog for a Weapon.
-   * @param weapon The weapon that was clicked.
+   * Opens Details Dialog for an Npc.
+   * @param element The Npc that was clicked.
    */
-  openDetails(weapon: Npc): void {
+  openDetails(element: Npc): void {
     // Pass the Armor object to the dialog here.
-    const dialogData = weapon;
+    const dialogData = element;
 
     // Set the dialog window options here.
     const dialogOptions = {

@@ -1,19 +1,32 @@
 // The Compendium Colors
 $tc-red: #a90000;
-$tc-white: #FFFFFF;
+$tc-white: #ffffff;
 
-// MatTables
-table {
-  width: 100%;
-}
-
+// Links
 span.link {
   cursor: pointer;
   color: $tc-red;
   text-decoration: underline;
 }
 
+// MatTables
+table {
+  width: 100%;
+}
+
+// MatTable search filter
 .mat-form-field {
   font-size: 14px;
   width: 100%;
 }
+
+// Loading spinners
+.spinner-container {
+  margin: auto;
+  padding: 50px;
+}
+
+// // centers spinner
+// .loading-spinner {
+//   margin: auto;
+// }

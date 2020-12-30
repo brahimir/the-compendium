@@ -33,7 +33,7 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Items
-  ITEMS_DATA: Item[] = [];
+  TABLE_DATA: Item[] = [];
 
   constructor(private itemsService: ItemsService, public dialog: MatDialog) {}
 
@@ -44,7 +44,7 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {}
 
   /**
-   * Get all Homebrew Armors from API.
+   * Get all Homebrew Items from API.
    * Set up DataSource for MatTableData.
    * Set up Paginators and Sorts.
    *
@@ -60,11 +60,11 @@ export class ItemsComponent implements OnInit, AfterViewInit {
         itemData.forEach((element) => {
           this.itemsService
             .getItemObject(element.url)
-            .subscribe((armorData: any) => {
-              this.ITEMS_DATA.push(armorData);
+            .subscribe((itemData: any) => {
+              this.TABLE_DATA.push(itemData);
 
               // Set the DataSource for MatTableData.
-              this.dataSource = new MatTableDataSource<Item>(this.ITEMS_DATA);
+              this.dataSource = new MatTableDataSource<Item>(this.TABLE_DATA);
 
               // Set Paginators and Sorts.
               this.dataSource.paginator = this.paginator;
@@ -76,12 +76,12 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Opens Details Dialog for a Armor.
-   * @param Armor The Armor that was clicked.
+   * Opens Details Dialog for an Item.
+   * @param element The Item that was clicked.
    */
-  openDetails(armor: Item): void {
+  openDetails(element: Item): void {
     // Pass the Armor object to the dialog here.
-    const dialogData = armor;
+    const dialogData = element;
 
     // Set the dialog window options here.
     const dialogOptions = {

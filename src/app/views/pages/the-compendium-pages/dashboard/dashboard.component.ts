@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   routeNPCs: string = "/npcs";
   routeSpells: string = "/spells";
 
-  // Global MatDialog options
+  // MatDialog options
   dialogOptions = {
     minWidth: 1280,
     maxHeight: 720,

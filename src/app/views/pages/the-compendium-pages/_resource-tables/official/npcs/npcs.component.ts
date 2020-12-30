@@ -34,7 +34,7 @@ export class NpcsComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Npcs
-  NPCS_DATA: Npc[] = [];
+  TABLE_DATA: Npc[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -62,10 +62,10 @@ export class NpcsComponent implements OnInit, AfterViewInit {
     this.npcsService.getAllArmors().subscribe((monstersData: any) => {
       monstersData.forEach((element) => {
         this.npcsService.getNpcObject(element.url).subscribe((npcData: any) => {
-          this.NPCS_DATA.push(npcData);
+          this.TABLE_DATA.push(npcData);
 
           // Set the DataSource for MatTableData.
-          this.dataSource = new MatTableDataSource<Npc>(this.NPCS_DATA);
+          this.dataSource = new MatTableDataSource<Npc>(this.TABLE_DATA);
 
           // Set Paginators and Sorts.
           this.dataSource.paginator = this.paginator;
@@ -76,12 +76,12 @@ export class NpcsComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Opens Details Dialog for a Armor.
-   * @param Armor The Armor that was clicked.
+   * Opens Details Dialog for an Npc.
+   * @param Armor The Npc that was clicked.
    */
-  openDetails(armor: Npc): void {
+  openDetails(element: Npc): void {
     // Pass the Armor object to the dialog here.
-    const dialogData = armor;
+    const dialogData = element;
 
     // Set the dialog window options here.
     const dialogOptions = {

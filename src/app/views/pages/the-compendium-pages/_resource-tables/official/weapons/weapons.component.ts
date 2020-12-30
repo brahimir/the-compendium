@@ -35,7 +35,7 @@ export class WeaponComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Weapons
-  WEAPONS_DATA: Weapon[] = [];
+  TABLE_DATA: Weapon[] = [];
 
   constructor(
     private weaponsService: WeaponService,
@@ -61,9 +61,9 @@ export class WeaponComponent implements OnInit, AfterViewInit {
         this.weaponsService
           .getWeaponObject(element.url)
           .subscribe((weaponData: any) => {
-            this.WEAPONS_DATA.push(weaponData);
+            this.TABLE_DATA.push(weaponData);
             // Set the DataSource for MatTableData.
-            this.dataSource = new MatTableDataSource<Weapon>(this.WEAPONS_DATA);
+            this.dataSource = new MatTableDataSource<Weapon>(this.TABLE_DATA);
 
             // Set Paginators and Sorts.
             this.dataSource.paginator = this.paginator;
@@ -74,12 +74,12 @@ export class WeaponComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Opens Details Dialog for a Armor.
-   * @param Armor The Armor that was clicked.
+   * Opens Details Dialog for a Weapon.
+   * @param Armor The Weapon that was clicked.
    */
-  openDetails(armor: Weapon): void {
+  openDetails(element: Weapon): void {
     // Pass the Armor object to the dialog here.
-    const dialogData = armor;
+    const dialogData = element;
 
     // Set the dialog window options here.
     const dialogOptions = {

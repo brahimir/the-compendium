@@ -32,7 +32,7 @@ export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Weapons
-  HOMEBREW_WEAPONS_DATA: Weapon[];
+  TABLE_DATA: Weapon[];
 
   constructor(
     private homebrewWeaponsService: HomebrewWeaponsService,
@@ -52,11 +52,11 @@ export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
    */
   updateHomebrewWeapons(): void {
     this.homebrewWeaponsService.getAll().subscribe((data: any) => {
-      this.HOMEBREW_WEAPONS_DATA = data;
+      this.TABLE_DATA = data;
 
       // Set the DataSource for MatTableData.
       this.dataSource = new MatTableDataSource<Weapon>(
-        this.HOMEBREW_WEAPONS_DATA
+        this.TABLE_DATA
       );
 
       // Set Paginators and Sorts.
@@ -69,9 +69,9 @@ export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
    * Opens Details Dialog for a Weapon.
    * @param weapon The weapon that was clicked.
    */
-  openDetails(weapon: Weapon): void {
+  openDetails(element: Weapon): void {
     // Pass the Armor object to the dialog here.
-    const dialogData = weapon;
+    const dialogData = element;
 
     // Set the dialog window options here.
     const dialogOptions = {
