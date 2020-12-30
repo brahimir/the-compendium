@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
 
   // Global MatDialog options
   dialogOptions = {
-    maxWidth: 1280,
+    minWidth: 1280,
     maxHeight: 720,
   };
 

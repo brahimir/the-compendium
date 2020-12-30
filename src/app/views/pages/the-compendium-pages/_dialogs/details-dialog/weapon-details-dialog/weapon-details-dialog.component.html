@@ -9,10 +9,10 @@
     <!-- start::Weapon Range and Weapon Category -->
     <div *ngIf="dialogData.weapon_range || dialogData.weapon_category" class="row">
       <div class="col-3">
-        <p class="font-italic">
+        <span class="font-italic">
           {{ dialogData.weapon_range }} weapon
           ({{ lowercaseFirstLetter(dialogData.weapon_category) }})
-        </p>
+        </span>
       </div>
     </div>
     <!-- end::Weapon Range and Weapon Category -->
