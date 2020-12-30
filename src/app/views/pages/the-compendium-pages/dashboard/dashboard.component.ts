@@ -9,6 +9,7 @@ import { ItemsComponent } from "../_resource-tables/official/items/items.compone
 import { SpellsComponent } from "../_resource-tables/official/spells/spells.component";
 // MatTable
 import { MatDialog } from "@angular/material/dialog";
+import { DialogComponent } from "../../material/popups-and-modals/dialog/dialog.component";
 
 @Component({
   selector: "kt-dashboard",
@@ -28,10 +29,8 @@ export class DashboardComponent implements OnInit {
 
   // Global MatDialog options
   dialogOptions = {
-    minWidth: 1450,
-    maxWidth: 1450,
-    minHeight: 800,
-    maxHeight: 800,
+    maxWidth: 1280,
+    maxHeight: 720,
   };
 
   constructor(public router: Router, public dialog: MatDialog) {}
@@ -59,43 +58,39 @@ export class DashboardComponent implements OnInit {
     myStorage.setItem("box", boxCoords);
   }
 
-  openWeapons(): void {
-    // Opens the dialog window.
-    const dialogRef = this.dialog.open(WeaponComponent, this.dialogOptions);
+  /**
+   * Opens Dialogs for each component on the Dashboard.
+   *
+   * @param {string} windowName The Dialog window name to open.
+   */
+  openDialog(windowName: string): void {
+    let dialogRef: any;
 
-    // Handles dialog closing - can do something when the dialog is closed.
-    dialogRef.afterClosed().subscribe((result) => {});
-  }
+    switch (windowName) {
+      case "weapons":
+        // Opens the dialog window.
+        dialogRef = this.dialog.open(WeaponComponent, this.dialogOptions);
+        break;
 
-  openArmors(): void {
-    // Opens the dialog window.
-    const dialogRef = this.dialog.open(ArmorComponent, this.dialogOptions);
+      case "armors":
+        // Opens the dialog window.
+        dialogRef = this.dialog.open(ArmorComponent, this.dialogOptions);
+        break;
 
-    // Handles dialog closing - can do something when the dialog is closed.
-    dialogRef.afterClosed().subscribe((result) => {});
-  }
+      case "items":
+        // Opens the dialog window.
+        dialogRef = this.dialog.open(ItemsComponent, this.dialogOptions);
+        break;
 
-  openNpcs(): void {
-    // Opens the dialog window.
-    const dialogRef = this.dialog.open(NpcsComponent, this.dialogOptions);
+      case "npcs":
+        // Opens the dialog window.
+        dialogRef = this.dialog.open(NpcsComponent, this.dialogOptions);
+        break;
 
-    // Handles dialog closing - can do something when the dialog is closed.
-    dialogRef.afterClosed().subscribe((result) => {});
-  }
-
-  openItems(): void {
-    // Opens the dialog window.
-    const dialogRef = this.dialog.open(ItemsComponent, this.dialogOptions);
-
-    // Handles dialog closing - can do something when the dialog is closed.
-    dialogRef.afterClosed().subscribe((result) => {});
-  }
-
-  openSpells(): void {
-    // Opens the dialog window.
-    const dialogRef = this.dialog.open(SpellsComponent, this.dialogOptions);
-
-    // Handles dialog closing - can do something when the dialog is closed.
-    dialogRef.afterClosed().subscribe((result) => {});
+      case "spells":
+        // Opens the dialog window.
+        dialogRef = this.dialog.open(SpellsComponent, this.dialogOptions);
+        break;
+    }
   }
 }

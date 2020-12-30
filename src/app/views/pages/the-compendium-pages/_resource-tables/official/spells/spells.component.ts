@@ -9,12 +9,12 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Dialog Component
-import { SpellDetailsDialogComponent } from "../../../_resource-dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
+import { SpellDetailsDialogComponent } from "../../../_dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
 
 @Component({
   selector: "kt-spells",
   templateUrl: "./spells.component.html",
-  styleUrls: ["./spells.component.scss", "../../../tc-global.scss"],
+  styleUrls: ["./spells.component.scss", "../../../sass/tc-global.scss"],
 })
 export class SpellsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

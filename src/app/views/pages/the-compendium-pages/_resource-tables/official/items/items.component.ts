@@ -9,7 +9,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Dialog Component
-import { ItemDetailsDialogComponent } from "../../../_resource-dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
+import { ItemDetailsDialogComponent } from "../../../_dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
 
 /**
  * @title Items table with Pagination
@@ -17,7 +17,7 @@ import { ItemDetailsDialogComponent } from "../../../_resource-dialogs/details-d
 @Component({
   selector: "kt-items",
   templateUrl: "./items.component.html",
-  styleUrls: ["./items.component.scss", "../../../tc-global.scss"],
+  styleUrls: ["./items.component.scss", "../../../sass/tc-global.scss"],
 })
 export class ItemsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

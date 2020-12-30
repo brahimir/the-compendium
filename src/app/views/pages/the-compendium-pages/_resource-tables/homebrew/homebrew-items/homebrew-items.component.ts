@@ -9,12 +9,12 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Details Dialog
-import { ItemDetailsDialogComponent } from "../../../_resource-dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
+import { ItemDetailsDialogComponent } from "../../../_dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
 
 @Component({
   selector: "kt-homebrew-items",
   templateUrl: "../../official/items/items.component.html",
-  styleUrls: ["./homebrew-items.component.scss", "../../../tc-global.scss"],
+  styleUrls: ["./homebrew-items.component.scss", "../../../sass/tc-global.scss"],
 })
 export class HomebrewItemsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

@@ -74,11 +74,11 @@ import scss from "highlight.js/lib/languages/scss";
 import typescript from "highlight.js/lib/languages/typescript";
 
 // The Compendium Dialogs
-import { ArmorDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
-import { NpcDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
-import { WeaponDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
-import { ItemDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
-import { SpellDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
+import { ArmorDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
+import { NpcDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
+import { WeaponDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
+import { ItemDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
+import { SpellDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {

@@ -14,7 +14,7 @@
       <!-- start:: Weapons Box -->
       <div class="component-box" cdkDrag cdkDragBoundary=".screen">
         <span class="link">
-          <a (click)="openWeapons(routeWeapons)">Weapons</a>
+          <a (click)="openDialog('weapons')">Weapons</a>
         </span>
       </div>
       <!-- end:: Weapons Box -->
@@ -22,7 +22,7 @@
       <!-- start:: Armor Box -->
       <div class="component-box" cdkDrag cdkDrag cdkDragBoundary=".screen">
         <span class="link">
-          <a (click)="openArmors(routeArmor)">Armor</a>
+          <a (click)="openDialog('armors')">Armor</a>
         </span>
       </div>
       <!-- end:: Armor Box -->
@@ -30,7 +30,7 @@
       <!-- start:: Items Box -->
       <div class="component-box" cdkDrag cdkDrag cdkDragBoundary=".screen">
         <span class="link">
-          <a (click)="openItems(routeItems)">Items</a>
+          <a (click)="openDialog('item')">Items</a>
         </span>
       </div>
       <!-- end:: Items Box -->
@@ -38,7 +38,7 @@
       <!-- start:: NPCs Box -->
       <div class="component-box" cdkDrag cdkDrag cdkDragBoundary=".screen">
         <span class="link">
-          <a (click)="openNpcs(routeNPCs)">NPCs</a>
+          <a (click)="openDialog('npcs')">Monsters</a>
         </span>
       </div>
       <!-- end:: NPCs Box -->
@@ -46,7 +46,7 @@
       <!-- start:: Spells Box -->
       <div class="component-box" cdkDrag cdkDrag cdkDragBoundary=".screen">
         <span class="link">
-          <a (click)="openSpells(routeSpells)">Spells</a>
+          <a (click)="openDialog('spells')">Spells</a>
         </span>
       </div>
       <!-- end:: Spells Box -->

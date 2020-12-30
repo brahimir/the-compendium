@@ -59,11 +59,11 @@ import { NpcsComponent } from "./the-compendium-pages/_resource-tables/official/
 import { SpellsComponent } from "./the-compendium-pages/_resource-tables/official/spells/spells.component";
 // Dialogs
 import { MatDialogModule } from "@angular/material/dialog";
-import { ArmorDetailsDialogComponent } from "./the-compendium-pages/_resource-dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
-import { NpcDetailsDialogComponent } from "./the-compendium-pages/_resource-dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
-import { WeaponDetailsDialogComponent } from "./the-compendium-pages/_resource-dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
-import { ItemDetailsDialogComponent } from "./the-compendium-pages/_resource-dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
-import { SpellDetailsDialogComponent } from "./the-compendium-pages/_resource-dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
+import { ArmorDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
+import { NpcDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
+import { WeaponDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
+import { ItemDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
+import { SpellDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
 // Homebrew Pages
 import { HomebrewWeaponsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-weapons/homebrew-weapons.component";
 import { HomebrewArmorComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-armor/homebrew-armor.component";

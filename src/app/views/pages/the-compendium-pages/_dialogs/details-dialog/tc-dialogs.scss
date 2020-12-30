@@ -1,0 +1,31 @@
+@import "../../sass/tc-global.scss";
+
+// The Compendium colors
+.tc-red {
+  color: $tc-red;
+}
+
+.tc-white {
+    color: $tc-white;
+}
+
+// Headers
+h1 {
+  margin-bottom: 5px;
+}
+
+h3 {
+  margin-bottom: -5px;
+}
+
+// Divider
+.divider {
+  border: 1px solid $tc-red;
+  margin-bottom: 20px;
+}
+
+// Buttons
+button:hover {
+  background-color: $tc-red;
+  color: #ffffff;
+}

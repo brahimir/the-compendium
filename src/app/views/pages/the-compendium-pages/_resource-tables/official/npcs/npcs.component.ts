@@ -11,7 +11,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Dialog Component
-import { NpcDetailsDialogComponent } from "../../../_resource-dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
+import { NpcDetailsDialogComponent } from "../../../_dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
 
 /**
  * @title Npcs table with Pagination
@@ -19,7 +19,7 @@ import { NpcDetailsDialogComponent } from "../../../_resource-dialogs/details-di
 @Component({
   selector: "kt-npcs",
   templateUrl: "./npcs.component.html",
-  styleUrls: ["./npcs.component.scss", "../../../tc-global.scss"],
+  styleUrls: ["./npcs.component.scss", "../../../sass/tc-global.scss"],
 })
 export class NpcsComponent implements OnInit, AfterViewInit {
   columnsToDisplay: any[] = [

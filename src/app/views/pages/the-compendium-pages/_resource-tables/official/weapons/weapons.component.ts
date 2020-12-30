@@ -9,7 +9,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatDialog } from "@angular/material/dialog";
 // Details Dialog
-import { WeaponDetailsDialogComponent } from "../../../_resource-dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
+import { WeaponDetailsDialogComponent } from "../../../_dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
 
 /**
  * @title Weapons table with Pagination
@@ -17,7 +17,7 @@ import { WeaponDetailsDialogComponent } from "../../../_resource-dialogs/details
 @Component({
   selector: "kt-weapons",
   templateUrl: "./weapons.component.html",
-  styleUrls: ["./weapons.component.scss", "../../../tc-global.scss"],
+  styleUrls: ["./weapons.component.scss", "../../../sass/tc-global.scss"],
 })
 export class WeaponComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

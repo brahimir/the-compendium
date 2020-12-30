@@ -11,12 +11,12 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Details Dialog
-import { NpcDetailsDialogComponent } from "../../../_resource-dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
+import { NpcDetailsDialogComponent } from "../../../_dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
 
 @Component({
   selector: "kt-homebrew-npcs",
   templateUrl: "../../official/npcs/npcs.component.html",
-  styleUrls: ["./homebrew-npcs.component.scss", "../../../tc-global.scss"],
+  styleUrls: ["./homebrew-npcs.component.scss", "../../../sass/tc-global.scss"],
 })
 export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

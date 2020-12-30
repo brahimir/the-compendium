@@ -9,12 +9,12 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Details Dialog
-import { SpellDetailsDialogComponent } from "../../../_resource-dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
+import { SpellDetailsDialogComponent } from "../../../_dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
 
 @Component({
   selector: "kt-homebrew-spells",
   templateUrl: "../../official/spells/spells.component.html",
-  styleUrls: ["./homebrew-spells.component.scss", "../../../tc-global.scss"],
+  styleUrls: ["./homebrew-spells.component.scss", "../../../sass/tc-global.scss"],
 })
 export class HomebrewSpellsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

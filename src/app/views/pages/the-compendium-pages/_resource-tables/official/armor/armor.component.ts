@@ -9,7 +9,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Dialog Component
-import { ArmorDetailsDialogComponent } from "../../../_resource-dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
+import { ArmorDetailsDialogComponent } from "../../../_dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
 
 /**
  * @title Armors table with Pagination
@@ -17,7 +17,7 @@ import { ArmorDetailsDialogComponent } from "../../../_resource-dialogs/details-
 @Component({
   selector: "kt-armor",
   templateUrl: "./armor.component.html",
-  styleUrls: ["./armor.component.scss", "../../../tc-global.scss"],
+  styleUrls: ["./armor.component.scss", "../../../sass/tc-global.scss"],
 })
 export class ArmorComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

@@ -9,12 +9,12 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Details Dialog
-import { WeaponDetailsDialogComponent } from "../../../_resource-dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
+import { WeaponDetailsDialogComponent } from "../../../_dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
 
 @Component({
   selector: "kt-homebrew-weapons",
   templateUrl: "../../official/weapons/weapons.component.html",
-  styleUrls: ["./homebrew-weapons.component.scss", "../../../tc-global.scss"],
+  styleUrls: ["./homebrew-weapons.component.scss", "../../../sass/tc-global.scss"],
 })
 export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
