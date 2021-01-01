@@ -73,12 +73,19 @@ import json from "highlight.js/lib/languages/json";
 import scss from "highlight.js/lib/languages/scss";
 import typescript from "highlight.js/lib/languages/typescript";
 
-// The Compendium Dialogs
+// ! The Compendium
+// Details Dialogs
 import { ArmorDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
 import { NpcDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
 import { WeaponDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
 import { ItemDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
 import { SpellDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
+// Create Dialogs
+import { CreateWeaponDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-weapon-dialog/create-weapon-dialog.component";
+import { CreateArmorDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-armor-dialog/create-armor-dialog.component";
+import { CreateItemDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-item-dialog/create-item-dialog.component";
+import { CreateNpcDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-npc-dialog/create-npc-dialog.component";
+import { CreateSpellDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-spell-dialog/create-spell-dialog.component";
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -141,11 +148,18 @@ export function getHighlightLanguages() {
   ],
   // ! Add DialogComponents here
   entryComponents: [
-    ArmorDetailsDialogComponent,
-    NpcDetailsDialogComponent,
+    // Details Dialogs
     WeaponDetailsDialogComponent,
+    ArmorDetailsDialogComponent,
     ItemDetailsDialogComponent,
+    NpcDetailsDialogComponent,
     SpellDetailsDialogComponent,
+    // Create Dialogs
+    CreateWeaponDialogComponent,
+    CreateArmorDialogComponent,
+    CreateItemDialogComponent,
+    CreateNpcDialogComponent,
+    CreateSpellDialogComponent,
   ],
   exports: [],
   providers: [

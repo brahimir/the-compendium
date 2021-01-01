@@ -13,13 +13,13 @@
       <!-- start:: Create buttons -->
       <div class="row">
         <div class="col-6">
-          <button mat-raised-button class="button">
+          <button (click)='openCreateDialog("weapon")' mat-raised-button class="button">
             <i class="fas fa-hammer"></i>
             Weapon
           </button>
         </div>
         <div class="col-6">
-          <button mat-raised-button class="button">
+          <button (click)='openCreateDialog("armor")' mat-raised-button class="button">
             <i class="fas fa-shield-alt"></i>
             Armor
           </button>
@@ -27,13 +27,13 @@
       </div>
       <div class="row">
         <div class="col-6">
-          <button mat-raised-button class="button">
+          <button (click)='openCreateDialog("item")' mat-raised-button class="button">
             <i class="fas fa-glass-martini"></i>
             Item
           </button>
         </div>
         <div class="col-6">
-          <button mat-raised-button class="button">
+          <button (click)='openCreateDialog("spell")' mat-raised-button class="button">
             <i class="fas fa-hat-wizard"></i>
             Spell
           </button>
@@ -42,9 +42,9 @@
 
       <div class="row">
         <div class="col">
-          <button mat-raised-button class="button">
+          <button (click)='openCreateDialog("npc")' mat-raised-button class="button">
             <i class="fab fa-optin-monster"></i>
-            Monster or Npc
+            Monster
           </button>
         </div>
       </div>

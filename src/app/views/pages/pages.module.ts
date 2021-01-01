@@ -76,6 +76,11 @@ import { DashboardComponent } from "./the-compendium-pages/dashboard/dashboard.c
 // ! end:: The Compendium Pages
 
 import { RouterModule } from "@angular/router";
+import { CreateWeaponDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-weapon-dialog/create-weapon-dialog.component';
+import { CreateArmorDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-armor-dialog/create-armor-dialog.component';
+import { CreateItemDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-item-dialog/create-item-dialog.component';
+import { CreateSpellDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-spell-dialog/create-spell-dialog.component';
+import { CreateNpcDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-npc-dialog/create-npc-dialog.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +108,11 @@ import { RouterModule } from "@angular/router";
     ItemDetailsDialogComponent,
     SpellDetailsDialogComponent,
     DashboardComponent,
+    CreateWeaponDialogComponent,
+    CreateArmorDialogComponent,
+    CreateItemDialogComponent,
+    CreateSpellDialogComponent,
+    CreateNpcDialogComponent,
   ],
   exports: [],
   imports: [
