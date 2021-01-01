@@ -6,80 +6,87 @@
   </kt-portlet-header>
 
   <kt-portlet-body>
-    <!-- start:: Filter -->
-    <div class="filter-header">
-      <mat-form-field>
-        <input
-          matInput
-          (keyup)="applyFilter($event.target.value)"
-          placeholder="Filter"
-        />
-      </mat-form-field>
+    <div class="wrapper">
+      <mat-dialog-content class="mat-typography">
+        <!-- start:: Filter -->
+        <div class="filter-header">
+          <mat-form-field>
+            <input
+              matInput
+              (keyup)="applyFilter($event.target.value)"
+              placeholder="Search"
+            />
+          </mat-form-field>
+        </div>
+        <!-- end:: Filter -->
+
+        <!-- start:: MatTable -->
+        <table
+          class="lmat-elevation-z8"
+          mat-table
+          matSort
+          [dataSource]="dataSource"
+        >
+          <!-- start:: Item Name -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let item">
+              <span class="link" (click)="openDetails(item)">
+                {{ item.name }}
+              </span>
+            </td>
+          </ng-container>
+          <!-- end:: Item Name -->
+
+          <!-- start:: Weight -->
+          <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Weight</th>
+            <td mat-cell *matCellDef="let item">
+              <span *ngIf="item.weight; else no_data">
+                {{ item.weight }} pounds
+              </span>
+              <ng-template #no_data> - </ng-template>
+            </td>
+          </ng-container>
+          <!-- end:: Weight -->
+
+          <!-- start:: Cost -->
+          <ng-container matColumnDef="cost">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Value</th>
+            <td mat-cell *matCellDef="let item">
+              <span *ngIf="item.cost; else no_data"
+                >{{ item.cost.quantity }}{{ item.cost.unit }}
+              </span>
+              <ng-template #no_data> - </ng-template>
+            </td>
+          </ng-container>
+          <!-- start:: Cost -->
+
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr
+            mat-row
+            *matRowDef="let myRowData; columns: columnsToDisplay"
+          ></tr>
+        </table>
+        <!-- end:: MatTable -->
+
+        <!-- start:: Loading spinner -->
+        <div *ngIf="!TABLE_DATA.length" class="spinner-container">
+          <mat-spinner
+            [diameter]="50"
+            style="margin: auto"
+            *ngIf="!TABLE_DATA.length"
+          ></mat-spinner>
+        </div>
+        <!-- end:: Loading spinner -->
+
+        <!-- start:: Paginator -->
+        <mat-paginator
+          [pageSizeOptions]="[25, 50, 100]"
+          showFirstLastButtons
+        ></mat-paginator>
+        <!-- end:: Paginator -->
+      </mat-dialog-content>
     </div>
-    <!-- end:: Filter -->
-
-    <!-- start:: MatTable -->
-    <table
-      class="lmat-elevation-z8"
-      mat-table
-      matSort
-      [dataSource]="dataSource"
-    >
-      <!-- start:: Item Name -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-        <td mat-cell *matCellDef="let item">
-          <span class="link" (click)="openDetails(item)">
-            {{ item.name }}
-          </span>
-        </td>
-      </ng-container>
-      <!-- end:: Item Name -->
-
-      <!-- start:: Weight -->
-      <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Weight</th>
-        <td mat-cell *matCellDef="let item">
-          <span *ngIf="item.weight; else no_data">
-            {{ item.weight }} pounds
-          </span>
-          <ng-template #no_data> - </ng-template>
-        </td>
-      </ng-container>
-      <!-- end:: Weight -->
-
-      <!-- start:: Cost -->
-      <ng-container matColumnDef="cost">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Value</th>
-        <td mat-cell *matCellDef="let item">
-          <span *ngIf="item.cost; else no_data"
-            >{{ item.cost.quantity }}{{ item.cost.unit }}
-          </span>
-          <ng-template #no_data> - </ng-template>
-        </td>
-      </ng-container>
-      <!-- start:: Cost -->
-
-      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
-    </table>
-    <!-- end:: MatTable -->
-
-    <!-- start:: Loading spinner -->
-    <div class="spinner-container">
-      <mat-spinner
-        [diameter]="50"
-        style="margin: auto"
-        *ngIf="!TABLE_DATA.length"
-      ></mat-spinner>
-    </div>
-    <!-- end:: Loading spinner -->
-
-    <!-- start:: Paginator -->
-    <mat-paginator
-      [pageSizeOptions]="[25, 50, 100]"
-      showFirstLastButtons
-    ></mat-paginator>
-    <!-- end:: Paginator -->
   </kt-portlet-body>
 </kt-portlet>

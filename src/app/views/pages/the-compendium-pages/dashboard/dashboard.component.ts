@@ -20,18 +20,8 @@ export class DashboardComponent implements OnInit {
   // todo -
   @Input() boxes: string[] = [];
 
-  // Page routes.
-  routeWeapons: string = "/weapons";
-  routeArmor: string = "/armor";
-  routeItems: string = "/items";
-  routeNPCs: string = "/npcs";
-  routeSpells: string = "/spells";
-
   // MatDialog options
-  dialogOptions = {
-    minWidth: 1200,
-    maxHeight: 700,
-  };
+  dialogOptions = {};
 
   constructor(public router: Router, public dialog: MatDialog) {}
 
