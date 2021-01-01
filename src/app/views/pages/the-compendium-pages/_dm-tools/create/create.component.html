@@ -1,7 +1,55 @@
 <kt-portlet>
+  <!-- start:: Portlet Header -->
+  <kt-portlet-header [class]="'card-head-lg'">
+    <ng-container ktPortletTitle>
+      <h1>What would you like to create?</h1>
+    </ng-container>
+  </kt-portlet-header>
+  <!-- end:: Portlet Header -->
+
   <!-- start:: Portlet Body -->
   <kt-portlet-body>
-    <h1>What do you want to create?</h1>
+    <div class="container">
+      <!-- start:: Create buttons -->
+      <div class="row">
+        <div class="col-6">
+          <button mat-raised-button class="button">
+            <i class="fas fa-hammer"></i>
+            Weapon
+          </button>
+        </div>
+        <div class="col-6">
+          <button mat-raised-button class="button">
+            <i class="fas fa-shield-alt"></i>
+            Armor
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <button mat-raised-button class="button">
+            <i class="fas fa-glass-martini"></i>
+            Item
+          </button>
+        </div>
+        <div class="col-6">
+          <button mat-raised-button class="button">
+            <i class="fas fa-hat-wizard"></i>
+            Spell
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button class="button">
+            <i class="fab fa-optin-monster"></i>
+            Monster or Npc
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end:: Create buttons -->
   </kt-portlet-body>
   <!-- end:: Portlet Body -->
 </kt-portlet>

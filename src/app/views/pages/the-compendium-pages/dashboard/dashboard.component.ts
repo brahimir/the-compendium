@@ -9,7 +9,6 @@ import { ItemsComponent } from "../_resource-tables/official/items/items.compone
 import { SpellsComponent } from "../_resource-tables/official/spells/spells.component";
 // MatTable
 import { MatDialog } from "@angular/material/dialog";
-import { DialogComponent } from "../../material/popups-and-modals/dialog/dialog.component";
 
 @Component({
   selector: "kt-dashboard",

@@ -1,9 +1,32 @@
-// The Compendium Colors
+// Colors
 $tc-red: #a90000;
 $tc-white: #ffffff;
 
+// Wrappers
+.wrapper {
+  margin: 0 auto;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 0.5rem;
+}
+
 // Links
-span.link {
+a {
+  text-decoration: underline;
+}
+
+a:hover {
+  cursor: pointer;
+  color: $tc-red;
+  text-decoration: underline;
+}
+
+.link {
+  text-decoration: underline;
+}
+
+.link:hover {
   cursor: pointer;
   color: $tc-red;
   text-decoration: underline;
@@ -25,8 +48,3 @@ table {
   margin: auto;
   padding: 50px;
 }
-
-// // centers spinner
-// .loading-spinner {
-//   margin: auto;
-// }

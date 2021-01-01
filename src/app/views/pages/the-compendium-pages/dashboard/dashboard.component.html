@@ -10,47 +10,40 @@
   <kt-portlet-body>
     <!-- start:: DM Screen -->
     <div class="screen">
-
       <!-- start:: Weapons Box -->
       <div class="component-box" cdkDrag cdkDragBoundary=".screen">
-        <span class="link">
-          <a (click)="openDialog('weapons')">Weapons</a>
-        </span>
+        <i class="fas fa-hammer"></i>
+        <a (click)="openDialog('weapons')">Weapons</a>
       </div>
       <!-- end:: Weapons Box -->
 
       <!-- start:: Armor Box -->
       <div class="component-box" cdkDrag cdkDrag cdkDragBoundary=".screen">
-        <span class="link">
-          <a (click)="openDialog('armors')">Armor</a>
-        </span>
+        <i class="fas fa-shield-alt"></i>
+        <a (click)="openDialog('armors')">Armor</a>
       </div>
       <!-- end:: Armor Box -->
 
       <!-- start:: Items Box -->
       <div class="component-box" cdkDrag cdkDrag cdkDragBoundary=".screen">
-        <span class="link">
-          <a (click)="openDialog('items')">Items</a>
-        </span>
+        <i class="fas fa-glass-martini"></i>
+        <a (click)="openDialog('items')">Items</a>
       </div>
       <!-- end:: Items Box -->
 
       <!-- start:: NPCs Box -->
       <div class="component-box" cdkDrag cdkDrag cdkDragBoundary=".screen">
-        <span class="link">
-          <a (click)="openDialog('npcs')">Monsters</a>
-        </span>
+        <i class="fab fa-optin-monster"></i>
+        <a (click)="openDialog('npcs')">Monsters</a>
       </div>
       <!-- end:: NPCs Box -->
 
       <!-- start:: Spells Box -->
       <div class="component-box" cdkDrag cdkDrag cdkDragBoundary=".screen">
-        <span class="link">
-          <a (click)="openDialog('spells')">Spells</a>
-        </span>
+        <i class="fas fa-hat-wizard"></i>
+        <a (click)="openDialog('spells')">Spells</a>
       </div>
       <!-- end:: Spells Box -->
-      
     </div>
     <!-- end:: DM Screen -->
   </kt-portlet-body>

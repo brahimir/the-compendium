@@ -458,24 +458,6 @@ export class MenuConfig {
             },
           ],
         },
-
-        // // Story
-        // { section: 'Story' },
-        // {
-        //   title: 'Campaigns',
-        //   bullet: 'dot',
-        //   icon: 'fas fa-globe-americas',
-        //   root: true,
-        //   page: '/campaigns'
-        // },
-        // {
-        //   title: 'Adventures',
-        //   bullet: 'dot',
-        //   icon: 'flaticon2-list-2',
-        //   root: true,
-        //   page: '/adventures'
-        // },
-
         // DM Tools
         { section: "Dungeon Master Tools" },
         {

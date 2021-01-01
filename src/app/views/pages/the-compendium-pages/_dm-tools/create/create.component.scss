@@ -1,0 +1,15 @@
+@import "../../sass/tc-global.scss";
+
+// Buttons
+.button {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 1rem;
+}
+
+// Font Awesome Icons
+i {
+    margin-right: 10px;
+    color: $tc-red; 
+}
