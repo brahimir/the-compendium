@@ -32,6 +32,11 @@ export class CreateComponent implements OnInit {
     switch (dialog) {
       case "weapon":
         dialogRef = this.dialog.open(CreateWeaponDialogComponent, this.dialogOptions);
+        
+        // todo - Handle display if the weapon was submitted successfully or not.
+        dialogRef.afterClosed().subscribe((result) => {
+
+        });
         break;
 
       case "armor":
