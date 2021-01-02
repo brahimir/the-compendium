@@ -1,13 +1,13 @@
 // Angular
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
 // Partials
 import { PartialsModule } from "../partials/partials.module";
 
-// Data table
+// Angular Marterial and Data Table
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from "@angular/material-moment-adapter";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -33,6 +33,7 @@ import { MatChipsModule } from "@angular/material/chips";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatSortModule } from "@angular/material/sort";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import {
   MatBottomSheetModule,
   MatBottomSheetRef,
@@ -56,12 +57,20 @@ import { ItemsComponent } from "./the-compendium-pages/_resource-tables/official
 import { NpcsComponent } from "./the-compendium-pages/_resource-tables/official/npcs/npcs.component";
 import { SpellsComponent } from "./the-compendium-pages/_resource-tables/official/spells/spells.component";
 // Dialogs
+// Details Dialogs
 import { MatDialogModule } from "@angular/material/dialog";
 import { ArmorDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
 import { NpcDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
 import { WeaponDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
 import { ItemDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
 import { SpellDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
+// Create Homebrew Dialogs
+import { CreateWeaponDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-weapon-dialog/create-weapon-dialog.component";
+import { CreateArmorDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-armor-dialog/create-armor-dialog.component";
+import { CreateItemDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-item-dialog/create-item-dialog.component";
+import { CreateSpellDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-spell-dialog/create-spell-dialog.component";
+import { CreateNpcDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-npc-dialog/create-npc-dialog.component";
+
 // Homebrew Pages
 import { HomebrewWeaponsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-weapons/homebrew-weapons.component";
 import { HomebrewArmorComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-armor/homebrew-armor.component";
@@ -76,11 +85,6 @@ import { DashboardComponent } from "./the-compendium-pages/dashboard/dashboard.c
 // ! end:: The Compendium Pages
 
 import { RouterModule } from "@angular/router";
-import { CreateWeaponDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-weapon-dialog/create-weapon-dialog.component';
-import { CreateArmorDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-armor-dialog/create-armor-dialog.component';
-import { CreateItemDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-item-dialog/create-item-dialog.component';
-import { CreateSpellDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-spell-dialog/create-spell-dialog.component';
-import { CreateNpcDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-npc-dialog/create-npc-dialog.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +121,7 @@ import { CreateNpcDialogComponent } from './the-compendium-pages/_dialogs/create
   exports: [],
   imports: [
     // material modules
+    MatCheckboxModule,
     DragDropModule,
     MatDialogModule,
     MatInputModule,
@@ -149,6 +154,7 @@ import { CreateNpcDialogComponent } from './the-compendium-pages/_dialogs/create
     MatButtonToggleModule,
     PartialsModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
     FormsModule,

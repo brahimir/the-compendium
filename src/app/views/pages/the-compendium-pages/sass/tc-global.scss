@@ -2,6 +2,15 @@
 $tc-red: #a90000;
 $tc-white: #ffffff;
 
+// Color classes
+.tc-red {
+  color: $tc-red;
+}
+
+.tc-white {
+  color: $tc-white;
+}
+
 // Wrappers
 .wrapper {
   margin: 0 auto;
