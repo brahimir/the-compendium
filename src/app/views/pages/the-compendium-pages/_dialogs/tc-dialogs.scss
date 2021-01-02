@@ -9,6 +9,15 @@ h3 {
   margin-bottom: -5px;
 }
 
+// Dialog Headers and Footers
+div.dialog-header {
+  margin-bottom: 30px;
+}
+
+div.dialog-footer {
+  background-color: #C7C6C8;
+}
+
 // Divider
 .divider {
   border: 1px solid $tc-red;
