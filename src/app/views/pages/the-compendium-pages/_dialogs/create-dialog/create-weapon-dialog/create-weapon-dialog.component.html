@@ -215,9 +215,7 @@
             <textarea
               matInput
               formControlName="description"
-              placeholder="Eg. This weapon has a +2 to hit on attack rolls. 
-              This weapon also deals addtional 2d6 Radiant damage to undead, 
-              demons, and lycanthrope targets."
+              placeholder="Eg. This weapon has a +2 to hit on attack rolls. This weapon also deals additional 2d6 Radiant damage to undead, demons, and lycanthrope targets."
             ></textarea>
           </mat-form-field>
         </div>
@@ -227,7 +225,13 @@
     <!-- end:: Form -->
     <mat-dialog-actions align="end">
       <button mat-button mat-dialog-close>Back</button>
-      <button (click)="saveWeapon()" color="primary" type="submit" mat-button>
+      <button
+        (click)="saveWeapon()"
+        color="primary"
+        type="submit"
+        mat-dialog-close
+        mat-button
+      >
         Create
       </button>
     </mat-dialog-actions>

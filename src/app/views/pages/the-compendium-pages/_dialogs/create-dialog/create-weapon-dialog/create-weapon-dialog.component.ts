@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 // FormBuilder
-import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { MatDialogRef } from "@angular/material/dialog";
 import { validators } from "src/assets/plugins/formvalidation/src/js";
 // Services
 import { HomebrewWeaponsService } from "../../../../../../core/resources/_services/homebrew-services/homebrew-weapons.service";
@@ -11,7 +12,10 @@ import { HomebrewWeaponsService } from "../../../../../../core/resources/_servic
   styleUrls: ["./create-weapon-dialog.component.scss"],
 })
 export class CreateWeaponDialogComponent implements OnInit {
-  // FormGroup
+  // Flag for submission
+  weaponSubmitted: boolean = false;
+
+  // Create Weapon Form
   createWeaponForm: FormGroup;
 
   // todo - Query 5E API to get the below metadata to allow DMs to create weapons with up-to-date
@@ -41,6 +45,7 @@ export class CreateWeaponDialogComponent implements OnInit {
   ];
 
   constructor(
+    public dialogRef: MatDialogRef<CreateWeaponDialogComponent>,
     private fb: FormBuilder,
     private homebrewWeaponsService: HomebrewWeaponsService
   ) {}
@@ -48,7 +53,7 @@ export class CreateWeaponDialogComponent implements OnInit {
   ngOnInit(): void {
     this.createWeaponForm = this.fb.group({
       generalInformation: this.fb.group({
-        name: ["", validators.notEmpty],
+        name: ["", Validators.required],
         weapon_category: [""],
         weapon_range: [""],
         cost_quantity: [""],
@@ -108,7 +113,9 @@ export class CreateWeaponDialogComponent implements OnInit {
       damage: {
         damage_dice:
           damageAndRange.damage_dice_number + damageAndRange.damage_dice_die,
-        damage_type: damageAndRange.damage_type,
+        damage_type: {
+          name: damageAndRange.damage_type,
+        },
       },
       range: {
         normal: damageAndRange.range_normal,
@@ -122,10 +129,16 @@ export class CreateWeaponDialogComponent implements OnInit {
       desc: [formValues.description],
     };
 
-    console.warn("payload");
-    console.log(payload);
-
-    this.homebrewWeaponsService.create(payload);
+    this.homebrewWeaponsService.create(payload).subscribe(
+      (res) => {
+        this.weaponSubmitted = true;
+        this.dialogRef.close({ isWeaponSubmitted: this.weaponSubmitted });
+      },
+      (err) => {
+        this.dialogRef.close({ isWeaponSubmitted: this.weaponSubmitted });
+        console.log(err);
+      }
+    );
   }
 
   /**
