@@ -29,8 +29,8 @@ export class CreateSpellDialogComponent implements OnInit {
   // 5E Resources
   // todo - Query 5E API to get the below metadata to allow DMs to create weapons with up-to-date
   // todo - options.
-  RARITIES = FIFTH_EDITION_RESOURCES.RARITIES;
-  SPELL_COMPONENTS = FIFTH_EDITION_RESOURCES.SPELL_COMPONENTS;
+  RARITIES = FIFTH_EDITION_RESOURCES.GENERAL.RARITIES;
+  SPELL_COMPONENTS = FIFTH_EDITION_RESOURCES.SPELLS.SPELL_COMPONENTS;
 
   // * MatChipInput
   visible = true;
@@ -147,6 +147,11 @@ export class CreateSpellDialogComponent implements OnInit {
     return results;
   }
 
+  /**
+   * Adds a chip to the MatChip
+   *
+   * @param {MatChipInputEvent} event Input event
+   */
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -162,6 +167,11 @@ export class CreateSpellDialogComponent implements OnInit {
     }
   }
 
+  /**
+   * Removes a chip from the MatChip
+   *
+   * @param {DnD_Class} element The element to remove.
+   */
   remove(element: DnD_Class): void {
     const index = this.spell_classes.indexOf(element);
 

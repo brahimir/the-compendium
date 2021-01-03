@@ -116,6 +116,36 @@
           <!-- end:: Is Ritual Spell -->
         </div>
 
+        <div *ngIf="form.value.generalInformation.is_attack_spell" class="row">
+          <!-- start:: Attack Type -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Attack Type</mat-label>
+              <input
+                formControlName="attack_type"
+                matInput
+                placeholder="Eg. Ranged"
+                type="text"
+              />
+            </mat-form-field>
+          </div>
+          <!-- start:: Attack Type -->
+
+          <!-- start:: Damage Type -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Damage Type</mat-label>
+              <input
+                formControlName="damage_type"
+                matInput
+                placeholder="Eg. Fire"
+                type="text"
+              />
+            </mat-form-field>
+          </div>
+          <!-- start:: Damage Type -->
+        </div>
+
         <!-- start:: Classes -->
         <div class="row">
           <!-- todo - Make these chips! see: https://material.angular.io/components/chips/overview -->
@@ -149,7 +179,7 @@
 
         <!-- start:: School -->
         <div class="row">
-          <div class="col-6">
+          <div class="col">
             <mat-form-field>
               <mat-label>School</mat-label>
               <input
@@ -163,43 +193,14 @@
         </div>
         <!-- end:: School -->
 
-        <div *ngIf="form.value.generalInformation.is_attack_spell" class="row">
-          <!-- start:: Attack Type -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Attack Type</mat-label>
-              <input
-                formControlName="attack_type"
-                matInput
-                placeholder="Eg. Ranged"
-                type="text"
-              />
-            </mat-form-field>
-          </div>
-          <!-- start:: Attack Type -->
-
-          <!-- start:: Damage Type -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Damage Type</mat-label>
-              <input
-                formControlName="damage_type"
-                matInput
-                placeholder="Eg. Fire"
-                type="text"
-              />
-            </mat-form-field>
-          </div>
-          <!-- start:: Damage Type -->
+        <div class="mt-5">
+          <span style="color: #757575; font-size: 13px"> Components </span>
         </div>
-
-        <h4 class="tc-red mt-3" style="font-weight: bold">SPELL COMPONENTS</h4>
-        <div class="divider"></div>
 
         <!-- * start:: FormGroup - Components -->
         <div formGroupName="spellComponents" class="form-group">
           <div class="row">
-            <div class="col">
+            <div class="col-3">
               <span *ngFor="let item of SPELL_COMPONENTS" class="pr-5">
                 <mat-checkbox
                   formControlName="spellComponent_{{ item }}"
@@ -209,16 +210,14 @@
                 </mat-checkbox>
               </span>
             </div>
-          </div>
 
-          <!-- start:: Material -->
-          <div
-            *ngIf="
-              form.value.generalInformation.spellComponents.spellComponent_M
-            "
-            class="row"
-          >
-            <div class="col">
+            <!-- start:: Material -->
+            <div
+              *ngIf="
+                form.value.generalInformation.spellComponents.spellComponent_M
+              "
+              class="col-9"
+            >
               <mat-form-field>
                 <mat-label>Materials required</mat-label>
                 <input
@@ -229,8 +228,8 @@
                 />
               </mat-form-field>
             </div>
+            <!-- end:: Material -->
           </div>
-          <!-- end:: Material -->
         </div>
         <!-- * end:: FormGroup - Components -->
 
