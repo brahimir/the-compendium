@@ -1,1 +1,116 @@
-<p>create-item-dialog works!</p>
+<div class="wrapper p-10">
+  <mat-dialog-content class="mat-typography">
+    <!-- start:: Header -->
+    <div class="dialog-header">
+      <h1>Create a Homebrew Weapon</h1>
+    </div>
+    <!-- end:: Header -->
+
+    <!-- start:: Form -->
+    <form [formGroup]="form">
+      <h4 class="tc-red" style="font-weight: bold">GENERAL INFORMATION</h4>
+      <div class="divider"></div>
+
+      <!-- * start:: FormGroup - General Information -->
+      <div formGroupName="generalInformation" class="form-group">
+        <div class="row">
+          <!-- start:: Name -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input
+                formControlName="name"
+                matInput
+                placeholder="Eg. Fountain of Youth"
+                type="text"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Name -->
+          <!-- start:: Category -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Category</mat-label>
+              <input
+                formControlName="equipment_category"
+                matInput
+                placeholder="Eg. Adventuring Gear"
+                type="text"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Category -->
+        </div>
+
+        <div class="row">
+          <!-- start:: Cost: Quantity -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Value (amount)</mat-label>
+              <input formControlName="cost_quantity" matInput type="number" />
+            </mat-form-field>
+          </div>
+          <!-- end:: Cost: Quantity -->
+
+          <!-- start:: Cost: Unit -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Value (pieces)</mat-label>
+              <mat-select formControlName="cost_unit">
+                <mat-option *ngFor="let item of CURRENCIES" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- end:: Cost: Unit -->
+        </div>
+
+        <div class="row">
+          <!-- start:: Weight -->
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Weight (pounds)</mat-label>
+              <input formControlName="weight" matInput type="number" />
+            </mat-form-field>
+          </div>
+          <!-- end:: Weight -->
+        </div>
+      </div>
+      <!-- * end:: FormGroup - General Information -->
+
+      <h4 class="tc-red" style="font-weight: bold">DESCRIPTION</h4>
+      <div class="divider"></div>
+
+      <!-- * start:: Description -->
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              rows="5"
+              cols="50"
+              formControlName="description"
+              placeholder="Eg. Divine power emanates from this chalice. The creature that drinks from this vessel rolls a d20. On a 20, they are granted a wish from the Wish spell. On a roll of 1 or 2 they are killed instantly, and their soul is ferried to the afterlife."
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- * end:: Description -->
+    </form>
+    <!-- end:: Form -->
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Back</button>
+      <button
+        (click)="saveForm()"
+        color="primary"
+        type="submit"
+        mat-dialog-close
+        mat-button
+      >
+        Create
+      </button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</div>

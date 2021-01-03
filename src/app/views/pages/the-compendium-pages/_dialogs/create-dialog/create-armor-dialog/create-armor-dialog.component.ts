@@ -27,7 +27,7 @@ export class CreateArmorDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CreateArmorDialogComponent>,
     private fb: FormBuilder,
-    private homebrewWeaponsService: HomebrewArmorsService
+    private apiService: HomebrewArmorsService
   ) {}
 
   ngOnInit(): void {
@@ -90,7 +90,7 @@ export class CreateArmorDialogComponent implements OnInit {
       desc: [formValues.description],
     };
 
-    this.homebrewWeaponsService.create(payload).subscribe(
+    this.apiService.create(payload).subscribe(
       (res) => {
         this.isSubmitted = true;
         this.dialogRef.close({ isisSubmitted: this.isSubmitted });
