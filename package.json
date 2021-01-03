@@ -3,6 +3,7 @@
   "version": "7.1.1",
   "description": "Packages used by Angular",
   "scripts": {
+    "host": "firebase deploy --only hosting:the-compendium",
     "ng": "ng",
     "start": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng serve",
     "build": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod",
