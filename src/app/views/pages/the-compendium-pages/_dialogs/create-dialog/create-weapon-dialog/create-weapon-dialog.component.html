@@ -60,7 +60,7 @@
           <div class="col-4">
             <mat-form-field>
               <mat-label>Value (amount)</mat-label>
-              <input formControlName="cost_quantity" matInput type="number" />
+              <input formControlName="cost_quantity" matInput type="number" min="0"/>
             </mat-form-field>
           </div>
           <!-- end:: Cost: Quantity -->
@@ -129,6 +129,7 @@
                 formControlName="damage_dice_number"
                 matInput
                 type="number"
+                min="1"
               />
             </mat-form-field>
           </div>
@@ -164,7 +165,12 @@
           <div class="col-6">
             <mat-form-field>
               <mat-label>Normal range (ft.)</mat-label>
-              <input formControlName="range_normal" matInput type="number" />
+              <input
+                formControlName="range_normal"
+                matInput
+                type="number"
+                min="0"
+              />
             </mat-form-field>
           </div>
           <!-- end:: Normal Range -->
@@ -172,7 +178,12 @@
           <div class="col-6">
             <mat-form-field>
               <mat-label>Long range (ft.)</mat-label>
-              <input formControlName="range_long" matInput type="number" />
+              <input
+                formControlName="range_long"
+                matInput
+                type="number"
+                min="0"
+              />
             </mat-form-field>
           </div>
           <!-- end:: Long Range -->
@@ -186,12 +197,11 @@
       <!-- * start:: FormGroup - Properties -->
       <div formGroupName="properties" class="form-group pb-3">
         <!-- start:: Properties -->
-        <!-- todo - need to fix properties checkboxes: arrange in array to read from? -->
         <div class="row">
           <div class="col">
             <span
               *ngFor="let item of WEAPON_PROPERTIES"
-              class="checkbox-container"
+              class="pr-5"
             >
               <mat-checkbox
                 formControlName="properties_{{ item }}"
@@ -213,7 +223,6 @@
       <div class="row">
         <div class="col">
           <mat-form-field appearance="outline">
-            <mat-label>Description</mat-label>
             <textarea
               matInput
               rows="5"

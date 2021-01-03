@@ -31,6 +31,9 @@ export const ROUTES = {
 };
 
 export const FIFTH_EDITION_RESOURCES = {
+  // General
+  DICE: ["d4", "d6", "d8", "d10", "d12", "d20"],
+  CURRENCIES: ["cp", "sp", "ep", "gp", "pp"],
   RARITIES: [
     "Common",
     "Uncommon",
@@ -39,10 +42,9 @@ export const FIFTH_EDITION_RESOURCES = {
     "Legendary",
     "Artifact",
   ],
-  CURRENCIES: ["cp", "sp", "ep", "gp", "pp"],
-  ARMOR_CATEGORIES: ["Light", "Medium", "Heavy", "Shield"],
-  DICE: ["d4", "d6", "d8", "d10", "d12", "d20"],
   RANGES: ["Melee", "Ranged"],
+  
+  // Weapons
   WEAPON_PROPERTIES: [
     "Ammunition",
     "Finesse",
@@ -56,4 +58,9 @@ export const FIFTH_EDITION_RESOURCES = {
     "TwoHanded",
     "Versatile",
   ],
+  // Armors
+  ARMOR_CATEGORIES: ["Light", "Medium", "Heavy", "Shield"],
+
+  // Spells
+  SPELL_COMPONENTS: ["V", "S", "M"],
 };

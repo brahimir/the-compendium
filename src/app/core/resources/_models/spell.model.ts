@@ -2,8 +2,8 @@ export class Spell {
   id: number;
   // start:: Official Schema
   name: string;
-  desc: string;
-  higher_level: string;
+  desc: string[];
+  higher_level: string[];
   range: string;
   components: string[];
   material: string;
@@ -30,8 +30,8 @@ export class Spell {
     id: number,
     // start:: Official Schema
     name: string,
-    desc: string,
-    higher_level: string,
+    desc: string[],
+    higher_level: string[],
     range: string,
     components: string[],
     material: string,

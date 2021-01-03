@@ -16,14 +16,14 @@ export class CreateArmorDialogComponent implements OnInit {
   // Flag for submission
   isSubmitted: boolean = false;
 
-  // Create Weapon Form
+  // The form
   form: FormGroup;
 
   // 5E Resources
-  CURRENCIES = FIFTH_EDITION_RESOURCES.CURRENCIES
-  RARITIES = FIFTH_EDITION_RESOURCES.RARITIES
-  ARMOR_CATEGORIES = FIFTH_EDITION_RESOURCES.ARMOR_CATEGORIES
-  
+  CURRENCIES = FIFTH_EDITION_RESOURCES.CURRENCIES;
+  RARITIES = FIFTH_EDITION_RESOURCES.RARITIES;
+  ARMOR_CATEGORIES = FIFTH_EDITION_RESOURCES.ARMOR_CATEGORIES;
+
   constructor(
     public dialogRef: MatDialogRef<CreateArmorDialogComponent>,
     private fb: FormBuilder,
@@ -67,7 +67,8 @@ export class CreateArmorDialogComponent implements OnInit {
     let formValues: any = this.form.value;
 
     let generalInformation: any = this.form.value.generalInformation;
-    let armorClassAndRequirements: any = this.form.value.armorClassAndRequirements;
+    let armorClassAndRequirements: any = this.form.value
+      .armorClassAndRequirements;
 
     // Prepare payload to POST.
     let payload: any = {

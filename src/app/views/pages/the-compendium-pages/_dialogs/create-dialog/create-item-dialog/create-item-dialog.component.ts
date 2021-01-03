@@ -16,7 +16,7 @@ export class CreateItemDialogComponent implements OnInit {
   // Flag for submission
   isSubmitted: boolean = false;
 
-  // Create Weapon Form
+  // The form
   form: FormGroup;
 
   // 5E Resources

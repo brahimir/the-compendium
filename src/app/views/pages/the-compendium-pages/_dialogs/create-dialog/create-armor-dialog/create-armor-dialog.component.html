@@ -59,7 +59,7 @@
           <div class="col-4">
             <mat-form-field>
               <mat-label>Value (amount)</mat-label>
-              <input formControlName="cost_quantity" matInput type="number" />
+              <input formControlName="cost_quantity" matInput type="number" min="0"/>
             </mat-form-field>
           </div>
           <!-- end:: Cost: Quantity -->
@@ -119,6 +119,7 @@
                 formControlName="armor_class_base"
                 matInput
                 type="number"
+                min="0"
               />
             </mat-form-field>
           </div>
@@ -150,7 +151,7 @@
           <div class="col-6">
             <mat-form-field>
               <mat-label>Minimum STR required</mat-label>
-              <input formControlName="str_minimum" matInput type="number" />
+              <input formControlName="str_minimum" matInput type="number" min="0"/>
             </mat-form-field>
           </div>
           <!-- start:: DEX Bonus applicable and Minimum STR Required  -->
@@ -168,6 +169,7 @@
                 formControlName="armor_class_max_bonus"
                 matInput
                 type="number"
+                min="0"
               />
             </mat-form-field>
           </div>
@@ -183,7 +185,6 @@
       <div class="row">
         <div class="col">
           <mat-form-field appearance="outline"> 
-            <mat-label>Description</mat-label>
             <textarea
               matInput
               rows="5"

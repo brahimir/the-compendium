@@ -34,6 +34,7 @@ import { MatStepperModule } from "@angular/material/stepper";
 import { MatSortModule } from "@angular/material/sort";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatIconModule } from '@angular/material/icon';
 import {
   MatBottomSheetModule,
   MatBottomSheetRef,
@@ -149,6 +150,7 @@ import { RouterModule } from "@angular/router";
     MatStepperModule,
     MatChipsModule,
     MatPaginatorModule,
+    MatIconModule,
     CoreModule,
     MatTreeModule,
     MatButtonToggleModule,
