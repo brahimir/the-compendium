@@ -1,1 +1,213 @@
-<p>create-armor-dialog works!</p>
+<div class="wrapper p-10">
+  <mat-dialog-content class="mat-typography">
+    <!-- start:: Header -->
+    <div class="dialog-header">
+      <h1>Create a Homebrew Armor</h1>
+    </div>
+    <!-- end:: Header -->
+
+    <!-- start:: Form -->
+    <form [formGroup]="form">
+      <h4 class="tc-red" style="font-weight: bold">GENERAL INFORMATION</h4>
+      <div class="divider"></div>
+
+      <!-- * start:: FormGroup - General Information -->
+      <div formGroupName="generalInformation" class="form-group">
+        <div class="row">
+          <!-- start:: Name -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input
+                formControlName="name"
+                matInput
+                placeholder="Eg. Bastion of Light"
+                type="text"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Name -->
+
+          <!-- start:: Armor Category -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Armor Category</mat-label>
+              <mat-select formControlName="armor_category">
+                <mat-option
+                  *ngFor="let item of ARMOR_CATEGORIES"
+                  [value]="item"
+                >
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- end:: Armor Category -->
+        </div>
+
+        <div class="row">
+          <!-- start:: Weight -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Weight (pounds)</mat-label>
+              <input formControlName="weight" matInput type="number" />
+            </mat-form-field>
+          </div>
+          <!-- end:: Weight -->
+
+          <!-- start:: Cost: Quantity -->
+          <div class="col-4">
+            <mat-form-field>
+              <mat-label>Value (amount)</mat-label>
+              <input formControlName="cost_quantity" matInput type="number" />
+            </mat-form-field>
+          </div>
+          <!-- end:: Cost: Quantity -->
+
+          <!-- start:: Cost: Unit -->
+          <div class="col-2">
+            <mat-form-field>
+              <mat-label>Value (pieces)</mat-label>
+              <mat-select formControlName="cost_unit">
+                <mat-option *ngFor="let item of CURRENCIES" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- end:: Cost: Unit -->
+        </div>
+
+        <div class="row">
+          <!-- start:: Rarity -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Rarity</mat-label>
+              <mat-select formControlName="rarity">
+                <mat-option *ngFor="let item of RARITIES" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- end:: Rarity -->
+
+          <!-- start:: Requires Attunement -->
+          <div class="col-6">
+            <mat-checkbox formControlName="requires_attunement" color="primary">
+              Requires attunement
+            </mat-checkbox>
+          </div>
+          <!-- start:: Requires Attunement -->
+        </div>
+      </div>
+      <!-- * end:: FormGroup - General Information -->
+
+      <h4 class="tc-red" style="font-weight: bold">
+        ARMOR CLASS & REQUIREMENTS
+      </h4>
+      <div class="divider"></div>
+
+      <!-- * start:: FormGroup - Armor Class and Requirements -->
+      <div formGroupName="armorClassAndRequirements" class="form-group">
+        <div class="row">
+          <!-- start:: Armor Class Base -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Armor Class</mat-label>
+              <input
+                formControlName="armor_class_base"
+                matInput
+                type="number"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Armor Class Base -->
+
+          <!-- start:: Stealth Disadvantage -->
+          <div class="col-6">
+            <mat-checkbox
+              formControlName="stealth_disadvantage"
+              color="primary"
+            >
+              Stealth Disadvantage
+            </mat-checkbox>
+          </div>
+          <!-- end:: Stealth Disadvantage -->
+        </div>
+
+        <div class="row">
+          <!-- start:: DEX Bonus applicable and Minimum STR Required  -->
+          <div class="col-6">
+            <mat-checkbox
+              formControlName="armor_class_dex_bonus"
+              color="primary"
+            >
+              DEX bonus applicable
+            </mat-checkbox>
+          </div>
+
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Minimum STR required</mat-label>
+              <input formControlName="str_minimum" matInput type="number" />
+            </mat-form-field>
+          </div>
+          <!-- start:: DEX Bonus applicable and Minimum STR Required  -->
+        </div>
+
+        <div class="row">
+          <!-- start:: Maximum DEX bonus and Minimum STR Required -->
+          <div
+            *ngIf="form.value.armorClassAndRequirements.armor_class_dex_bonus"
+            class="col-6"
+          >
+            <mat-form-field>
+              <mat-label>Maximum DEX bonus</mat-label>
+              <input
+                formControlName="armor_class_max_bonus"
+                matInput
+                type="number"
+              />
+            </mat-form-field>
+          </div>
+          <!-- start:: Maximum DEX bonus and Minimum STR Required -->
+        </div>
+      </div>
+      <!-- * end:: FormGroup - Armor Class and Requirements -->
+
+      <h4 class="tc-red" style="font-weight: bold">DESCRIPTION</h4>
+      <div class="divider"></div>
+
+      <!-- * start:: Description -->
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline"> 
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              rows="5"
+              cols="50"
+              formControlName="description"
+              placeholder="Eg. While in natural sunlight for at least 10 minutes, this breastplate gains a charge of Light, up to a maximum of 2 charges. The user can use an Action to spend one Light charge to emit blinding light in a 10 foot radius. Each creature in the affected area must make a DC 12 Constitution saving throw, or become Blinded for the duration of their turn."
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- * end:: Description -->
+    </form>
+    <!-- end:: Form -->
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Back</button>
+      <button
+        (click)="saveForm()"
+        color="primary"
+        type="submit"
+        mat-dialog-close
+        mat-button
+      >
+        Create
+      </button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</div>

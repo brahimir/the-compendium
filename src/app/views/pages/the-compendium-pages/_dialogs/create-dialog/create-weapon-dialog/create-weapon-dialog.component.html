@@ -7,7 +7,7 @@
     <!-- end:: Header -->
 
     <!-- start:: Form -->
-    <form [formGroup]="createWeaponForm">
+    <form [formGroup]="form">
       <h4 class="tc-red" style="font-weight: bold">GENERAL INFORMATION</h4>
       <div class="divider"></div>
 
@@ -93,12 +93,11 @@
           <div class="col-6">
             <mat-form-field>
               <mat-label>Rarity</mat-label>
-              <input
-                formControlName="rarity"
-                matInput
-                placeholder="Eg. Uncommon"
-                type="text"
-              />
+              <mat-select formControlName="rarity">
+                <mat-option *ngFor="let item of RARITIES" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
           <!-- end:: Rarity -->
@@ -190,7 +189,10 @@
         <!-- todo - need to fix properties checkboxes: arrange in array to read from? -->
         <div class="row">
           <div class="col">
-            <span *ngFor="let item of PROPERTIES" class="checkbox-container">
+            <span
+              *ngFor="let item of WEAPON_PROPERTIES"
+              class="checkbox-container"
+            >
               <mat-checkbox
                 formControlName="properties_{{ item }}"
                 color="primary"
@@ -207,26 +209,28 @@
       <h4 class="tc-red" style="font-weight: bold">DESCRIPTION</h4>
       <div class="divider"></div>
 
-      <!-- start:: Description -->
+      <!-- * start:: Description -->
       <div class="row">
         <div class="col">
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
             <textarea
               matInput
+              rows="5"
+              cols="50"
               formControlName="description"
               placeholder="Eg. This weapon has a +2 to hit on attack rolls. This weapon also deals additional 2d6 Radiant damage to undead, demons, and lycanthrope targets."
             ></textarea>
           </mat-form-field>
         </div>
       </div>
-      <!-- end:: Description -->
+      <!-- * end:: Description -->
     </form>
     <!-- end:: Form -->
     <mat-dialog-actions align="end">
       <button mat-button mat-dialog-close>Back</button>
       <button
-        (click)="saveWeapon()"
+        (click)="saveForm()"
         color="primary"
         type="submit"
         mat-dialog-close
