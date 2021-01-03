@@ -104,9 +104,13 @@ export class CreateSpellDialogComponent implements OnInit {
       level: generalInformation.level,
       attack_type: generalInformation.attack_type,
       damage: {
-        damage_type: generalInformation.damage_type,
+        damage_type: {
+          name: generalInformation.damage_type,
+        },
       },
-      school: generalInformation.school,
+      school: {
+        name: generalInformation.school,
+      },
       classes: this.spell_classes,
     };
 
