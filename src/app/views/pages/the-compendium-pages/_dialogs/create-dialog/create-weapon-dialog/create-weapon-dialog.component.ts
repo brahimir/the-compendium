@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
+// 5E Resources
+import { FIFTH_EDITION_RESOURCES } from "src/environments/app-secrets";
 // FormBuilder
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
-import { validators } from "src/assets/plugins/formvalidation/src/js";
 // Services
 import { HomebrewWeaponsService } from "../../../../../../core/resources/_services/homebrew-services/homebrew-weapons.service";
 
@@ -13,36 +14,19 @@ import { HomebrewWeaponsService } from "../../../../../../core/resources/_servic
 })
 export class CreateWeaponDialogComponent implements OnInit {
   // Flag for submission
-  weaponSubmitted: boolean = false;
+  isSubmitted: boolean = false;
 
   // Create Weapon Form
-  createWeaponForm: FormGroup;
+  form: FormGroup;
 
+  // 5E Resources
   // todo - Query 5E API to get the below metadata to allow DMs to create weapons with up-to-date
   // todo - options.
-  // Dice
-  DICE: string[] = ["d4", "d6", "d8", "d10", "d12", "d20"];
-
-  // Ranges
-  RANGES: string[] = ["Melee", "Ranged"];
-
-  // Currencies
-  CURRENCIES: string[] = ["cp", "sp", "ep", "gp", "pp"];
-
-  // Weapon Properties
-  PROPERTIES: string[] = [
-    "Ammunition",
-    "Finesse",
-    "Heavy",
-    "Light",
-    "Loading",
-    "Range",
-    "Reach",
-    "Special",
-    "Thrown",
-    "TwoHanded",
-    "Versatile",
-  ];
+  DICE = FIFTH_EDITION_RESOURCES.DICE;
+  RANGES = FIFTH_EDITION_RESOURCES.RANGES;
+  RARITIES = FIFTH_EDITION_RESOURCES.RARITIES;
+  CURRENCIES = FIFTH_EDITION_RESOURCES.CURRENCIES;
+  WEAPON_PROPERTIES = FIFTH_EDITION_RESOURCES.WEAPON_PROPERTIES;
 
   constructor(
     public dialogRef: MatDialogRef<CreateWeaponDialogComponent>,
@@ -51,13 +35,20 @@ export class CreateWeaponDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.createWeaponForm = this.fb.group({
+    this.initForm();
+  }
+
+  /**
+   * Initializes the from.
+   */
+  initForm(): void {
+    this.form = this.fb.group({
       generalInformation: this.fb.group({
         name: ["", Validators.required],
         weapon_category: [""],
         weapon_range: [""],
         cost_quantity: [""],
-        cost_unit: [""],
+        cost_unit: ["gp"],
         weight: [""],
         requires_attunement: [""],
         rarity: [""],
@@ -87,18 +78,15 @@ export class CreateWeaponDialogComponent implements OnInit {
   }
 
   /**
-   * Saves the created Homebrew Weapon to the database.
+   * Saves the form to the database.
    *
    */
-  saveWeapon(): void {
-    let formValues: any = this.createWeaponForm.value;
+  saveForm(): void {
+    let formValues: any = this.form.value;
 
-    let generalInformation: any = this.createWeaponForm.value
-      .generalInformation;
-    let damageAndRange: any = this.createWeaponForm.value.damageAndRange;
-    let properties: any = this.createWeaponForm.value.properties;
-
-    console.log(properties);
+    let generalInformation: any = this.form.value.generalInformation;
+    let damageAndRange: any = this.form.value.damageAndRange;
+    let properties: any = this.form.value.properties;
 
     // Prepare payload to POST.
     let payload: any = {
@@ -131,11 +119,11 @@ export class CreateWeaponDialogComponent implements OnInit {
 
     this.homebrewWeaponsService.create(payload).subscribe(
       (res) => {
-        this.weaponSubmitted = true;
-        this.dialogRef.close({ isWeaponSubmitted: this.weaponSubmitted });
+        this.isSubmitted = true;
+        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
       },
       (err) => {
-        this.dialogRef.close({ isWeaponSubmitted: this.weaponSubmitted });
+        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
         console.log(err);
       }
     );
