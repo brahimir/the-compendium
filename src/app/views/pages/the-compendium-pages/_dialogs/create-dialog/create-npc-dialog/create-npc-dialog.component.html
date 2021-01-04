@@ -1,1 +1,364 @@
-<p>create-npc-dialog works!</p>
+<div class="wrapper p-10">
+  <mat-dialog-content class="mat-typography">
+    <!-- start:: Header -->
+    <div class="dialog-header">
+      <h1>Create a Homebrew Monster</h1>
+    </div>
+    <!-- end:: Header -->
+
+    <!-- start:: Form -->
+    <form [formGroup]="form">
+      <h4 class="tc-red" style="font-weight: bold">GENERAL INFORMATION</h4>
+      <div class="divider"></div>
+
+      <!-- * start:: General Information -->
+      <div formGroupName="generalInformation" class="form-group">
+        <div class="row">
+          <!-- start:: Name -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input
+                formControlName="name"
+                matInput
+                placeholder="Eg. Cthulu"
+                type="text"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Name -->
+
+          <!-- start:: Size -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Size</mat-label>
+              <mat-select formControlName="size">
+                <mat-option *ngFor="let item of SIZES" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- end:: Size -->
+        </div>
+
+        <div class="row">
+          <!-- start:: Type -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Type</mat-label>
+              <input
+                formControlName="type"
+                matInput
+                placeholder="Eg. God"
+                type="text"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Type -->
+
+          <!-- start:: Subtype -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Subtype</mat-label>
+              <input
+                formControlName="subtype"
+                matInput
+                placeholder="Eg. Eldritch"
+                type="text"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Subtype -->
+        </div>
+
+        <div class="row">
+          <!-- start:: Alignment -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Alignment</mat-label>
+              <input
+                formControlName="alignment"
+                matInput
+                placeholder="Eg. God"
+                type="text"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Alignment -->
+
+          <!-- start:: Armor Class -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Armor Class</mat-label>
+              <input
+                formControlName="armor_class"
+                matInput
+                placeholder="Eg. 20"
+                type="number"
+                min="0"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Armor Class -->
+        </div>
+
+        <div class="row">
+          <!-- start:: Hitpoints -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Hitpoints</mat-label>
+              <input
+                formControlName="hit_points"
+                matInput
+                placeholder="Eg. God"
+                type="text"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Hitpoints -->
+
+          <!-- start:: Hit Dice -->
+          <div class="col-3">
+            <mat-form-field>
+              <mat-label>Number of hit dice</mat-label>
+              <input
+                formControlName="hit_dice_number"
+                matInput
+                placeholder="Eg. 20"
+                type="number"
+                min="1"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field>
+              <mat-label>Type of hit die</mat-label>
+              <mat-select formControlName="hit_dice_die">
+                <mat-option *ngFor="let item of DICE" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- end:: Hit Dice -->
+        </div>
+      </div>
+      <!-- * end:: General Information -->
+
+      <div class="mt-5">
+        <span class="checkbox-label"> Movement </span>
+      </div>
+
+      <!-- * start:: Speed -->
+      <div formGroupName="speed" class="form-group">
+        <div class="row">
+          <div class="col-4">
+            <span *ngFor="let item of MOVEMENTS" class="pr-5">
+              <mat-checkbox formControlName="speed_{{ item }}" color="primary">
+                {{ item }}
+              </mat-checkbox>
+            </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- start:: Speed - Walk -->
+          <div *ngIf="form.value.speed.speed_Walk" class="col-4">
+            <mat-form-field>
+              <mat-label>Walking speed (ft.)</mat-label>
+              <input
+                formControlName="speed_Walk"
+                matInput
+                placeholder="Eg. 60"
+                type="number"
+                min="0"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Speed - Walk -->
+
+          <!-- start:: Speed - Fly -->
+          <div *ngIf="form.value.speed.speed_Fly" class="col-4">
+            <mat-form-field>
+              <mat-label>Flying speed (ft.)</mat-label>
+              <input
+                formControlName="speed_Fly"
+                matInput
+                placeholder="Eg. 120"
+                type="number"
+                min="0"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Speed - Fly -->
+
+          <!-- start:: Speed - Swim -->
+          <div *ngIf="form.value.speed.speed_Swim" class="col-4">
+            <mat-form-field>
+              <mat-label>Swiming speed (ft.)</mat-label>
+              <input
+                formControlName="speed_Swim"
+                matInput
+                placeholder="Eg. 200"
+                type="number"
+                min="0"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Speed - Swim -->
+        </div>
+      </div>
+      <!-- * start:: Speed -->
+
+      <h4 class="tc-red" style="font-weight: bold">ABILITY SCORES</h4>
+      <div class="divider"></div>
+
+      <!-- * start:: Ability Scores -->
+      <div formGroupName="abilityScores" class="form-group">
+        <div class="row">
+          <!-- start:: Strength -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Strength</mat-label>
+              <input
+                formControlName="ability_scores_STR"
+                matInput
+                placeholder="Eg. 10"
+                type="number"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Strength -->
+
+          <!-- start:: Dexterity -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Dexterity</mat-label>
+              <input
+                formControlName="ability_scores_DEX"
+                matInput
+                placeholder="Eg. 10"
+                type="number"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Dexterity -->
+        </div>
+
+        <div class="row">
+          <!-- start:: Constitution -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Constitution</mat-label>
+              <input
+                formControlName="ability_scores_CON"
+                matInput
+                placeholder="Eg. 10"
+                type="number"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Constitution -->
+
+          <!-- start:: Intelligence -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Intelligence</mat-label>
+              <input
+                formControlName="ability_scores_INT"
+                matInput
+                placeholder="Eg. 10"
+                type="number"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Intelligence -->
+        </div>
+
+        <div class="row">
+          <!-- start:: Wisdom -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Wisdom</mat-label>
+              <input
+                formControlName="ability_scores_WIS"
+                matInput
+                placeholder="Eg. 10"
+                type="number"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Wisdom -->
+
+          <!-- start:: Charisma -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Charisma</mat-label>
+              <input
+                formControlName="ability_scores_CHA"
+                matInput
+                placeholder="Eg. 10"
+                type="number"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Charisma -->
+        </div>
+      </div>
+      <!-- * start:: Ability Scores -->
+
+      <h4 class="tc-red" style="font-weight: bold">
+        RESISTANCES AND VUNERABILTIES
+      </h4>
+      <div class="divider"></div>
+
+      <!-- * start:: Resistances and Vunerabilities -->
+      <div formGroupName="resistancesAndVulnerabilities" class="form-group">
+        <!-- start:: Damage Vunerabilities -->
+        <div class="row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Damage Vunerabilities</mat-label>
+              <mat-chip-list #damage_vulnerabilities_chipList>
+                <mat-chip
+                  *ngFor="let item of damage_vulnerabilities"
+                  color="primary"
+                  selected
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(item, 'damage_vulnerabilities')"
+                >
+                  {{ item }}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="Eg. Slashing"
+                  [matChipInputFor]="damage_vulnerabilities_chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event, 'damage_vulnerabilities')"
+                />
+              </mat-chip-list>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- end:: Damage Vunerabilities -->
+      </div>
+      <!-- * end:: Resistances and Vunerabilities -->
+    </form>
+    <!-- end:: Form -->
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Back</button>
+      <button
+        (click)="saveForm()"
+        color="primary"
+        type="submit"
+        mat-dialog-close
+        mat-button
+      >
+        Create
+      </button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</div>
