@@ -16,41 +16,39 @@ import { COMMA, ENTER } from "@angular/cdk/keycodes";
   styleUrls: ["./create-npc-dialog.component.scss"],
 })
 export class CreateNpcDialogComponent implements OnInit {
-  // * Npc metadata
-  // Proficiencies
-  proficiencies: string[] = [];
-
-  // Resistances & Vunerabilities
-  damage_vulnerabilities: string[] = [];
-  damage_resistances: string[] = [];
-  damage_immunities: string[] = [];
-  condition_immunities: any[] = [];
-
-  // Combat
-  special_abilities: any = [];
-  actions: any = [];
-  legendary_actions: any = [];
-
-  // Flag for submission
-  isSubmitted: boolean = false;
-
-  // The form
+  // Public properties
   form: FormGroup;
+  hasFormErrors = false;
+  isSubmitted: boolean = false;
+  errorMessage: string =
+    "Oops! We encountered an error; please check all required fields and try submitting again.";
 
-  // 5E Resources
-  // todo - Query 5E API to get the below metadata to allow DMs to create weapons with up-to-date
-  // todo - options.
-  DICE = FIFTH_EDITION_RESOURCES.GENERAL.DICE;
-  SIZES = FIFTH_EDITION_RESOURCES.GENERAL.SIZES;
-  MOVEMENTS = FIFTH_EDITION_RESOURCES.GENERAL.MOVEMENTS;
-  SENSES = FIFTH_EDITION_RESOURCES.GENERAL.SENSES;
-
-  // * MatChipInput
+  // MatChip properties
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  // 5E Resources
+  DICE = FIFTH_EDITION_RESOURCES.GENERAL.DICE;
+  SIZES = FIFTH_EDITION_RESOURCES.GENERAL.SIZES;
+  MOVEMENTS = FIFTH_EDITION_RESOURCES.GENERAL.MOVEMENTS;
+  SENSES = FIFTH_EDITION_RESOURCES.GENERAL.SENSES;
+
+  // * Npc metadata
+  // General
+  senses: string[] = [];
+  proficiencies: string[] = [];
+  // Resistances & Vunerabilities
+  damage_vulnerabilities: string[] = [];
+  damage_resistances: string[] = [];
+  damage_immunities: string[] = [];
+  condition_immunities: any[] = [];
+  // Combat
+  special_abilities: any = [];
+  actions: any = [];
+  legendary_actions: any = [];
 
   constructor(
     public dialogRef: MatDialogRef<CreateNpcDialogComponent>,
@@ -68,7 +66,7 @@ export class CreateNpcDialogComponent implements OnInit {
   initForm(): void {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
-        name: [""],
+        name: ["", Validators.required],
         size: [""],
         type: [""],
         subtype: [""],
@@ -102,10 +100,10 @@ export class CreateNpcDialogComponent implements OnInit {
         condition_immunities: [""],
       }),
       senses: this.fb.group({
-        senses_blindsight: [""],
-        senses_darkvision: [""],
-        senses_tremorvision: [""],
-        senses_passive_perception: [""],
+        senses_Blindsight: [""],
+        senses_Darkvision: [""],
+        senses_Tremorsense: [""],
+        senses_Passive_Perception: [""],
       }),
       abilities: this.fb.group({
         abilities_special_abilities: this.special_abilities,
@@ -116,13 +114,25 @@ export class CreateNpcDialogComponent implements OnInit {
   }
 
   /**
-   * Saves the form to the database.
+   * On Submit.
    */
-  saveForm(): void {
-    let formValues: any = this.form.value;
+  onSubmit(): void {
+    this.hasFormErrors = false;
+    const controls = this.form.controls;
 
+    // Check form for errors.
+    if (this.form.invalid) {
+      Object.keys(controls).forEach((controlName) =>
+        controls[controlName].markAsTouched()
+      );
+
+      this.hasFormErrors = true;
+      return;
+    }
+
+    // Proceed with submitting form.
+    let formValues: any = this.form.value;
     let generalInformation: any = this.form.value.generalInformation;
-    let components: any = this.form.value.generalInformation.spellComponents;
 
     // Prepare payload to POST.
     let payload: any = {};
@@ -199,7 +209,7 @@ export class CreateNpcDialogComponent implements OnInit {
   /**
    * Removes a chip from the MatChip
    *
-   * @param {string} element The element to remove.
+   * @param {string} element The element to remove
    */
   remove(element: string, arrayName: string): void {
     let index: any;
@@ -230,5 +240,10 @@ export class CreateNpcDialogComponent implements OnInit {
     if (index >= 0) {
       arrayToModify.splice(index, 1);
     }
+  }
+
+  /** Alect Close event */
+  onAlertClose($event) {
+    this.hasFormErrors = false;
   }
 }

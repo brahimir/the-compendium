@@ -8,12 +8,24 @@
 
     <!-- start:: Form -->
     <form [formGroup]="form">
+      <!-- start:: KT Alert if form has errors. -->
+      <kt-alert
+        *ngIf="hasFormErrors"
+        type="warn"
+        [duration]="30000"
+        [showCloseButton]="true"
+        (close)="onAlertClose($event)"
+      >
+        {{ errorMessage }}
+      </kt-alert>
+      <!-- start:: KT Alert if form has errors. -->
+
       <h4 class="tc-red" style="font-weight: bold">GENERAL INFORMATION</h4>
       <div class="divider"></div>
 
       <!-- * start:: General Information -->
       <div formGroupName="generalInformation" class="form-group">
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Name -->
           <div class="col-6">
             <mat-form-field>
@@ -24,6 +36,13 @@
                 placeholder="Eg. Cthulu"
                 type="text"
               />
+              <mat-error
+                >Monster name is
+                <strong>required</strong>
+              </mat-error>
+              <mat-hint align="start"
+                >Enter the <strong>name</strong> of the Monster
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Name -->
@@ -42,7 +61,7 @@
           <!-- end:: Size -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Type -->
           <div class="col-6">
             <mat-form-field>
@@ -72,7 +91,7 @@
           <!-- end:: Subtype -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Alignment -->
           <div class="col-6">
             <mat-form-field>
@@ -103,7 +122,7 @@
           <!-- end:: Armor Class -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Hitpoints -->
           <div class="col-6">
             <mat-form-field>
@@ -152,7 +171,7 @@
 
       <!-- * start:: Speed -->
       <div formGroupName="speed" class="form-group">
-        <div class="row">
+        <div class="form-group row">
           <div class="col-4">
             <span *ngFor="let item of MOVEMENTS" class="pr-5">
               <mat-checkbox formControlName="speed_{{ item }}" color="primary">
@@ -162,7 +181,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Speed - Walk -->
           <div *ngIf="form.value.speed.speed_Walk" class="col-4">
             <mat-form-field>
@@ -216,7 +235,7 @@
 
       <!-- * start:: Ability Scores -->
       <div formGroupName="abilityScores" class="form-group">
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Strength -->
           <div class="col-6">
             <mat-form-field>
@@ -246,7 +265,7 @@
           <!-- end:: Dexterity -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Constitution -->
           <div class="col-6">
             <mat-form-field>
@@ -276,7 +295,7 @@
           <!-- end:: Intelligence -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Wisdom -->
           <div class="col-6">
             <mat-form-field>
@@ -316,7 +335,7 @@
       <!-- * start:: Resistances and Vunerabilities -->
       <div formGroupName="resistancesAndVulnerabilities" class="form-group">
         <!-- start:: Damage Vunerabilities -->
-        <div class="row">
+        <div class="form-group row">
           <div class="col">
             <mat-form-field>
               <mat-label>Damage Vunerabilities</mat-label>
@@ -344,21 +363,219 @@
           </div>
         </div>
         <!-- end:: Damage Vunerabilities -->
+
+        <!-- start:: Damage Resistances -->
+        <div class="form-group row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Damage Resistances</mat-label>
+              <mat-chip-list #damage_resistances_chipList>
+                <mat-chip
+                  *ngFor="let item of damage_resistances"
+                  color="primary"
+                  selected
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(item, 'damage_resistances')"
+                >
+                  {{ item }}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="Eg. Slashing"
+                  [matChipInputFor]="damage_resistances_chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event, 'damage_resistances')"
+                />
+              </mat-chip-list>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- end:: Damage Resistances -->
+
+        <!-- start:: Damage Immunities -->
+        <div class="form-group row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Damage Immunities</mat-label>
+              <mat-chip-list #damage_immunities_chipList>
+                <mat-chip
+                  *ngFor="let item of damage_immunities"
+                  color="primary"
+                  selected
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(item, 'damage_immunities')"
+                >
+                  {{ item }}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="Eg. Slashing"
+                  [matChipInputFor]="damage_immunities_chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event, 'damage_immunities')"
+                />
+              </mat-chip-list>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- end:: Damage Immunities -->
+
+        <!-- start:: Condition Immunities -->
+        <div class="form-group row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Condition Immunities</mat-label>
+              <mat-chip-list #condition_immunities_chipList>
+                <mat-chip
+                  *ngFor="let item of condition_immunities"
+                  color="primary"
+                  selected
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(item, 'condition_immunities')"
+                >
+                  {{ item }}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="Eg. Slashing"
+                  [matChipInputFor]="condition_immunities_chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event, 'condition_immunities')"
+                />
+              </mat-chip-list>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- end:: Condition Immunities -->
       </div>
       <!-- * end:: Resistances and Vunerabilities -->
+
+      <h4 class="tc-red" style="font-weight: bold">SENSES</h4>
+      <div class="divider"></div>
+
+      <!-- * start:: Senses -->
+      <div formGroupName="senses" class="form-group">
+        <div class="form-group row">
+          <div class="col">
+            <span *ngFor="let item of SENSES" class="pr-5">
+              <mat-checkbox formControlName="senses_{{ item }}" color="primary">
+                {{ item }}
+              </mat-checkbox>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <!-- start:: Senses - Blindsight -->
+          <div *ngIf="form.value.senses.senses_Blindsight" class="col-3">
+            <mat-form-field>
+              <mat-label>Blindsight (ft.)</mat-label>
+              <input
+                formControlName="senses_Blindsight"
+                matInput
+                placeholder="Eg. 60"
+                type="number"
+                min="0"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Senses - Blindsight -->
+
+          <!-- start:: Senses - Darkvision -->
+          <div *ngIf="form.value.senses.senses_Darkvision" class="col-3">
+            <mat-form-field>
+              <mat-label>Darkvision (ft.)</mat-label>
+              <input
+                formControlName="senses_Darkvision"
+                matInput
+                placeholder="Eg. 120"
+                type="number"
+                min="0"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Senses - Darkvision -->
+
+          <!-- start:: Senses - Tremorsense -->
+          <div *ngIf="form.value.senses.senses_Tremorsense" class="col-3">
+            <mat-form-field>
+              <mat-label>Tremorsight (ft.)</mat-label>
+              <input
+                formControlName="senses_Tremorsense"
+                matInput
+                placeholder="Eg. 120"
+                type="number"
+                min="0"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Senses - Tremorsense -->
+
+          <!-- start:: Senses - Passive Perception -->
+          <div
+            *ngIf="form.value.senses.senses_Passive_Perception"
+            class="col-3"
+          >
+            <mat-form-field>
+              <mat-label>Passive Perception (ft.)</mat-label>
+              <input
+                formControlName="senses_Passive_Perception"
+                matInput
+                placeholder="Eg. 200"
+                type="number"
+                min="0"
+              />
+            </mat-form-field>
+          </div>
+          <!-- end:: Senses - Passive Perception -->
+        </div>
+      </div>
+      <!-- * end:: Senses -->
+
+      <div class="card-footer">
+        <!-- start:: KT Alert if form has errors. -->
+        <kt-alert
+          *ngIf="hasFormErrors"
+          type="warn"
+          [duration]="30000"
+          [showCloseButton]="true"
+          (close)="onAlertClose($event)"
+        >
+          {{ errorMessage }}
+        </kt-alert>
+        <!-- start:: KT Alert if form has errors. -->
+
+        <div class="d-flex justify-content-between">
+          <div class="mr-2"></div>
+          <div>
+            <button
+              type="button"
+              mat-raised-button
+              cdkFocusInitial
+              matTooltip="Cancel changes"
+            >
+              Cancel</button
+            >&nbsp;
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="onSubmit()"
+              [disabled]="viewLoading"
+              matTooltip="Save changes"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
     </form>
     <!-- end:: Form -->
-    <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Back</button>
-      <button
-        (click)="saveForm()"
-        color="primary"
-        type="submit"
-        mat-dialog-close
-        mat-button
-      >
-        Create
-      </button>
-    </mat-dialog-actions>
   </mat-dialog-content>
 </div>

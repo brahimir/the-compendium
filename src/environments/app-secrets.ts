@@ -45,7 +45,7 @@ export const FIFTH_EDITION_RESOURCES = {
     ],
     RANGES: ["Melee", "Ranged"],
     SIZES: ["Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"],
-    SENSES: ["Blindsight", "Darkvision", "Tremorsight", "Passive Perception"],
+    SENSES: ["Blindsight", "Darkvision", "Tremorsense", "Passive_Perception"],
     MOVEMENTS: ["Walk", "Fly", "Swim"],
   },
 
