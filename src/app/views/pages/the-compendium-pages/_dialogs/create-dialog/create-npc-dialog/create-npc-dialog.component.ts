@@ -30,8 +30,6 @@ import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 export class CreateNpcDialogComponent implements OnInit {
   // Public properties
   form: FormGroup;
-  languageCtrl = new FormControl();
-  filteredLanguages: Observable<string[]>;
   hasFormErrors = false;
   isSubmitted: boolean = false;
   // Error messages
@@ -43,6 +41,9 @@ export class CreateNpcDialogComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE, TAB];
+  // Languages MatChip properties
+  languageCtrl = new FormControl();
+  filteredLanguages: Observable<string[]>;
 
   // 5E Resources
   DICE = FIFTH_EDITION_RESOURCES.GENERAL.DICE;
@@ -56,6 +57,7 @@ export class CreateNpcDialogComponent implements OnInit {
   // * Npc metadata
   // General
   senses: string[] = [];
+  speeds: any[] = [];
   languages: string[] = [];
   proficiencies: string[] = [];
   // Resistances, Immunities and Vunerabilities
@@ -77,7 +79,7 @@ export class CreateNpcDialogComponent implements OnInit {
     private apiService: HomebrewNpcsService
   ) {
     this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
-      startWith(''),
+      startWith(""),
       map((language: string | null) =>
         language ? this.filter(language) : this.LANGUAGES.slice()
       )
@@ -121,10 +123,10 @@ export class CreateNpcDialogComponent implements OnInit {
         ability_scores_CHA: [10],
       }),
       resistancesAndVulnerabilities: this.fb.group({
-        damage_vulnerabilities: [],
-        damage_resistances: [],
-        damage_immunities: [],
-        condition_immunities: [],
+        rav_damage_vulnerabilities: [],
+        rav_damage_resistances: [],
+        rav_damage_immunities: [],
+        rav_condition_immunities: [],
       }),
       senses: this.fb.group({
         senses_Blindsight: [],
@@ -133,9 +135,9 @@ export class CreateNpcDialogComponent implements OnInit {
         senses_Passive_Perception: [],
       }),
       abilities: this.fb.group({
-        abilities_special_abilities: this.special_abilities,
-        abilities_actions: this.actions,
-        abilities_legendary_actions: this.legendary_actions,
+        special_abilities: this.special_abilities,
+        actions: this.actions,
+        legendary_actions: this.legendary_actions,
       }),
       languages: [],
     });
@@ -158,23 +160,137 @@ export class CreateNpcDialogComponent implements OnInit {
       return;
     }
 
-    // Proceed with submitting form.
-    let formValues: any = this.form.value;
-    let generalInformation: any = this.form.value.generalInformation;
+    let payload = this.preparePayload();
+
+    console.log(payload);
+
+    // todo - send it
+    // this.apiService.create(payload).subscribe(
+    //   (res) => {
+    //     this.isSubmitted = true;
+    //     this.dialogRef.close({ isSubmitted: this.isSubmitted });
+    //   },
+    //   (err) => {
+    //     this.dialogRef.close({ isSubmitted: this.isSubmitted });
+    //     console.log(err);
+    //   }
+    // );
+  }
+
+  preparePayload(): any {
+    // let formValues: any = this.form.value;
+    let formGeneralInformation: any = this.form.value.generalInformation;
+    let formSpeed: any = this.form.value.speed;
+    let formAbilityScores: any = this.form.value.abilityScores;
+    let formResistancesAndVulnerabilities: any = this.form.value
+      .resistancesAndVulnerabilities;
+    let formSenses: any = this.form.value.senses;
+    let formAbilities: any = this.form.value.abilities;
+
+    // Set objects for payload.
+    let payload_speeds = this.getSpeeds(formSpeed);
+    let payload_senses = this.getSenses(formSenses);
 
     // Prepare payload to POST.
-    let payload: any = {};
+    let payload: any = {
+      name: formGeneralInformation.name,
+      size: formGeneralInformation.size,
+      type: formGeneralInformation.type,
+      subtype: formGeneralInformation.subtype,
+      alignment: formGeneralInformation.alignment,
+      armor_class: formGeneralInformation.armor_class,
+      hit_points: formGeneralInformation.hit_points,
+      hit_dice_number: formGeneralInformation.hit_dice_number,
+      hit_dice_die: formGeneralInformation.hit_dice_die,
+      speed: payload_speeds,
+      strength: formAbilityScores.ability_scores_STR,
+      dexterity: formAbilityScores.ability_scores_DEX,
+      constitution: formAbilityScores.ability_scores_CON,
+      intelligence: formAbilityScores.ability_scores_INT,
+      wisdom: formAbilityScores.ability_scores_WIS,
+      charisma: formAbilityScores.ability_scores_CHA,
+      proficiencies: this.proficiencies,
+      damage_vulnerabilities: this.damage_vulnerabilities,
+      damage_resistances: this.damage_resistances,
+      damage_immunities: this.damage_immunities,
+      condition_immunities: this.condition_immunities,
+      senses: payload_senses,
+      languages: this.languages,
+      challenge_rating: formGeneralInformation.challenge_rating,
+      xp: formGeneralInformation.xp,
+      special_abilities: formAbilities.special_abilities,
+      actions: formAbilities.actions,
+      legendary_actions: formAbilities.legendary_actions,
+    };
 
-    this.apiService.create(payload).subscribe(
-      (res) => {
-        this.isSubmitted = true;
-        this.dialogRef.close({ isSubmitted: this.isSubmitted });
-      },
-      (err) => {
-        this.dialogRef.close({ isSubmitted: this.isSubmitted });
-        console.log(err);
-      }
-    );
+    return payload;
+  }
+
+  /**
+   * Gets the senses and prepares them in Object form to fit the database schema
+   *
+   * @param {*} control The senses form control
+   * @returns {Object} An Object of senses
+   */
+  getSenses(control: any): Object {
+    let blindsight = null;
+    let darkvision = null;
+    let tremorsense = null;
+    let passive_perception = null;
+
+    if (control.senses_Blindsight) {
+      blindsight = control.senses_Blindsight;
+    }
+
+    if (control.senses_Darkvision) {
+      darkvision = control.senses_Darkvision;
+    }
+
+    if (control.senses_Tremorsense) {
+      tremorsense = control.senses_Tremorsense;
+    }
+
+    if (control.senses_Passive_Perception) {
+      passive_perception = control.senses_Passive_Perception;
+    }
+
+    return {
+      blindsight: blindsight,
+      darkvision: darkvision,
+      tremorsense: tremorsense,
+      passive_perception: passive_perception,
+    };
+  }
+
+  /**
+   * Gets the speeds and prepares them in Object form to fit the database schema
+   *
+   * @param {*} control The speed form control
+   * @returns {Object} An Object of speeds
+   */
+  getSpeeds(control: any): Object {
+    // Check speeds
+    let walk = null;
+    let fly = null;
+    let swim = null;
+
+    if (control.speed_Walk) {
+      walk = control.speed_Walk;
+    }
+
+    if (control.speed_Fly) {
+      fly = control.speed_Fly;
+    }
+
+    if (control.speed_Swim) {
+      swim = control.speed_Swim;
+    }
+
+    return {
+      walk: walk,
+      fly: fly,
+      swim: swim,
+    };
   }
 
   /**

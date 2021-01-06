@@ -480,7 +480,7 @@
                   [removable]="removable"
                   (removed)="remove(item, 'condition_immunities')"
                 >
-                  {{ item }}
+                  {{ item.name }}
                   <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
                 <input
