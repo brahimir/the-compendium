@@ -449,7 +449,7 @@ export class MenuConfig {
               page: "/homebrew-items",
             },
             {
-              title: "NPCs",
+              title: "Monsters",
               page: "/homebrew-npcs",
             },
             {
