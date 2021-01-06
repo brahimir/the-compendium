@@ -201,6 +201,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 				startWith(''),
 				map(val => this.filterManufacture(val.toString()))
 			);
+			
 		this.filteredColors = this.productForm.controls.color.valueChanges
 			.pipe(
 				startWith(''),
