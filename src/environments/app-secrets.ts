@@ -33,8 +33,31 @@ export const ROUTES = {
 export const FIFTH_EDITION_RESOURCES = {
   // * General
   GENERAL: {
-    DICE: ["d4", "d6", "d8", "d10", "d12", "d20"],
     CURRENCIES: ["cp", "sp", "ep", "gp", "pp"],
+    DICE: ["d4", "d6", "d8", "d10", "d12", "d20"],
+    LANGUAGES: {
+      STANDARD: [
+        "Common",
+        "Dwarvish",
+        "Elvish",
+        "Giant",
+        "Gnomish",
+        "Goblin",
+        "Halfling",
+        "Orc",
+      ],
+      EXOTIC: [
+        "Abyssal",
+        "Celestial",
+        "Draconic",
+        "Deep Speech",
+        "Infernal",
+        "Primordial",
+        "Sylvan",
+        "Undercommon",
+      ],
+    },
+    MOVEMENTS: ["Walk", "Fly", "Swim"],
     RARITIES: [
       "Common",
       "Uncommon",
@@ -46,7 +69,6 @@ export const FIFTH_EDITION_RESOURCES = {
     RANGES: ["Melee", "Ranged"],
     SIZES: ["Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"],
     SENSES: ["Blindsight", "Darkvision", "Tremorsense", "Passive_Perception"],
-    MOVEMENTS: ["Walk", "Fly", "Swim"],
   },
 
   // * Weapons
