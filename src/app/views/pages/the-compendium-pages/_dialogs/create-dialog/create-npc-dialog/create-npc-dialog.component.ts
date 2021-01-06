@@ -1,14 +1,26 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+// Constants
+import { CONSTANTS_CREATE_DIALOG } from "../constants";
 // 5E Resources
 import { FIFTH_EDITION_RESOURCES } from "src/environments/app-secrets";
 // FormBuilder
-import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import {
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormControl,
+} from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 // Services
 import { HomebrewNpcsService } from "../../../../../../core/resources/_services/homebrew-services/homebrew-npcs.service";
+// RXJS
+import { map, startWith } from "rxjs/operators";
+import { Observable } from "rxjs";
 // MatChipInput
 import { MatChipInputEvent } from "@angular/material/chips";
-import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import { COMMA, ENTER, SPACE, TAB } from "@angular/cdk/keycodes";
+// MatAutocomplete
+import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 
 @Component({
   selector: "kt-create-npc-dialog",
@@ -18,29 +30,35 @@ import { COMMA, ENTER } from "@angular/cdk/keycodes";
 export class CreateNpcDialogComponent implements OnInit {
   // Public properties
   form: FormGroup;
+  languageCtrl = new FormControl();
+  filteredLanguages: Observable<string[]>;
   hasFormErrors = false;
   isSubmitted: boolean = false;
-  errorMessage: string =
-    "Oops! We encountered an error; please check all required fields and try submitting again.";
+  // Error messages
+  errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
 
   // MatChip properties
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE, TAB];
 
   // 5E Resources
   DICE = FIFTH_EDITION_RESOURCES.GENERAL.DICE;
-  SIZES = FIFTH_EDITION_RESOURCES.GENERAL.SIZES;
+  LANGUAGES = FIFTH_EDITION_RESOURCES.GENERAL.LANGUAGES.STANDARD.concat(
+    FIFTH_EDITION_RESOURCES.GENERAL.LANGUAGES.EXOTIC
+  );
   MOVEMENTS = FIFTH_EDITION_RESOURCES.GENERAL.MOVEMENTS;
+  SIZES = FIFTH_EDITION_RESOURCES.GENERAL.SIZES;
   SENSES = FIFTH_EDITION_RESOURCES.GENERAL.SENSES;
 
   // * Npc metadata
   // General
   senses: string[] = [];
+  languages: string[] = [];
   proficiencies: string[] = [];
-  // Resistances & Vunerabilities
+  // Resistances, Immunities and Vunerabilities
   damage_vulnerabilities: string[] = [];
   damage_resistances: string[] = [];
   damage_immunities: string[] = [];
@@ -50,11 +68,21 @@ export class CreateNpcDialogComponent implements OnInit {
   actions: any = [];
   legendary_actions: any = [];
 
+  // Input references
+  @ViewChild("languageInput") languageInput: ElementRef;
+
   constructor(
     public dialogRef: MatDialogRef<CreateNpcDialogComponent>,
     private fb: FormBuilder,
     private apiService: HomebrewNpcsService
-  ) {}
+  ) {
+    this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
+      startWith(''),
+      map((language: string | null) =>
+        language ? this.filter(language) : this.LANGUAGES.slice()
+      )
+    );
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -66,24 +94,23 @@ export class CreateNpcDialogComponent implements OnInit {
   initForm(): void {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
-        name: ["", Validators.required],
-        size: [""],
-        type: [""],
-        subtype: [""],
-        alignment: [""],
-        armor_class: [""],
-        hit_points: [""],
-        hit_dice_number: [""],
-        hit_dice_die: [""],
-        languages: [""],
-        challenge_rating: [""],
-        proficiencies: [""],
-        xp: [""],
+        name: [, Validators.required],
+        size: [],
+        type: [],
+        subtype: [],
+        alignment: [],
+        armor_class: [],
+        hit_points: [],
+        hit_dice_number: [],
+        hit_dice_die: [],
+        challenge_rating: [],
+        proficiencies: [],
+        xp: [],
       }),
       speed: this.fb.group({
-        speed_Walk: [""],
-        speed_Fly: [""],
-        speed_Swim: [""],
+        speed_Walk: [],
+        speed_Fly: [],
+        speed_Swim: [],
       }),
       abilityScores: this.fb.group({
         ability_scores_STR: [10],
@@ -94,22 +121,23 @@ export class CreateNpcDialogComponent implements OnInit {
         ability_scores_CHA: [10],
       }),
       resistancesAndVulnerabilities: this.fb.group({
-        damage_vulnerabilities: [""],
-        damage_resistances: [""],
-        damage_immunities: [""],
-        condition_immunities: [""],
+        damage_vulnerabilities: [],
+        damage_resistances: [],
+        damage_immunities: [],
+        condition_immunities: [],
       }),
       senses: this.fb.group({
-        senses_Blindsight: [""],
-        senses_Darkvision: [""],
-        senses_Tremorsense: [""],
-        senses_Passive_Perception: [""],
+        senses_Blindsight: [],
+        senses_Darkvision: [],
+        senses_Tremorsense: [],
+        senses_Passive_Perception: [],
       }),
       abilities: this.fb.group({
         abilities_special_abilities: this.special_abilities,
         abilities_actions: this.actions,
         abilities_legendary_actions: this.legendary_actions,
       }),
+      languages: [],
     });
   }
 
@@ -140,10 +168,10 @@ export class CreateNpcDialogComponent implements OnInit {
     this.apiService.create(payload).subscribe(
       (res) => {
         this.isSubmitted = true;
-        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
+        this.dialogRef.close({ isSubmitted: this.isSubmitted });
       },
       (err) => {
-        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
+        this.dialogRef.close({ isSubmitted: this.isSubmitted });
         console.log(err);
       }
     );
@@ -182,6 +210,12 @@ export class CreateNpcDialogComponent implements OnInit {
     // Add our element
     if ((value || "").trim()) {
       switch (arrayName) {
+        // General
+        case "languages":
+          this.languages.push(value.trim());
+          break;
+
+        // Resistances, Immunities and Vunerabilities
         case "damage_vulnerabilities":
           this.damage_vulnerabilities.push(value.trim());
           break;
@@ -204,6 +238,8 @@ export class CreateNpcDialogComponent implements OnInit {
     if (input) {
       input.value = "";
     }
+
+    this.languageCtrl.setValue(null);
   }
 
   /**
@@ -216,6 +252,13 @@ export class CreateNpcDialogComponent implements OnInit {
     let arrayToModify: any;
 
     switch (arrayName) {
+      // General
+      case "languages":
+        index = this.languages.indexOf(element);
+        arrayToModify = this.languages;
+        break;
+
+      // Resistances, Immunities and Vunerabilities
       case "damage_vulnerabilities":
         index = this.damage_vulnerabilities.indexOf(element);
         arrayToModify = this.damage_vulnerabilities;
@@ -240,6 +283,18 @@ export class CreateNpcDialogComponent implements OnInit {
     if (index >= 0) {
       arrayToModify.splice(index, 1);
     }
+  }
+
+  filter(name: string) {
+    return this.LANGUAGES.filter(
+      (fruit) => fruit.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.languages.push(event.option.viewValue);
+    this.languageInput.nativeElement.value = "";
+    this.form.controls.languages.setValue(null);
   }
 
   /** Alect Close event */

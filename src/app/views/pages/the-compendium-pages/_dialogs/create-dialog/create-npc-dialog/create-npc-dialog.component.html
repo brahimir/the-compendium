@@ -162,6 +162,56 @@
           </div>
           <!-- end:: Hit Dice -->
         </div>
+
+        <!-- start:: Languages -->
+        <div class="form-group row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Languages</mat-label>
+              <mat-chip-list #languages_chipList>
+                <mat-chip
+                  *ngFor="let item of languages"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(item, 'languages')"
+                >
+                  {{ item }}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="Eg. Common, Deep Speech, Telepathy"
+                  #languageInput
+                  [formControl]="languageCtrl"
+                  [matAutocomplete]="auto_languages"
+                  [matChipInputFor]="languages_chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event)"
+                />
+              </mat-chip-list>
+              <mat-autocomplete
+                #auto_languages="matAutocomplete"
+                (optionSelected)="selected($event)"
+              >
+                <mat-option
+                  *ngFor="let item of filteredLanguages | async"
+                  [value]="item"
+                >
+                  {{ item }}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-hint align="start"
+                >The <strong>languages</strong> the Monster speaks and
+                understands
+              </mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- end:: Languages -->
+
+        <!-- start:: Proficiencies -->
+        <div class="form-group row"></div>
+        <!-- end:: Proficiencies -->
       </div>
       <!-- * end:: General Information -->
 
@@ -332,7 +382,7 @@
       </h4>
       <div class="divider"></div>
 
-      <!-- * start:: Resistances and Vunerabilities -->
+      <!-- * start:: Resistances, Immunities and Vunerabilities -->
       <div formGroupName="resistancesAndVulnerabilities" class="form-group">
         <!-- start:: Damage Vunerabilities -->
         <div class="form-group row">
@@ -342,8 +392,6 @@
               <mat-chip-list #damage_vulnerabilities_chipList>
                 <mat-chip
                   *ngFor="let item of damage_vulnerabilities"
-                  color="primary"
-                  selected
                   [selectable]="selectable"
                   [removable]="removable"
                   (removed)="remove(item, 'damage_vulnerabilities')"
@@ -372,8 +420,6 @@
               <mat-chip-list #damage_resistances_chipList>
                 <mat-chip
                   *ngFor="let item of damage_resistances"
-                  color="primary"
-                  selected
                   [selectable]="selectable"
                   [removable]="removable"
                   (removed)="remove(item, 'damage_resistances')"
@@ -402,8 +448,6 @@
               <mat-chip-list #damage_immunities_chipList>
                 <mat-chip
                   *ngFor="let item of damage_immunities"
-                  color="primary"
-                  selected
                   [selectable]="selectable"
                   [removable]="removable"
                   (removed)="remove(item, 'damage_immunities')"
@@ -412,7 +456,7 @@
                   <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
                 <input
-                  placeholder="Eg. Slashing"
+                  placeholder="Eg. Necrotic, Poison, Psychic, Bludgeoning, Piercing, Slashing from nonmagical attacks"
                   [matChipInputFor]="damage_immunities_chipList"
                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                   [matChipInputAddOnBlur]="addOnBlur"
@@ -432,8 +476,6 @@
               <mat-chip-list #condition_immunities_chipList>
                 <mat-chip
                   *ngFor="let item of condition_immunities"
-                  color="primary"
-                  selected
                   [selectable]="selectable"
                   [removable]="removable"
                   (removed)="remove(item, 'condition_immunities')"
@@ -442,7 +484,7 @@
                   <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
                 <input
-                  placeholder="Eg. Slashing"
+                  placeholder="Eg. Blinded, Charmed, Deafened, Frightened, Petrified, Poisoned, Stunned"
                   [matChipInputFor]="condition_immunities_chipList"
                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                   [matChipInputAddOnBlur]="addOnBlur"
@@ -454,7 +496,7 @@
         </div>
         <!-- end:: Condition Immunities -->
       </div>
-      <!-- * end:: Resistances and Vunerabilities -->
+      <!-- * end:: Resistances, Immunities and Vunerabilities -->
 
       <h4 class="tc-red" style="font-weight: bold">SENSES</h4>
       <div class="divider"></div>
@@ -538,6 +580,14 @@
       </div>
       <!-- * end:: Senses -->
 
+      <h4 class="tc-red" style="font-weight: bold">ACTIONS AND ABILITIES</h4>
+      <div class="divider"></div>
+
+      <!-- * start:: Actions & Abilities -->
+      <div class="form-group row"></div>
+      <!-- * end:: Actions & Abilities -->
+
+      <!-- start:: Footer -->
       <div class="card-footer">
         <!-- start:: KT Alert if form has errors. -->
         <kt-alert
@@ -557,8 +607,9 @@
             <button
               type="button"
               mat-raised-button
+              mat-dialog-close
               cdkFocusInitial
-              matTooltip="Cancel changes"
+              matTooltip="Cancel"
             >
               Cancel</button
             >&nbsp;
@@ -567,14 +618,14 @@
               mat-raised-button
               color="primary"
               (click)="onSubmit()"
-              [disabled]="viewLoading"
-              matTooltip="Save changes"
+              matTooltip="Save Monster"
             >
               Save
             </button>
           </div>
         </div>
       </div>
+      <!-- end:: Footer -->
     </form>
     <!-- end:: Form -->
   </mat-dialog-content>
