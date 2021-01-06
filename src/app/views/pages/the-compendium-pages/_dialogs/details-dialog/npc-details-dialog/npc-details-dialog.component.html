@@ -289,7 +289,7 @@
         <div class="col">
           <p>
             <span class="font-weight-bolder font-italic">
-              {{ item.name }}.
+              {{ item.name }}<span *ngIf="item.name">.</span>
             </span>
             {{ item.desc }}
           </p>
@@ -310,7 +310,7 @@
         <div class="col">
           <p>
             <span class="font-weight-bolder font-italic">
-              {{ item.name }}.
+              {{ item.name }}<span *ngIf="item.name">.</span>
             </span>
             {{ item.desc }}
           </p>

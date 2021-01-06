@@ -13,7 +13,7 @@
 
       <!-- * start:: FormGroup - General Information -->
       <div formGroupName="generalInformation" class="form-group">
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Name -->
           <div class="col-6">
             <mat-form-field>
@@ -42,7 +42,7 @@
           <!-- end:: Category -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Range -->
           <div class="col-6">
             <mat-form-field>
@@ -60,7 +60,12 @@
           <div class="col-4">
             <mat-form-field>
               <mat-label>Value (amount)</mat-label>
-              <input formControlName="cost_quantity" matInput type="number" min="0"/>
+              <input
+                formControlName="cost_quantity"
+                matInput
+                type="number"
+                min="0"
+              />
             </mat-form-field>
           </div>
           <!-- end:: Cost: Quantity -->
@@ -79,7 +84,7 @@
           <!-- end:: Cost: Unit -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Weight -->
           <div class="col-6">
             <mat-form-field>
@@ -104,7 +109,7 @@
         </div>
 
         <!-- start:: Requires Attunement -->
-        <div class="row">
+        <div class="form-group row">
           <div class="col">
             <mat-checkbox formControlName="requires_attunement" color="primary">
               Requires attunement
@@ -120,7 +125,7 @@
 
       <!-- * start:: FormGroup - Damage and Range -->
       <div formGroupName="damageAndRange" class="form-group">
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Damage Dice-->
           <div class="col-3">
             <mat-form-field>
@@ -161,7 +166,7 @@
         </div>
 
         <!-- todo:: Remove the Normal and Long range inputs on Melee Weapons. -->
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Normal Range -->
           <div class="col-6">
             <mat-form-field>
@@ -175,7 +180,7 @@
             </mat-form-field>
           </div>
           <!-- end:: Normal Range -->
-          
+
           <!-- start:: Long Range -->
           <div class="col-6">
             <mat-form-field>
@@ -199,12 +204,9 @@
       <!-- * start:: FormGroup - Properties -->
       <div formGroupName="properties" class="form-group pb-3">
         <!-- start:: Properties -->
-        <div class="row">
+        <div class="form-group row">
           <div class="col">
-            <span
-              *ngFor="let item of WEAPON_PROPERTIES"
-              class="pr-5"
-            >
+            <span *ngFor="let item of WEAPON_PROPERTIES" class="pr-5">
               <mat-checkbox
                 formControlName="properties_{{ item }}"
                 color="primary"
@@ -222,7 +224,7 @@
       <div class="divider"></div>
 
       <!-- * start:: Description -->
-      <div class="row">
+      <div class="form-group row">
         <div class="col">
           <mat-form-field appearance="outline">
             <textarea
@@ -236,19 +238,47 @@
         </div>
       </div>
       <!-- * end:: Description -->
+
+      <!-- start:: Footer -->
+      <div class="card-footer">
+        <!-- start:: KT Alert if form has errors. -->
+        <kt-alert
+          *ngIf="hasFormErrors"
+          type="warn"
+          [duration]="30000"
+          [showCloseButton]="true"
+          (close)="onAlertClose($event)"
+        >
+          {{ errorMessage }}
+        </kt-alert>
+        <!-- start:: KT Alert if form has errors. -->
+
+        <div class="d-flex justify-content-between">
+          <div class="mr-2"></div>
+          <div>
+            <button
+              type="button"
+              mat-raised-button
+              mat-dialog-close
+              cdkFocusInitial
+              matTooltip="Cancel"
+            >
+              Cancel</button
+            >&nbsp;
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="onSubmit()"
+              matTooltip="Save Monster"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- end:: Footer -->
     </form>
     <!-- end:: Form -->
-    <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Back</button>
-      <button
-        (click)="saveForm()"
-        color="primary"
-        type="submit"
-        mat-dialog-close
-        mat-button
-      >
-        Create
-      </button>
-    </mat-dialog-actions>
   </mat-dialog-content>
 </div>

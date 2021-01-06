@@ -63,7 +63,7 @@ export class CreateArmorDialogComponent implements OnInit {
    * Saves the form to the database.
    *
    */
-  saveForm(): void {
+  onSubmit(): void {
     let formValues: any = this.form.value;
 
     let generalInformation: any = this.form.value.generalInformation;

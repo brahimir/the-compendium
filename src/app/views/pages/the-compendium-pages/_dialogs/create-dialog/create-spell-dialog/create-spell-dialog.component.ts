@@ -56,34 +56,34 @@ export class CreateSpellDialogComponent implements OnInit {
   initForm(): void {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
-        name: ["", Validators.required],
-        level: [""],
-        range: [""],
-        casting_time: [""],
-        duration: [""],
+        name: [, Validators.required],
+        level: [],
+        range: [],
+        casting_time: [],
+        duration: [],
         is_attack_spell: [false],
         concentration: [false],
         ritual: [false],
-        damage_type: [""],
-        attack_type: [""],
-        school: [""],
-        classes: [""],
+        damage_type: [],
+        attack_type: [],
+        school: [],
+        classes: [],
         spellComponents: this.fb.group({
           spellComponent_V: [false],
           spellComponent_S: [false],
           spellComponent_M: [false],
-          material: [""],
+          material: [],
         }),
       }),
-      description: [""],
-      higher_level: [""],
+      description: [, Validators.required],
+      higher_level: [],
     });
   }
 
   /**
    * Saves the form to the database.
    */
-  saveForm(): void {
+  onSubmit(): void {
     let formValues: any = this.form.value;
 
     let generalInformation: any = this.form.value.generalInformation;
@@ -113,6 +113,11 @@ export class CreateSpellDialogComponent implements OnInit {
       },
       classes: this.spell_classes,
     };
+
+    // Check if higher_level has a value - if not, set it to null.
+    if (!formValues.higher_level) {
+      payload.higher_level = null;
+    }
 
     this.apiService.create(payload).subscribe(
       (res) => {

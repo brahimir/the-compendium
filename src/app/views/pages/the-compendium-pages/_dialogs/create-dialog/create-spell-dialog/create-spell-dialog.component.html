@@ -13,7 +13,7 @@
 
       <!-- * start:: FormGroup - General Information -->
       <div formGroupName="generalInformation" class="form-group">
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Name -->
           <div class="col-6">
             <mat-form-field>
@@ -44,7 +44,7 @@
           <!-- end:: Level -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Range -->
           <div class="col-6">
             <mat-form-field>
@@ -74,7 +74,7 @@
           <!-- end:: Casting Time -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Duration -->
           <div class="col-6">
             <mat-form-field>
@@ -90,7 +90,7 @@
           <!-- end:: Duration -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Is Attack Spell -->
           <div class="col-4">
             <mat-checkbox formControlName="is_attack_spell" color="primary">
@@ -116,7 +116,10 @@
           <!-- end:: Is Ritual Spell -->
         </div>
 
-        <div *ngIf="form.value.generalInformation.is_attack_spell" class="row">
+        <div
+          *ngIf="form.value.generalInformation.is_attack_spell"
+          class="form-group row"
+        >
           <!-- start:: Attack Type -->
           <div class="col-6">
             <mat-form-field>
@@ -147,7 +150,7 @@
         </div>
 
         <!-- start:: Classes -->
-        <div class="row">
+        <div class="form-group row">
           <div class="col">
             <mat-form-field>
               <mat-label>Classes</mat-label>
@@ -177,7 +180,7 @@
         <!-- end:: Classes -->
 
         <!-- start:: School -->
-        <div class="row">
+        <div class="form-group row">
           <div class="col">
             <mat-form-field>
               <mat-label>School</mat-label>
@@ -198,7 +201,7 @@
 
         <!-- * start:: FormGroup - Components -->
         <div formGroupName="spellComponents" class="form-group">
-          <div class="row">
+          <div class="form-group row">
             <div class="col-3">
               <span *ngFor="let item of SPELL_COMPONENTS" class="pr-5">
                 <mat-checkbox
@@ -241,7 +244,7 @@
       <div class="divider"></div>
 
       <!-- * start:: Description -->
-      <div class="row">
+      <div class="form-group row">
         <div class="col">
           <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
@@ -258,7 +261,7 @@
       <!-- * end:: Description -->
 
       <!-- * start:: At Higher Levels -->
-      <div class="row">
+      <div class="form-group row">
         <div class="col">
           <mat-form-field appearance="outline">
             <mat-label>At Higher Levels</mat-label>
@@ -273,19 +276,47 @@
         </div>
       </div>
       <!-- * end:: At Higher Levels -->
+
+      <!-- start:: Footer -->
+      <div class="card-footer">
+        <!-- start:: KT Alert if form has errors. -->
+        <kt-alert
+          *ngIf="hasFormErrors"
+          type="warn"
+          [duration]="30000"
+          [showCloseButton]="true"
+          (close)="onAlertClose($event)"
+        >
+          {{ errorMessage }}
+        </kt-alert>
+        <!-- start:: KT Alert if form has errors. -->
+
+        <div class="d-flex justify-content-between">
+          <div class="mr-2"></div>
+          <div>
+            <button
+              type="button"
+              mat-raised-button
+              mat-dialog-close
+              cdkFocusInitial
+              matTooltip="Cancel"
+            >
+              Cancel</button
+            >&nbsp;
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="onSubmit()"
+              matTooltip="Save Monster"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- end:: Footer -->
     </form>
     <!-- end:: Form -->
-    <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Back</button>
-      <button
-        (click)="saveForm()"
-        color="primary"
-        type="submit"
-        mat-dialog-close
-        mat-button
-      >
-        Create
-      </button>
-    </mat-dialog-actions>
   </mat-dialog-content>
 </div>

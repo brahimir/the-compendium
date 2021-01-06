@@ -13,7 +13,7 @@
 
       <!-- * start:: FormGroup - General Information -->
       <div formGroupName="generalInformation" class="form-group">
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Name -->
           <div class="col-6">
             <mat-form-field>
@@ -42,7 +42,7 @@
           <!-- end:: Category -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Cost: Quantity -->
           <div class="col-6">
             <mat-form-field>
@@ -71,7 +71,7 @@
           <!-- end:: Cost: Unit -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Weight -->
           <div class="col">
             <mat-form-field>
@@ -88,7 +88,7 @@
       <div class="divider"></div>
 
       <!-- * start:: Description -->
-      <div class="row">
+      <div class="form-group row">
         <div class="col">
           <mat-form-field appearance="outline">
             <textarea
@@ -102,19 +102,47 @@
         </div>
       </div>
       <!-- * end:: Description -->
+
+      <!-- start:: Footer -->
+      <div class="card-footer">
+        <!-- start:: KT Alert if form has errors. -->
+        <kt-alert
+          *ngIf="hasFormErrors"
+          type="warn"
+          [duration]="30000"
+          [showCloseButton]="true"
+          (close)="onAlertClose($event)"
+        >
+          {{ errorMessage }}
+        </kt-alert>
+        <!-- start:: KT Alert if form has errors. -->
+
+        <div class="d-flex justify-content-between">
+          <div class="mr-2"></div>
+          <div>
+            <button
+              type="button"
+              mat-raised-button
+              mat-dialog-close
+              cdkFocusInitial
+              matTooltip="Cancel"
+            >
+              Cancel</button
+            >&nbsp;
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="onSubmit()"
+              matTooltip="Save Monster"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- end:: Footer -->
     </form>
     <!-- end:: Form -->
-    <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Back</button>
-      <button
-        (click)="saveForm()"
-        color="primary"
-        type="submit"
-        mat-dialog-close
-        mat-button
-      >
-        Create
-      </button>
-    </mat-dialog-actions>
   </mat-dialog-content>
 </div>

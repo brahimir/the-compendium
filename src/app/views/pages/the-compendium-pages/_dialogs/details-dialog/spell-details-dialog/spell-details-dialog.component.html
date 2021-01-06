@@ -10,11 +10,17 @@
     <div *ngIf="dialogData.level || dialogData.school" class="row">
       <div class="col">
         <span class="font-italic">
-          <span *ngIf="dialogData.level === 0;else default">
-            Cantrip <span *ngIf="dialogData.school"> {{dialogData.school.name}} </span>
+          <span *ngIf="dialogData.level === 0; else default">
+            Cantrip
+            <span *ngIf="dialogData.school">
+              {{ dialogData.school.name }} spell
+            </span>
           </span>
           <ng-template #default>
-            Level {{dialogData.level}} <span *ngIf="dialogData.school"> {{dialogData.school.name}} </span>
+            Level {{ dialogData.level }}
+            <span *ngIf="dialogData.school">
+              {{ dialogData.school.name }} spell</span
+            >
           </ng-template>
         </span>
       </div>
@@ -31,7 +37,7 @@
         <p class="font-weight-bolder">Casting Time:</p>
       </div>
       <div class="col">
-        <p> {{ dialogData.casting_time }} </p>
+        <p>{{ dialogData.casting_time }}</p>
       </div>
     </div>
     <!-- end::Spell Casting Time -->
@@ -42,18 +48,21 @@
         <p class="font-weight-bolder">Range:</p>
       </div>
       <div class="col">
-        <p> {{ dialogData.range }} </p>
+        <p>{{ dialogData.range }}</p>
       </div>
     </div>
     <!-- end::Spell Range -->
 
     <!-- start::Spell Components -->
-    <div *ngIf="dialogData.components" class="row">
+    <div
+      *ngIf="dialogData.components && dialogData.components.length !== 0"
+      class="row"
+    >
       <div class="col-3">
         <p class="font-weight-bolder">Components:</p>
       </div>
       <div class="col">
-        <span *ngFor="let item of dialogData.components" > {{ item }} </span>
+        <span *ngFor="let item of dialogData.components"> {{ item }} </span>
       </div>
     </div>
     <!-- end::Spell Components -->
@@ -64,7 +73,7 @@
         <p class="font-weight-bolder">Duration:</p>
       </div>
       <div class="col">
-        <p> {{ dialogData.duration }} </p>
+        <p>{{ dialogData.duration }}</p>
       </div>
     </div>
     <!-- end::Spell Duration -->
@@ -90,14 +99,16 @@
 
       <div class="row">
         <div class="col">
-          <p *ngFor="let item of dialogData.desc"> {{ item }} </p>
+          <p *ngFor="let item of dialogData.desc">{{ item }}</p>
         </div>
       </div>
     </div>
     <!-- end::Description -->
 
     <!-- start::Spell Higher Levels-->
-    <div *ngIf="dialogData.higher_level">
+    <div
+      *ngIf="dialogData.higher_level && dialogData.higher_level.length !== 0"
+    >
       <h3 class="tc-red pt-5 font-weight-bolder">AT HIGHER LEVELS</h3>
 
       <!-- start:: DIVIDER -->
@@ -106,12 +117,11 @@
 
       <div class="row">
         <div class="col">
-          <p *ngFor="let item of dialogData.higher_level"> {{ item }} </p>
+          <p *ngFor="let item of dialogData.higher_level">{{ item }}</p>
         </div>
       </div>
     </div>
     <!-- end::Spell Higher Levels-->
-
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Close</button>

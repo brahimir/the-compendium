@@ -13,7 +13,7 @@
 
       <!-- * start:: FormGroup - General Information -->
       <div formGroupName="generalInformation" class="form-group">
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Name -->
           <div class="col-6">
             <mat-form-field>
@@ -45,7 +45,7 @@
           <!-- end:: Armor Category -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Weight -->
           <div class="col-6">
             <mat-form-field>
@@ -59,7 +59,12 @@
           <div class="col-4">
             <mat-form-field>
               <mat-label>Value (amount)</mat-label>
-              <input formControlName="cost_quantity" matInput type="number" min="0"/>
+              <input
+                formControlName="cost_quantity"
+                matInput
+                type="number"
+                min="0"
+              />
             </mat-form-field>
           </div>
           <!-- end:: Cost: Quantity -->
@@ -78,7 +83,7 @@
           <!-- end:: Cost: Unit -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Rarity -->
           <div class="col-6">
             <mat-form-field>
@@ -110,7 +115,7 @@
 
       <!-- * start:: FormGroup - Armor Class and Requirements -->
       <div formGroupName="armorClassAndRequirements" class="form-group">
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Armor Class Base -->
           <div class="col-6">
             <mat-form-field>
@@ -137,7 +142,7 @@
           <!-- end:: Stealth Disadvantage -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: DEX Bonus applicable and Minimum STR Required  -->
           <div class="col-6">
             <mat-checkbox
@@ -151,13 +156,18 @@
           <div class="col-6">
             <mat-form-field>
               <mat-label>Minimum STR required</mat-label>
-              <input formControlName="str_minimum" matInput type="number" min="0"/>
+              <input
+                formControlName="str_minimum"
+                matInput
+                type="number"
+                min="0"
+              />
             </mat-form-field>
           </div>
           <!-- start:: DEX Bonus applicable and Minimum STR Required  -->
         </div>
 
-        <div class="row">
+        <div class="form-group row">
           <!-- start:: Maximum DEX bonus and Minimum STR Required -->
           <div
             *ngIf="form.value.armorClassAndRequirements.armor_class_dex_bonus"
@@ -182,9 +192,9 @@
       <div class="divider"></div>
 
       <!-- * start:: Description -->
-      <div class="row">
+      <div class="form-group row">
         <div class="col">
-          <mat-form-field appearance="outline"> 
+          <mat-form-field appearance="outline">
             <textarea
               matInput
               rows="5"
@@ -196,19 +206,47 @@
         </div>
       </div>
       <!-- * end:: Description -->
+
+      <!-- start:: Footer -->
+      <div class="card-footer">
+        <!-- start:: KT Alert if form has errors. -->
+        <kt-alert
+          *ngIf="hasFormErrors"
+          type="warn"
+          [duration]="30000"
+          [showCloseButton]="true"
+          (close)="onAlertClose($event)"
+        >
+          {{ errorMessage }}
+        </kt-alert>
+        <!-- start:: KT Alert if form has errors. -->
+
+        <div class="d-flex justify-content-between">
+          <div class="mr-2"></div>
+          <div>
+            <button
+              type="button"
+              mat-raised-button
+              mat-dialog-close
+              cdkFocusInitial
+              matTooltip="Cancel"
+            >
+              Cancel</button
+            >&nbsp;
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="onSubmit()"
+              matTooltip="Save Monster"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- end:: Footer -->
     </form>
     <!-- end:: Form -->
-    <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Back</button>
-      <button
-        (click)="saveForm()"
-        color="primary"
-        type="submit"
-        mat-dialog-close
-        mat-button
-      >
-        Create
-      </button>
-    </mat-dialog-actions>
   </mat-dialog-content>
 </div>
