@@ -13,11 +13,10 @@ import { HomebrewArmorsService } from "../../../../../../core/resources/_service
   styleUrls: ["./create-armor-dialog.component.scss"],
 })
 export class CreateArmorDialogComponent implements OnInit {
-  // Flag for submission
-  isSubmitted: boolean = false;
-
-  // The form
+  // Public properties
   form: FormGroup;
+  hasFormErrors = false;
+  isSubmitted: boolean = false;
 
   // 5E Resources
   CURRENCIES = FIFTH_EDITION_RESOURCES.GENERAL.CURRENCIES;

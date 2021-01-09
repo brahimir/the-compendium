@@ -20,15 +20,12 @@ export interface DnD_Class {
   styleUrls: ["./create-spell-dialog.component.scss"],
 })
 export class CreateSpellDialogComponent implements OnInit {
-  // Flag for submission
+  // Public properties
+  form: FormGroup;
+  hasFormErrors = false;
   isSubmitted: boolean = false;
 
-  // The form
-  form: FormGroup;
-
   // 5E Resources
-  // todo - Query 5E API to get the below metadata to allow DMs to create weapons with up-to-date
-  // todo - options.
   RARITIES = FIFTH_EDITION_RESOURCES.GENERAL.RARITIES;
   SPELL_COMPONENTS = FIFTH_EDITION_RESOURCES.SPELLS.SPELL_COMPONENTS;
 

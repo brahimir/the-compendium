@@ -13,15 +13,12 @@ import { HomebrewWeaponsService } from "../../../../../../core/resources/_servic
   styleUrls: ["./create-weapon-dialog.component.scss"],
 })
 export class CreateWeaponDialogComponent implements OnInit {
-  // Flag for submission
+  // Public properties
+  form: FormGroup;
+  hasFormErrors = false;
   isSubmitted: boolean = false;
 
-  // The form
-  form: FormGroup;
-
   // 5E Resources
-  // todo - Query 5E API to get the below metadata to allow DMs to create weapons with up-to-date
-  // todo - options.
   DICE = FIFTH_EDITION_RESOURCES.GENERAL.DICE;
   RANGES = FIFTH_EDITION_RESOURCES.GENERAL.RANGES;
   RARITIES = FIFTH_EDITION_RESOURCES.GENERAL.RARITIES;
@@ -82,6 +79,19 @@ export class CreateWeaponDialogComponent implements OnInit {
    *
    */
   onSubmit(): void {
+    this.hasFormErrors = false;
+    const controls = this.form.controls;
+
+    // Check form for errors.
+    if (this.form.invalid) {
+      Object.keys(controls).forEach((controlName) =>
+        controls[controlName].markAsTouched()
+      );
+
+      this.hasFormErrors = true;
+      return;
+    }
+
     let formValues: any = this.form.value;
 
     let generalInformation: any = this.form.value.generalInformation;

@@ -13,15 +13,12 @@ import { HomebrewItemsService } from "../../../../../../core/resources/_services
   styleUrls: ["./create-item-dialog.component.scss"],
 })
 export class CreateItemDialogComponent implements OnInit {
-  // Flag for submission
+  // Public properties
+  form: FormGroup;
+  hasFormErrors = false;
   isSubmitted: boolean = false;
 
-  // The form
-  form: FormGroup;
-
   // 5E Resources
-  // todo - Query 5E API to get the below metadata to allow DMs to create weapons with up-to-date
-  // todo - options.
   RARITIES = FIFTH_EDITION_RESOURCES.GENERAL.RARITIES;
   CURRENCIES = FIFTH_EDITION_RESOURCES.GENERAL.CURRENCIES;
 
