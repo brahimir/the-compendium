@@ -41,12 +41,13 @@ export class CreateNpcDialogComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   // Languages MatChip properties
   languageCtrl = new FormControl();
   filteredLanguages: Observable<string[]>;
 
   // 5E Resources
+  ALIGNMENTS = FIFTH_EDITION_RESOURCES.GENERAL.ALIGNMENTS;
   DICE = FIFTH_EDITION_RESOURCES.GENERAL.DICE;
   LANGUAGES = FIFTH_EDITION_RESOURCES.GENERAL.LANGUAGES.STANDARD.concat(
     FIFTH_EDITION_RESOURCES.GENERAL.LANGUAGES.EXOTIC
@@ -79,6 +80,9 @@ export class CreateNpcDialogComponent implements OnInit {
     private fb: FormBuilder,
     private apiService: HomebrewNpcsService
   ) {
+    // Format resources.
+    this.SENSES = this.replaceSpacesWithUnderscores(this.SENSES);
+
     // Filtered languages
     this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
       startWith(""),
@@ -137,80 +141,12 @@ export class CreateNpcDialogComponent implements OnInit {
         senses_Passive_Perception: [""],
       }),
       abilitiesAndActions: this.fb.group({
-        special_abilities: this.fb.array([this.initSpecialAbilities()]),
-        actions: this.fb.array([this.initActions()]),
-        legendary_actions: this.fb.array([this.initLegendaryActions()]),
+        special_abilities: this.fb.array([]),
+        actions: this.fb.array([]),
+        legendary_actions: this.fb.array([]),
       }),
       languages: [""],
     });
-  }
-
-  /**
-   * Initializes Special Abilities
-   *
-   * @returns {FormGroup} Special Abilities Form Group
-   */
-  initSpecialAbilities(): FormGroup {
-    return this.fb.group({
-      name: ["", Validators.required],
-      desc: ["", Validators.required],
-    });
-  }
-
-  /**
-   * Initializes Actions
-   *
-   * @returns {FormGroup} Actions Form Group
-   */
-  initActions(): FormGroup {
-    return this.fb.group({
-      name: ["", Validators.required],
-      desc: ["", Validators.required],
-    });
-  }
-
-  /**
-   * Initializes Legendary Actions
-   *
-   * @returns {FormGroup} Legendary Actions Form Group
-   */
-  initLegendaryActions(): FormGroup {
-    return this.fb.group({
-      name: ["", Validators.required],
-      desc: ["", Validators.required],
-    });
-  }
-
-  addActionOrAbility(identifier: string): void {
-    if (identifier === "special_ability") {
-      const control = <FormArray>this.form.controls.abilitiesAndActions.get('special_abilities');
-      control.push(this.initSpecialAbilities());
-    }
-    if (identifier === "actions") {
-      const control = <FormArray>this.form.controls.abilitiesAndActions.get('actions');
-      control.push(this.initActions());
-    }
-    if (identifier === "legendary_action") {
-      const control = <FormArray>this.form.controls.abilitiesAndActions.get('legendary_action');
-      control.push(this.initLegendaryActions());
-    }
-  }
-
-  removeActionOrAbility(i: number, identifier: string): void {
-    if (identifier === "special_ability") {
-      const control = <FormArray>this.form.controls.abilitiesAndActions.get('special_abilities');
-      control.removeAt(i);
-    }
-
-    if (identifier === "actions") {
-      const control = <FormArray>this.form.controls.abilitiesAndActions.get('actions');
-      control.removeAt(i);
-    }
-
-    if (identifier === "legendary_action") {
-      const control = <FormArray>this.form.controls.abilitiesAndActions.get('legendary_action');
-      control.removeAt(i);
-    }
   }
 
   /**
@@ -268,8 +204,9 @@ export class CreateNpcDialogComponent implements OnInit {
       alignment: formGeneralInformation.alignment,
       armor_class: formGeneralInformation.armor_class,
       hit_points: formGeneralInformation.hit_points,
-      hit_dice_number: formGeneralInformation.hit_dice_number,
-      hit_dice_die: formGeneralInformation.hit_dice_die,
+      hit_dice:
+        formGeneralInformation.hit_dice_number +
+        formGeneralInformation.hit_dice_die,
       speed: payload_speeds,
       strength: formAbilityScores.ability_scores_STR,
       dexterity: formAbilityScores.ability_scores_DEX,
@@ -292,6 +229,96 @@ export class CreateNpcDialogComponent implements OnInit {
     };
 
     return payload;
+  }
+
+  /**
+   * Initializes Special Abilities
+   *
+   * @returns {FormGroup} Special Abilities Form Group
+   */
+  initSpecialAbilities(): FormGroup {
+    return this.fb.group({
+      name: ["", Validators.required],
+      desc: ["", Validators.required],
+    });
+  }
+
+  /**
+   * Initializes Actions
+   *
+   * @returns {FormGroup} Actions Form Group
+   */
+  initActions(): FormGroup {
+    return this.fb.group({
+      name: ["", Validators.required],
+      desc: ["", Validators.required],
+    });
+  }
+
+  /**
+   * Initializes Legendary Actions
+   *
+   * @returns {FormGroup} Legendary Actions Form Group
+   */
+  initLegendaryActions(): FormGroup {
+    return this.fb.group({
+      name: ["", Validators.required],
+      desc: ["", Validators.required],
+    });
+  }
+
+  /**
+   * Adds a new FromGroup control to the abilitiesAndActions FormArray.
+   *
+   * @param {string} identifier Which FormGroup control to add.
+   */
+  addActionOrAbility(identifier: string): void {
+    if (identifier === "special_ability") {
+      const control = <FormArray>(
+        this.form.controls.abilitiesAndActions.get("special_abilities")
+      );
+      control.push(this.initSpecialAbilities());
+    }
+    if (identifier === "action") {
+      const control = <FormArray>(
+        this.form.controls.abilitiesAndActions.get("actions")
+      );
+      control.push(this.initActions());
+    }
+    if (identifier === "legendary_action") {
+      const control = <FormArray>(
+        this.form.controls.abilitiesAndActions.get("legendary_actions")
+      );
+      control.push(this.initLegendaryActions());
+    }
+  }
+
+  /**
+   * Removes a new FromGroup control to the abilitiesAndActions FormArray.
+   *
+   * @param {string} identifier Which FormGroup control to remove.
+   */
+  removeActionOrAbility(i: number, identifier: string): void {
+    if (identifier === "special_ability") {
+      const control = <FormArray>(
+        this.form.controls.abilitiesAndActions.get("special_abilities")
+      );
+      control.removeAt(i);
+    }
+
+    if (identifier === "action") {
+      const control = <FormArray>(
+        this.form.controls.abilitiesAndActions.get("actions")
+      );
+      control.removeAt(i);
+    }
+
+    if (identifier === "legendary_action") {
+      const control = <FormArray>(
+        this.form.controls.abilitiesAndActions.get("legendary_actions")
+      );
+      control.removeAt(i);
+    }
   }
 
   /**
@@ -468,6 +495,16 @@ export class CreateNpcDialogComponent implements OnInit {
     this.languages.push(event.option.viewValue);
     this.languageInput.nativeElement.value = "";
     this.form.controls.languages.setValue(null);
+    console.log(this.languages);
+  }
+
+  replaceSpacesWithUnderscores(data: string[]): string[] {
+    let result: string[] = [];
+
+    data.forEach((element) => {
+      result.push(element.replace(" ", "_"));
+    });
+    return result;
   }
 
   /**

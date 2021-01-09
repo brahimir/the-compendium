@@ -2,7 +2,16 @@
   <mat-dialog-content class="mat-typography">
     <!-- start:: Header -->
     <div class="dialog-header">
-      <h1>Create a Homebrew Monster</h1>
+      <div class="row">
+        <div class="col-6">
+          <h1>Create a Homebrew Monster</h1>
+        </div>
+        <div class="d-flex justify-content-end col-6">
+          <button mat-icon-button [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
     <!-- end:: Header -->
 
@@ -40,8 +49,8 @@
                 >Monster name is
                 <strong>required</strong>
               </mat-error>
-              <mat-hint align="start"
-                >Enter the <strong>name</strong> of the Monster
+              <mat-hint align="start">
+                The <strong>name</strong> of the Monster.
               </mat-hint>
             </mat-form-field>
           </div>
@@ -56,6 +65,9 @@
                   {{ item }}
                 </mat-option>
               </mat-select>
+              <mat-hint align="start">
+                The <strong>size</strong> of the Monster.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Size -->
@@ -72,6 +84,9 @@
                 placeholder="Eg. God"
                 type="text"
               />
+              <mat-hint align="start">
+                The Monster's <strong>type.</strong>
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Type -->
@@ -86,6 +101,9 @@
                 placeholder="Eg. Eldritch"
                 type="text"
               />
+              <mat-hint align="start">
+                The Monster's <strong>subtype.</strong>
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Subtype -->
@@ -96,12 +114,14 @@
           <div class="col-6">
             <mat-form-field>
               <mat-label>Alignment</mat-label>
-              <input
-                formControlName="alignment"
-                matInput
-                placeholder="Eg. God"
-                type="text"
-              />
+              <mat-select formControlName="hit_dice_die">
+                <mat-option *ngFor="let item of ALIGNMENTS" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+              <mat-hint align="start">
+                The Monster's <strong>alignment.</strong>
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Alignment -->
@@ -117,6 +137,9 @@
                 type="number"
                 min="0"
               />
+              <mat-hint align="start">
+                The Monster's <strong>armor class.</strong>
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Armor Class -->
@@ -133,6 +156,9 @@
                 placeholder="Eg. God"
                 type="text"
               />
+              <mat-hint align="start">
+                The Monster's <strong>hitpoints.</strong>
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Hitpoints -->
@@ -148,6 +174,9 @@
                 type="number"
                 min="1"
               />
+              <mat-hint align="start">
+                The number of <strong>hit dice</strong> the Monster has.
+              </mat-hint>
             </mat-form-field>
           </div>
           <div class="col-3">
@@ -158,6 +187,9 @@
                   {{ item }}
                 </mat-option>
               </mat-select>
+              <mat-hint align="start">
+                The type of <strong>hit dice</strong> the Monster has.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Hit Dice -->
@@ -186,7 +218,7 @@
                   [matChipInputFor]="languages_chipList"
                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                   [matChipInputAddOnBlur]="addOnBlur"
-                  (matChipInputTokenEnd)="add($event)"
+                  (matChipInputTokenEnd)="add($event, 'languages')"
                 />
               </mat-chip-list>
               <mat-autocomplete
@@ -200,9 +232,8 @@
                   {{ item }}
                 </mat-option>
               </mat-autocomplete>
-              <mat-hint align="start"
-                >The <strong>languages</strong> the Monster speaks and
-                understands
+              <mat-hint align="start">
+                The <strong>languages</strong> the Monster speaks and understands.
               </mat-hint>
             </mat-form-field>
           </div>
@@ -243,6 +274,9 @@
                 type="number"
                 min="0"
               />
+              <mat-hint align="start">
+                The Monster's <strong>walking speed</strong>.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Speed - Walk -->
@@ -258,6 +292,9 @@
                 type="number"
                 min="0"
               />
+              <mat-hint align="start">
+                The Monster's <strong>flying speed</strong>.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Speed - Fly -->
@@ -265,7 +302,7 @@
           <!-- start:: Speed - Swim -->
           <div *ngIf="form.value.speed.speed_Swim" class="col-4">
             <mat-form-field>
-              <mat-label>Swiming speed (ft.)</mat-label>
+              <mat-label>Swimming speed (ft.)</mat-label>
               <input
                 formControlName="speed_Swim"
                 matInput
@@ -273,6 +310,9 @@
                 type="number"
                 min="0"
               />
+              <mat-hint align="start">
+                The Monster's <strong>swimming speed.</strong>
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Speed - Swim -->
@@ -296,6 +336,9 @@
                 placeholder="Eg. 10"
                 type="number"
               />
+              <mat-hint align="start">
+                The Monster's <strong>Strength</strong> score.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Strength -->
@@ -310,6 +353,9 @@
                 placeholder="Eg. 10"
                 type="number"
               />
+              <mat-hint align="start">
+                The Monster's <strong>Dexterity</strong> score.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Dexterity -->
@@ -326,6 +372,9 @@
                 placeholder="Eg. 10"
                 type="number"
               />
+              <mat-hint align="start">
+                The Monster's <strong>Constitution</strong> score.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Constitution -->
@@ -340,6 +389,9 @@
                 placeholder="Eg. 10"
                 type="number"
               />
+              <mat-hint align="start">
+                The Monster's <strong>Intelligence</strong> score.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Intelligence -->
@@ -356,6 +408,9 @@
                 placeholder="Eg. 10"
                 type="number"
               />
+              <mat-hint align="start">
+                The Monster's <strong>Wisdom</strong> score.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Wisdom -->
@@ -370,6 +425,9 @@
                 placeholder="Eg. 10"
                 type="number"
               />
+              <mat-hint align="start">
+                The Monster's <strong>Charisma</strong> score.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Charisma -->
@@ -407,6 +465,9 @@
                   (matChipInputTokenEnd)="add($event, 'damage_vulnerabilities')"
                 />
               </mat-chip-list>
+              <mat-hint align="start">
+                Damage that the Monster is <strong>vulnerable</strong> to.
+              </mat-hint>
             </mat-form-field>
           </div>
         </div>
@@ -435,6 +496,9 @@
                   (matChipInputTokenEnd)="add($event, 'damage_resistances')"
                 />
               </mat-chip-list>
+              <mat-hint align="start">
+                Damage that the Monster is <strong>resistant</strong> to.
+              </mat-hint>
             </mat-form-field>
           </div>
         </div>
@@ -463,6 +527,9 @@
                   (matChipInputTokenEnd)="add($event, 'damage_immunities')"
                 />
               </mat-chip-list>
+              <mat-hint align="start">
+                Damage that the Monster is <strong>immune</strong> to.
+              </mat-hint>
             </mat-form-field>
           </div>
         </div>
@@ -491,6 +558,9 @@
                   (matChipInputTokenEnd)="add($event, 'condition_immunities')"
                 />
               </mat-chip-list>
+              <mat-hint align="start">
+                Condition(s) that the Monster is <strong>immune</strong> to.
+              </mat-hint>
             </mat-form-field>
           </div>
         </div>
@@ -525,6 +595,9 @@
                 type="number"
                 min="0"
               />
+              <mat-hint align="start">
+                The Monster's <strong>blindsight</strong> range.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Senses - Blindsight -->
@@ -540,6 +613,9 @@
                 type="number"
                 min="0"
               />
+              <mat-hint align="start">
+                The Monster's <strong>darkvision</strong> range.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Senses - Darkvision -->
@@ -547,7 +623,7 @@
           <!-- start:: Senses - Tremorsense -->
           <div *ngIf="form.value.senses.senses_Tremorsense" class="col-3">
             <mat-form-field>
-              <mat-label>Tremorsight (ft.)</mat-label>
+              <mat-label>Tremorsense (ft.)</mat-label>
               <input
                 formControlName="senses_Tremorsense"
                 matInput
@@ -555,6 +631,9 @@
                 type="number"
                 min="0"
               />
+              <mat-hint align="start">
+                The Monster's <strong>tremorsense</strong> range.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Senses - Tremorsense -->
@@ -573,6 +652,9 @@
                 type="number"
                 min="0"
               />
+              <mat-hint align="start">
+                The Monster's <strong>passive perception</strong> range.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Senses - Passive Perception -->
@@ -596,37 +678,32 @@
               let i = index
             "
           >
-            <div class="special-ability-card-wrapper">
+            <div class="tc-card-wrapper">
               <!-- start:: Special Ability Header -->
-              <div class="special-ability-card-header">
+              <div class="tc-card-header">
                 <div class="row">
                   <div class="d-flex justify-content-start col-6">
-                    <h3>Ability {{ i + 1 }}</h3>
+                    <h3>Special Ability {{ i + 1 }}</h3>
                   </div>
                   <div class="d-flex justify-content-end col-6">
                     <!-- start:: REMOVE Special Ability Button -->
                     <button
                       class="remove-button"
                       mat-icon-button
-                      *ngIf="
-                        form.controls.abilitiesAndActions.get(
-                          'special_abilities'
-                        )['controls'].length > 1
-                      "
                       (click)="removeActionOrAbility(i, 'special_ability')"
                       matTooltip="Remove Special Ability"
                     >
                       <mat-icon>delete</mat-icon>
                     </button>
-                    <!-- start:: REMOVE Special Ability Button -->
+                    <!-- end:: REMOVE Special Ability Button -->
                   </div>
                 </div>
               </div>
               <!-- end:: Special Ability Header -->
 
               <!-- start:: Special Ability Content-->
-              <div class="special-ability-card-content" [formGroupName]="i">
-                <!-- start:: Ability Name -->
+              <div class="tc-card-content" [formGroupName]="i">
+                <!-- start:: Special Ability Name -->
                 <div class="form-group row">
                   <div class="col">
                     <mat-form-field>
@@ -638,14 +715,14 @@
                         placeholder="Eg. Amphibious"
                       />
                       <mat-hint align="start">
-                        Enter the <strong>name</strong> of the Special Ability
+                        The <strong>name</strong> of the Special Ability.
                       </mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
-                <!-- end:: Ability Name -->
+                <!-- end:: Special Ability Name -->
 
-                <!-- start:: Description -->
+                <!-- start:: Special Ability Description -->
                 <div class="form-group row">
                   <div class="col">
                     <mat-form-field>
@@ -658,13 +735,12 @@
                         placeholder="Eg. Cthulu can breathe air and water."
                       ></textarea>
                       <mat-hint align="start">
-                        Enter the <strong>description</strong> of the Special
-                        Ability
+                        The <strong>description</strong> of the Special Ability.
                       </mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
-                <!-- end:: Description -->
+                <!-- end:: Special Ability Description -->
               </div>
               <!-- end:: Special Ability Content -->
             </div>
@@ -672,7 +748,7 @@
           <!-- end:: Control Iterator -->
 
           <!-- start:: ADD Special Ability -->
-          <div class="d-flex justify-content-between mt-4">
+          <div class="d-flex justify-content-between mt-4 mb-8">
             <div class="mr-2"></div>
             <button
               type="button"
@@ -702,9 +778,9 @@
               let i = index
             "
           >
-            <div class="special-ability-card-wrapper">
+            <div class="tc-card-wrapper">
               <!-- start:: Action Header -->
-              <div class="special-ability-card-header">
+              <div class="tc-card-header">
                 <div class="row">
                   <div class="d-flex justify-content-start col-6">
                     <h3>Action {{ i + 1 }}</h3>
@@ -714,24 +790,19 @@
                     <button
                       class="remove-button"
                       mat-icon-button
-                      *ngIf="
-                        form.controls.abilitiesAndActions.get(
-                          'actions'
-                        )['controls'].length > 1
-                      "
-                      (click)="removeActionOrAbility(i, 'actions')"
-                      matTooltip="Remove Special Ability"
+                      (click)="removeActionOrAbility(i, 'action')"
+                      matTooltip="Remove Action"
                     >
                       <mat-icon>delete</mat-icon>
                     </button>
-                    <!-- start:: REMOVE Action Button -->
+                    <!-- end:: REMOVE Action Button -->
                   </div>
                 </div>
               </div>
               <!-- end:: Action Header -->
 
               <!-- start:: Action Content-->
-              <div class="special-ability-card-content" [formGroupName]="i">
+              <div class="tc-card-content" [formGroupName]="i">
                 <!-- start:: Action Name -->
                 <div class="form-group row">
                   <div class="col">
@@ -744,7 +815,7 @@
                         placeholder="Eg. Multiattack"
                       />
                       <mat-hint align="start">
-                        Enter the <strong>name</strong> of the Action
+                        The <strong>name</strong> of the Action.
                       </mat-hint>
                     </mat-form-field>
                   </div>
@@ -764,7 +835,7 @@
                         placeholder="Eg. Cthulhu uses its Otherworldly Gaze. He then makes four attacks: two with his wings and two with his claws, or two with his tentacles and two with his claws."
                       ></textarea>
                       <mat-hint align="start">
-                        Enter the <strong>description</strong> of the Action
+                        The <strong>description</strong> of the Action.
                       </mat-hint>
                     </mat-form-field>
                   </div>
@@ -777,30 +848,123 @@
           <!-- end:: FormControl Iterator -->
 
           <!-- start:: ADD Action -->
-          <div class="d-flex justify-content-between mt-4">
+          <div class="d-flex justify-content-between mt-4 mb-8">
             <div class="mr-2"></div>
             <button
               type="button"
               mat-raised-button
               color="primary"
-              (click)="addActionOrAbility('actions')"
-              matTooltip="Add Special Ability"
+              (click)="addActionOrAbility('action')"
+              matTooltip="Add Action"
             >
               Add Action
             </button>
           </div>
           <!-- end:: ADD Action -->
         </div>
-        <!-- * start:: Actions -->
-      </div>
+        <!-- * end:: Actions -->
 
-      <!-- start:: Legendary Actions -->
-      <!-- start:: Legendary Actions header -->
-      <!-- end:: Legendary Actions header -->
-      <!-- start:: Legendary Actions content -->
-      <!-- end:: Legendary Actions content -->
-      <!-- end:: Legendary Actions -->
-      <!-- ! start:: FormGroup abilitiesAndActions -->
+        <h4 class="tc-red" style="font-weight: bold">LEGENDARY ACTIONS</h4>
+        <div class="divider"></div>
+
+        <!-- * start:: Legendary Actions -->
+        <div formArrayName="legendary_actions">
+          <!-- start:: FormControl Iterator -->
+          <div
+            *ngFor="
+              let legendary_action of form.controls.abilitiesAndActions.get(
+                'legendary_actions'
+              )['controls'];
+              let i = index
+            "
+          >
+            <div class="tc-card-wrapper">
+              <!-- start:: Legendary Action Header -->
+              <div class="tc-card-header">
+                <div class="row">
+                  <div class="d-flex justify-content-start col-6">
+                    <h3>Legendary Action {{ i + 1 }}</h3>
+                  </div>
+                  <div class="d-flex justify-content-end col-6">
+                    <!-- start:: REMOVE Legendary Action Button -->
+                    <button
+                      class="remove-button"
+                      mat-icon-button
+                      (click)="removeActionOrAbility(i, 'legendary_action')"
+                      matTooltip="Remove Legendary Action"
+                    >
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                    <!-- end:: REMOVE Action Button -->
+                  </div>
+                </div>
+              </div>
+              <!-- end:: Legendary Action Header -->
+
+              <!-- start:: Legendary Action Content-->
+              <div class="tc-card-content" [formGroupName]="i">
+                <!-- start:: Legendary Action Name -->
+                <div class="form-group row">
+                  <div class="col">
+                    <mat-form-field>
+                      <mat-label>Legendary Action Name</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        formControlName="name"
+                        placeholder="Eg. Legendary Resistance"
+                      />
+                      <mat-hint align="start">
+                        Enter the <strong>name</strong> of the Legendary Action.
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!-- end:: Legendary Action Name -->
+
+                <!-- start:: Legendary Action Description -->
+                <div class="form-group row">
+                  <div class="col">
+                    <mat-form-field>
+                      <mat-label>Legendary Action Description</mat-label>
+                      <textarea
+                        matInput
+                        rows="5"
+                        cols="50"
+                        formControlName="desc"
+                        placeholder="Eg. If Cthulu fails a saving throw, it can choose to succeed instead."
+                      ></textarea>
+                      <mat-hint align="start">
+                        Enter the <strong>description</strong> of the Legendary Action.
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!-- end:: Legendary Action Description -->
+              </div>
+              <!-- end:: Legendary Action Content -->
+            </div>
+          </div>
+          <!-- end:: FormControl Iterator -->
+
+          <!-- start:: ADD Legendary Action -->
+          <div class="d-flex justify-content-between mt-4 mb-8">
+            <div class="mr-2"></div>
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="addActionOrAbility('legendary_action')"
+              matTooltip="Add Legendary Action"
+            >
+              Add Legendary Action
+            </button>
+          </div>
+          <!-- end:: ADD Legendary Action -->
+        </div>
+        <!-- * end:: Legendary Actions -->
+      </div>
+      <!-- ! end:: FormGroup abilitiesAndActions -->
 
       <!-- start:: Footer -->
       <div class="card-footer">
