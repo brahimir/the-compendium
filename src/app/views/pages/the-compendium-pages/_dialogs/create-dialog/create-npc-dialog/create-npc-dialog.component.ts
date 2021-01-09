@@ -9,6 +9,7 @@ import {
   Validators,
   FormBuilder,
   FormControl,
+  FormArray,
 } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 // Services
@@ -40,7 +41,7 @@ export class CreateNpcDialogComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE, TAB];
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
   // Languages MatChip properties
   languageCtrl = new FormControl();
   filteredLanguages: Observable<string[]>;
@@ -78,6 +79,7 @@ export class CreateNpcDialogComponent implements OnInit {
     private fb: FormBuilder,
     private apiService: HomebrewNpcsService
   ) {
+    // Filtered languages
     this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
       startWith(""),
       map((language: string | null) =>
@@ -97,22 +99,22 @@ export class CreateNpcDialogComponent implements OnInit {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
         name: [, Validators.required],
-        size: [],
-        type: [],
-        subtype: [],
-        alignment: [],
-        armor_class: [],
-        hit_points: [],
-        hit_dice_number: [],
-        hit_dice_die: [],
-        challenge_rating: [],
-        proficiencies: [],
-        xp: [],
+        size: [""],
+        type: [""],
+        subtype: [""],
+        alignment: [""],
+        armor_class: [""],
+        hit_points: [""],
+        hit_dice_number: [""],
+        hit_dice_die: [""],
+        challenge_rating: [""],
+        proficiencies: [""],
+        xp: [""],
       }),
       speed: this.fb.group({
-        speed_Walk: [],
-        speed_Fly: [],
-        speed_Swim: [],
+        speed_Walk: [""],
+        speed_Fly: [""],
+        speed_Swim: [""],
       }),
       abilityScores: this.fb.group({
         ability_scores_STR: [10],
@@ -123,24 +125,92 @@ export class CreateNpcDialogComponent implements OnInit {
         ability_scores_CHA: [10],
       }),
       resistancesAndVulnerabilities: this.fb.group({
-        rav_damage_vulnerabilities: [],
-        rav_damage_resistances: [],
-        rav_damage_immunities: [],
-        rav_condition_immunities: [],
+        rav_damage_vulnerabilities: [""],
+        rav_damage_resistances: [""],
+        rav_damage_immunities: [""],
+        rav_condition_immunities: [""],
       }),
       senses: this.fb.group({
-        senses_Blindsight: [],
-        senses_Darkvision: [],
-        senses_Tremorsense: [],
-        senses_Passive_Perception: [],
+        senses_Blindsight: [""],
+        senses_Darkvision: [""],
+        senses_Tremorsense: [""],
+        senses_Passive_Perception: [""],
       }),
-      abilities: this.fb.group({
-        special_abilities: this.special_abilities,
-        actions: this.actions,
-        legendary_actions: this.legendary_actions,
+      abilitiesAndActions: this.fb.group({
+        special_abilities: this.fb.array([this.initSpecialAbilities()]),
+        actions: this.fb.array([this.initActions()]),
+        legendary_actions: this.fb.array([this.initLegendaryActions()]),
       }),
-      languages: [],
+      languages: [""],
     });
+  }
+
+  /**
+   * Initializes Special Abilities
+   *
+   * @returns {FormGroup} Special Abilities Form Group
+   */
+  initSpecialAbilities(): FormGroup {
+    return this.fb.group({
+      name: ["", Validators.required],
+      desc: ["", Validators.required],
+    });
+  }
+
+  /**
+   * Initializes Actions
+   *
+   * @returns {FormGroup} Actions Form Group
+   */
+  initActions(): FormGroup {
+    return this.fb.group({
+      name: ["", Validators.required],
+      desc: ["", Validators.required],
+    });
+  }
+
+  /**
+   * Initializes Legendary Actions
+   *
+   * @returns {FormGroup} Legendary Actions Form Group
+   */
+  initLegendaryActions(): FormGroup {
+    return this.fb.group({
+      name: ["", Validators.required],
+      desc: ["", Validators.required],
+    });
+  }
+
+  addActionOrAbility(identifier: string): void {
+    if (identifier === "special_ability") {
+      const control = <FormArray>this.form.controls.abilitiesAndActions.get('special_abilities');
+      control.push(this.initSpecialAbilities());
+    }
+    if (identifier === "actions") {
+      const control = <FormArray>this.form.controls.abilitiesAndActions.get('actions');
+      control.push(this.initActions());
+    }
+    if (identifier === "legendary_action") {
+      const control = <FormArray>this.form.controls.abilitiesAndActions.get('legendary_action');
+      control.push(this.initLegendaryActions());
+    }
+  }
+
+  removeActionOrAbility(i: number, identifier: string): void {
+    if (identifier === "special_ability") {
+      const control = <FormArray>this.form.controls.abilitiesAndActions.get('special_abilities');
+      control.removeAt(i);
+    }
+
+    if (identifier === "actions") {
+      const control = <FormArray>this.form.controls.abilitiesAndActions.get('actions');
+      control.removeAt(i);
+    }
+
+    if (identifier === "legendary_action") {
+      const control = <FormArray>this.form.controls.abilitiesAndActions.get('legendary_action');
+      control.removeAt(i);
+    }
   }
 
   /**
@@ -182,10 +252,8 @@ export class CreateNpcDialogComponent implements OnInit {
     let formGeneralInformation: any = this.form.value.generalInformation;
     let formSpeed: any = this.form.value.speed;
     let formAbilityScores: any = this.form.value.abilityScores;
-    let formResistancesAndVulnerabilities: any = this.form.value
-      .resistancesAndVulnerabilities;
     let formSenses: any = this.form.value.senses;
-    let formAbilities: any = this.form.value.abilities;
+    let formAbilitiesAndActions: any = this.form.value.abilitiesAndActions;
 
     // Set objects for payload.
     let payload_speeds = this.getSpeeds(formSpeed);
@@ -218,9 +286,9 @@ export class CreateNpcDialogComponent implements OnInit {
       languages: this.languages,
       challenge_rating: formGeneralInformation.challenge_rating,
       xp: formGeneralInformation.xp,
-      special_abilities: formAbilities.special_abilities,
-      actions: formAbilities.actions,
-      legendary_actions: formAbilities.legendary_actions,
+      special_abilities: formAbilitiesAndActions.special_abilities,
+      actions: formAbilitiesAndActions.actions,
+      legendary_actions: formAbilitiesAndActions.legendary_actions,
     };
 
     return payload;
@@ -269,7 +337,6 @@ export class CreateNpcDialogComponent implements OnInit {
    * @returns {Object} An Object of speeds
    */
   getSpeeds(control: any): Object {
-    // Check speeds
     let walk = null;
     let fly = null;
     let swim = null;
@@ -294,28 +361,7 @@ export class CreateNpcDialogComponent implements OnInit {
   }
 
   /**
-   * Returns a string representation of similar Object properties in an array.
-   *
-   * @param {*} array The array to process.
-   * @returns {string[]} The processed array.
-   */
-  getElementsArray(array: any): string[] {
-    let results: string[] = [];
-
-    for (let element in array) {
-      if (array[element]) {
-        let elementName: string;
-        elementName = element.split("_")[1];
-
-        results.push(elementName);
-      }
-    }
-
-    return results;
-  }
-
-  /**
-   * Adds the chip to the local array.
+   * Adds the chip element to the corresponding local array.
    *
    * @param {MatChipInputEvent} event Input event
    */
@@ -401,19 +447,34 @@ export class CreateNpcDialogComponent implements OnInit {
     }
   }
 
-  filter(name: string) {
+  /**
+   * MatAutocomplete filter
+   *
+   * @param {string} data The string to parse for.
+   * @returns
+   */
+  filter(data: string) {
     return this.LANGUAGES.filter(
-      (fruit) => fruit.toLowerCase().indexOf(name.toLowerCase()) === 0
+      (element) => element.toLowerCase().indexOf(data.toLowerCase()) === 0
     );
   }
 
+  /**
+   * Selects from the MatAutocomplete
+   *
+   * @param {MatAutocompleteSelectedEvent} event
+   */
   selected(event: MatAutocompleteSelectedEvent): void {
     this.languages.push(event.option.viewValue);
     this.languageInput.nativeElement.value = "";
     this.form.controls.languages.setValue(null);
   }
 
-  /** Alect Close event */
+  /**
+   * Alert close event
+   *
+   * @param {*} $event
+   */
   onAlertClose($event) {
     this.hasFormErrors = false;
   }

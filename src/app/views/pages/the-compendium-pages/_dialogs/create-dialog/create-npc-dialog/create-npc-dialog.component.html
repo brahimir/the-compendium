@@ -580,12 +580,227 @@
       </div>
       <!-- * end:: Senses -->
 
-      <h4 class="tc-red" style="font-weight: bold">ACTIONS AND ABILITIES</h4>
-      <div class="divider"></div>
+      <!-- ! start:: FormGroup abilitiesAndActions -->
+      <div formGroupName="abilitiesAndActions" class="form-group">
+        <h4 class="tc-red" style="font-weight: bold">SPECIAL ABILITIES</h4>
+        <div class="divider"></div>
 
-      <!-- * start:: Actions & Abilities -->
-      <div class="form-group row"></div>
-      <!-- * end:: Actions & Abilities -->
+        <!-- * start:: Special Abilities -->
+        <div formArrayName="special_abilities">
+          <!-- start:: Control Iterator -->
+          <div
+            *ngFor="
+              let special_ability of form.controls.abilitiesAndActions.get(
+                'special_abilities'
+              )['controls'];
+              let i = index
+            "
+          >
+            <div class="special-ability-card-wrapper">
+              <!-- start:: Special Ability Header -->
+              <div class="special-ability-card-header">
+                <div class="row">
+                  <div class="d-flex justify-content-start col-6">
+                    <h3>Ability {{ i + 1 }}</h3>
+                  </div>
+                  <div class="d-flex justify-content-end col-6">
+                    <!-- start:: REMOVE Special Ability Button -->
+                    <button
+                      class="remove-button"
+                      mat-icon-button
+                      *ngIf="
+                        form.controls.abilitiesAndActions.get(
+                          'special_abilities'
+                        )['controls'].length > 1
+                      "
+                      (click)="removeActionOrAbility(i, 'special_ability')"
+                      matTooltip="Remove Special Ability"
+                    >
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                    <!-- start:: REMOVE Special Ability Button -->
+                  </div>
+                </div>
+              </div>
+              <!-- end:: Special Ability Header -->
+
+              <!-- start:: Special Ability Content-->
+              <div class="special-ability-card-content" [formGroupName]="i">
+                <!-- start:: Ability Name -->
+                <div class="form-group row">
+                  <div class="col">
+                    <mat-form-field>
+                      <mat-label>Special Ability Name</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        formControlName="name"
+                        placeholder="Eg. Amphibious"
+                      />
+                      <mat-hint align="start">
+                        Enter the <strong>name</strong> of the Special Ability
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!-- end:: Ability Name -->
+
+                <!-- start:: Description -->
+                <div class="form-group row">
+                  <div class="col">
+                    <mat-form-field>
+                      <mat-label>Special Ability Description</mat-label>
+                      <textarea
+                        matInput
+                        rows="5"
+                        cols="50"
+                        formControlName="desc"
+                        placeholder="Eg. Cthulu can breathe air and water."
+                      ></textarea>
+                      <mat-hint align="start">
+                        Enter the <strong>description</strong> of the Special
+                        Ability
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!-- end:: Description -->
+              </div>
+              <!-- end:: Special Ability Content -->
+            </div>
+          </div>
+          <!-- end:: Control Iterator -->
+
+          <!-- start:: ADD Special Ability -->
+          <div class="d-flex justify-content-between mt-4">
+            <div class="mr-2"></div>
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="addActionOrAbility('special_ability')"
+              matTooltip="Add Special Ability"
+            >
+              Add Special Ability
+            </button>
+          </div>
+          <!-- end:: ADD Special Ability -->
+        </div>
+        <!-- * end:: Special Abilities -->
+
+        <h4 class="tc-red" style="font-weight: bold">ACTIONS</h4>
+        <div class="divider"></div>
+
+        <!-- * start:: Actions -->
+        <div formArrayName="actions">
+          <!-- start:: FormControl Iterator -->
+          <div
+            *ngFor="
+              let action of form.controls.abilitiesAndActions.get('actions')[
+                'controls'
+              ];
+              let i = index
+            "
+          >
+            <div class="special-ability-card-wrapper">
+              <!-- start:: Action Header -->
+              <div class="special-ability-card-header">
+                <div class="row">
+                  <div class="d-flex justify-content-start col-6">
+                    <h3>Action {{ i + 1 }}</h3>
+                  </div>
+                  <div class="d-flex justify-content-end col-6">
+                    <!-- start:: REMOVE Action Button -->
+                    <button
+                      class="remove-button"
+                      mat-icon-button
+                      *ngIf="
+                        form.controls.abilitiesAndActions.get(
+                          'actions'
+                        )['controls'].length > 1
+                      "
+                      (click)="removeActionOrAbility(i, 'actions')"
+                      matTooltip="Remove Special Ability"
+                    >
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                    <!-- start:: REMOVE Action Button -->
+                  </div>
+                </div>
+              </div>
+              <!-- end:: Action Header -->
+
+              <!-- start:: Action Content-->
+              <div class="special-ability-card-content" [formGroupName]="i">
+                <!-- start:: Action Name -->
+                <div class="form-group row">
+                  <div class="col">
+                    <mat-form-field>
+                      <mat-label>Action Name</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        formControlName="name"
+                        placeholder="Eg. Multiattack"
+                      />
+                      <mat-hint align="start">
+                        Enter the <strong>name</strong> of the Action
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!-- end:: Action Name -->
+
+                <!-- start:: Action Description -->
+                <div class="form-group row">
+                  <div class="col">
+                    <mat-form-field>
+                      <mat-label>Action Description</mat-label>
+                      <textarea
+                        matInput
+                        rows="5"
+                        cols="50"
+                        formControlName="desc"
+                        placeholder="Eg. Cthulhu uses its Otherworldly Gaze. He then makes four attacks: two with his wings and two with his claws, or two with his tentacles and two with his claws."
+                      ></textarea>
+                      <mat-hint align="start">
+                        Enter the <strong>description</strong> of the Action
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!-- end:: Action Description -->
+              </div>
+              <!-- end:: Action Content -->
+            </div>
+          </div>
+          <!-- end:: FormControl Iterator -->
+
+          <!-- start:: ADD Action -->
+          <div class="d-flex justify-content-between mt-4">
+            <div class="mr-2"></div>
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="addActionOrAbility('actions')"
+              matTooltip="Add Special Ability"
+            >
+              Add Action
+            </button>
+          </div>
+          <!-- end:: ADD Action -->
+        </div>
+        <!-- * start:: Actions -->
+      </div>
+
+      <!-- start:: Legendary Actions -->
+      <!-- start:: Legendary Actions header -->
+      <!-- end:: Legendary Actions header -->
+      <!-- start:: Legendary Actions content -->
+      <!-- end:: Legendary Actions content -->
+      <!-- end:: Legendary Actions -->
+      <!-- ! start:: FormGroup abilitiesAndActions -->
 
       <!-- start:: Footer -->
       <div class="card-footer">

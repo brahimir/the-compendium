@@ -1,1 +1,25 @@
 @import "../../tc-dialogs.scss";
+
+.special-ability-card-wrapper {
+  margin-bottom: 1rem;
+}
+
+.special-ability-card-content {
+  padding: 1.25rem;
+  border: 2px solid;
+  border-color: $tc-red;
+}
+
+.special-ability-card-header {
+  padding: 1rem;
+  background-color: $tc-red;
+  color: $tc-white;
+}
+
+.remove-button {
+  margin: -0.75rem;
+}
+
+.remove-button:hover {
+  margin: -0.75rem;
+}
