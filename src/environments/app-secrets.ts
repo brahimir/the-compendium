@@ -33,6 +33,19 @@ export const ROUTES = {
 export const FIFTH_EDITION_RESOURCES = {
   // * General
   GENERAL: {
+    ALIGNMENTS: [
+      "Chaotic Good",
+      "Neutral Good",
+      "Lawful Good",
+      "Chaotic Neutral",
+      "Neutral",
+      "Lawful Neutral",
+      "Chaotic Evil",
+      "Neutral Evil",
+      "Lawful Evil",
+      "Unaligned",
+    ],
+
     CURRENCIES: ["cp", "sp", "ep", "gp", "pp"],
     DICE: ["d4", "d6", "d8", "d10", "d12", "d20"],
     LANGUAGES: {
@@ -68,7 +81,7 @@ export const FIFTH_EDITION_RESOURCES = {
     ],
     RANGES: ["Melee", "Ranged"],
     SIZES: ["Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"],
-    SENSES: ["Blindsight", "Darkvision", "Tremorsense", "Passive_Perception"],
+    SENSES: ["Blindsight", "Darkvision", "Tremorsense", "Passive Perception"],
   },
 
   // * Weapons
