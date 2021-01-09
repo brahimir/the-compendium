@@ -81,7 +81,7 @@ export class CreateNpcDialogComponent implements OnInit {
     private apiService: HomebrewNpcsService
   ) {
     // Format resources.
-    this.SENSES = this.replaceSpacesWithUnderscores(this.SENSES);
+    this.SENSES = this.arrayReplaceSpacesWithUnderscores(this.SENSES);
 
     // Filtered languages
     this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
@@ -103,14 +103,15 @@ export class CreateNpcDialogComponent implements OnInit {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
         name: [, Validators.required],
-        size: [""],
+        size: ["", Validators.required],
         type: [""],
         subtype: [""],
-        alignment: [""],
-        armor_class: [""],
+        alignment: ["", Validators.required],
+        armor_class: ["", Validators.required],
         hit_points: [""],
         hit_dice_number: [""],
         hit_dice_die: [""],
+        languages: [""],
         challenge_rating: [""],
         proficiencies: [""],
         xp: [""],
@@ -138,6 +139,7 @@ export class CreateNpcDialogComponent implements OnInit {
         senses_Blindsight: [""],
         senses_Darkvision: [""],
         senses_Tremorsense: [""],
+        senses_Truesight: [""],
         senses_Passive_Perception: [""],
       }),
       abilitiesAndActions: this.fb.group({
@@ -145,7 +147,6 @@ export class CreateNpcDialogComponent implements OnInit {
         actions: this.fb.array([]),
         legendary_actions: this.fb.array([]),
       }),
-      languages: [""],
     });
   }
 
@@ -154,13 +155,19 @@ export class CreateNpcDialogComponent implements OnInit {
    */
   onSubmit(): void {
     this.hasFormErrors = false;
-    const controls = this.form.controls;
+    const formGroups = this.form.controls;
 
     // Check form for errors.
     if (this.form.invalid) {
-      Object.keys(controls).forEach((controlName) =>
-        controls[controlName].markAsTouched()
-      );
+      // FormGroups
+      Object.keys(formGroups).forEach((formgroupName) => {
+        let nestedControls = formGroups[formgroupName]["controls"];
+
+        // Nested Controls in FormGroups
+        Object.keys(nestedControls).forEach((nestedControlName) => {
+          nestedControls[nestedControlName].markAsTouched();
+        });
+      });
 
       this.hasFormErrors = true;
       return;
@@ -168,19 +175,16 @@ export class CreateNpcDialogComponent implements OnInit {
 
     let payload = this.preparePayload();
 
-    console.log(payload);
-
-    // todo - send it
-    // this.apiService.create(payload).subscribe(
-    //   (res) => {
-    //     this.isSubmitted = true;
-    //     this.dialogRef.close({ isSubmitted: this.isSubmitted });
-    //   },
-    //   (err) => {
-    //     this.dialogRef.close({ isSubmitted: this.isSubmitted });
-    //     console.log(err);
-    //   }
-    // );
+    this.apiService.create(payload).subscribe(
+      (res) => {
+        this.isSubmitted = true;
+        this.dialogRef.close({ isSubmitted: this.isSubmitted });
+      },
+      (err) => {
+        this.dialogRef.close({ isSubmitted: this.isSubmitted });
+        console.log(err);
+      }
+    );
   }
 
   preparePayload(): any {
@@ -369,15 +373,15 @@ export class CreateNpcDialogComponent implements OnInit {
     let swim = null;
 
     if (control.speed_Walk) {
-      walk = control.speed_Walk;
+      walk = control.speed_Walk + "ft.";
     }
 
     if (control.speed_Fly) {
-      fly = control.speed_Fly;
+      fly = control.speed_Fly + "ft.";
     }
 
     if (control.speed_Swim) {
-      swim = control.speed_Swim;
+      swim = control.speed_Swim + "ft.";
     }
 
     return {
@@ -477,7 +481,7 @@ export class CreateNpcDialogComponent implements OnInit {
   /**
    * MatAutocomplete filter
    *
-   * @param {string} data The string to parse for.
+   * @param {string} data The string to parse for
    * @returns
    */
   filter(data: string) {
@@ -494,17 +498,34 @@ export class CreateNpcDialogComponent implements OnInit {
   selected(event: MatAutocompleteSelectedEvent): void {
     this.languages.push(event.option.viewValue);
     this.languageInput.nativeElement.value = "";
-    this.form.controls.languages.setValue(null);
-    console.log(this.languages);
+    this.form.controls.generalInformation.get("languages").setValue(null);
   }
 
-  replaceSpacesWithUnderscores(data: string[]): string[] {
+  /**
+   * todo - Move this to a service?
+   * Replaces spaces with underscores from on incoming array
+   *
+   * @param {string[]} data The array to process
+   * @returns {string[]} The proccessed array
+   */
+  arrayReplaceSpacesWithUnderscores(data: string[]): string[] {
     let result: string[] = [];
 
     data.forEach((element) => {
       result.push(element.replace(" ", "_"));
     });
     return result;
+  }
+
+  /**
+   * todo - Move this to a service?
+   * Replaces spaces with underscores from on string
+   *
+   * @param {string[]} data The string to process
+   * @returns {string[]} The proccessed string
+   */
+  replaceUnderscoresWithSpaces(data: string): string {
+    return data.replace("_", " ");
   }
 
   /**

@@ -81,7 +81,13 @@ export const FIFTH_EDITION_RESOURCES = {
     ],
     RANGES: ["Melee", "Ranged"],
     SIZES: ["Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"],
-    SENSES: ["Blindsight", "Darkvision", "Tremorsense", "Passive Perception"],
+    SENSES: [
+      "Blindsight",
+      "Darkvision",
+      "Tremorsense",
+      "Truesight",
+      "Passive Perception",
+    ],
   },
 
   // * Weapons

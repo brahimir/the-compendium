@@ -45,10 +45,7 @@
                 placeholder="Eg. Cthulu"
                 type="text"
               />
-              <mat-error
-                >Monster name is
-                <strong>required</strong>
-              </mat-error>
+              <mat-error> Monster name is <strong>required</strong> </mat-error>
               <mat-hint align="start">
                 The <strong>name</strong> of the Monster.
               </mat-hint>
@@ -65,6 +62,7 @@
                   {{ item }}
                 </mat-option>
               </mat-select>
+              <mat-error> Monster size is <strong>required</strong> </mat-error>
               <mat-hint align="start">
                 The <strong>size</strong> of the Monster.
               </mat-hint>
@@ -114,11 +112,14 @@
           <div class="col-6">
             <mat-form-field>
               <mat-label>Alignment</mat-label>
-              <mat-select formControlName="hit_dice_die">
+              <mat-select formControlName="alignment">
                 <mat-option *ngFor="let item of ALIGNMENTS" [value]="item">
                   {{ item }}
                 </mat-option>
               </mat-select>
+              <mat-error>
+                Monster alignment is <strong>required</strong>
+              </mat-error>
               <mat-hint align="start">
                 The Monster's <strong>alignment.</strong>
               </mat-hint>
@@ -137,6 +138,9 @@
                 type="number"
                 min="0"
               />
+              <mat-error>
+                Monster armor class is <strong>required</strong>
+              </mat-error>
               <mat-hint align="start">
                 The Monster's <strong>armor class.</strong>
               </mat-hint>
@@ -188,11 +192,49 @@
                 </mat-option>
               </mat-select>
               <mat-hint align="start">
-                The type of <strong>hit dice</strong> the Monster has.
+                The type of <strong>hit dice</strong> the Monster uses.
               </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Hit Dice -->
+        </div>
+
+        <div class="form-group row">
+          <!-- start:: Challenge Rating -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Challenge Rating</mat-label>
+              <input
+                formControlName="challenge_rating"
+                matInput
+                placeholder="Eg. 20"
+                type="number"
+                min="0"
+              />
+              <mat-hint align="start">
+                The Monster's <strong>challenge rating.</strong>
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <!-- end:: Challenge Rating -->
+
+          <!-- start:: XP -->
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>XP</mat-label>
+              <input
+                formControlName="xp"
+                matInput
+                placeholder="Eg. 20"
+                type="number"
+                min="0"
+              />
+              <mat-hint align="start">
+                <strong>Experience</strong> granted by the Monster.
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <!-- start:: XP -->
         </div>
 
         <!-- start:: Languages -->
@@ -233,26 +275,27 @@
                 </mat-option>
               </mat-autocomplete>
               <mat-hint align="start">
-                The <strong>languages</strong> the Monster speaks and understands.
+                The <strong>languages</strong> the Monster speaks and
+                understands.
               </mat-hint>
             </mat-form-field>
           </div>
         </div>
         <!-- end:: Languages -->
 
-        <!-- start:: Proficiencies -->
+        <!-- todo start:: Proficiencies -->
         <div class="form-group row"></div>
-        <!-- end:: Proficiencies -->
+        <!-- todo end:: Proficiencies -->
       </div>
       <!-- * end:: General Information -->
 
-      <div class="mt-5">
+      <div class="mt-2">
         <span class="checkbox-label"> Movement </span>
       </div>
 
       <!-- * start:: Speed -->
       <div formGroupName="speed" class="form-group">
-        <div class="form-group row">
+        <div class="row">
           <div class="col-4">
             <span *ngFor="let item of MOVEMENTS" class="pr-5">
               <mat-checkbox formControlName="speed_{{ item }}" color="primary">
@@ -264,7 +307,7 @@
 
         <div class="form-group row">
           <!-- start:: Speed - Walk -->
-          <div *ngIf="form.value.speed.speed_Walk" class="col-4">
+          <div *ngIf="form.value.speed.speed_Walk" class="col">
             <mat-form-field>
               <mat-label>Walking speed (ft.)</mat-label>
               <input
@@ -282,7 +325,7 @@
           <!-- end:: Speed - Walk -->
 
           <!-- start:: Speed - Fly -->
-          <div *ngIf="form.value.speed.speed_Fly" class="col-4">
+          <div *ngIf="form.value.speed.speed_Fly" class="col">
             <mat-form-field>
               <mat-label>Flying speed (ft.)</mat-label>
               <input
@@ -300,7 +343,7 @@
           <!-- end:: Speed - Fly -->
 
           <!-- start:: Speed - Swim -->
-          <div *ngIf="form.value.speed.speed_Swim" class="col-4">
+          <div *ngIf="form.value.speed.speed_Swim" class="col">
             <mat-form-field>
               <mat-label>Swimming speed (ft.)</mat-label>
               <input
@@ -577,7 +620,7 @@
           <div class="col">
             <span *ngFor="let item of SENSES" class="pr-5">
               <mat-checkbox formControlName="senses_{{ item }}" color="primary">
-                {{ item }}
+                {{ replaceUnderscoresWithSpaces(item) }}
               </mat-checkbox>
             </span>
           </div>
@@ -585,7 +628,7 @@
 
         <div class="form-group row">
           <!-- start:: Senses - Blindsight -->
-          <div *ngIf="form.value.senses.senses_Blindsight" class="col-3">
+          <div *ngIf="form.value.senses.senses_Blindsight" class="col">
             <mat-form-field>
               <mat-label>Blindsight (ft.)</mat-label>
               <input
@@ -603,7 +646,7 @@
           <!-- end:: Senses - Blindsight -->
 
           <!-- start:: Senses - Darkvision -->
-          <div *ngIf="form.value.senses.senses_Darkvision" class="col-3">
+          <div *ngIf="form.value.senses.senses_Darkvision" class="col">
             <mat-form-field>
               <mat-label>Darkvision (ft.)</mat-label>
               <input
@@ -621,7 +664,7 @@
           <!-- end:: Senses - Darkvision -->
 
           <!-- start:: Senses - Tremorsense -->
-          <div *ngIf="form.value.senses.senses_Tremorsense" class="col-3">
+          <div *ngIf="form.value.senses.senses_Tremorsense" class="col">
             <mat-form-field>
               <mat-label>Tremorsense (ft.)</mat-label>
               <input
@@ -638,22 +681,40 @@
           </div>
           <!-- end:: Senses - Tremorsense -->
 
-          <!-- start:: Senses - Passive Perception -->
-          <div
-            *ngIf="form.value.senses.senses_Passive_Perception"
-            class="col-3"
-          >
+          <!-- start:: Senses - Truesight -->
+          <div *ngIf="form.value.senses.senses_Truesight" class="col">
             <mat-form-field>
-              <mat-label>Passive Perception (ft.)</mat-label>
+              <mat-label>Truesight (ft.)</mat-label>
               <input
-                formControlName="senses_Passive_Perception"
+                formControlName="senses_Truesight"
                 matInput
-                placeholder="Eg. 200"
+                placeholder="Eg. 120"
                 type="number"
                 min="0"
               />
               <mat-hint align="start">
-                The Monster's <strong>passive perception</strong> range.
+                The Monster's <strong>truesight</strong> range.
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <!-- end:: Senses - Truesight -->
+
+          <!-- start:: Senses - Passive Perception -->
+          <div
+            *ngIf="form.value.senses.senses_Passive_Perception"
+            class="col"
+          >
+            <mat-form-field>
+              <mat-label>Passive Perception</mat-label>
+              <input
+                formControlName="senses_Passive_Perception"
+                matInput
+                placeholder="Eg. 27"
+                type="number"
+                min="0"
+              />
+              <mat-hint align="start">
+                The Monster's <strong>passive perception</strong> value.
               </mat-hint>
             </mat-form-field>
           </div>
@@ -935,7 +996,8 @@
                         placeholder="Eg. If Cthulu fails a saving throw, it can choose to succeed instead."
                       ></textarea>
                       <mat-hint align="start">
-                        Enter the <strong>description</strong> of the Legendary Action.
+                        Enter the <strong>description</strong> of the Legendary
+                        Action.
                       </mat-hint>
                     </mat-form-field>
                   </div>
