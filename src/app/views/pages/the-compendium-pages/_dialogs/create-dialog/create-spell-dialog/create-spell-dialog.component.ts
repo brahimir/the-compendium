@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+// Constants
+import { CONSTANTS_CREATE_DIALOG } from "../constants";
 // 5E Resources
 import { FIFTH_EDITION_RESOURCES } from "src/environments/app-secrets";
 // FormBuilder
@@ -24,6 +26,8 @@ export class CreateSpellDialogComponent implements OnInit {
   form: FormGroup;
   hasFormErrors = false;
   isSubmitted: boolean = false;
+  // Error messages
+  errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
 
   // 5E Resources
   RARITIES = FIFTH_EDITION_RESOURCES.GENERAL.RARITIES;
@@ -54,33 +58,53 @@ export class CreateSpellDialogComponent implements OnInit {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
         name: [, Validators.required],
-        level: [],
-        range: [],
-        casting_time: [],
-        duration: [],
+        level: ["", Validators.required],
+        range: ["", Validators.required],
+        casting_time: ["", Validators.required],
+        duration: ["", Validators.required],
         is_attack_spell: [false],
         concentration: [false],
         ritual: [false],
-        damage_type: [],
-        attack_type: [],
-        school: [],
-        classes: [],
+        damage_type: [""],
+        attack_type: [""],
+        school: [""],
+        classes: [""],
         spellComponents: this.fb.group({
           spellComponent_V: [false],
           spellComponent_S: [false],
           spellComponent_M: [false],
-          material: [],
+          material: [""],
         }),
+        description: [, Validators.required],
+        higher_level: [""],
       }),
-      description: [, Validators.required],
-      higher_level: [],
     });
   }
 
   /**
+   * todo - refactor to preparing payload in seperate method.
    * Saves the form to the database.
    */
   onSubmit(): void {
+    this.hasFormErrors = false;
+    const formGroups = this.form.controls;
+
+    // Check form for errors.
+    if (this.form.invalid) {
+      // FormGroups
+      Object.keys(formGroups).forEach((formgroupName) => {
+        let nestedControls = formGroups[formgroupName]["controls"];
+
+        // Nested Controls in FormGroups
+        Object.keys(nestedControls).forEach((nestedControlName) => {
+          nestedControls[nestedControlName].markAsTouched();
+        });
+      });
+
+      this.hasFormErrors = true;
+      return;
+    }
+
     let formValues: any = this.form.value;
 
     let generalInformation: any = this.form.value.generalInformation;
@@ -180,5 +204,14 @@ export class CreateSpellDialogComponent implements OnInit {
     if (index >= 0) {
       this.spell_classes.splice(index, 1);
     }
+  }
+
+  /**
+   * Alert close event
+   *
+   * @param {*} $event
+   */
+  onAlertClose($event) {
+    this.hasFormErrors = false;
   }
 }

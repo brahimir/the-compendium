@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+// Constants
+import { CONSTANTS_CREATE_DIALOG } from "../constants";
 // 5E Resources
 import { FIFTH_EDITION_RESOURCES } from "src/environments/app-secrets";
 // FormBuilder
@@ -17,6 +19,8 @@ export class CreateArmorDialogComponent implements OnInit {
   form: FormGroup;
   hasFormErrors = false;
   isSubmitted: boolean = false;
+  // Error messages
+  errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
 
   // 5E Resources
   CURRENCIES = FIFTH_EDITION_RESOURCES.GENERAL.CURRENCIES;
@@ -40,12 +44,13 @@ export class CreateArmorDialogComponent implements OnInit {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
         name: ["", Validators.required],
-        armor_category: [""],
+        armor_category: ["", Validators.required],
         weight: [""],
-        cost_quantity: [""],
-        cost_unit: ["gp"],
+        cost_quantity: ["", Validators.required],
+        cost_unit: ["gp", Validators.required],
         requires_attunement: [false],
-        rarity: [""],
+        rarity: ["", Validators.required],
+        description: ["", Validators.required],
       }),
       armorClassAndRequirements: this.fb.group({
         armor_class_base: ["", Validators.required],
@@ -54,7 +59,6 @@ export class CreateArmorDialogComponent implements OnInit {
         stealth_disadvantage: [false],
         str_minimum: [0],
       }),
-      description: [""],
     });
   }
 
@@ -63,6 +67,25 @@ export class CreateArmorDialogComponent implements OnInit {
    *
    */
   onSubmit(): void {
+    this.hasFormErrors = false;
+    const formGroups = this.form.controls;
+
+    // Check form for errors.
+    if (this.form.invalid) {
+      // FormGroups
+      Object.keys(formGroups).forEach((formgroupName) => {
+        let nestedControls = formGroups[formgroupName]["controls"];
+
+        // Nested Controls in FormGroups
+        Object.keys(nestedControls).forEach((nestedControlName) => {
+          nestedControls[nestedControlName].markAsTouched();
+        });
+      });
+
+      this.hasFormErrors = true;
+      return;
+    }
+
     let formValues: any = this.form.value;
 
     let generalInformation: any = this.form.value.generalInformation;
@@ -100,5 +123,14 @@ export class CreateArmorDialogComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  /**
+   * Alert close event
+   *
+   * @param {*} $event
+   */
+  onAlertClose($event) {
+    this.hasFormErrors = false;
   }
 }

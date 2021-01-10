@@ -19,7 +19,7 @@ import { map, startWith } from "rxjs/operators";
 import { Observable } from "rxjs";
 // MatChipInput
 import { MatChipInputEvent } from "@angular/material/chips";
-import { COMMA, ENTER, SPACE, TAB } from "@angular/cdk/keycodes";
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
 // MatAutocomplete
 import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 
@@ -36,7 +36,18 @@ export class CreateNpcDialogComponent implements OnInit {
   // Error messages
   errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
 
-  // MatChip properties
+  // * 5E Resources
+  ALIGNMENTS = FIFTH_EDITION_RESOURCES.GENERAL.ALIGNMENTS;
+  DAMAGE_TYPES = FIFTH_EDITION_RESOURCES.GENERAL.DAMAGE_TYPES;
+  DICE = FIFTH_EDITION_RESOURCES.GENERAL.DICE;
+  LANGUAGES = FIFTH_EDITION_RESOURCES.GENERAL.LANGUAGES.STANDARD.concat(
+    FIFTH_EDITION_RESOURCES.GENERAL.LANGUAGES.EXOTIC
+  );
+  MOVEMENTS = FIFTH_EDITION_RESOURCES.GENERAL.MOVEMENTS;
+  SIZES = FIFTH_EDITION_RESOURCES.GENERAL.SIZES;
+  SENSES = FIFTH_EDITION_RESOURCES.GENERAL.SENSES;
+
+  // * MatChip properties
   visible = true;
   selectable = true;
   removable = true;
@@ -45,16 +56,9 @@ export class CreateNpcDialogComponent implements OnInit {
   // Languages MatChip properties
   languageCtrl = new FormControl();
   filteredLanguages: Observable<string[]>;
-
-  // 5E Resources
-  ALIGNMENTS = FIFTH_EDITION_RESOURCES.GENERAL.ALIGNMENTS;
-  DICE = FIFTH_EDITION_RESOURCES.GENERAL.DICE;
-  LANGUAGES = FIFTH_EDITION_RESOURCES.GENERAL.LANGUAGES.STANDARD.concat(
-    FIFTH_EDITION_RESOURCES.GENERAL.LANGUAGES.EXOTIC
-  );
-  MOVEMENTS = FIFTH_EDITION_RESOURCES.GENERAL.MOVEMENTS;
-  SIZES = FIFTH_EDITION_RESOURCES.GENERAL.SIZES;
-  SENSES = FIFTH_EDITION_RESOURCES.GENERAL.SENSES;
+  // Damage MatChip properties
+  damageImmunitiesCtrl = new FormControl();
+  filteredDamageImmunities: Observable<string[]>;
 
   // * Npc metadata
   // General
@@ -72,8 +76,9 @@ export class CreateNpcDialogComponent implements OnInit {
   actions: any = [];
   legendary_actions: any = [];
 
-  // Input references
+  // Input references - for MatChip with MatAutocomplete
   @ViewChild("languageInput") languageInput: ElementRef;
+  // @ViewChild("damageImmunities") damageImmunities: ElementRef;
 
   constructor(
     public dialogRef: MatDialogRef<CreateNpcDialogComponent>,
@@ -498,7 +503,7 @@ export class CreateNpcDialogComponent implements OnInit {
   selected(event: MatAutocompleteSelectedEvent): void {
     this.languages.push(event.option.viewValue);
     this.languageInput.nativeElement.value = "";
-    this.form.controls.generalInformation.get("languages").setValue(null);
+    this.languageCtrl.setValue(null);
   }
 
   /**

@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+// Constants
+import { CONSTANTS_CREATE_DIALOG } from "../constants";
 // 5E Resources
 import { FIFTH_EDITION_RESOURCES } from "src/environments/app-secrets";
 // FormBuilder
@@ -17,6 +19,8 @@ export class CreateItemDialogComponent implements OnInit {
   form: FormGroup;
   hasFormErrors = false;
   isSubmitted: boolean = false;
+  // Error messages
+  errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
 
   // 5E Resources
   RARITIES = FIFTH_EDITION_RESOURCES.GENERAL.RARITIES;
@@ -40,11 +44,11 @@ export class CreateItemDialogComponent implements OnInit {
       generalInformation: this.fb.group({
         name: ["", Validators.required],
         equipment_category: [""],
-        cost_quantity: [""],
-        cost_unit: ["gp"],
+        cost_quantity: ["", Validators.required],
+        cost_unit: ["gp", Validators.required],
         weight: [""],
+        description: ["", Validators.required],
       }),
-      description: [""],
     });
   }
 
@@ -53,6 +57,25 @@ export class CreateItemDialogComponent implements OnInit {
    *
    */
   onSubmit(): void {
+    this.hasFormErrors = false;
+    const formGroups = this.form.controls;
+
+    // Check form for errors.
+    if (this.form.invalid) {
+      // FormGroups
+      Object.keys(formGroups).forEach((formgroupName) => {
+        let nestedControls = formGroups[formgroupName]["controls"];
+
+        // Nested Controls in FormGroups
+        Object.keys(nestedControls).forEach((nestedControlName) => {
+          nestedControls[nestedControlName].markAsTouched();
+        });
+      });
+
+      this.hasFormErrors = true;
+      return;
+    }
+
     let formValues: any = this.form.value;
 
     let generalInformation: any = this.form.value.generalInformation;
@@ -82,5 +105,14 @@ export class CreateItemDialogComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  /**
+   * Alert close event
+   *
+   * @param {*} $event
+   */
+  onAlertClose($event) {
+    this.hasFormErrors = false;
   }
 }

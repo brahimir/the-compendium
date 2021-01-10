@@ -13,6 +13,23 @@ h4 {
   margin-top: 3rem;
 }
 
+// Dialog Cards
+.tc-card-wrapper {
+  margin-bottom: 1rem;
+}
+
+.tc-card-content {
+  padding: 1.25rem;
+  border: 2px solid;
+  border-color: $tc-red;
+}
+
+.tc-card-header {
+  padding: 1rem;
+  background-color: $tc-red;
+  color: $tc-white;
+}
+
 // Dialog Headers and Footers
 div.dialog-header {
   margin-bottom: 30px;

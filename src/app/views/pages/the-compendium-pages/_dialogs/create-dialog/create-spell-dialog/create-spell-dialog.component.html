@@ -2,12 +2,33 @@
   <mat-dialog-content class="mat-typography">
     <!-- start:: Header -->
     <div class="dialog-header">
-      <h1>Create a Homebrew Spell</h1>
+      <div class="row">
+        <div class="col-6">
+          <h1>Create a Homebrew Spell</h1>
+        </div>
+        <div class="d-flex justify-content-end col-6">
+          <button mat-icon-button [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
     <!-- end:: Header -->
 
     <!-- start:: Form -->
     <form [formGroup]="form">
+      <!-- start:: KT Alert if form has errors. -->
+      <kt-alert
+        *ngIf="hasFormErrors"
+        type="warn"
+        [duration]="30000"
+        [showCloseButton]="true"
+        (close)="onAlertClose($event)"
+      >
+        {{ errorMessage }}
+      </kt-alert>
+      <!-- start:: KT Alert if form has errors. -->
+
       <h4 class="tc-red" style="font-weight: bold">GENERAL INFORMATION</h4>
       <div class="divider"></div>
 
@@ -24,6 +45,10 @@
                 placeholder="Eg. Expelliarmus"
                 type="text"
               />
+              <mat-error> Spell name is <strong>required</strong> </mat-error>
+              <mat-hint align="start">
+                The <strong>name</strong> of the Spell.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Name -->
@@ -39,6 +64,10 @@
                 type="number"
                 min="0"
               />
+              <mat-error> Spell level is <strong>required</strong> </mat-error>
+              <mat-hint align="start">
+                The <strong>level</strong> of the Spell.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Level -->
@@ -55,6 +84,10 @@
                 placeholder="Eg. 60"
                 type="text"
               />
+              <mat-error> Spell range is <strong>required</strong> </mat-error>
+              <mat-hint align="start">
+                The <strong>range</strong> of the Spell.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Range -->
@@ -69,6 +102,12 @@
                 placeholder="Eg. 1 Action"
                 type="text"
               />
+              <mat-error>
+                Spell casting time is <strong>required</strong>
+              </mat-error>
+              <mat-hint align="start">
+                The <strong>casting time</strong> of the Spell.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Casting Time -->
@@ -85,6 +124,12 @@
                 placeholder="Eg. Instantaneous"
                 type="text"
               />
+              <mat-error>
+                Spell duration is <strong>required</strong>
+              </mat-error>
+              <mat-hint align="start">
+                The <strong>duration</strong> of the Spell.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Duration -->
@@ -130,6 +175,9 @@
                 placeholder="Eg. Ranged"
                 type="text"
               />
+              <mat-hint align="start">
+                The <strong>attack type</strong> of the Spell.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- start:: Attack Type -->
@@ -144,6 +192,9 @@
                 placeholder="Eg. Fire"
                 type="text"
               />
+              <mat-hint align="start">
+                The <strong>damage type</strong> of the Spell.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- start:: Damage Type -->
@@ -158,7 +209,6 @@
                 <mat-chip
                   *ngFor="let item of spell_classes"
                   color="primary"
-                  selected
                   [selectable]="selectable"
                   [removable]="removable"
                   (removed)="remove(item)"
@@ -174,6 +224,9 @@
                   (matChipInputTokenEnd)="add($event)"
                 />
               </mat-chip-list>
+              <mat-hint align="start">
+                <strong>Classes</strong> that can learn and cast the Spell.
+              </mat-hint>
             </mat-form-field>
           </div>
         </div>
@@ -190,6 +243,9 @@
                 placeholder="Eg. Evocation"
                 type="text"
               />
+              <mat-hint align="start">
+                The <strong>school</strong> of magic the Spell belongs to.
+              </mat-hint>
             </mat-form-field>
           </div>
         </div>
@@ -228,6 +284,9 @@
                   placeholder="Eg. A fashioned Ollivander wand."
                   type="text"
                 />
+                <mat-hint align="start">
+                  The <strong>material</strong> required to cast the Spell.
+                </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Material -->
@@ -243,39 +302,50 @@
       </h4>
       <div class="divider"></div>
 
-      <!-- * start:: Description -->
-      <div class="form-group row">
-        <div class="col">
-          <mat-form-field appearance="outline">
-            <mat-label>Description</mat-label>
-            <textarea
-              matInput
-              rows="5"
-              cols="50"
-              formControlName="description"
-              placeholder="Eg. Fires a disarming charm at a target within 60 feet. The target must succeed on a Strength saving throw against your Spellcasting DC, otherwise they drop their main-hand weapon."
-            ></textarea>
-          </mat-form-field>
+      <div formGroupName="generalInformation">
+        <!-- * start:: Description -->
+        <div class="form-group row">
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea
+                matInput
+                rows="5"
+                cols="50"
+                formControlName="description"
+                placeholder="Eg. Fires a disarming charm at a target within 60 feet. The target must succeed on a Strength saving throw against your Spellcasting DC, otherwise they drop their main-hand weapon."
+              ></textarea>
+              <mat-error>
+                Spell description is <strong>required</strong>
+              </mat-error>
+              <mat-hint align="start">
+                The <strong>description</strong> of the Spell.
+              </mat-hint>
+            </mat-form-field>
+          </div>
         </div>
-      </div>
-      <!-- * end:: Description -->
+        <!-- * end:: Description -->
 
-      <!-- * start:: At Higher Levels -->
-      <div class="form-group row">
-        <div class="col">
-          <mat-form-field appearance="outline">
-            <mat-label>At Higher Levels</mat-label>
-            <textarea
-              matInput
-              rows="3"
-              cols="50"
-              formControlName="higher_level"
-              placeholder="Eg. Casting this spell using a Spell Slot higher than Level 1 increases the spell save DC by +1, for each level higher that the Spell Slot was used to cast this spell."
-            ></textarea>
-          </mat-form-field>
+        <!-- * start:: At Higher Levels -->
+        <div class="form-group row">
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>At Higher Levels</mat-label>
+              <textarea
+                matInput
+                rows="3"
+                cols="50"
+                formControlName="higher_level"
+                placeholder="Eg. Casting this spell using a Spell Slot higher than Level 1 increases the spell save DC by +1, for each level higher that the Spell Slot was used to cast this spell."
+              ></textarea>
+              <mat-hint align="start">
+                When the Spell is cast at a <strong>higher level.</strong>
+              </mat-hint>
+            </mat-form-field>
+          </div>
         </div>
+        <!-- * end:: At Higher Levels -->
       </div>
-      <!-- * end:: At Higher Levels -->
 
       <!-- start:: Footer -->
       <div class="card-footer">

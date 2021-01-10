@@ -47,6 +47,21 @@ export const FIFTH_EDITION_RESOURCES = {
     ],
 
     CURRENCIES: ["cp", "sp", "ep", "gp", "pp"],
+    DAMAGE_TYPES: [
+      "Acid",
+      "Bludgeoning",
+      "Cold",
+      "Fire",
+      "Force",
+      "Lightning",
+      "Necrotic",
+      "Piercing",
+      "Poison",
+      "Psychic",
+      "Radiant",
+      "Slashing",
+      "Thunder",
+    ],
     DICE: ["d4", "d6", "d8", "d10", "d12", "d20"],
     LANGUAGES: {
       STANDARD: [

@@ -2,12 +2,33 @@
   <mat-dialog-content class="mat-typography">
     <!-- start:: Header -->
     <div class="dialog-header">
-      <h1>Create a Homebrew Weapon</h1>
+      <div class="row">
+        <div class="col-6">
+          <h1>Create a Homebrew Weapon</h1>
+        </div>
+        <div class="d-flex justify-content-end col-6">
+          <button mat-icon-button [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
     <!-- end:: Header -->
 
     <!-- start:: Form -->
     <form [formGroup]="form">
+      <!-- start:: KT Alert if form has errors. -->
+      <kt-alert
+        *ngIf="hasFormErrors"
+        type="warn"
+        [duration]="30000"
+        [showCloseButton]="true"
+        (close)="onAlertClose($event)"
+      >
+        {{ errorMessage }}
+      </kt-alert>
+      <!-- start:: KT Alert if form has errors. -->
+
       <h4 class="tc-red" style="font-weight: bold">GENERAL INFORMATION</h4>
       <div class="divider"></div>
 
@@ -24,9 +45,14 @@
                 placeholder="Eg. Silverlight"
                 type="text"
               />
+              <mat-error> Weapon name is <strong>required</strong> </mat-error>
+              <mat-hint align="start">
+                The <strong>name</strong> of the Weapon.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Name -->
+
           <!-- start:: Category -->
           <div class="col-6">
             <mat-form-field>
@@ -66,6 +92,10 @@
                 type="number"
                 min="0"
               />
+              <mat-error> Numeric amount of cost is <strong>required</strong> </mat-error>
+              <mat-hint align="start">
+                The <strong>numeric amount</strong> of currency that the Weapon costs.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Cost: Quantity -->
@@ -79,6 +109,10 @@
                   {{ item }}
                 </mat-option>
               </mat-select>
+              <mat-error> Unit of currency is <strong>required</strong> </mat-error>
+              <mat-hint align="start">
+                The <strong>unit of currency</strong> of the Weapon.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Cost: Unit -->
@@ -103,6 +137,10 @@
                   {{ item }}
                 </mat-option>
               </mat-select>
+              <mat-error>Rarity is <strong>required</strong> </mat-error>
+              <mat-hint align="start">
+                The <strong>rarity</strong> of the Weapon.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Rarity -->
@@ -136,6 +174,10 @@
                 type="number"
                 min="1"
               />
+              <mat-error>Number of damage dice is <strong>required</strong> </mat-error>
+              <mat-hint align="start">
+                The <strong>number of damage dice</strong> the Weapon has.
+              </mat-hint>
             </mat-form-field>
           </div>
           <div class="col-3">
@@ -146,6 +188,10 @@
                   {{ item }}
                 </mat-option>
               </mat-select>
+              <mat-error>Type of damage die is <strong>required</strong> </mat-error>
+              <mat-hint align="start">
+                The <strong>type of damage die</strong> of the Weapon.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Damage Dice -->
@@ -160,6 +206,10 @@
                 placeholder="Eg. Slashing"
                 type="text"
               />
+              <mat-error>The weapon's damage type is<strong>required</strong> </mat-error>
+              <mat-hint align="start">
+                The Weapon's <strong>damage type.</strong>
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Damage Type -->
@@ -224,7 +274,7 @@
       <div class="divider"></div>
 
       <!-- * start:: Description -->
-      <div class="form-group row">
+      <div formGroupName="generalInformation" class="form-group row">
         <div class="col">
           <mat-form-field appearance="outline">
             <textarea
@@ -234,6 +284,10 @@
               formControlName="description"
               placeholder="Eg. This weapon has a +2 to hit on attack rolls. This weapon also deals additional 2d6 Radiant damage to undead, demons, and lycanthrope targets."
             ></textarea>
+            <mat-error> Weapon description is <strong>required</strong> </mat-error>
+            <mat-hint align="start">
+              The description of the <strong>weapon.</strong>
+            </mat-hint>
           </mat-form-field>
         </div>
       </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+// Constants
+import { CONSTANTS_CREATE_DIALOG } from "../constants";
 // 5E Resources
 import { FIFTH_EDITION_RESOURCES } from "src/environments/app-secrets";
 // FormBuilder
@@ -17,6 +19,8 @@ export class CreateWeaponDialogComponent implements OnInit {
   form: FormGroup;
   hasFormErrors = false;
   isSubmitted: boolean = false;
+  // Error messages
+  errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
 
   // 5E Resources
   DICE = FIFTH_EDITION_RESOURCES.GENERAL.DICE;
@@ -44,16 +48,17 @@ export class CreateWeaponDialogComponent implements OnInit {
         name: ["", Validators.required],
         weapon_category: [""],
         weapon_range: [""],
-        cost_quantity: [""],
-        cost_unit: ["gp"],
+        cost_quantity: ["", Validators.required],
+        cost_unit: ["gp", Validators.required],
         weight: [""],
         requires_attunement: [""],
-        rarity: [""],
+        rarity: ["", Validators.required],
+        description: ["", Validators.required],
       }),
       damageAndRange: this.fb.group({
-        damage_dice_number: [""],
-        damage_dice_die: [""],
-        damage_type: [""],
+        damage_dice_number: ["", Validators.required],
+        damage_dice_die: ["", Validators.required],
+        damage_type: ["", Validators.required],
         range_normal: [""],
         range_long: [""],
       }),
@@ -70,7 +75,6 @@ export class CreateWeaponDialogComponent implements OnInit {
         properties_TwoHanded: [false],
         properties_Versatile: [false],
       }),
-      description: [""],
     });
   }
 
@@ -80,13 +84,19 @@ export class CreateWeaponDialogComponent implements OnInit {
    */
   onSubmit(): void {
     this.hasFormErrors = false;
-    const controls = this.form.controls;
+    const formGroups = this.form.controls;
 
     // Check form for errors.
     if (this.form.invalid) {
-      Object.keys(controls).forEach((controlName) =>
-        controls[controlName].markAsTouched()
-      );
+      // FormGroups
+      Object.keys(formGroups).forEach((formgroupName) => {
+        let nestedControls = formGroups[formgroupName]["controls"];
+
+        // Nested Controls in FormGroups
+        Object.keys(nestedControls).forEach((nestedControlName) => {
+          nestedControls[nestedControlName].markAsTouched();
+        });
+      });
 
       this.hasFormErrors = true;
       return;
@@ -160,5 +170,14 @@ export class CreateWeaponDialogComponent implements OnInit {
     }
 
     return results;
+  }
+
+  /**
+   * Alert close event
+   *
+   * @param {*} $event
+   */
+  onAlertClose($event) {
+    this.hasFormErrors = false;
   }
 }
