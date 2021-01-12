@@ -620,7 +620,7 @@
           <div class="col">
             <span *ngFor="let item of SENSES" class="pr-5">
               <mat-checkbox formControlName="senses_{{ item }}" color="primary">
-                {{ replaceUnderscoresWithSpaces(item) }}
+                {{ formattingService.replaceUnderscoresWithSpaces(item) }}
               </mat-checkbox>
             </span>
           </div>
