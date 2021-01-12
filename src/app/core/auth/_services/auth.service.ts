@@ -21,6 +21,7 @@ export class AuthService {
 
   // Authentication/Authorization
   login(email: string, password: string): Observable<User> {
+    // todo - try subscribing to this and see what the data looks like.
     return this.http.post<User>(USERS_URL, {email, password});
   }
 

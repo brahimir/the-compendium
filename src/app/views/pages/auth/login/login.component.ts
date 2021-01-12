@@ -135,7 +135,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 			.login(authData.email, authData.password)
 			.pipe(
 				tap(user => {
-					if (user) {
+					if (user) {						
 						this.store.dispatch(new Login({authToken: user.accessToken}));
 						this.router.navigateByUrl(this.returnUrl); // Main page
 					} else {

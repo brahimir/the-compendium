@@ -9,7 +9,7 @@ export class User extends BaseModel {
   refreshToken: string;
   roles: number[];
   fullName: string;
-  user_settings: {
+  userSettings: {
     user_dashboard: string[],
     user_storyboard: {
       plots_main:{

@@ -1,36 +1,41 @@
 // Angular
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 // RxJS
-import {forkJoin, Observable, of} from 'rxjs';
-import {catchError, map, mergeMap} from 'rxjs/operators';
+import { forkJoin, Observable, of } from "rxjs";
+import { catchError, map, mergeMap } from "rxjs/operators";
 // Lodash
-import {each, filter, find, some} from 'lodash';
+import { each, filter, find, some } from "lodash";
 // Environment
-import {environment} from '../../../../environments/environment';
+import { environment } from "../../../../environments/environment";
 // CRUD
-import {HttpUtilsService, QueryParamsModel, QueryResultsModel} from '../../_base/crud';
+import {
+  HttpUtilsService,
+  QueryParamsModel,
+  QueryResultsModel,
+} from "../../_base/crud";
 // Models
-import {User} from '../_models/user.model';
-import {Permission} from '../_models/permission.model';
-import {Role} from '../_models/role.model';
+import { User } from "../_models/user.model";
+import { Permission } from "../_models/permission.model";
+import { Role } from "../_models/role.model";
+// The Compendium API
+import { ROUTES } from "src/environments/app-secrets";
 
-const API_USERS_URL = 'api/users';
-const API_PERMISSION_URL = 'api/permissions';
-const API_ROLES_URL = 'api/roles';
+const USERS_URL = ROUTES.AUTH.USERS;
+const API_USERS_URL = "api/users";
+const API_PERMISSION_URL = "api/permissions";
+const API_ROLES_URL = "api/roles";
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient,
-              private httpUtils: HttpUtilsService) {
-  }
+  constructor(private http: HttpClient, private httpUtils: HttpUtilsService) {}
 
   // Authentication/Authorization
   login(email: string, password: string): Observable<User> {
     if (!email || !password) {
       return of(null);
     }
-
+    
     return this.getAllUsers().pipe(
       map((result: User[]) => {
         if (result.length <= 0) {
@@ -38,7 +43,10 @@ export class AuthService {
         }
 
         const user = find(result, (item: User) => {
-          return (item.email.toLowerCase() === email.toLowerCase() && item.password === password);
+          return (
+            item.email.toLowerCase() === email.toLowerCase() &&
+            item.password === password
+          );
         });
 
         if (!user) {
@@ -49,21 +57,21 @@ export class AuthService {
         return user;
       })
     );
-
   }
 
   register(user: User): Observable<any> {
-    user.accessToken = 'access-token-' + Math.random();
-    user.refreshToken = 'access-token-' + Math.random();
+    user.accessToken = "access-token-" + Math.random();
+    user.refreshToken = "access-token-" + Math.random();
 
     let httpHeaders = new HttpHeaders();
-    httpHeaders = httpHeaders.set('Content-Type', 'application/json');
-    return this.http.post<User>(API_USERS_URL, user, {headers: httpHeaders})
+    httpHeaders = httpHeaders.set("Content-Type", "application/json");
+    return this.http
+      .post<User>(API_USERS_URL, user, { headers: httpHeaders })
       .pipe(
         map((res: User) => {
           return res;
         }),
-        catchError(err => {
+        catchError((err) => {
           return null;
         })
       );
@@ -77,7 +85,7 @@ export class AuthService {
         }
 
         const user = find(users, (item: User) => {
-          return (item.email.toLowerCase() === email.toLowerCase());
+          return item.email.toLowerCase() === email.toLowerCase();
         });
 
         if (!user) {
@@ -87,7 +95,7 @@ export class AuthService {
         user.password = undefined;
         return user;
       }),
-      catchError(this.handleError('forgot-password', []))
+      catchError(this.handleError("forgot-password", []))
     );
   }
 
@@ -104,7 +112,7 @@ export class AuthService {
         }
 
         const user = find(result, (item: User) => {
-          return (item.accessToken === userToken.toString());
+          return item.accessToken === userToken.toString();
         });
 
         if (!user) {
@@ -123,13 +131,13 @@ export class AuthService {
   createUser(user: User): Observable<User> {
     let httpHeaders = new HttpHeaders();
     // Note: Add headers if needed (tokens/bearer)
-    httpHeaders = httpHeaders.set('Content-Type', 'application/json');
-    return this.http.post<User>(API_USERS_URL, user, {headers: httpHeaders});
+    httpHeaders = httpHeaders.set("Content-Type", "application/json");
+    return this.http.post<User>(API_USERS_URL, user, { headers: httpHeaders });
   }
 
   // READ
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(API_USERS_URL);
+    return this.http.get<User[]>(USERS_URL);
   }
 
   getUserById(userId: number): Observable<User> {
@@ -150,9 +158,9 @@ export class AuthService {
   // tslint:disable-next-line
   updateUser(_user: User): Observable<any> {
     let httpHeaders = new HttpHeaders();
-    httpHeaders = httpHeaders.set('Content-Type', 'application/json');
-    return this.http.put(API_USERS_URL, _user, {headers: httpHeaders}).pipe(
-      catchError(err => {
+    httpHeaders = httpHeaders.set("Content-Type", "application/json");
+    return this.http.put(API_USERS_URL, _user, { headers: httpHeaders }).pipe(
+      catchError((err) => {
         return of(null);
       })
     );
@@ -179,7 +187,7 @@ export class AuthService {
     const allRolesRequest = this.http.get<Permission[]>(API_PERMISSION_URL);
     const roleRequest = roleId ? this.getRoleById(roleId) : of(null);
     return forkJoin(allRolesRequest, roleRequest).pipe(
-      map(res => {
+      map((res) => {
         const allPermissions: Permission[] = res[0];
         const role: Role = res[1];
         if (!allPermissions || allPermissions.length === 0) {
@@ -192,31 +200,57 @@ export class AuthService {
     );
   }
 
-  private getRolePermissionsTree(allPermission: Permission[] = [], rolePermissionIds: number[] = []): Permission[] {
+  private getRolePermissionsTree(
+    allPermission: Permission[] = [],
+    rolePermissionIds: number[] = []
+  ): Permission[] {
     const result: Permission[] = [];
-    const root: Permission[] = filter(allPermission, (item: Permission) => !item.parentId);
+    const root: Permission[] = filter(
+      allPermission,
+      (item: Permission) => !item.parentId
+    );
     each(root, (rootItem: Permission) => {
       rootItem._children = [];
-      rootItem._children = this.collectChildrenPermission(allPermission, rootItem.id, rolePermissionIds);
-      rootItem.isSelected = (some(rolePermissionIds, (id: number) => id === rootItem.id));
+      rootItem._children = this.collectChildrenPermission(
+        allPermission,
+        rootItem.id,
+        rolePermissionIds
+      );
+      rootItem.isSelected = some(
+        rolePermissionIds,
+        (id: number) => id === rootItem.id
+      );
       result.push(rootItem);
     });
     return result;
   }
 
-  private collectChildrenPermission(allPermission: Permission[] = [],
-                                    parentId: number, rolePermissionIds: number[] = []): Permission[] {
+  private collectChildrenPermission(
+    allPermission: Permission[] = [],
+    parentId: number,
+    rolePermissionIds: number[] = []
+  ): Permission[] {
     const result: Permission[] = [];
     // tslint:disable-next-line
-    const _children: Permission[] = filter(allPermission, (item: Permission) => item.parentId === parentId);
+    const _children: Permission[] = filter(
+      allPermission,
+      (item: Permission) => item.parentId === parentId
+    );
     if (_children.length === 0) {
       return result;
     }
 
     each(_children, (childItem: Permission) => {
       childItem._children = [];
-      childItem._children = this.collectChildrenPermission(allPermission, childItem.id, rolePermissionIds);
-      childItem.isSelected = (some(rolePermissionIds, (id: number) => id === childItem.id));
+      childItem._children = this.collectChildrenPermission(
+        allPermission,
+        childItem.id,
+        rolePermissionIds
+      );
+      childItem.isSelected = some(
+        rolePermissionIds,
+        (id: number) => id === childItem.id
+      );
       result.push(childItem);
     });
     return result;
@@ -235,15 +269,15 @@ export class AuthService {
   createRole(role: Role): Observable<Role> {
     // Note: Add headers if needed (tokens/bearer)
     let httpHeaders = new HttpHeaders();
-    httpHeaders = httpHeaders.set('Content-Type', 'application/json');
-    return this.http.post<Role>(API_ROLES_URL, role, {headers: httpHeaders});
+    httpHeaders = httpHeaders.set("Content-Type", "application/json");
+    return this.http.post<Role>(API_ROLES_URL, role, { headers: httpHeaders });
   }
 
   // UPDATE => PUT: update the role on the server
   updateRole(role: Role): Observable<any> {
     let httpHeaders = new HttpHeaders();
-    httpHeaders = httpHeaders.set('Content-Type', 'application/json');
-    return this.http.put(API_ROLES_URL, role, {headers: httpHeaders});
+    httpHeaders = httpHeaders.set("Content-Type", "application/json");
+    return this.http.put(API_ROLES_URL, role, { headers: httpHeaders });
   }
 
   // DELETE => delete the role from the server
@@ -255,7 +289,7 @@ export class AuthService {
   findRoles(queryParams: QueryParamsModel): Observable<QueryResultsModel> {
     // This code imitates server calls
     return this.http.get<Role[]>(API_ROLES_URL).pipe(
-      mergeMap(res => {
+      mergeMap((res) => {
         const result = this.httpUtils.baseFilter(res, queryParams, []);
         return of(result);
       })
@@ -267,12 +301,14 @@ export class AuthService {
     return this.getAllUsers().pipe(
       map((users: User[]) => {
         // tslint:disable-next-line
-        return some(users, (user: User) => some(user.roles, (_roleId: number) => _roleId === roleId));
+        return some(users, (user: User) =>
+          some(user.roles, (_roleId: number) => _roleId === roleId)
+        );
       })
     );
   }
 
-  private handleError<T>(operation = 'operation', result?: any) {
+  private handleError<T>(operation = "operation", result?: any) {
     return (error: any): Observable<any> => {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead

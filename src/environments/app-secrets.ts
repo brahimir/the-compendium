@@ -2,7 +2,7 @@
 export const ROUTES = {
   // Auth
   AUTH: {
-    USERS: "api/users",
+    USERS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users",
     PERMISSIONS: "api/permissions",
     ROLES: "api/roles",
   },

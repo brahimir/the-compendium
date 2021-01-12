@@ -8,7 +8,7 @@ export class UsersTable {
       accessToken: 'access-token-8f3ae836da744329a6f93bf20594b5cc',
       refreshToken: 'access-token-f8c137a2c98743f48b643e71161d90aa',
       roles: [1], // Administrator
-      fullname: 'Administrator',
+      fullName: 'Administrator',
       user_settings: {
         user_dashboard: ["Weapons", "Armor", "Items", "NPCs", "Spells"],
         user_storyboard: {
@@ -57,7 +57,7 @@ export class UsersTable {
       accessToken: 'access-token-6829bba69dd3421d8762991e9e806dbfs',
       refreshToken: 'access-token-kdfk3kasofk92k1k12emfk934k921129',
       roles: [2], // Dungeon Master
-      fullname: 'Dungeon Master',
+      fullName: 'Dungeon Master',
       user_settings: {
         user_dashboard: ["Weapons", "Armor", "Items", "NPCs", "Spells"],
         user_storyboard: {
@@ -107,7 +107,7 @@ export class UsersTable {
       accessToken: 'access-token-d2dff7b82f784de584b60964abbe45b9',
       refreshToken: 'access-token-c999ccfe74aa40d0aa1a64c5e620c1a5',
       roles: [3], // Player
-      fullname: 'Player',
+      fullName: 'Player',
       user_settings: {
         user_dashboard: ["Weapons", "Armor", "Items", "NPCs", "Spells"],
         user_storyboard: {
@@ -156,7 +156,7 @@ export class UsersTable {
       accessToken: 'access-token-7dhdh1723jkk23828381238jdfj81283j',
       refreshToken: 'access-token-234jfjs34j393jjsf3asjkf123490fja',
       roles: [2], // Dungeon Master
-      fullname: 'Nick',
+      fullName: 'Nick',
       user_settings: {
         user_dashboard: ["Weapons", "Armor", "Items", "NPCs", "Spells"],
         user_storyboard: {
@@ -205,7 +205,7 @@ export class UsersTable {
       accessToken: 'access-token-123nj2k3n245192m231232k3m2904512m31',
       refreshToken: 'access-token-455jsf903mrf923msfm903m99tr3kmm10a',
       roles: [2], // Dungeon Master
-      fullname: 'Pam',
+      fullName: 'Pam',
     },
     {
       id: 6,
@@ -215,7 +215,7 @@ export class UsersTable {
       accessToken: 'access-token-232323ijqijawidjkasid12323aisjeij12i3',
       refreshToken: 'access-token-823273jasidasidjiawsdaiosdjoadjaod2a',
       roles: [2], // Dungeon Master
-      fullname: 'Joe V.',
+      fullName: 'Joe V.',
       user_settings: {
         user_dashboard: ["Weapons", "Armor", "Items", "NPCs", "Spells"],
         user_storyboard: {
