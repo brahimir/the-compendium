@@ -117,7 +117,7 @@ export const FIFTH_EDITION_RESOURCES = {
       "Reach",
       "Special",
       "Thrown",
-      "TwoHanded",
+      "Two Handed",
       "Versatile",
     ],
   },

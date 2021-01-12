@@ -29,7 +29,7 @@
       </kt-alert>
       <!-- start:: KT Alert if form has errors. -->
 
-      <h4 class="tc-red" style="font-weight: bold">GENERAL INFORMATION</h4>
+      <h4 class="tc-red" style="font-weight: bold">General Information</h4>
       <div class="divider"></div>
 
       <!-- * start:: FormGroup - General Information -->
@@ -63,6 +63,9 @@
                 placeholder="Eg. Martial"
                 type="text"
               />
+              <mat-hint align="start">
+                The <strong>category</strong> of the Weapon.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Category -->
@@ -78,6 +81,9 @@
                   {{ item }}
                 </mat-option>
               </mat-select>
+              <mat-hint align="start">
+                The <strong>range</strong> of the Weapon.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Range -->
@@ -92,9 +98,12 @@
                 type="number"
                 min="0"
               />
-              <mat-error> Numeric amount of cost is <strong>required</strong> </mat-error>
+              <mat-error>
+                Numeric amount of cost is <strong>required</strong>
+              </mat-error>
               <mat-hint align="start">
-                The <strong>numeric amount</strong> of currency that the Weapon costs.
+                The <strong>numeric amount</strong> of currency that the Weapon
+                costs.
               </mat-hint>
             </mat-form-field>
           </div>
@@ -109,7 +118,9 @@
                   {{ item }}
                 </mat-option>
               </mat-select>
-              <mat-error> Unit of currency is <strong>required</strong> </mat-error>
+              <mat-error>
+                Unit of currency is <strong>required</strong>
+              </mat-error>
               <mat-hint align="start">
                 The <strong>unit of currency</strong> of the Weapon.
               </mat-hint>
@@ -124,6 +135,9 @@
             <mat-form-field>
               <mat-label>Weight (pounds)</mat-label>
               <input formControlName="weight" matInput type="number" />
+              <mat-hint align="start">
+                The <strong>weight</strong> of the Weapon.
+              </mat-hint>
             </mat-form-field>
           </div>
           <!-- end:: Weight -->
@@ -158,12 +172,12 @@
       </div>
       <!-- * end:: FormGroup - General Information -->
 
-      <h4 class="tc-red" style="font-weight: bold">DAMAGE AND RANGE</h4>
+      <h4 class="tc-red" style="font-weight: bold">Damage & Range</h4>
       <div class="divider"></div>
 
       <!-- * start:: FormGroup - Damage and Range -->
       <div formGroupName="damageAndRange" class="form-group">
-        <div class="form-group row">
+        <div class="form-group row pb-6">
           <!-- start:: Damage Dice-->
           <div class="col-3">
             <mat-form-field>
@@ -174,7 +188,9 @@
                 type="number"
                 min="1"
               />
-              <mat-error>Number of damage dice is <strong>required</strong> </mat-error>
+              <mat-error
+                >Number of damage dice is <strong>required</strong>
+              </mat-error>
               <mat-hint align="start">
                 The <strong>number of damage dice</strong> the Weapon has.
               </mat-hint>
@@ -188,7 +204,9 @@
                   {{ item }}
                 </mat-option>
               </mat-select>
-              <mat-error>Type of damage die is <strong>required</strong> </mat-error>
+              <mat-error
+                >Type of damage die is <strong>required</strong>
+              </mat-error>
               <mat-hint align="start">
                 The <strong>type of damage die</strong> of the Weapon.
               </mat-hint>
@@ -206,7 +224,9 @@
                 placeholder="Eg. Slashing"
                 type="text"
               />
-              <mat-error>The weapon's damage type is<strong>required</strong> </mat-error>
+              <mat-error
+                >The weapon's damage type is<strong>required</strong>
+              </mat-error>
               <mat-hint align="start">
                 The Weapon's <strong>damage type.</strong>
               </mat-hint>
@@ -215,8 +235,13 @@
           <!-- end:: Damage Type -->
         </div>
 
-        <!-- todo:: Remove the Normal and Long range inputs on Melee Weapons. -->
-        <div class="form-group row">
+        <div
+          *ngIf="
+            form.controls.generalInformation.get('weapon_range').value ===
+            'Ranged'
+          "
+          class="form-group row"
+        >
           <!-- start:: Normal Range -->
           <div class="col-6">
             <mat-form-field>
@@ -248,11 +273,11 @@
       </div>
       <!-- * end:: FormGroup - Damage and Range -->
 
-      <h4 class="tc-red" style="font-weight: bold">PROPERTIES</h4>
+      <h4 class="tc-red" style="font-weight: bold">Properties</h4>
       <div class="divider"></div>
 
       <!-- * start:: FormGroup - Properties -->
-      <div formGroupName="properties" class="form-group pb-3">
+      <div formGroupName="properties" class="form-group">
         <!-- start:: Properties -->
         <div class="form-group row">
           <div class="col">
@@ -261,7 +286,7 @@
                 formControlName="properties_{{ item }}"
                 color="primary"
               >
-                {{ item }}
+                {{ formattingService.replaceUnderscoresWithSpaces(item) }}
               </mat-checkbox>
             </span>
           </div>
@@ -270,7 +295,7 @@
       </div>
       <!-- * end:: FormGroup - Properties -->
 
-      <h4 class="tc-red" style="font-weight: bold">DESCRIPTION</h4>
+      <h4 class="tc-red" style="font-weight: bold">Description</h4>
       <div class="divider"></div>
 
       <!-- * start:: Description -->
@@ -284,7 +309,9 @@
               formControlName="description"
               placeholder="Eg. This weapon has a +2 to hit on attack rolls. This weapon also deals additional 2d6 Radiant damage to undead, demons, and lycanthrope targets."
             ></textarea>
-            <mat-error> Weapon description is <strong>required</strong> </mat-error>
+            <mat-error>
+              Weapon description is <strong>required</strong>
+            </mat-error>
             <mat-hint align="start">
               The description of the <strong>weapon.</strong>
             </mat-hint>

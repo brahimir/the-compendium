@@ -8,6 +8,7 @@ import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 // Services
 import { HomebrewWeaponsService } from "../../../../../../core/resources/_services/homebrew-services/homebrew-weapons.service";
+import { FormattingService } from "src/app/core/resources/_services/formatting.service";
 
 @Component({
   selector: "kt-create-weapon-dialog",
@@ -32,8 +33,13 @@ export class CreateWeaponDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CreateWeaponDialogComponent>,
     private fb: FormBuilder,
-    private apiService: HomebrewWeaponsService
-  ) {}
+    private apiService: HomebrewWeaponsService,
+    private formattingService: FormattingService
+  ) {
+    this.WEAPON_PROPERTIES = this.formattingService.arrayReplaceSpacesWithUnderscores(
+      this.WEAPON_PROPERTIES
+    );
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -72,7 +78,7 @@ export class CreateWeaponDialogComponent implements OnInit {
         properties_Reach: [false],
         properties_Special: [false],
         properties_Thrown: [false],
-        properties_TwoHanded: [false],
+        properties_Two_Handed: [false],
         properties_Versatile: [false],
       }),
     });
@@ -102,15 +108,28 @@ export class CreateWeaponDialogComponent implements OnInit {
       return;
     }
 
+    let payload = this.preparePayload();
+
+    this.apiService.create(payload).subscribe(
+      (res) => {
+        this.isSubmitted = true;
+        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
+      },
+      (err) => {
+        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
+        console.log(err);
+      }
+    );
+  }
+
+  preparePayload(): any {
     let formValues: any = this.form.value;
 
     let generalInformation: any = this.form.value.generalInformation;
     let damageAndRange: any = this.form.value.damageAndRange;
     let properties: any = this.form.value.properties;
 
-    // Prepare payload to POST.
     let payload: any = {
-      // start:: Official Schema
       name: generalInformation.name,
       weapon_category: generalInformation.weapon_category,
       weapon_range: generalInformation.weapon_range,
@@ -134,19 +153,10 @@ export class CreateWeaponDialogComponent implements OnInit {
       // end:: Official Schema
       requires_attunement: generalInformation.requires_attunement,
       rarity: generalInformation.rarity,
-      desc: [formValues.description],
+      desc: [generalInformation.description],
     };
 
-    this.apiService.create(payload).subscribe(
-      (res) => {
-        this.isSubmitted = true;
-        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
-      },
-      (err) => {
-        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
-        console.log(err);
-      }
-    );
+    return payload;
   }
 
   /**

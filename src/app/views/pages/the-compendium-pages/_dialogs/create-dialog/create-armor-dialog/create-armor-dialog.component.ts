@@ -86,13 +86,28 @@ export class CreateArmorDialogComponent implements OnInit {
       return;
     }
 
+    // Prepare payload to POST.
+    let payload = this.preparePayload();
+
+    this.apiService.create(payload).subscribe(
+      (res) => {
+        this.isSubmitted = true;
+        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
+      },
+      (err) => {
+        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
+        console.log(err);
+      }
+    );
+  }
+
+  preparePayload(): any {
     let formValues: any = this.form.value;
 
     let generalInformation: any = this.form.value.generalInformation;
     let armorClassAndRequirements: any = this.form.value
       .armorClassAndRequirements;
 
-    // Prepare payload to POST.
     let payload: any = {
       name: generalInformation.name,
       armor_category: generalInformation.armor_category,
@@ -110,19 +125,10 @@ export class CreateArmorDialogComponent implements OnInit {
       },
       requires_attunement: generalInformation.requires_attunement,
       rarity: generalInformation.rarity,
-      desc: [formValues.description],
+      desc: [generalInformation.description],
     };
 
-    this.apiService.create(payload).subscribe(
-      (res) => {
-        this.isSubmitted = true;
-        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
-      },
-      (err) => {
-        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
-        console.log(err);
-      }
-    );
+    return payload;
   }
 
   /**

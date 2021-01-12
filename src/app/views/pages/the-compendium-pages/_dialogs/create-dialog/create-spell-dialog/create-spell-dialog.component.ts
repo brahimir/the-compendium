@@ -105,6 +105,22 @@ export class CreateSpellDialogComponent implements OnInit {
       return;
     }
 
+    // Prepare payload
+    let payload = this.preparePayload();
+
+    this.apiService.create(payload).subscribe(
+      (res) => {
+        this.isSubmitted = true;
+        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
+      },
+      (err) => {
+        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
+        console.log(err);
+      }
+    );
+  }
+
+  preparePayload(): any {
     let formValues: any = this.form.value;
 
     let generalInformation: any = this.form.value.generalInformation;
@@ -113,7 +129,7 @@ export class CreateSpellDialogComponent implements OnInit {
     // Prepare payload to POST.
     let payload: any = {
       name: generalInformation.name,
-      desc: [formValues.description],
+      desc: [generalInformation.description],
       higher_level: [formValues.higher_level],
       range: generalInformation.range,
       components: this.getElementsArray(components),
@@ -140,16 +156,7 @@ export class CreateSpellDialogComponent implements OnInit {
       payload.higher_level = null;
     }
 
-    this.apiService.create(payload).subscribe(
-      (res) => {
-        this.isSubmitted = true;
-        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
-      },
-      (err) => {
-        this.dialogRef.close({ isisSubmitted: this.isSubmitted });
-        console.log(err);
-      }
-    );
+    return payload;
   }
 
   /**

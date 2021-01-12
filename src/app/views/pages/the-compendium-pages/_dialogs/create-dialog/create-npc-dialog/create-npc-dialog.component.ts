@@ -22,6 +22,7 @@ import { MatChipInputEvent } from "@angular/material/chips";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 // MatAutocomplete
 import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
+import { FormattingService } from "src/app/core/resources/_services/formatting.service";
 
 @Component({
   selector: "kt-create-npc-dialog",
@@ -83,10 +84,11 @@ export class CreateNpcDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CreateNpcDialogComponent>,
     private fb: FormBuilder,
-    private apiService: HomebrewNpcsService
+    private apiService: HomebrewNpcsService,
+    private formattingService: FormattingService
   ) {
     // Format resources.
-    this.SENSES = this.arrayReplaceSpacesWithUnderscores(this.SENSES);
+    this.SENSES = this.formattingService.arrayReplaceSpacesWithUnderscores(this.SENSES);
 
     // Filtered languages
     this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
@@ -504,33 +506,6 @@ export class CreateNpcDialogComponent implements OnInit {
     this.languages.push(event.option.viewValue);
     this.languageInput.nativeElement.value = "";
     this.languageCtrl.setValue(null);
-  }
-
-  /**
-   * todo - Move this to a service?
-   * Replaces spaces with underscores from on incoming array
-   *
-   * @param {string[]} data The array to process
-   * @returns {string[]} The proccessed array
-   */
-  arrayReplaceSpacesWithUnderscores(data: string[]): string[] {
-    let result: string[] = [];
-
-    data.forEach((element) => {
-      result.push(element.replace(" ", "_"));
-    });
-    return result;
-  }
-
-  /**
-   * todo - Move this to a service?
-   * Replaces spaces with underscores from on string
-   *
-   * @param {string[]} data The string to process
-   * @returns {string[]} The proccessed string
-   */
-  replaceUnderscoresWithSpaces(data: string): string {
-    return data.replace("_", " ");
   }
 
   /**

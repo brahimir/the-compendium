@@ -76,24 +76,8 @@ export class CreateItemDialogComponent implements OnInit {
       return;
     }
 
-    let formValues: any = this.form.value;
-
-    let generalInformation: any = this.form.value.generalInformation;
-
-    // Prepare payload to POST.
-    let payload: any = {
-      name: generalInformation.name,
-      equipment_category: {
-        name: generalInformation.equipment_category,
-      },
-      gear_category: {},
-      cost: {
-        quantity: generalInformation.cost_quantity,
-        unit: generalInformation.cost_unit,
-      },
-      weight: generalInformation.weight,
-      desc: formValues.description,
-    };
+    // Prepare payload.
+    let payload = this.preparePayload();
 
     this.apiService.create(payload).subscribe(
       (res) => {
@@ -105,6 +89,27 @@ export class CreateItemDialogComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  preparePayload(): any {
+    let formValues: any = this.form.value;
+    let generalInformation: any = this.form.value.generalInformation;
+
+    let payload = {
+      name: generalInformation.name,
+      equipment_category: {
+        name: generalInformation.equipment_category,
+      },
+      gear_category: {},
+      cost: {
+        quantity: generalInformation.cost_quantity,
+        unit: generalInformation.cost_unit,
+      },
+      weight: generalInformation.weight,
+      desc: generalInformation.description,
+    };
+
+    return payload;
   }
 
   /**
