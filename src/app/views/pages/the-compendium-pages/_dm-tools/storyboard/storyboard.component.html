@@ -21,14 +21,19 @@
           class="list"
           (cdkDropListDropped)="drop($event)"
         >
-          <div
-            class="box"
-            *ngFor="let plot of plotsMain"
-            cdkDrag
-          >
+          <div class="box" *ngFor="let plot of plotsMain" cdkDrag>
             <h6>{{ plot.title }}</h6>
             <p>{{ plot.description }}</p>
           </div>
+
+          <!-- start:: Loading spinner -->
+          <div *ngIf="!plotsMain" class="mt-6 mb-6">
+            <mat-spinner
+              [diameter]="30"
+              style="margin: auto"
+            ></mat-spinner>
+          </div>
+          <!-- end:: Loading spinner -->
         </div>
       </div>
       <!-- end:: Main Plots -->
@@ -44,14 +49,19 @@
           class="list"
           (cdkDropListDropped)="drop($event)"
         >
-          <div
-            class="box"
-            *ngFor="let plot of plotsInProgress"
-            cdkDrag
-          >
+          <div class="box" *ngFor="let plot of plotsInProgress" cdkDrag>
             <h6>{{ plot.title }}</h6>
             <p>{{ plot.description }}</p>
           </div>
+
+          <!-- start:: Loading spinner -->
+          <div *ngIf="!plotsInProgress" class="mt-6 mb-6">
+            <mat-spinner
+              [diameter]="30"
+              style="margin: auto"
+            ></mat-spinner>
+          </div>
+          <!-- end:: Loading spinner -->
         </div>
       </div>
       <!-- end:: Plots in Progress -->
@@ -68,14 +78,19 @@
             class="list"
             (cdkDropListDropped)="drop($event)"
           >
-            <div
-              class="box"
-              *ngFor="let plot of plotsDone"
-              cdkDrag
-            >
+            <div class="box" *ngFor="let plot of plotsDone" cdkDrag>
               <h6>{{ plot.title }}</h6>
               <p>{{ plot.description }}</p>
             </div>
+
+            <!-- start:: Loading spinner -->
+            <div *ngIf="!plotsDone" class="mt-6 mb-6">
+              <mat-spinner
+                [diameter]="30"
+                style="margin: auto"
+              ></mat-spinner>
+            </div>
+            <!-- end:: Loading spinner -->
           </div>
         </div>
       </div>
