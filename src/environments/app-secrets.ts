@@ -28,6 +28,10 @@ export const ROUTES = {
     SPELLS:
       "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewSpells",
   },
+  // DM Tools
+  DM_TOOLS: {
+    STORYBOARD: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/storyboard/"
+  }
 };
 
 export const FIFTH_EDITION_RESOURCES = {

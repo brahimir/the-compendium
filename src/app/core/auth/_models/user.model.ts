@@ -10,17 +10,17 @@ export class User extends BaseModel {
   roles: number[];
   fullName: string;
   userSettings: {
-    user_dashboard: string[],
-    user_storyboard: {
-      plots_main:{
+    dashboard: string[],
+    storyboard: {
+      plotsMain:{
         title: string,
         description: string
       },
-      plots_in_progress:{
+      plotsInProgress:{
         title: string,
         description: string
       },
-      plots_done:{
+      plotsDone:{
         title: string,
         description: string
       },
