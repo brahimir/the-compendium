@@ -189,7 +189,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
 				return;
 			}
 
-			this.store.dispatch(new UserDeleted({ id: _item.id }));
+			// this.store.dispatch(new UserDeleted({ id: _item.id }));
 			this.layoutUtilsService.showActionNotification(_deleteMessage, MessageType.Delete);
 		});
 	}
@@ -202,7 +202,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
 		this.selection.selected.forEach(elem => {
 			messages.push({
 				text: `${elem.fullName}, ${elem.email}`,
-				id: elem.id.toString(),
+				id: elem._id.toString(),
 				status: elem.username
 			});
 		});

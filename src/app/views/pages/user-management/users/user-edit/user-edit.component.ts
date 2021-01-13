@@ -103,7 +103,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 	 */
 	initUser() {
 		this.createForm();
-		if (!this.user.id) {
+		if (!this.user._id) {
 			this.subheaderService.setTitle('Create user');
 			this.subheaderService.setBreadcrumbs([
 				{ title: 'User Management', page: `user-management` },
@@ -116,7 +116,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 		this.subheaderService.setBreadcrumbs([
 			{ title: 'User Management', page: `user-management` },
 			{ title: 'Users',  page: `user-management/users` },
-			{ title: 'Edit user', page: `user-management/users/edit`, queryParams: { id: this.user.id } }
+			{ title: 'Edit user', page: `user-management/users/edit`, queryParams: { id: this.user._id } }
 		]);
 	}
 
@@ -190,7 +190,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
 		const editedUser = this.prepareUser();
 
-		if (editedUser.id > 0) {
+		if (editedUser._id) {
 			this.updateUser(editedUser, withBack);
 			return;
 		}
@@ -208,7 +208,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 		_user.roles = this.rolesSubject.value;
 		_user.accessToken = this.user.accessToken;
 		_user.refreshToken = this.user.refreshToken;
-		_user.id = this.user.id;
+		_user._id = this.user._id;
 		_user.username = controls.username.value;
 		_user.email = controls.email.value;
 		_user.fullName = controls.fullname.value;
@@ -249,7 +249,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 		// tslint:disable-next-line:prefer-const
 
 		const updatedUser: Update<User> = {
-			id: _user.id,
+			id: _user._id,
 			changes: _user
 		};
 		this.store.dispatch(new UserUpdated( { partialUser: updatedUser, user: _user }));
@@ -267,7 +267,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 	 */
 	getComponentTitle() {
 		let result = 'Create user';
-		if (!this.user || !this.user.id) {
+		if (!this.user || !this.user._id) {
 			return result;
 		}
 
