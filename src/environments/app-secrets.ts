@@ -2,7 +2,7 @@
 export const ROUTES = {
   // Auth
   AUTH: {
-    USERS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users",
+    USERS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
     PERMISSIONS: "api/permissions",
     ROLES: "api/roles",
   },
@@ -30,7 +30,7 @@ export const ROUTES = {
   },
   // DM Tools
   DM_TOOLS: {
-    STORYBOARD: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/storyboard/"
+    UPDATE_STORYBOARD: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/storyboard/"
   }
 };
 
