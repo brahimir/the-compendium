@@ -1,7 +1,7 @@
 import { BaseModel } from '../../_base/crud';
 
 export class User extends BaseModel {
-  id: number;
+  _id: string;
   username: string;
   password: string;
   email: string;
@@ -28,7 +28,7 @@ export class User extends BaseModel {
   }
 
   clear(): void {
-    this.id = undefined;
+    this._id = undefined;
     this.username = '';
     this.password = '';
     this.email = '';

@@ -53,19 +53,19 @@ export class UserEffects {
       }),
     );
 
-  @Effect()
-  deleteUser$ = this.actions$
-    .pipe(
-      ofType<UserDeleted>(UserActionTypes.UserDeleted),
-      mergeMap(({payload}) => {
-          this.store.dispatch(this.showActionLoadingDistpatcher);
-          return this.auth.deleteUser(payload.id);
-        }
-      ),
-      map(() => {
-        return this.hideActionLoadingDistpatcher;
-      }),
-    );
+  // @Effect()
+  // deleteUser$ = this.actions$
+  //   .pipe(
+  //     ofType<UserDeleted>(UserActionTypes.UserDeleted),
+  //     mergeMap(({payload}) => {
+  //         this.store.dispatch(this.showActionLoadingDistpatcher);
+  //         return this.auth.deleteUser(payload.id);
+  //       }
+  //     ),
+  //     map(() => {
+  //       return this.hideActionLoadingDistpatcher;
+  //     }),
+  //   );
 
   @Effect()
   updateUser$ = this.actions$

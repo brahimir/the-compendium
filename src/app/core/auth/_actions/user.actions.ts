@@ -41,7 +41,7 @@ export class UserUpdated implements Action {
 
 export class UserDeleted implements Action {
     readonly type = UserActionTypes.UserDeleted;
-    constructor(public payload: { id: number }) {}
+    constructor(public payload: { id: string }) {}
 }
 
 export class UsersPageRequested implements Action {
