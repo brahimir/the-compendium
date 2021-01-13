@@ -6,50 +6,80 @@
     </ng-container>
   </kt-portlet-header>
   <!-- end::Portlet Header -->
+
   <!-- start:: Portlet Body -->
   <kt-portlet-body>
-    <div *ngIf="$user | async as user">
-      <div class="row">
-
-        <!-- start:: Main Plots -->
-        <div class="col">
-          <h4>Main Plots</h4>
-          <div cdkDropList #mainPlots="cdkDropList" [cdkDropListData]="user.user_settings.user_storyboard.plots_main" [cdkDropListConnectedTo]="[inProgressPlots, donePlots]" class="list" (cdkDropListDropped)="drop($event)">
-            <div class="box" *ngFor="let plot of user.user_settings.user_storyboard.plots_main" cdkDrag>
-              <h6> {{plot.title}} </h6>
-              <p> {{plot.description}} </p>
-            </div>
+    <div class="row">
+      <!-- start:: Main Plots -->
+      <div class="col">
+        <h4>Main Plots</h4>
+        <div
+          cdkDropList
+          #mainPlots="cdkDropList"
+          [cdkDropListData]="plotsMain"
+          [cdkDropListConnectedTo]="[inProgressPlots, donePlots]"
+          class="list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div
+            class="box"
+            *ngFor="let plot of plotsMain"
+            cdkDrag
+          >
+            <h6>{{ plot.title }}</h6>
+            <p>{{ plot.description }}</p>
           </div>
         </div>
-        <!-- end:: Main Plots -->
-
-        <!-- start:: Plots in Progress -->
-        <div class="col">
-          <h4>Plots in Progress</h4>
-          <div cdkDropList #inProgressPlots="cdkDropList" [cdkDropListData]="user.user_settings.user_storyboard.plots_in_progress" [cdkDropListConnectedTo]="[mainPlots, donePlots]" class="list" (cdkDropListDropped)="drop($event)">
-            <div class="box" *ngFor="let plot of user.user_settings.user_storyboard.plots_in_progress" cdkDrag>
-              <h6> {{plot.title}} </h6>
-              <p> {{plot.description}} </p>
-            </div>
-          </div>
-        </div>
-        <!-- end:: Plots in Progress -->
-
-        <!-- start:: Plots Done -->
-        <div class="col">
-          <div class="container">
-            <h4>Plots Done</h4>
-            <div cdkDropList #donePlots="cdkDropList" [cdkDropListData]="user.user_settings.user_storyboard.plots_done" [cdkDropListConnectedTo]="[mainPlots, inProgressPlots]" class="list" (cdkDropListDropped)="drop($event)">
-              <div class="box" *ngFor="let plot of user.user_settings.user_storyboard.plots_done" cdkDrag>
-                <h6> {{plot.title}} </h6>
-                <p> {{plot.description}} </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end:: Plots Done -->
-
       </div>
+      <!-- end:: Main Plots -->
+
+      <!-- start:: Plots in Progress -->
+      <div class="col">
+        <h4>Plots in Progress</h4>
+        <div
+          cdkDropList
+          #inProgressPlots="cdkDropList"
+          [cdkDropListData]="plotsInProgress"
+          [cdkDropListConnectedTo]="[mainPlots, donePlots]"
+          class="list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div
+            class="box"
+            *ngFor="let plot of plotsInProgress"
+            cdkDrag
+          >
+            <h6>{{ plot.title }}</h6>
+            <p>{{ plot.description }}</p>
+          </div>
+        </div>
+      </div>
+      <!-- end:: Plots in Progress -->
+
+      <!-- start:: Plots Done -->
+      <div class="col">
+        <div class="container">
+          <h4>Plots Done</h4>
+          <div
+            cdkDropList
+            #donePlots="cdkDropList"
+            [cdkDropListData]="plotsDone"
+            [cdkDropListConnectedTo]="[mainPlots, inProgressPlots]"
+            class="list"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div
+              class="box"
+              *ngFor="let plot of plotsDone"
+              cdkDrag
+            >
+              <h6>{{ plot.title }}</h6>
+              <p>{{ plot.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end:: Plots Done -->
     </div>
   </kt-portlet-body>
   <!-- end:: Portlet Body -->
