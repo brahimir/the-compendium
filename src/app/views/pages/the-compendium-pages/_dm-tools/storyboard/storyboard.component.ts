@@ -1,4 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+// Models
+import { Plot } from "src/app/core/resources/_models/dm_tools/storyboard/storyboard.model";
+// Services
+import { StoryboardService } from "src/app/core/resources/_services/dm-tools-services/storyboard.service";
 // CdkDragDrop
 import {
   CdkDragDrop,
@@ -14,19 +18,6 @@ import { AppState } from "src/app/core/reducers";
 import { currentUser, User } from "src/app/core/auth";
 
 /**
- * Story plot model
- */
-export class StoryPlot {
-  title: string;
-  description: string;
-
-  constructor(title: string, description: string) {
-    this.title = title;
-    this.description = description;
-  }
-}
-
-/**
  * Storyboard Kanban Board.
  *
  * @implements {OnInit}
@@ -39,34 +30,29 @@ export class StoryPlot {
 export class StoryboardComponent implements OnInit {
   // Public properties
   user$: Observable<User>;
-  plotsMain: StoryPlot[] = [];
-  plotsInProgress: StoryPlot[] = [];
-  plotsDone: StoryPlot[] = [];
+  userId: string;
 
-  constructor(private store: Store<AppState>) {}
+  // Storyboard Plots
+  plotsMain: any[];
+  plotsInProgress: any[];
+  plotsDone: any[];
+
+  constructor(
+    private store: Store<AppState>,
+    private apiService: StoryboardService
+  ) {}
 
   ngOnInit(): void {
-    // todo - I think this is getting a "snapshot" of the user - need to explicitly call the API to get
+    // todo - This is getting a "snapshot" of the user - need to explicitly call the API to get
     // todo - up-to-date information on the Storyboard plots for the user.
     this.user$ = this.store.pipe(select(currentUser));
     this.user$.subscribe((data) => {
-      let plots_main: any = data.userSettings.storyboard.plotsMain;
-      let plots_in_progress: any = data.userSettings.storyboard.plotsInProgress;
-      let plots_done: any = data.userSettings.storyboard.plotsDone;
-
-      plots_main.forEach((element) => {
-        this.plotsMain.push(new StoryPlot(element.title, element.description));
-      });
-
-      plots_in_progress.forEach((element) => {
-        this.plotsInProgress.push(
-          new StoryPlot(element.title, element.description)
-        );
-      });
-
-      plots_done.forEach((element) => {
-        this.plotsDone.push(new StoryPlot(element.title, element.description));
-      });
+      this.userId = data._id;
+    });
+    this.refreshStoryboard().subscribe((data) => {
+      this.plotsMain = data.userSettings.storyboard.plotsMain;
+      this.plotsInProgress = data.userSettings.storyboard.plotsInProgress;
+      this.plotsDone = data.userSettings.storyboard.plotsDone;
     });
   }
 
@@ -82,6 +68,8 @@ export class StoryboardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+      // Update the user's storyboard on the server.
+      this.updateStoryBoard();
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -89,9 +77,31 @@ export class StoryboardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+      // Update the user's storyboard on the server.
+      this.updateStoryBoard();
     }
   }
 
-  // todo
-  updateStoryBoard(): void {}
+  /**
+   * Gets the most current version of the user's Storyboard.
+   *
+   * @returns {Observable<any>} Resulting Storyboard.
+   */
+  refreshStoryboard(): Observable<any> {
+    return this.apiService.getStoryboard(this.userId);
+  }
+
+  /**
+   * Updates the user's Storyboard on the server.
+   *
+   * @returns {Observable<any>} The resulting Storyboard.
+   */
+  updateStoryBoard(): Observable<any> {
+    let bodyStoryboard = {
+      plotsMain: this.plotsMain,
+      plotsInProgress: this.plotsInProgress,
+      plotsDone: this.plotsDone,
+    };
+    return this.apiService.updateStoryboard(this.userId, bodyStoryboard);
+  }
 }
