@@ -134,7 +134,7 @@ export class StoryboardComponent implements OnInit {
       case "plotsMain":
         // Open the Dialog.
         dialogRef = this.dialog.open(AddPlotDialogComponent, {
-          data: { title: "Create a Main Plot" },
+          data: { headerTitle: "Create a Main Plot" },
         });
 
         // Subscribe to result after Dialog is closed, and push the new
@@ -156,7 +156,7 @@ export class StoryboardComponent implements OnInit {
       case "plotsInProgress":
         // Open the Dialog.
         dialogRef = this.dialog.open(AddPlotDialogComponent, {
-          data: { title: "Create a Plot in Progress" },
+          data: { headerTitle: "Create a Plot in Progress" },
         });
 
         // Subscribe to result after Dialog is closed, and push the new
@@ -193,6 +193,7 @@ export class StoryboardComponent implements OnInit {
     let dialogRef: any;
 
     switch (plotColumn) {
+      // Plots Main - Remove/Edit
       case "plotsMain":
         switch (modifyOption) {
           case "Remove":
@@ -214,7 +215,25 @@ export class StoryboardComponent implements OnInit {
                   this.plotsMain.splice(plotIndex, 1);
                 } else {
                   return;
-                }
+                } // Subscribe to result after Dialog is closed, and push the new
+                // plot to the corresponding local array.
+                dialogRef.afterClosed().subscribe((result) => {
+                  if (!result) {
+                    return;
+                  } else {
+                    // Check if the delete is confirmed by the user, then delete the plot from the array.
+                    if (result.isConfirmedDelete) {
+                      this.plotsMain.splice(plotIndex, 1);
+                    } else {
+                      return;
+                    }
+
+                    // Update plot arrays on the server and refresh the Storyboard.
+                    this.updateStoryBoard();
+                    this.refreshStoryboard();
+                    this.cdr.detectChanges();
+                  }
+                });
 
                 // Update plot arrays on the server and refresh the Storyboard.
                 this.updateStoryBoard();
@@ -227,14 +246,32 @@ export class StoryboardComponent implements OnInit {
           case "Edit":
             dialogRef = this.dialog.open(EditPlotDialogComponent, {
               data: {
+                headerTitle: "Edit Plot",
                 plotTitle: plot.title,
                 plotDescription: plot.description,
               },
+            });
+
+            // Subscribe to result after Dialog is closed, and push the new
+            // plot to the corresponding local array.
+            dialogRef.afterClosed().subscribe((result) => {
+              if (!result) {
+                return;
+              } else {
+                // Check if the delete is confirmed by the user, then delete the plot from the array.
+                this.plotsMain.splice(plotIndex, 1, result);
+
+                // Update plot arrays on the server and refresh the Storyboard.
+                this.updateStoryBoard();
+                this.refreshStoryboard();
+                this.cdr.detectChanges();
+              }
             });
             break;
         }
         break;
 
+      // Plots In Progress - Remove/Edit
       case "plotsInProgress":
         switch (modifyOption) {
           case "Remove":
@@ -256,7 +293,25 @@ export class StoryboardComponent implements OnInit {
                   this.plotsInProgress.splice(plotIndex, 1);
                 } else {
                   return;
-                }
+                } // Subscribe to result after Dialog is closed, and push the new
+                // plot to the corresponding local array.
+                dialogRef.afterClosed().subscribe((result) => {
+                  if (!result) {
+                    return;
+                  } else {
+                    // Check if the delete is confirmed by the user, then delete the plot from the array.
+                    if (result.isConfirmedDelete) {
+                      this.plotsMain.splice(plotIndex, 1);
+                    } else {
+                      return;
+                    }
+
+                    // Update plot arrays on the server and refresh the Storyboard.
+                    this.updateStoryBoard();
+                    this.refreshStoryboard();
+                    this.cdr.detectChanges();
+                  }
+                });
 
                 // Update plot arrays on the server and refresh the Storyboard.
                 this.updateStoryBoard();
@@ -269,15 +324,108 @@ export class StoryboardComponent implements OnInit {
           case "Edit":
             dialogRef = this.dialog.open(EditPlotDialogComponent, {
               data: {
+                headerTitle: "Edit Plot",
                 plotTitle: plot.title,
                 plotDescription: plot.description,
               },
+            });
+
+            // Subscribe to result after Dialog is closed, and push the new
+            // plot to the corresponding local array.
+            dialogRef.afterClosed().subscribe((result) => {
+              if (!result) {
+                return;
+              } else {
+                // Check if the delete is confirmed by the user, then delete the plot from the array.
+                this.plotsInProgress.splice(plotIndex, 1, result);
+
+                // Update plot arrays on the server and refresh the Storyboard.
+                this.updateStoryBoard();
+                this.refreshStoryboard();
+                this.cdr.detectChanges();
+              }
+            });
+            break;
+        }
+        break;
+
+      // Plots Done - Remove/Edit
+      case "plotsDone":
+        switch (modifyOption) {
+          case "Remove":
+            dialogRef = this.dialog.open(RemovePlotDialogComponent, {
+              data: {
+                plotTitle: plot.title,
+                plotDescription: plot.description,
+              },
+            });
+
+            // Subscribe to result after Dialog is closed, and push the new
+            // plot to the corresponding local array.
+            dialogRef.afterClosed().subscribe((result) => {
+              if (!result) {
+                return;
+              } else {
+                // Check if the delete is confirmed by the user, then delete the plot from the array.
+                if (result.isConfirmedDelete) {
+                  this.plotsDone.splice(plotIndex, 1);
+                } else {
+                  return;
+                } // Subscribe to result after Dialog is closed, and push the new
+                // plot to the corresponding local array.
+                dialogRef.afterClosed().subscribe((result) => {
+                  if (!result) {
+                    return;
+                  } else {
+                    // Check if the delete is confirmed by the user, then delete the plot from the array.
+                    if (result.isConfirmedDelete) {
+                      this.plotsDone.splice(plotIndex, 1);
+                    } else {
+                      return;
+                    }
+
+                    // Update plot arrays on the server and refresh the Storyboard.
+                    this.updateStoryBoard();
+                    this.refreshStoryboard();
+                    this.cdr.detectChanges();
+                  }
+                });
+
+                // Update plot arrays on the server and refresh the Storyboard.
+                this.updateStoryBoard();
+                this.refreshStoryboard();
+                this.cdr.detectChanges();
+              }
+            });
+            break;
+
+          case "Edit":
+            dialogRef = this.dialog.open(EditPlotDialogComponent, {
+              data: {
+                headerTitle: "Edit Plot",
+                plotTitle: plot.title,
+                plotDescription: plot.description,
+              },
+            });
+
+            // Subscribe to result after Dialog is closed, and push the new
+            // plot to the corresponding local array.
+            dialogRef.afterClosed().subscribe((result) => {
+              if (!result) {
+                return;
+              } else {
+                // Check if the delete is confirmed by the user, then delete the plot from the array.
+                this.plotsDone.splice(plotIndex, 1, result);
+
+                // Update plot arrays on the server and refresh the Storyboard.
+                this.updateStoryBoard();
+                this.refreshStoryboard();
+                this.cdr.detectChanges();
+              }
             });
             break;
         }
         break;
     }
-
-    // todo - this.updateStoryBoard() after adding a plot to it's corresponding array.
   }
 }
