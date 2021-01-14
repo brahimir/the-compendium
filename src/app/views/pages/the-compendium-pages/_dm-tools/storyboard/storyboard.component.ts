@@ -96,12 +96,14 @@ export class StoryboardComponent implements OnInit {
    *
    * @returns {Observable<any>} The resulting Storyboard.
    */
-  updateStoryBoard(): Observable<any> {
+  updateStoryBoard(): void {
     let bodyStoryboard = {
       plotsMain: this.plotsMain,
       plotsInProgress: this.plotsInProgress,
       plotsDone: this.plotsDone,
     };
-    return this.apiService.updateStoryboard(this.userId, bodyStoryboard);
+    this.apiService
+      .updateStoryboard(this.userId, bodyStoryboard)
+      .subscribe((data) => {});
   }
 }
