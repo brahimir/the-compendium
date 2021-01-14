@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+// Constants
+import { CONSTANTS_STORYBOARD } from "./constants";
 // Models
 import { Plot } from "src/app/core/resources/_models/dm_tools/storyboard/storyboard.model";
 // Services
@@ -16,6 +18,13 @@ import { select, Store } from "@ngrx/store";
 // State
 import { AppState } from "src/app/core/reducers";
 import { currentUser, User } from "src/app/core/auth";
+// ChangeDetectorRef
+import { ChangeDetectorRef } from "@angular/core";
+// MatDialog
+import { MatDialog } from "@angular/material/dialog";
+import { AddPlotDialogComponent } from "../../_dialogs/storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
+import { RemovePlotDialogComponent } from "../../_dialogs/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
+import { EditPlotDialogComponent } from "../../_dialogs/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
 
 /**
  * Storyboard Kanban Board.
@@ -28,18 +37,23 @@ import { currentUser, User } from "src/app/core/auth";
   styleUrls: ["./storyboard.component.scss"],
 })
 export class StoryboardComponent implements OnInit {
+  // Constants
+  PLOT_OPTIONS = CONSTANTS_STORYBOARD.PLOT_OPTIONS;
+
   // Public properties
   user$: Observable<User>;
   userId: string;
 
   // Storyboard Plots
-  plotsMain: any[];
-  plotsInProgress: any[];
-  plotsDone: any[];
+  plotsMain: Object[];
+  plotsInProgress: Object[];
+  plotsDone: Object[];
 
   constructor(
     private store: Store<AppState>,
-    private apiService: StoryboardService
+    private apiService: StoryboardService,
+    private cdr: ChangeDetectorRef,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -102,8 +116,168 @@ export class StoryboardComponent implements OnInit {
       plotsInProgress: this.plotsInProgress,
       plotsDone: this.plotsDone,
     };
+
     this.apiService
       .updateStoryboard(this.userId, bodyStoryboard)
       .subscribe((data) => {});
+  }
+
+  /**
+   * Adds a plot to the corresponding array column.
+   *
+   * @param {string} plotColumn The array column to add the plot to.
+   */
+  addStoryboardPlot(plotColumn: string): void {
+    let dialogRef: any;
+
+    switch (plotColumn) {
+      case "plotsMain":
+        // Open the Dialog.
+        dialogRef = this.dialog.open(AddPlotDialogComponent, {
+          data: { title: "Create a Main Plot" },
+        });
+
+        // Subscribe to result after Dialog is closed, and push the new
+        // plot to the corresponding local array.
+        dialogRef.afterClosed().subscribe((result) => {
+          if (!result) {
+            return;
+          } else {
+            this.plotsMain.push(result);
+
+            // Update plot arrays on the server and refresh the Storyboard.
+            this.updateStoryBoard();
+            this.refreshStoryboard();
+            this.cdr.detectChanges();
+          }
+        });
+        break;
+
+      case "plotsInProgress":
+        // Open the Dialog.
+        dialogRef = this.dialog.open(AddPlotDialogComponent, {
+          data: { title: "Create a Plot in Progress" },
+        });
+
+        // Subscribe to result after Dialog is closed, and push the new
+        // plot to the corresponding local array.
+        dialogRef.afterClosed().subscribe((result) => {
+          if (!result) {
+            return;
+          } else {
+            this.plotsInProgress.push(result);
+
+            // Update plot arrays on the server and refresh the Storyboard.
+            this.updateStoryBoard();
+            this.refreshStoryboard();
+            this.cdr.detectChanges();
+          }
+        });
+        break;
+    }
+  }
+
+  /**
+   * Modifies a plot from the corresponding array column.
+   *
+   * @param {string} plotColumn The array column to modify the plot from.
+   * @param {string} modifyOption The modification option (i.e remove, edit)
+   * @param {*} plot The plot Object.
+   */
+  modifyStoryboardPlot(
+    plotColumn: string,
+    modifyOption: string,
+    plot: any,
+    plotIndex: number
+  ): void {
+    let dialogRef: any;
+
+    switch (plotColumn) {
+      case "plotsMain":
+        switch (modifyOption) {
+          case "Remove":
+            dialogRef = this.dialog.open(RemovePlotDialogComponent, {
+              data: {
+                plotTitle: plot.title,
+                plotDescription: plot.description,
+              },
+            });
+
+            // Subscribe to result after Dialog is closed, and push the new
+            // plot to the corresponding local array.
+            dialogRef.afterClosed().subscribe((result) => {
+              if (!result) {
+                return;
+              } else {
+                // Check if the delete is confirmed by the user, then delete the plot from the array.
+                if (result.isConfirmedDelete) {
+                  this.plotsMain.splice(plotIndex, 1);
+                } else {
+                  return;
+                }
+
+                // Update plot arrays on the server and refresh the Storyboard.
+                this.updateStoryBoard();
+                this.refreshStoryboard();
+                this.cdr.detectChanges();
+              }
+            });
+            break;
+
+          case "Edit":
+            dialogRef = this.dialog.open(EditPlotDialogComponent, {
+              data: {
+                plotTitle: plot.title,
+                plotDescription: plot.description,
+              },
+            });
+            break;
+        }
+        break;
+
+      case "plotsInProgress":
+        switch (modifyOption) {
+          case "Remove":
+            dialogRef = this.dialog.open(RemovePlotDialogComponent, {
+              data: {
+                plotTitle: plot.title,
+                plotDescription: plot.description,
+              },
+            });
+
+            // Subscribe to result after Dialog is closed, and push the new
+            // plot to the corresponding local array.
+            dialogRef.afterClosed().subscribe((result) => {
+              if (!result) {
+                return;
+              } else {
+                // Check if the delete is confirmed by the user, then delete the plot from the array.
+                if (result.isConfirmedDelete) {
+                  this.plotsInProgress.splice(plotIndex, 1);
+                } else {
+                  return;
+                }
+
+                // Update plot arrays on the server and refresh the Storyboard.
+                this.updateStoryBoard();
+                this.refreshStoryboard();
+                this.cdr.detectChanges();
+              }
+            });
+            break;
+
+          case "Edit":
+            dialogRef = this.dialog.open(EditPlotDialogComponent, {
+              data: {
+                plotTitle: plot.title,
+                plotDescription: plot.description,
+              },
+            });
+            break;
+        }
+        break;
+    }
+
+    // todo - this.updateStoryBoard() after adding a plot to it's corresponding array.
   }
 }

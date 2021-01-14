@@ -1,0 +1,66 @@
+<div class="wrapper p-10">
+  <mat-dialog-content class="mat-typography">
+    <!-- start:: Header -->
+    <div class="dialog-header">
+      <div class="row">
+        <div class="col-10">
+          <h1>{{ CONFIRMATION_MESSAGE }}</h1>
+        </div>
+        <div class="d-flex justify-content-end col-2">
+          <button mat-icon-button [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end:: Header -->
+
+    <div class="wrapper">
+      <!-- start:: Plot Title -->
+      <div class="row">
+        <div class="col">
+          <h2 class="tc-red">{{ plotTitle }}</h2>
+        </div>
+      </div>
+      <!-- end:: Plot Title -->
+
+      <!-- start:: Plot Description -->
+      <div class="row">
+        <div class="col">
+          <h4>{{ plotDescription }}</h4>
+        </div>
+      </div>
+      <!-- end:: Plot Description -->
+    </div>
+
+    <!-- start:: Footer -->
+    <div class="card-footer">
+      <div class="d-flex justify-content-between">
+        <div class="mr-2">
+          <h3 class="tc-red">{{ WARNING_MESSAGE }}</h3>
+        </div>
+        <div>
+          <button
+            type="button"
+            mat-raised-button
+            mat-dialog-close
+            cdkFocusInitial
+            matTooltip="Cancel"
+          >
+            Cancel</button
+          >&nbsp;
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="onDelete()"
+            matTooltip="Delete plot"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end:: Footer -->
+  </mat-dialog-content>
+</div>

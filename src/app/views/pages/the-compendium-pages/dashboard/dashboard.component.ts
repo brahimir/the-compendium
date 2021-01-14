@@ -1,4 +1,3 @@
-import { CdkDragEnd } from "@angular/cdk/drag-drop";
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 // Components
@@ -7,7 +6,7 @@ import { ArmorComponent } from "../_resource-tables/official/armor/armor.compone
 import { NpcsComponent } from "../_resource-tables/official/npcs/npcs.component";
 import { ItemsComponent } from "../_resource-tables/official/items/items.component";
 import { SpellsComponent } from "../_resource-tables/official/spells/spells.component";
-// MatTable
+// MatDialog
 import { MatDialog } from "@angular/material/dialog";
 
 @Component({
@@ -57,27 +56,22 @@ export class DashboardComponent implements OnInit {
 
     switch (windowName) {
       case "weapons":
-        // Opens the dialog window.
         dialogRef = this.dialog.open(WeaponComponent, this.dialogOptions);
         break;
 
       case "armors":
-        // Opens the dialog window.
         dialogRef = this.dialog.open(ArmorComponent, this.dialogOptions);
         break;
 
       case "items":
-        // Opens the dialog window.
         dialogRef = this.dialog.open(ItemsComponent, this.dialogOptions);
         break;
 
       case "npcs":
-        // Opens the dialog window.
         dialogRef = this.dialog.open(NpcsComponent, this.dialogOptions);
         break;
 
       case "spells":
-        // Opens the dialog window.
         dialogRef = this.dialog.open(SpellsComponent, this.dialogOptions);
         break;
     }
