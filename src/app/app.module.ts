@@ -86,6 +86,9 @@ import { CreateArmorDialogComponent } from "./views/pages/the-compendium-pages/_
 import { CreateItemDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-item-dialog/create-item-dialog.component";
 import { CreateNpcDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-npc-dialog/create-npc-dialog.component";
 import { CreateSpellDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-spell-dialog/create-spell-dialog.component";
+import { AddPlotDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
+import { EditPlotDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
+import { RemovePlotDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -148,18 +151,22 @@ export function getHighlightLanguages() {
   ],
   // ! Add DialogComponents here
   entryComponents: [
-    // Details Dialogs
+    // Resource Details Dialogs
     WeaponDetailsDialogComponent,
     ArmorDetailsDialogComponent,
     ItemDetailsDialogComponent,
     NpcDetailsDialogComponent,
     SpellDetailsDialogComponent,
-    // Create Dialogs
+    // Create Homebrew Dialogs
     CreateWeaponDialogComponent,
     CreateArmorDialogComponent,
     CreateItemDialogComponent,
     CreateNpcDialogComponent,
     CreateSpellDialogComponent,
+    // Storyboard Plot Dialogs
+    AddPlotDialogComponent,
+    RemovePlotDialogComponent,
+    EditPlotDialogComponent
   ],
   exports: [],
   providers: [

@@ -34,7 +34,7 @@ import { MatStepperModule } from "@angular/material/stepper";
 import { MatSortModule } from "@angular/material/sort";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from "@angular/material/icon";
 import {
   MatBottomSheetModule,
   MatBottomSheetRef,
@@ -71,6 +71,10 @@ import { CreateArmorDialogComponent } from "./the-compendium-pages/_dialogs/crea
 import { CreateItemDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-item-dialog/create-item-dialog.component";
 import { CreateSpellDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-spell-dialog/create-spell-dialog.component";
 import { CreateNpcDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-npc-dialog/create-npc-dialog.component";
+// Storyboard Dialogs
+import { AddPlotDialogComponent } from "./the-compendium-pages/_dialogs/storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
+import { EditPlotDialogComponent } from "./the-compendium-pages/_dialogs/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
+import { RemovePlotDialogComponent } from "./the-compendium-pages/_dialogs/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
 
 // Homebrew Pages
 import { HomebrewWeaponsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-weapons/homebrew-weapons.component";
@@ -118,6 +122,9 @@ import { RouterModule } from "@angular/router";
     CreateItemDialogComponent,
     CreateSpellDialogComponent,
     CreateNpcDialogComponent,
+    AddPlotDialogComponent,
+    EditPlotDialogComponent,
+    RemovePlotDialogComponent,
   ],
   exports: [],
   imports: [
