@@ -108,7 +108,7 @@
 					<!--end::Form-->
 				</ng-template>
 			</mat-tab>
-			<mat-tab [disabled]="!user || !user.id">
+			<mat-tab [disabled]="!user || !user._id">
 				<ng-template mat-tab-label>
 					<i class="mat-tab-label-icon fa fa-address-book"></i>
 					User address
@@ -117,7 +117,7 @@
 					<kt-address [(addressSubject)]="addressSubject"></kt-address>
 				</ng-template>
 			</mat-tab>
-			<mat-tab [disabled]="!user || !user.id">
+			<mat-tab [disabled]="!user || !user._id">
 				<ng-template mat-tab-label>
 					<i class="mat-tab-label-icon fab fa-facebook"></i>
 					Social Nerworks
@@ -126,7 +126,7 @@
 					<kt-social-networks [(socialNetworksSubject)]="soicialNetworksSubject"></kt-social-networks>
 				</ng-template>
 			</mat-tab>
-			<mat-tab *ngIf="user" [disabled]="!user || !user.id">
+			<mat-tab *ngIf="user" [disabled]="!user || !user._id">
 				<ng-template mat-tab-label>
 					<i class="mat-tab-label-icon fa fa-unlock"></i>
 					User roles
@@ -135,13 +135,13 @@
 					<kt-user-roles-list [(rolesSubject)]="rolesSubject"></kt-user-roles-list>
 				</ng-template>
 			</mat-tab>
-			<mat-tab *ngIf="user" [disabled]="!user || !user.id">
+			<mat-tab *ngIf="user" [disabled]="!user || !user._id">
 				<ng-template mat-tab-label>
 					<i class="mat-tab-label-icon fa fa-exchange-alt"></i>
 					Change password
 				</ng-template>
 				<ng-template matTabContent>
-					<kt-change-password [userId]="user.id"></kt-change-password>
+					<kt-change-password [userId]="user._id"></kt-change-password>
 				</ng-template>
 			</mat-tab>
 		</mat-tab-group>
