@@ -1,1 +1,117 @@
-<p>edit-plot-dialog works!</p>
+<div class="wrapper p-10">
+  <mat-dialog-content class="mat-typography">
+    <!-- start:: Header -->
+    <div class="dialog-header">
+      <div class="row">
+        <div class="col-6">
+          <h1>{{ headerTitle }}</h1>
+        </div>
+        <div class="d-flex justify-content-end col-6">
+          <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end:: Header -->
+
+    <!-- start:: Form -->
+    <form [formGroup]="form" class="form-group">
+      <!-- start:: KT Alert if form has errors. -->
+      <kt-alert
+        *ngIf="hasFormErrors"
+        type="warn"
+        [duration]="30000"
+        [showCloseButton]="true"
+        (close)="onAlertClose($event)"
+      >
+        {{ errorMessage }}
+      </kt-alert>
+      <!-- start:: KT Alert if form has errors. -->
+
+      <!-- start:: Plot Title -->
+      <div class="form-group row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input
+              formControlName="title"
+              matInput
+              [value] = plotTitle
+              placeholder="Eg. Bandits and Witchers"
+              type="text"
+            />
+            <mat-error> Plot title is <strong>required.</strong> </mat-error>
+            <mat-hint align="start">
+              The <strong>title</strong> of the plot.
+            </mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- end:: Plot Title -->
+
+      <!-- start:: Plot Description -->
+      <div class="form-group row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <textarea
+              matInput
+              [value] = plotDescription
+              rows="20"
+              formControlName="description"
+              placeholder="Eg. Bandit fled after finding out Cora was a Witcher: reporting to Clasp that there is another Witcher alive and heading to Westruun."
+            ></textarea>
+            <mat-error>
+              The description of the plot is <strong>required.</strong>
+            </mat-error>
+            <mat-hint align="start">
+              The <strong>description</strong> of the plot.
+            </mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- end:: Plot Description -->
+
+      <!-- start:: Footer -->
+      <div class="card-footer">
+        <!-- start:: KT Alert if form has errors. -->
+        <kt-alert
+          *ngIf="hasFormErrors"
+          type="warn"
+          [duration]="30000"
+          [showCloseButton]="true"
+          (close)="onAlertClose($event)"
+        >
+          {{ errorMessage }}
+        </kt-alert>
+        <!-- start:: KT Alert if form has errors. -->
+
+        <div class="d-flex justify-content-between">
+          <div class="mr-2"></div>
+          <div>
+            <button
+              type="button"
+              mat-raised-button
+              mat-dialog-close
+              cdkFocusInitial
+              matTooltip="Discard plot"
+            >
+              Cancel</button
+            >&nbsp;
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="onSubmit()"
+              matTooltip="Update plot"
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- end:: Footer -->
+    </form>
+    <!-- end:: Form -->
+  </mat-dialog-content>
+</div>
