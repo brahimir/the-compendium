@@ -32,7 +32,12 @@ h4 {
 
 // Dialog Headers and Footers
 div.dialog-header {
-  margin-bottom: 30px;
+  margin-bottom: 1.5rem;
+}
+
+div.details-dialog-header {
+  color: $tc-red;
+  margin-bottom: 0rem;
 }
 
 div.dialog-footer {
@@ -50,10 +55,4 @@ div.dialog-footer {
   border: 1px solid $tc-red;
   margin-top: 7px;
   margin-bottom: 20px;
-}
-
-// Buttons
-button:hover {
-  background-color: $tc-red;
-  color: #ffffff;
 }
