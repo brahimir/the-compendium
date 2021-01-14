@@ -28,7 +28,7 @@ export class AddPlotDialogComponent implements OnInit {
     private fb: FormBuilder
   ) {
     // Set the title for the Dialog.
-    this.headerTitle = data.title;
+    this.headerTitle = data.headerTitle;
   }
 
   ngOnInit(): void {
@@ -55,7 +55,6 @@ export class AddPlotDialogComponent implements OnInit {
 
   /**
    * Form on Submit.
-   * todo - close Dialog, send payload back to StoryboardComponent.
    */
   onSubmit(): void {
     this.hasFormErrors = false;
