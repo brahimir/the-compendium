@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from "@angular/core";
 // Constants
-import { CONSTANTS_STORYBOARD } from "../../../_dm-tools/storyboard/constants";
+import { CONSTANTS_STORYBOARD } from "../../../dm-tools/storyboard/constants";
 // MatDialog
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
