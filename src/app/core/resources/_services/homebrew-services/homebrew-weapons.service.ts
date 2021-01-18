@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 // Models
 import { Weapon } from "../../_models/weapon.model";
 // Routes
-import { ROUTES } from "../../../../../environments/app-secrets";
+import { API_ROUTES } from "../../../../../environments/app-secrets";
 // Http
 import { HttpClient } from "@angular/common/http";
 // RXJS
@@ -10,7 +10,7 @@ import { Observable, throwError } from "rxjs";
 import { map, catchError } from "rxjs/operators";
 
 // API url
-const BASE_URL = ROUTES.HOMEBREW.WEAPONS;
+const BASE_URL = API_ROUTES.HOMEBREW.WEAPONS;
 
 @Injectable({
   providedIn: "root",

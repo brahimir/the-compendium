@@ -2,15 +2,15 @@ import { Injectable } from "@angular/core";
 // Models
 import { Npc } from "../../_models/npc.model";
 // Routes
-import { ROUTES } from "../../../../../environments/app-secrets";
+import { API_ROUTES } from "../../../../../environments/app-secrets";
 // Http
 import { HttpClient } from "@angular/common/http";
 // RXJS
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-const BASE_URL = ROUTES.OFFICIAL.BASE;
-const ARMOR_URL = ROUTES.OFFICIAL.MONSTERS;
+const BASE_URL = API_ROUTES.OFFICIAL.BASE;
+const ARMOR_URL = API_ROUTES.OFFICIAL.MONSTERS;
 
 @Injectable({
   providedIn: "root",

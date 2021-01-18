@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 // Models
-import { Plot } from "src/app/core/resources/_models/dm_tools/storyboard/storyboard.model";
+import { Plot } from "src/app/core/resources/_models/dm_tools/storyboard/plot.model";
 // Routes
-import { ROUTES } from "../../../../../environments/app-secrets";
+import { API_ROUTES } from "../../../../../environments/app-secrets";
 // Http
 import { HttpClient } from "@angular/common/http";
 // RXJS
@@ -10,8 +10,8 @@ import { Observable, throwError } from "rxjs";
 import { map, catchError } from "rxjs/operators";
 
 // API urls
-const USERS_URL = ROUTES.AUTH.USERS;
-const UPDATE_STORYBOARD = ROUTES.DM_TOOLS.UPDATE_STORYBOARD;
+const USERS_URL = API_ROUTES.AUTH.USERS;
+const UPDATE_STORYBOARD = API_ROUTES.DM_TOOLS.UPDATE_STORYBOARD;
 
 @Injectable({
   providedIn: "root",
