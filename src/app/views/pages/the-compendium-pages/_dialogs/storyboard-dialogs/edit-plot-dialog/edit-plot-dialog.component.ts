@@ -44,7 +44,7 @@ export class EditPlotDialogComponent implements OnInit {
   initForm(): void {
     this.form = this.fb.group({
       title: [this.plotTitle, Validators.required],
-      description: [this.plotDescription, Validators.required],
+      description: [this.plotDescription],
     });
   }
 

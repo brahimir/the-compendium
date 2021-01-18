@@ -38,7 +38,7 @@ export class AddPlotDialogComponent implements OnInit {
   initForm(): void {
     this.form = this.fb.group({
       title: ["", Validators.required],
-      description: ["", Validators.required],
+      description: [""],
     });
   }
 
