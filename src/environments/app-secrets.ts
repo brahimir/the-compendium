@@ -1,5 +1,5 @@
 // API Routes
-export const ROUTES = {
+export const API_ROUTES = {
   // Auth
   AUTH: {
     USERS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
@@ -30,7 +30,8 @@ export const ROUTES = {
   },
   // DM Tools
   DM_TOOLS: {
-    UPDATE_STORYBOARD: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/storyboard/"
+    UPDATE_STORYBOARD: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/storyboard/",
+    UPDATE_SESSIONS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/sessions/",
   }
 };
 
