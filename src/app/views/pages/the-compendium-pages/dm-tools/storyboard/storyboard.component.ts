@@ -64,9 +64,10 @@ export class StoryboardComponent implements OnInit {
       this.userId = data._id;
     });
     this.refreshStoryboard().subscribe((data) => {
-      this.plotsMain = data.userSettings.storyboard.plotsMain;
-      this.plotsInProgress = data.userSettings.storyboard.plotsInProgress;
-      this.plotsDone = data.userSettings.storyboard.plotsDone;
+      this.plotsMain = data.userSettings.dmTools.storyboard.plotsMain;
+      this.plotsInProgress =
+        data.userSettings.dmTools.storyboard.plotsInProgress;
+      this.plotsDone = data.userSettings.dmTools.storyboard.plotsDone;
     });
   }
 

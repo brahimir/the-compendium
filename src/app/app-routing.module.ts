@@ -8,6 +8,7 @@ import { BaseComponent } from "./views/theme/base/base.component";
 import { AuthGuard } from "./core/auth";
 
 // The Compendium Components
+// Dashboard Page
 import { DashboardComponent } from "./views/pages/the-compendium-pages/dashboard/dashboard.component";
 // Official 5E Resource Pages
 import { WeaponComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/weapons/weapons.component";
@@ -23,6 +24,7 @@ import { HomebrewNpcsComponent } from "./views/pages/the-compendium-pages/_resou
 import { HomebrewSpellsComponent } from "./views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-spells/homebrew-spells.component";
 // DM Tools
 import { StoryboardComponent } from "./views/pages/the-compendium-pages/dm-tools/storyboard/storyboard.component";
+import { SessionSummariesComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries.component";
 import { CreateComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create.component";
 
 const routes: Routes = [
@@ -42,11 +44,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       // start:: The Compendium Pages
+      // Dashboard
       {
         path: "dashboard",
         component: DashboardComponent,
       },
-
+      // 5e Resources
       {
         path: "weapons",
         component: WeaponComponent,
@@ -92,6 +95,10 @@ const routes: Routes = [
       {
         path: "storyboard",
         component: StoryboardComponent,
+      },
+      {
+        path: "session-summaries",
+        component: SessionSummariesComponent,
       },
       {
         path: "create",

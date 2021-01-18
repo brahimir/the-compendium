@@ -51,6 +51,8 @@ import { ECommerceModule } from "./apps/e-commerce/e-commerce.module";
 import { UserManagementModule } from "./user-management/user-management.module";
 
 // ! start:: The Compendium Pages
+// Dashboard Page
+import { DashboardComponent } from "./the-compendium-pages/dashboard/dashboard.component";
 // Official 5E Resource Pages
 import { WeaponComponent } from "./the-compendium-pages/_resource-tables/official/weapons/weapons.component";
 import { ArmorComponent } from "./the-compendium-pages/_resource-tables/official/armor/armor.component";
@@ -75,6 +77,8 @@ import { CreateNpcDialogComponent } from "./the-compendium-pages/_dialogs/create
 import { AddPlotDialogComponent } from "./the-compendium-pages/_dialogs/storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
 import { EditPlotDialogComponent } from "./the-compendium-pages/_dialogs/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
 import { RemovePlotDialogComponent } from "./the-compendium-pages/_dialogs/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
+// Session Summaries Dialogs
+import { CreateSessionDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-session-dialog/create-session-dialog.component';
 
 // Homebrew Pages
 import { HomebrewWeaponsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-weapons/homebrew-weapons.component";
@@ -85,11 +89,10 @@ import { HomebrewSpellsComponent } from "./the-compendium-pages/_resource-tables
 // DM Tools Pages
 import { StoryboardComponent } from "./the-compendium-pages/dm-tools/storyboard/storyboard.component";
 import { CreateComponent } from "./the-compendium-pages/dm-tools/create/create.component";
-import { DashboardComponent } from "./the-compendium-pages/dashboard/dashboard.component";
+import { SessionSummariesComponent } from './the-compendium-pages/dm-tools/session-summaries/session-summaries.component';
 // ! end:: The Compendium Pages
 
 import { RouterModule } from "@angular/router";
-import { CreateSessionDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-session-dialog/create-session-dialog.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +128,7 @@ import { CreateSessionDialogComponent } from './the-compendium-pages/_dialogs/cr
     EditPlotDialogComponent,
     RemovePlotDialogComponent,
     CreateSessionDialogComponent,
+    SessionSummariesComponent,
   ],
   exports: [],
   imports: [

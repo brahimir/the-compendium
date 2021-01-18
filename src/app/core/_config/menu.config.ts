@@ -473,7 +473,7 @@ export class MenuConfig {
           bullet: "dot",
           icon: "fas fa-book",
           root: true,
-          page: "/adventures",
+          page: "/session-summaries",
           permission: "accessToDMTools",
         },
         {
