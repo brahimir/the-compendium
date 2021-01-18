@@ -19,9 +19,9 @@ import { User } from "../_models/user.model";
 import { Permission } from "../_models/permission.model";
 import { Role } from "../_models/role.model";
 // The Compendium API
-import { ROUTES } from "src/environments/app-secrets";
+import { API_ROUTES } from "src/environments/app-secrets";
 
-const USERS_URL = ROUTES.AUTH.USERS;
+const USERS_URL = API_ROUTES.AUTH.USERS;
 const API_USERS_URL = "api/users";
 const API_PERMISSION_URL = "api/permissions";
 const API_ROLES_URL = "api/roles";

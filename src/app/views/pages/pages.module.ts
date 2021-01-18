@@ -83,13 +83,13 @@ import { HomebrewItemsComponent } from "./the-compendium-pages/_resource-tables/
 import { HomebrewNpcsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-npcs/homebrew-npcs.component";
 import { HomebrewSpellsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-spells/homebrew-spells.component";
 // DM Tools Pages
-import { AdventuresComponent } from "./the-compendium-pages/adventures/adventures.component";
-import { StoryboardComponent } from "./the-compendium-pages/_dm-tools/storyboard/storyboard.component";
-import { CreateComponent } from "./the-compendium-pages/_dm-tools/create/create.component";
+import { StoryboardComponent } from "./the-compendium-pages/dm-tools/storyboard/storyboard.component";
+import { CreateComponent } from "./the-compendium-pages/dm-tools/create/create.component";
 import { DashboardComponent } from "./the-compendium-pages/dashboard/dashboard.component";
 // ! end:: The Compendium Pages
 
 import { RouterModule } from "@angular/router";
+import { CreateSessionDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-session-dialog/create-session-dialog.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +100,6 @@ import { RouterModule } from "@angular/router";
     NpcsComponent,
     SpellsComponent,
     StoryboardComponent,
-    AdventuresComponent,
     // Homebrew Pages
     HomebrewWeaponsComponent,
     HomebrewArmorComponent,
@@ -125,6 +124,7 @@ import { RouterModule } from "@angular/router";
     AddPlotDialogComponent,
     EditPlotDialogComponent,
     RemovePlotDialogComponent,
+    CreateSessionDialogComponent,
   ],
   exports: [],
   imports: [

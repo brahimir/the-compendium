@@ -9,7 +9,6 @@ import { AuthGuard } from "./core/auth";
 
 // The Compendium Components
 import { DashboardComponent } from "./views/pages/the-compendium-pages/dashboard/dashboard.component";
-import { AdventuresComponent } from "./views/pages/the-compendium-pages/adventures/adventures.component";
 // Official 5E Resource Pages
 import { WeaponComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/weapons/weapons.component";
 import { ArmorComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/armor/armor.component";
@@ -23,8 +22,8 @@ import { HomebrewItemsComponent } from "./views/pages/the-compendium-pages/_reso
 import { HomebrewNpcsComponent } from "./views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-npcs/homebrew-npcs.component";
 import { HomebrewSpellsComponent } from "./views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-spells/homebrew-spells.component";
 // DM Tools
-import { StoryboardComponent } from "./views/pages/the-compendium-pages/_dm-tools/storyboard/storyboard.component";
-import { CreateComponent } from "./views/pages/the-compendium-pages/_dm-tools/create/create.component";
+import { StoryboardComponent } from "./views/pages/the-compendium-pages/dm-tools/storyboard/storyboard.component";
+import { CreateComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create.component";
 
 const routes: Routes = [
   {
@@ -67,10 +66,6 @@ const routes: Routes = [
       {
         path: "spells",
         component: SpellsComponent,
-      },
-      {
-        path: "adventures",
-        component: AdventuresComponent,
       },
       // Homebrew Pages
       {

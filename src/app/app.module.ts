@@ -89,6 +89,7 @@ import { CreateSpellDialogComponent } from "./views/pages/the-compendium-pages/_
 import { AddPlotDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
 import { EditPlotDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
 import { RemovePlotDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
+import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-session-dialog/create-session-dialog.component";
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -157,16 +158,18 @@ export function getHighlightLanguages() {
     ItemDetailsDialogComponent,
     NpcDetailsDialogComponent,
     SpellDetailsDialogComponent,
+    // Storyboard Plot Dialogs
+    AddPlotDialogComponent,
+    RemovePlotDialogComponent,
+    EditPlotDialogComponent,
     // Create Homebrew Dialogs
     CreateWeaponDialogComponent,
     CreateArmorDialogComponent,
     CreateItemDialogComponent,
     CreateNpcDialogComponent,
     CreateSpellDialogComponent,
-    // Storyboard Plot Dialogs
-    AddPlotDialogComponent,
-    RemovePlotDialogComponent,
-    EditPlotDialogComponent
+    // Create Adventure Dialogs
+    CreateSessionDialogComponent,
   ],
   exports: [],
   providers: [
