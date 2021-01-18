@@ -469,9 +469,9 @@ export class MenuConfig {
           permission: "accessToDMTools",
         },
         {
-          title: "Adventures",
+          title: "Session Summaries",
           bullet: "dot",
-          icon: "fas fa-globe-americas",
+          icon: "fas fa-book",
           root: true,
           page: "/adventures",
           permission: "accessToDMTools",
