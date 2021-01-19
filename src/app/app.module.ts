@@ -75,22 +75,28 @@ import typescript from "highlight.js/lib/languages/typescript";
 
 // ! The Compendium
 // Details Dialogs
-import { ArmorDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
-import { NpcDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
-import { WeaponDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
-import { ItemDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
-import { SpellDetailsDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
-// Create Dialogs
-import { CreateWeaponDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-weapon-dialog/create-weapon-dialog.component";
-import { CreateArmorDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-armor-dialog/create-armor-dialog.component";
-import { CreateItemDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-item-dialog/create-item-dialog.component";
-import { CreateNpcDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-npc-dialog/create-npc-dialog.component";
-import { CreateSpellDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-spell-dialog/create-spell-dialog.component";
-import { AddPlotDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
-import { EditPlotDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
-import { RemovePlotDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
-import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-session-dialog/create-session-dialog.component";
-import { SessionSummariesDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component";
+// Homebrew
+import { ArmorDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-tables/resource-details-dialog/armor-details-dialog/armor-details-dialog.component";
+import { NpcDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-tables/resource-details-dialog/npc-details-dialog/npc-details-dialog.component";
+import { WeaponDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-tables/resource-details-dialog/weapon-details-dialog/weapon-details-dialog.component";
+import { ItemDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-tables/resource-details-dialog/item-details-dialog/item-details-dialog.component";
+import { SpellDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-tables/resource-details-dialog/spell-details-dialog/spell-details-dialog.component";
+// Session Summaries
+import { SessionSummariesDetailsDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component";
+
+// CRUD Dialogs
+// Homebrew
+import { CreateWeaponDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-weapon-dialog/create-weapon-dialog.component";
+import { CreateArmorDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-armor-dialog/create-armor-dialog.component";
+import { CreateItemDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-item-dialog/create-item-dialog.component";
+import { CreateNpcDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-npc-dialog/create-npc-dialog.component";
+import { CreateSpellDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-spell-dialog/create-spell-dialog.component";
+// Storyboard Plots
+import { AddPlotDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
+import { EditPlotDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
+import { RemovePlotDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
+// Session Summaries
+import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-session-dialog/create-session-dialog.component";
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -161,7 +167,7 @@ export function getHighlightLanguages() {
     NpcDetailsDialogComponent,
     SpellDetailsDialogComponent,
     // Sessions Details Dialogs
-    SessionSummariesDialogComponent,
+    SessionSummariesDetailsDialogComponent,
     // Storyboard Plot Dialogs
     AddPlotDialogComponent,
     RemovePlotDialogComponent,
