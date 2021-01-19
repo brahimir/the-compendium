@@ -93,6 +93,7 @@ import { SessionSummariesComponent } from './the-compendium-pages/dm-tools/sessi
 // ! end:: The Compendium Pages
 
 import { RouterModule } from "@angular/router";
+import { SessionSummariesDialogComponent } from './the-compendium-pages/_dialogs/session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -129,6 +130,7 @@ import { RouterModule } from "@angular/router";
     RemovePlotDialogComponent,
     CreateSessionDialogComponent,
     SessionSummariesComponent,
+    SessionSummariesDialogComponent,
   ],
   exports: [],
   imports: [

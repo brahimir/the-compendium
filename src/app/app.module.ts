@@ -90,6 +90,7 @@ import { AddPlotDialogComponent } from "./views/pages/the-compendium-pages/_dial
 import { EditPlotDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
 import { RemovePlotDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
 import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/create-dialog/create-session-dialog/create-session-dialog.component";
+import { SessionSummariesDialogComponent } from "./views/pages/the-compendium-pages/_dialogs/session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component";
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -152,12 +153,15 @@ export function getHighlightLanguages() {
   ],
   // ! Add DialogComponents here
   entryComponents: [
+    // Details Dialogs
     // Resource Details Dialogs
     WeaponDetailsDialogComponent,
     ArmorDetailsDialogComponent,
     ItemDetailsDialogComponent,
     NpcDetailsDialogComponent,
     SpellDetailsDialogComponent,
+    // Sessions Details Dialogs
+    SessionSummariesDialogComponent,
     // Storyboard Plot Dialogs
     AddPlotDialogComponent,
     RemovePlotDialogComponent,
