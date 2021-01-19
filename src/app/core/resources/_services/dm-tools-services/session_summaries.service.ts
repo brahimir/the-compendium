@@ -39,8 +39,8 @@ export class SessionSummariesService {
     data.forEach((element) => {
       objects.push(
         new Session(
-          element.titleChapter,
-          element.titleEpisode,
+          element.chapter,
+          element.episode,
           element.date,
           element.content
         )

@@ -8,6 +8,89 @@
   <!-- end:: Portlet Header -->
 
   <!-- start:: Portlet Body -->
-  <kt-portlet-body> </kt-portlet-body>
+  <kt-portlet-body>
+    <div class="wrapper">
+      <mat-dialog-content class="mat-typography">
+        <!-- start:: Filter -->
+        <div class="filter-header">
+          <mat-form-field>
+            <input
+              matInput
+              (keyup)="applyFilter($event.target.value)"
+              placeholder="Search"
+            />
+          </mat-form-field>
+        </div>
+        <!-- end:: Filter -->
+
+        <!-- start:: Table -->
+        <table
+          class="lmat-elevation-z8"
+          mat-table
+          matSort
+          [dataSource]="dataSource"
+        >
+          <!-- start:: Session Chapter Title -->
+          <ng-container matColumnDef="chapter">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Chapter</th>
+            <td mat-cell *matCellDef="let session">
+              <span class="link" (click)="openDetails(session)">
+                {{ session.chapter }}
+              </span>
+            </td>
+          </ng-container>
+          <!-- end:: Session Chapter Title -->
+
+          <!-- start:: Session Episode Title -->
+          <ng-container matColumnDef="episode">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Epsiode</th>
+            <td mat-cell *matCellDef="let session">
+              <span class="link" (click)="openDetails(session)">
+                {{ session.episode }}
+              </span>
+            </td>
+          </ng-container>
+          <!-- end:: Session Episode Title -->
+
+          <!-- start:: Session Date -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Date Added
+            </th>
+            <td mat-cell *matCellDef="let session">
+              <span>
+                {{ dateService.formatISOString(session.date, "LLLL")}}
+              </span>
+            </td>
+          </ng-container>
+          <!-- end:: Session Date -->
+
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr
+            mat-row
+            *matRowDef="let myRowData; columns: columnsToDisplay"
+          ></tr>
+        </table>
+        <!-- end:: Table -->
+
+        <!-- start:: Loading spinner -->
+        <div *ngIf="!TABLE_DATA.length" class="spinner-container">
+          <mat-spinner
+            [diameter]="50"
+            style="margin: auto"
+            *ngIf="!TABLE_DATA.length"
+          ></mat-spinner>
+        </div>
+        <!-- end:: Loading spinner -->
+
+        <!-- start:: Paginator -->
+        <mat-paginator
+          [pageSizeOptions]="[25, 50, 100]"
+          showFirstLastButtons
+        ></mat-paginator>
+        <!-- end:: Paginator -->
+      </mat-dialog-content>
+    </div>
+  </kt-portlet-body>
   <!-- end:: Portlet Body -->
 </kt-portlet>

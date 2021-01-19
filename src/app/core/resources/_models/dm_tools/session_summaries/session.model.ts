@@ -1,17 +1,17 @@
 export class Session {
-  titleChapter: string;
-  titleEpisode: string;
+  chapter: string;
+  episode: string;
   date: string;
   content: string;
 
   constructor(
-    title: string,
-    titleEpisode: string,
+    chapter: string,
+    episode: string,
     date: string,
     content: string
   ) {
-    this.titleChapter = title;
-    this.titleEpisode = titleEpisode;
+    this.chapter = chapter;
+    this.episode = episode;
     this.date = date;
     this.content = content;
   }
