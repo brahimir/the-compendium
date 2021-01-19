@@ -9,7 +9,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Details Dialog
-import { ItemDetailsDialogComponent } from "../../../_dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
+import { ItemDetailsDialogComponent } from "../../resource-details-dialog/item-details-dialog/item-details-dialog.component";
 
 @Component({
   selector: "kt-homebrew-items",

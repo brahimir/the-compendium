@@ -9,7 +9,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Dialog Component
-import { SpellDetailsDialogComponent } from "../../../_dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
+import { SpellDetailsDialogComponent } from "../../resource-details-dialog/spell-details-dialog/spell-details-dialog.component";
 
 @Component({
   selector: "kt-spells",

@@ -9,7 +9,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Details Dialog
-import { WeaponDetailsDialogComponent } from "../../../_dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
+import { WeaponDetailsDialogComponent } from "../../resource-details-dialog/weapon-details-dialog/weapon-details-dialog.component";
 
 @Component({
   selector: "kt-homebrew-weapons",

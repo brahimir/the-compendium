@@ -22,9 +22,9 @@ import { currentUser, User } from "src/app/core/auth";
 import { ChangeDetectorRef } from "@angular/core";
 // MatDialog
 import { MatDialog } from "@angular/material/dialog";
-import { AddPlotDialogComponent } from "../../_dialogs/storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
-import { RemovePlotDialogComponent } from "../../_dialogs/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
-import { EditPlotDialogComponent } from "../../_dialogs/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
+import { AddPlotDialogComponent } from "./storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
+import { EditPlotDialogComponent } from "./storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
+import { RemovePlotDialogComponent } from "./storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
 
 /**
  * Storyboard Kanban Board.

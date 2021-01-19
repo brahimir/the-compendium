@@ -11,7 +11,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Dialog Component
-import { NpcDetailsDialogComponent } from "../../../_dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
+import { NpcDetailsDialogComponent } from "../../resource-details-dialog/npc-details-dialog/npc-details-dialog.component";
 
 /**
  * @title Npcs table with Pagination

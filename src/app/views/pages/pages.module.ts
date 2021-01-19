@@ -62,23 +62,24 @@ import { SpellsComponent } from "./the-compendium-pages/_resource-tables/officia
 // Dialogs
 // Details Dialogs
 import { MatDialogModule } from "@angular/material/dialog";
-import { ArmorDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
-import { NpcDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/npc-details-dialog/npc-details-dialog.component";
-import { WeaponDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
-import { ItemDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
-import { SpellDetailsDialogComponent } from "./the-compendium-pages/_dialogs/details-dialog/spell-details-dialog/spell-details-dialog.component";
+import { ArmorDetailsDialogComponent } from "./the-compendium-pages/_resource-tables/resource-details-dialog/armor-details-dialog/armor-details-dialog.component";
+import { NpcDetailsDialogComponent } from "./the-compendium-pages/_resource-tables/resource-details-dialog/npc-details-dialog/npc-details-dialog.component";
+import { WeaponDetailsDialogComponent } from "./the-compendium-pages/_resource-tables/resource-details-dialog/weapon-details-dialog/weapon-details-dialog.component";
+import { ItemDetailsDialogComponent } from "./the-compendium-pages/_resource-tables/resource-details-dialog/item-details-dialog/item-details-dialog.component";
+import { SpellDetailsDialogComponent } from "./the-compendium-pages/_resource-tables/resource-details-dialog/spell-details-dialog/spell-details-dialog.component";
 // Create Homebrew Dialogs
-import { CreateWeaponDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-weapon-dialog/create-weapon-dialog.component";
-import { CreateArmorDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-armor-dialog/create-armor-dialog.component";
-import { CreateItemDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-item-dialog/create-item-dialog.component";
-import { CreateSpellDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-spell-dialog/create-spell-dialog.component";
-import { CreateNpcDialogComponent } from "./the-compendium-pages/_dialogs/create-dialog/create-npc-dialog/create-npc-dialog.component";
+import { CreateWeaponDialogComponent } from "./the-compendium-pages/dm-tools/create/create-dialog/create-weapon-dialog/create-weapon-dialog.component";
+import { CreateArmorDialogComponent } from "./the-compendium-pages/dm-tools/create/create-dialog/create-armor-dialog/create-armor-dialog.component";
+import { CreateItemDialogComponent } from "./the-compendium-pages/dm-tools/create/create-dialog/create-item-dialog/create-item-dialog.component";
+import { CreateNpcDialogComponent } from "./the-compendium-pages/dm-tools/create/create-dialog/create-npc-dialog/create-npc-dialog.component";
+import { CreateSpellDialogComponent } from "./the-compendium-pages/dm-tools/create/create-dialog/create-spell-dialog/create-spell-dialog.component";
 // Storyboard Dialogs
-import { AddPlotDialogComponent } from "./the-compendium-pages/_dialogs/storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
-import { EditPlotDialogComponent } from "./the-compendium-pages/_dialogs/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
-import { RemovePlotDialogComponent } from "./the-compendium-pages/_dialogs/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
+import { AddPlotDialogComponent } from "./the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
+import { EditPlotDialogComponent } from "./the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
+import { RemovePlotDialogComponent } from "./the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
 // Session Summaries Dialogs
-import { CreateSessionDialogComponent } from './the-compendium-pages/_dialogs/create-dialog/create-session-dialog/create-session-dialog.component';
+import { SessionSummariesDetailsDialogComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component";
+import { CreateSessionDialogComponent } from "./the-compendium-pages/dm-tools/create/create-dialog/create-session-dialog/create-session-dialog.component";
 
 // Homebrew Pages
 import { HomebrewWeaponsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-weapons/homebrew-weapons.component";
@@ -89,11 +90,10 @@ import { HomebrewSpellsComponent } from "./the-compendium-pages/_resource-tables
 // DM Tools Pages
 import { StoryboardComponent } from "./the-compendium-pages/dm-tools/storyboard/storyboard.component";
 import { CreateComponent } from "./the-compendium-pages/dm-tools/create/create.component";
-import { SessionSummariesComponent } from './the-compendium-pages/dm-tools/session-summaries/session-summaries.component';
+import { SessionSummariesComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries.component";
 // ! end:: The Compendium Pages
 
 import { RouterModule } from "@angular/router";
-import { SessionSummariesDialogComponent } from './the-compendium-pages/_dialogs/session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -130,7 +130,7 @@ import { SessionSummariesDialogComponent } from './the-compendium-pages/_dialogs
     RemovePlotDialogComponent,
     CreateSessionDialogComponent,
     SessionSummariesComponent,
-    SessionSummariesDialogComponent,
+    SessionSummariesDetailsDialogComponent,
   ],
   exports: [],
   imports: [

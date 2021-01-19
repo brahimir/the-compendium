@@ -1,0 +1,9 @@
+@import "../../../../sass/tc-dialogs.scss";
+
+.remove-button {
+  margin: -0.75rem;
+}
+
+.remove-button:hover {
+  background-color: $tc-red-hover;
+}

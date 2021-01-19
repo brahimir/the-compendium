@@ -2,12 +2,12 @@ import { Component, OnInit } from "@angular/core";
 // MatDialog
 import { MatDialog } from "@angular/material/dialog";
 // Dialog Components
-import { CreateWeaponDialogComponent } from "../../_dialogs/create-dialog/create-weapon-dialog/create-weapon-dialog.component";
-import { CreateArmorDialogComponent } from "../../_dialogs/create-dialog/create-armor-dialog/create-armor-dialog.component";
-import { CreateItemDialogComponent } from "../../_dialogs/create-dialog/create-item-dialog/create-item-dialog.component";
-import { CreateNpcDialogComponent } from "../../_dialogs/create-dialog/create-npc-dialog/create-npc-dialog.component";
-import { CreateSpellDialogComponent } from "../../_dialogs/create-dialog/create-spell-dialog/create-spell-dialog.component";
-import { CreateSessionDialogComponent } from "../../_dialogs/create-dialog/create-session-dialog/create-session-dialog.component";
+import { CreateWeaponDialogComponent } from "../create/create-dialog/create-weapon-dialog/create-weapon-dialog.component";
+import { CreateArmorDialogComponent } from "../create/create-dialog/create-armor-dialog/create-armor-dialog.component";
+import { CreateItemDialogComponent } from "../create/create-dialog/create-item-dialog/create-item-dialog.component";
+import { CreateNpcDialogComponent } from "../create/create-dialog/create-npc-dialog/create-npc-dialog.component";
+import { CreateSpellDialogComponent } from "../create/create-dialog/create-spell-dialog/create-spell-dialog.component";
+import { CreateSessionDialogComponent } from "../create/create-dialog/create-session-dialog/create-session-dialog.component";
 
 @Component({
   selector: "kt-create",

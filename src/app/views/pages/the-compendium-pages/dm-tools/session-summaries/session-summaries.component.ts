@@ -11,7 +11,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Dialog Component
-import { SessionSummariesDialogComponent } from "../../_dialogs/session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component";
+import { SessionSummariesDetailsDialogComponent } from "./session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component";
 // RxJS
 import { Observable } from "rxjs";
 // NGRX
@@ -83,7 +83,7 @@ export class SessionSummariesComponent implements OnInit {
 
     // Opens the dialog window.
     const dialogRef = this.dialog.open(
-      SessionSummariesDialogComponent,
+      SessionSummariesDetailsDialogComponent,
       dialogOptions
     );
 

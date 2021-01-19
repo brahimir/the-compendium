@@ -9,7 +9,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Dialog Component
-import { ItemDetailsDialogComponent } from "../../../_dialogs/details-dialog/item-details-dialog/item-details-dialog.component";
+import { ItemDetailsDialogComponent } from "../../resource-details-dialog/item-details-dialog/item-details-dialog.component";
 
 /**
  * @title Items table with Pagination

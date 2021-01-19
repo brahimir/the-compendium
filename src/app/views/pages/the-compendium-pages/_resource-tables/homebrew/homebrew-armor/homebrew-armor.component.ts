@@ -9,7 +9,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Details Dialog
-import { ArmorDetailsDialogComponent } from "../../../_dialogs/details-dialog/armor-details-dialog/armor-details-dialog.component";
+import { ArmorDetailsDialogComponent } from "../../resource-details-dialog/armor-details-dialog/armor-details-dialog.component";
 
 @Component({
   selector: "kt-homebrew-armor",

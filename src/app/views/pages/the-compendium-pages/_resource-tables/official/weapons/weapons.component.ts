@@ -9,7 +9,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatDialog } from "@angular/material/dialog";
 // Details Dialog
-import { WeaponDetailsDialogComponent } from "../../../_dialogs/details-dialog/weapon-details-dialog/weapon-details-dialog.component";
+import { WeaponDetailsDialogComponent } from "../../resource-details-dialog/weapon-details-dialog/weapon-details-dialog.component";
 
 /**
  * @title Weapons table with Pagination
