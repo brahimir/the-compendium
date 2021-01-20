@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 // Models
 import { currentUser, User } from "src/app/core/auth";
 import { Session } from "../../../../../core/resources/_models/dm_tools/session_summaries/session.model";
@@ -31,6 +31,7 @@ export class SessionSummariesComponent implements OnInit {
   // Public properties
   user$: Observable<User>;
   userId: string;
+  userSessionSummaries: Object[];
 
   columnsToDisplay: any[] = ["chapter", "episode", "date"];
 
@@ -44,7 +45,8 @@ export class SessionSummariesComponent implements OnInit {
     private store: Store<AppState>,
     private apiService: SessionSummariesService,
     public dateService: DateService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -59,9 +61,11 @@ export class SessionSummariesComponent implements OnInit {
   }
 
   refreshSessions(): void {
-    this.apiService.getSessionSummaries(this.userId).subscribe((data) => {
-      let sessions = data.userSettings.dmTools.sessions;
-      this.TABLE_DATA = this.apiService.generateSessionObjects(sessions);
+    this.apiService.getSessionSummaries(this.userId).subscribe((data: User) => {
+      this.userSessionSummaries = data.userSettings.dmTools.sessions;
+      this.TABLE_DATA = this.apiService.generateSessionObjects(
+        this.userSessionSummaries
+      );
 
       // Set the DataSource for MatTableData.
       this.dataSource = new MatTableDataSource<Session>(this.TABLE_DATA);
@@ -70,11 +74,19 @@ export class SessionSummariesComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+
+    this.cdr.detectChanges();
   }
 
-  openDetails(element: Session): void {
-    // Pass the Armor object to the dialog here.
-    const dialogData = element;
+  openDetails(session: Session): void {
+    // Pass the object to the dialog here.
+    const sessionIndex = this.TABLE_DATA.indexOf(session);
+
+    const dialogData = {
+      data: session,
+      index: sessionIndex,
+      sessionSummaries: this.userSessionSummaries,
+    };
 
     // Set the dialog window options here.
     const dialogOptions = {
@@ -88,7 +100,10 @@ export class SessionSummariesComponent implements OnInit {
     );
 
     // Handles dialog closing - can do something when the dialog is closed.
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((result) => {
+      this.refreshSessions();
+      this.cdr.detectChanges();
+    });
   }
 
   /**

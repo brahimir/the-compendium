@@ -97,6 +97,8 @@ import { EditPlotDialogComponent } from "./views/pages/the-compendium-pages/dm-t
 import { RemovePlotDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
 // Session Summaries
 import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-session-dialog/create-session-dialog.component";
+import { EditSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
+import { RemoveSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -168,6 +170,8 @@ export function getHighlightLanguages() {
     SpellDetailsDialogComponent,
     // Sessions Details Dialogs
     SessionSummariesDetailsDialogComponent,
+    EditSessionDialogComponent,
+    RemoveSessionDialogComponent,
     // Storyboard Plot Dialogs
     AddPlotDialogComponent,
     RemovePlotDialogComponent,

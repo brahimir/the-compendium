@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from "@angular/core";
 // Constants
+import { CONSTANTS_GLOBAL } from "../../../../constants";
 import { CONSTANTS_STORYBOARD } from "../../constants";
 // MatDialog
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
@@ -12,7 +13,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 export class RemovePlotDialogComponent implements OnInit {
   // Constants
   CONFIRMATION_MESSAGE = CONSTANTS_STORYBOARD.REMOVE_PLOT.CONFIRMATION_MESSAGE;
-  WARNING_MESSAGE = CONSTANTS_STORYBOARD.REMOVE_PLOT.WARNING_MESSAGE;
+  WARNING_NO_UNDO = CONSTANTS_GLOBAL.WARNINGS.NO_UNDO;
 
   // Public properties
   plotTitle: string;

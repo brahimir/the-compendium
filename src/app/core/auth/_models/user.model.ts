@@ -12,6 +12,7 @@ export class User extends BaseModel {
   userSettings: {
     dashboard: string[];
     dmTools: {
+      campaigns: Object[];
       storyboard: {
         plotsMain: {
           title: string;
@@ -26,6 +27,7 @@ export class User extends BaseModel {
           description: string;
         };
       };
+      sessions: Object[];
     };
     userProfile: {};
   };

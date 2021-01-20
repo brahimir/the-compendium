@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 // Constants
-import { CONSTANTS_CREATE_DIALOG } from "../../constants";
+import { CONSTANTS_CREATE_DIALOG } from "../../../create/constants";
 // Models
 import { currentUser, User } from "src/app/core/auth";
 import { Session } from "src/app/core/resources/_models/dm_tools/session_summaries/session.model";
@@ -16,47 +16,45 @@ import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 
 @Component({
-  selector: "kt-create-session-dialog",
-  templateUrl: "./create-session-dialog.component.html",
-  styleUrls: ["./create-session-dialog.component.scss"],
+  selector: "kt-edit-session-dialog",
+  templateUrl: "./edit-session-dialog.component.html",
+  styleUrls: ["./edit-session-dialog.component.scss"],
 })
-export class CreateSessionDialogComponent implements OnInit {
+export class EditSessionDialogComponent implements OnInit {
+  // Session Public properties
+  sessionData: Session;
+  sessionIndex: number;
+  sessionSummaries: Session[];
+  isEdited: boolean = false;
+
   // Public properties
   user$: Observable<User>;
   userId: string;
-  userSessionSummaries: Object[];
+  userSessionSummaries: any[];
 
   // Form properties
   form: FormGroup;
   hasFormErrors = false;
 
-  headerTitle: string = "Create a Session Summary";
+  headerTitle: string = "Edit a Session Summary";
 
   // Error messages
   errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
 
   constructor(
-    public dialogRef: MatDialogRef<CreateSessionDialogComponent>,
+    public dialogRef: MatDialogRef<EditSessionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    private store: Store<AppState>,
-    private fb: FormBuilder,
-    private apiService: SessionSummariesService
-  ) {}
+    private fb: FormBuilder
+  ) {
+    // Sets the incoming data to this Component's data references.
+    this.sessionData = data.data;
+    this.sessionIndex = data.index;
+    this.sessionSummaries = data.sessionSummaries;
+  }
 
   ngOnInit(): void {
-    // todo - This is getting a "snapshot" of the user - need to explicitly call the API to get
-    // todo - up-to-date information on the Storyboard plots for the user.
-    this.user$ = this.store.pipe(select(currentUser));
-    this.user$.subscribe((user) => {
-      // Get the User's ID
-      this.userId = user._id;
-    });
-
     // Initialize the form.
     this.initForm();
-
-    // Get updated Session Summaries array.
-    this.refreshSessions();
   }
 
   /**
@@ -64,16 +62,9 @@ export class CreateSessionDialogComponent implements OnInit {
    */
   initForm(): void {
     this.form = this.fb.group({
-      chapter: ["", Validators.required],
-      episode: ["", Validators.required],
-      content: ["", Validators.required],
-      // todo - implement a datepicker here to let the user select their own date (recording a session form the past?)
-    });
-  }
-
-  refreshSessions(): void {
-    this.apiService.getSessionSummaries(this.userId).subscribe((data: User) => {
-      this.userSessionSummaries = data.userSettings.dmTools.sessions;
+      chapter: [this.sessionData.chapter, Validators.required],
+      episode: [this.sessionData.episode, Validators.required],
+      content: [this.sessionData.content, Validators.required],
     });
   }
 
@@ -115,16 +106,7 @@ export class CreateSessionDialogComponent implements OnInit {
     // Prepare payload.
     let payload = this.preparePayload();
 
-    // Add the new Session Summary to the existing Session Summaries.
-    let newArray = Object.assign([], this.userSessionSummaries);
-    newArray.push(payload);
-
-    // Update User Session Summaries on server.
-    this.apiService
-      .updateSessionSummaries(this.userId, newArray)
-      .subscribe((data) => {});
-
-    // Close the dialog, and send the payload back to the CreateComponent.
+    // Close the dialog, and send the payload back to the SessionSummariesDetailsComponent.
     this.dialogRef.close(payload);
   }
 
