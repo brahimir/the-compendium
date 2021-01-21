@@ -14,6 +14,7 @@ import {
 import { MatDialogRef } from "@angular/material/dialog";
 // Services
 import { HomebrewNpcsService } from "../../../../../../../core/resources/_services/homebrew-services/homebrew-npcs.service";
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // RXJS
 import { map, startWith } from "rxjs/operators";
 import { Observable } from "rxjs";
@@ -34,6 +35,8 @@ export class CreateNpcDialogComponent implements OnInit {
   form: FormGroup;
   hasFormErrors = false;
   isSubmitted: boolean = false;
+  headerTitle: string = "Create Homebrew Monster";
+
   // Error messages
   errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
 
@@ -85,10 +88,13 @@ export class CreateNpcDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<CreateNpcDialogComponent>,
     private fb: FormBuilder,
     private apiService: HomebrewNpcsService,
-    private formattingService: FormattingService
+    private formattingService: FormattingService,
+    private layoutUtilsService: LayoutUtilsService
   ) {
     // Format resources.
-    this.SENSES = this.formattingService.arrayReplaceSpacesWithUnderscores(this.SENSES);
+    this.SENSES = this.formattingService.arrayReplaceSpacesWithUnderscores(
+      this.SENSES
+    );
 
     // Filtered languages
     this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
@@ -191,6 +197,16 @@ export class CreateNpcDialogComponent implements OnInit {
         this.dialogRef.close({ isSubmitted: this.isSubmitted });
         console.log(err);
       }
+    );
+
+    // Show confirmation snackbar message.
+    const message = "Homebrew Monster successfully added.";
+    this.layoutUtilsService.showActionNotification(
+      message,
+      MessageType.Create,
+      10000,
+      true,
+      true
     );
   }
 

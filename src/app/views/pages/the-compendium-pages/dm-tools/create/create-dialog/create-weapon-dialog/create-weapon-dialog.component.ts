@@ -9,6 +9,7 @@ import { MatDialogRef } from "@angular/material/dialog";
 // Services
 import { HomebrewWeaponsService } from "../../../../../../../core/resources/_services/homebrew-services/homebrew-weapons.service";
 import { FormattingService } from "src/app/core/resources/_services/formatting.service";
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 
 @Component({
   selector: "kt-create-weapon-dialog",
@@ -20,6 +21,8 @@ export class CreateWeaponDialogComponent implements OnInit {
   form: FormGroup;
   hasFormErrors = false;
   isSubmitted: boolean = false;
+  headerTitle: string = "Create Homebrew Weapon";
+
   // Error messages
   errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
 
@@ -34,7 +37,8 @@ export class CreateWeaponDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<CreateWeaponDialogComponent>,
     private fb: FormBuilder,
     private apiService: HomebrewWeaponsService,
-    private formattingService: FormattingService
+    private formattingService: FormattingService,
+    private layoutUtilsService: LayoutUtilsService
   ) {
     this.WEAPON_PROPERTIES = this.formattingService.arrayReplaceSpacesWithUnderscores(
       this.WEAPON_PROPERTIES
@@ -119,6 +123,16 @@ export class CreateWeaponDialogComponent implements OnInit {
         this.dialogRef.close({ isisSubmitted: this.isSubmitted });
         console.log(err);
       }
+    );
+
+    // Show confirmation snackbar message.
+    const message = "Homebrew Weapon successfully added.";
+    this.layoutUtilsService.showActionNotification(
+      message,
+      MessageType.Create,
+      10000,
+      true,
+      true
     );
   }
 

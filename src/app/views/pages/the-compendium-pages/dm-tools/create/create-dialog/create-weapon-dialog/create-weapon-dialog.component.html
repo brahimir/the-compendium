@@ -1,327 +1,19 @@
-<div class="wrapper p-10">
-  <mat-dialog-content class="mat-typography">
-    <!-- start:: Header -->
-    <div class="dialog-header">
-      <div class="row">
-        <div class="col-6">
-          <h1>Create a Homebrew Weapon</h1>
-        </div>
-        <div class="d-flex justify-content-end col-6">
-          <button mat-icon-button [mat-dialog-close]="true">
-            <mat-icon>close</mat-icon>
-          </button>
+<mat-dialog-content class="mat-typography">
+  <div class="card card-custom">
+    <!-- start:: Card Header -->
+    <div class="card-header">
+      <div class="card-title">
+        <div class="card-label">
+          <h1>{{ headerTitle }}</h1>
         </div>
       </div>
     </div>
-    <!-- end:: Header -->
+    <!-- end:: Card Header -->
 
-    <!-- start:: Form -->
-    <form [formGroup]="form">
-      <!-- start:: KT Alert if form has errors. -->
-      <kt-alert
-        *ngIf="hasFormErrors"
-        type="warn"
-        [duration]="30000"
-        [showCloseButton]="true"
-        (close)="onAlertClose($event)"
-      >
-        {{ errorMessage }}
-      </kt-alert>
-      <!-- start:: KT Alert if form has errors. -->
-
-      <h3 class="tc-red" style="font-weight: bold">General Information</h3>
-      <div class="divider"></div>
-
-      <!-- * start:: FormGroup - General Information -->
-      <div formGroupName="generalInformation" class="form-group">
-        <div class="form-group row">
-          <!-- start:: Name -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Name</mat-label>
-              <input
-                formControlName="name"
-                matInput
-                placeholder="Eg. Silverlight"
-                type="text"
-              />
-              <mat-error> Weapon name is <strong>required</strong> </mat-error>
-              <mat-hint align="start">
-                The <strong>name</strong> of the Weapon.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Name -->
-
-          <!-- start:: Category -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Category</mat-label>
-              <input
-                formControlName="weapon_category"
-                matInput
-                placeholder="Eg. Martial"
-                type="text"
-              />
-              <mat-hint align="start">
-                The <strong>category</strong> of the Weapon.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Category -->
-        </div>
-
-        <div class="form-group row">
-          <!-- start:: Range -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Range</mat-label>
-              <mat-select formControlName="weapon_range">
-                <mat-option *ngFor="let item of RANGES" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-              <mat-hint align="start">
-                The <strong>range</strong> of the Weapon.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Range -->
-
-          <!-- start:: Cost: Quantity -->
-          <div class="col-4">
-            <mat-form-field>
-              <mat-label>Value (amount)</mat-label>
-              <input
-                formControlName="cost_quantity"
-                matInput
-                type="number"
-                min="0"
-              />
-              <mat-error>
-                Numeric amount of cost is <strong>required</strong>
-              </mat-error>
-              <mat-hint align="start">
-                The <strong>numeric amount</strong> of currency that the Weapon
-                costs.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Cost: Quantity -->
-
-          <!-- start:: Cost: Unit -->
-          <div class="col-2">
-            <mat-form-field>
-              <mat-label>Value (pieces)</mat-label>
-              <mat-select formControlName="cost_unit">
-                <mat-option *ngFor="let item of CURRENCIES" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-              <mat-error>
-                Unit of currency is <strong>required</strong>
-              </mat-error>
-              <mat-hint align="start">
-                The <strong>unit of currency</strong> of the Weapon.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Cost: Unit -->
-        </div>
-
-        <div class="form-group row">
-          <!-- start:: Weight -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Weight (pounds)</mat-label>
-              <input formControlName="weight" matInput type="number" />
-              <mat-hint align="start">
-                The <strong>weight</strong> of the Weapon.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Weight -->
-
-          <!-- start:: Rarity -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Rarity</mat-label>
-              <mat-select formControlName="rarity">
-                <mat-option *ngFor="let item of RARITIES" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-              <mat-error>Rarity is <strong>required</strong> </mat-error>
-              <mat-hint align="start">
-                The <strong>rarity</strong> of the Weapon.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Rarity -->
-        </div>
-
-        <!-- start:: Requires Attunement -->
-        <div class="form-group row">
-          <div class="col">
-            <mat-checkbox formControlName="requires_attunement" color="primary">
-              Requires attunement
-            </mat-checkbox>
-          </div>
-        </div>
-        <!-- end:: Requires Attunement -->
-      </div>
-      <!-- * end:: FormGroup - General Information -->
-
-      <h3 class="tc-red" style="font-weight: bold">Damage & Range</h3>
-      <div class="divider"></div>
-
-      <!-- * start:: FormGroup - Damage and Range -->
-      <div formGroupName="damageAndRange" class="form-group">
-        <div class="form-group row pb-6">
-          <!-- start:: Damage Dice-->
-          <div class="col-3">
-            <mat-form-field>
-              <mat-label>Number of damage dice</mat-label>
-              <input
-                formControlName="damage_dice_number"
-                matInput
-                type="number"
-                min="1"
-              />
-              <mat-error
-                >Number of damage dice is <strong>required</strong>
-              </mat-error>
-              <mat-hint align="start">
-                The <strong>number of damage dice</strong> the Weapon has.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <div class="col-3">
-            <mat-form-field>
-              <mat-label>Type of damage die</mat-label>
-              <mat-select formControlName="damage_dice_die">
-                <mat-option *ngFor="let item of DICE" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-              <mat-error
-                >Type of damage die is <strong>required</strong>
-              </mat-error>
-              <mat-hint align="start">
-                The <strong>type of damage die</strong> of the Weapon.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Damage Dice -->
-
-          <!-- start:: Damage Type -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Damage type</mat-label>
-              <input
-                matInput
-                formControlName="damage_type"
-                placeholder="Eg. Slashing"
-                type="text"
-              />
-              <mat-error
-                >The weapon's damage type is<strong>required</strong>
-              </mat-error>
-              <mat-hint align="start">
-                The Weapon's <strong>damage type.</strong>
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Damage Type -->
-        </div>
-
-        <div
-          *ngIf="
-            form.controls.generalInformation.get('weapon_range').value ===
-            'Ranged'
-          "
-          class="form-group row"
-        >
-          <!-- start:: Normal Range -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Normal range (ft.)</mat-label>
-              <input
-                formControlName="range_normal"
-                matInput
-                type="number"
-                min="0"
-              />
-            </mat-form-field>
-          </div>
-          <!-- end:: Normal Range -->
-
-          <!-- start:: Long Range -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Long range (ft.)</mat-label>
-              <input
-                formControlName="range_long"
-                matInput
-                type="number"
-                min="0"
-              />
-            </mat-form-field>
-          </div>
-          <!-- end:: Long Range -->
-        </div>
-      </div>
-      <!-- * end:: FormGroup - Damage and Range -->
-
-      <h3 class="tc-red" style="font-weight: bold">Properties</h3>
-      <div class="divider"></div>
-
-      <!-- * start:: FormGroup - Properties -->
-      <div formGroupName="properties" class="form-group">
-        <!-- start:: Properties -->
-        <div class="form-group row">
-          <div class="col">
-            <span *ngFor="let item of WEAPON_PROPERTIES" class="pr-5">
-              <mat-checkbox
-                formControlName="properties_{{ item }}"
-                color="primary"
-              >
-                {{ formattingService.replaceUnderscoresWithSpaces(item) }}
-              </mat-checkbox>
-            </span>
-          </div>
-        </div>
-        <!-- end:: Properties -->
-      </div>
-      <!-- * end:: FormGroup - Properties -->
-
-      <h3 class="tc-red" style="font-weight: bold">Description</h3>
-      <div class="divider"></div>
-
-      <!-- * start:: Description -->
-      <div formGroupName="generalInformation" class="form-group row">
-        <div class="col">
-          <mat-form-field appearance="outline">
-            <textarea
-              matInput
-              rows="5"
-              cols="50"
-              formControlName="description"
-              placeholder="Eg. This weapon has a +2 to hit on attack rolls. This weapon also deals additional 2d6 Radiant damage to undead, demons, and lycanthrope targets."
-            ></textarea>
-            <mat-error>
-              Weapon description is <strong>required</strong>
-            </mat-error>
-            <mat-hint align="start">
-              The description of the <strong>weapon.</strong>
-            </mat-hint>
-          </mat-form-field>
-        </div>
-      </div>
-      <!-- * end:: Description -->
-
-      <!-- start:: Footer -->
-      <div class="card-footer">
+    <!-- start:: Card Body -->
+    <div class="card-body">
+      <!-- start:: Form -->
+      <form [formGroup]="form">
         <!-- start:: KT Alert if form has errors. -->
         <kt-alert
           *ngIf="hasFormErrors"
@@ -334,32 +26,344 @@
         </kt-alert>
         <!-- start:: KT Alert if form has errors. -->
 
-        <div class="d-flex justify-content-between">
-          <div class="mr-2"></div>
-          <div>
-            <button
-              type="button"
-              mat-raised-button
-              mat-dialog-close
-              cdkFocusInitial
-              matTooltip="Cancel"
-            >
-              Cancel</button
-            >&nbsp;
-            <button
-              type="button"
-              mat-raised-button
-              color="primary"
-              (click)="onSubmit()"
-              matTooltip="Save Monster"
-            >
-              Save
-            </button>
+        <h3 class="tc-red" style="font-weight: bold">General Information</h3>
+        <div class="divider"></div>
+
+        <!-- * start:: FormGroup - General Information -->
+        <div formGroupName="generalInformation" class="form-group">
+          <div class="form-group row">
+            <!-- start:: Name -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input
+                  formControlName="name"
+                  matInput
+                  placeholder="Eg. Silverlight"
+                  type="text"
+                />
+                <mat-error>
+                  Weapon name is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="start">
+                  The <strong>name</strong> of the Weapon.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Name -->
+
+            <!-- start:: Category -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Category</mat-label>
+                <input
+                  formControlName="weapon_category"
+                  matInput
+                  placeholder="Eg. Martial"
+                  type="text"
+                />
+                <mat-hint align="start">
+                  The <strong>category</strong> of the Weapon.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Category -->
+          </div>
+
+          <div class="form-group row">
+            <!-- start:: Range -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Range</mat-label>
+                <mat-select formControlName="weapon_range">
+                  <mat-option *ngFor="let item of RANGES" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+                <mat-hint align="start">
+                  The <strong>range</strong> of the Weapon.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Range -->
+
+            <!-- start:: Cost: Quantity -->
+            <div class="col-4">
+              <mat-form-field>
+                <mat-label>Value (amount)</mat-label>
+                <input
+                  formControlName="cost_quantity"
+                  matInput
+                  type="number"
+                  min="0"
+                />
+                <mat-error>
+                  Numeric amount of cost is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="start">
+                  The <strong>numeric amount</strong> of currency that the
+                  Weapon costs.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Cost: Quantity -->
+
+            <!-- start:: Cost: Unit -->
+            <div class="col-2">
+              <mat-form-field>
+                <mat-label>Value (pieces)</mat-label>
+                <mat-select formControlName="cost_unit">
+                  <mat-option *ngFor="let item of CURRENCIES" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>
+                  Unit of currency is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="start">
+                  The <strong>unit of currency</strong> of the Weapon.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Cost: Unit -->
+          </div>
+
+          <div class="form-group row">
+            <!-- start:: Weight -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Weight (pounds)</mat-label>
+                <input formControlName="weight" matInput type="number" />
+                <mat-hint align="start">
+                  The <strong>weight</strong> of the Weapon.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Weight -->
+
+            <!-- start:: Rarity -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Rarity</mat-label>
+                <mat-select formControlName="rarity">
+                  <mat-option *ngFor="let item of RARITIES" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>Rarity is <strong>required</strong> </mat-error>
+                <mat-hint align="start">
+                  The <strong>rarity</strong> of the Weapon.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Rarity -->
+          </div>
+
+          <!-- start:: Requires Attunement -->
+          <div class="form-group row">
+            <div class="col">
+              <mat-checkbox
+                formControlName="requires_attunement"
+                color="primary"
+              >
+                Requires attunement
+              </mat-checkbox>
+            </div>
+          </div>
+          <!-- end:: Requires Attunement -->
+        </div>
+        <!-- * end:: FormGroup - General Information -->
+
+        <h3 class="tc-red" style="font-weight: bold">Damage & Range</h3>
+        <div class="divider"></div>
+
+        <!-- * start:: FormGroup - Damage and Range -->
+        <div formGroupName="damageAndRange" class="form-group">
+          <div class="form-group row pb-6">
+            <!-- start:: Damage Dice-->
+            <div class="col-3">
+              <mat-form-field>
+                <mat-label>Number of damage dice</mat-label>
+                <input
+                  formControlName="damage_dice_number"
+                  matInput
+                  type="number"
+                  min="1"
+                />
+                <mat-error
+                  >Number of damage dice is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="start">
+                  The <strong>number of damage dice</strong> the Weapon has.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field>
+                <mat-label>Type of damage die</mat-label>
+                <mat-select formControlName="damage_dice_die">
+                  <mat-option *ngFor="let item of DICE" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+                <mat-error
+                  >Type of damage die is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="start">
+                  The <strong>type of damage die</strong> of the Weapon.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Damage Dice -->
+
+            <!-- start:: Damage Type -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Damage type</mat-label>
+                <input
+                  matInput
+                  formControlName="damage_type"
+                  placeholder="Eg. Slashing"
+                  type="text"
+                />
+                <mat-error
+                  >The weapon's damage type is<strong>required</strong>
+                </mat-error>
+                <mat-hint align="start">
+                  The Weapon's <strong>damage type.</strong>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Damage Type -->
+          </div>
+
+          <div
+            *ngIf="
+              form.controls.generalInformation.get('weapon_range').value ===
+              'Ranged'
+            "
+            class="form-group row"
+          >
+            <!-- start:: Normal Range -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Normal range (ft.)</mat-label>
+                <input
+                  formControlName="range_normal"
+                  matInput
+                  type="number"
+                  min="0"
+                />
+              </mat-form-field>
+            </div>
+            <!-- end:: Normal Range -->
+
+            <!-- start:: Long Range -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Long range (ft.)</mat-label>
+                <input
+                  formControlName="range_long"
+                  matInput
+                  type="number"
+                  min="0"
+                />
+              </mat-form-field>
+            </div>
+            <!-- end:: Long Range -->
           </div>
         </div>
-      </div>
-      <!-- end:: Footer -->
-    </form>
-    <!-- end:: Form -->
-  </mat-dialog-content>
-</div>
+        <!-- * end:: FormGroup - Damage and Range -->
+
+        <h3 class="tc-red" style="font-weight: bold">Properties</h3>
+        <div class="divider"></div>
+
+        <!-- * start:: FormGroup - Properties -->
+        <div formGroupName="properties" class="form-group">
+          <!-- start:: Properties -->
+          <div class="form-group row">
+            <div class="col">
+              <span *ngFor="let item of WEAPON_PROPERTIES" class="pr-5">
+                <mat-checkbox
+                  formControlName="properties_{{ item }}"
+                  color="primary"
+                >
+                  {{ formattingService.replaceUnderscoresWithSpaces(item) }}
+                </mat-checkbox>
+              </span>
+            </div>
+          </div>
+          <!-- end:: Properties -->
+        </div>
+        <!-- * end:: FormGroup - Properties -->
+
+        <h3 class="tc-red" style="font-weight: bold">Description</h3>
+        <div class="divider"></div>
+
+        <!-- * start:: Description -->
+        <div formGroupName="generalInformation" class="form-group row">
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <textarea
+                matInput
+                rows="5"
+                cols="50"
+                formControlName="description"
+                placeholder="Eg. This weapon has a +2 to hit on attack rolls. This weapon also deals additional 2d6 Radiant damage to undead, demons, and lycanthrope targets."
+              ></textarea>
+              <mat-error>
+                Weapon description is <strong>required</strong>
+              </mat-error>
+              <mat-hint align="start">
+                The description of the <strong>weapon.</strong>
+              </mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- * end:: Description -->
+
+        <!-- start:: Footer -->
+        <div class="card-footer">
+          <!-- start:: KT Alert if form has errors. -->
+          <kt-alert
+            *ngIf="hasFormErrors"
+            type="warn"
+            [duration]="30000"
+            [showCloseButton]="true"
+            (close)="onAlertClose($event)"
+          >
+            {{ errorMessage }}
+          </kt-alert>
+          <!-- start:: KT Alert if form has errors. -->
+
+          <div class="d-flex justify-content-between">
+            <div class="mr-2"></div>
+            <div>
+              <button
+                type="button"
+                mat-raised-button
+                mat-dialog-close
+                cdkFocusInitial
+                matTooltip="Cancel"
+              >
+                Cancel</button
+              >&nbsp;
+              <button
+                type="button"
+                mat-raised-button
+                color="primary"
+                (click)="onSubmit()"
+                matTooltip="Save Monster"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- end:: Footer -->
+      </form>
+      <!-- end:: Form -->
+    </div>
+    <!-- end :: Card Body -->
+  </div>
+</mat-dialog-content>

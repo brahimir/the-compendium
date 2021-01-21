@@ -1,159 +1,19 @@
-<div class="wrapper p-10">
-  <mat-dialog-content class="mat-typography">
-    <!-- start:: Header -->
-    <div class="dialog-header">
-      <div class="row">
-        <div class="col-6">
-          <h1>Create a Homebrew Monster</h1>
-        </div>
-        <div class="d-flex justify-content-end col-6">
-          <button mat-icon-button [mat-dialog-close]="true">
-            <mat-icon>close</mat-icon>
-          </button>
+<mat-dialog-content class="mat-typography">
+  <div class="card card-custom">
+    <!-- start:: Card Header -->
+    <div class="card-header">
+      <div class="card-title">
+        <div class="card-label">
+          <h1>{{ headerTitle }}</h1>
         </div>
       </div>
     </div>
-    <!-- end:: Header -->
+    <!-- end:: Card Header -->
 
-    <!-- start:: Form -->
-    <form [formGroup]="form">
-      <!-- start:: KT Alert if form has errors. -->
-      <kt-alert
-        *ngIf="hasFormErrors"
-        type="warn"
-        [duration]="30000"
-        [showCloseButton]="true"
-        (close)="onAlertClose($event)"
-      >
-        {{ errorMessage }}
-      </kt-alert>
-      <!-- start:: KT Alert if form has errors. -->
-
-      <h3 class="tc-red" style="font-weight: bold">General Information</h3>
-      <div class="divider"></div>
-
-      <!-- * start:: FormGroup - General Information -->
-      <div formGroupName="generalInformation" class="form-group">
-        <div class="form-group row">
-          <!-- start:: Name -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Name</mat-label>
-              <input
-                formControlName="name"
-                matInput
-                placeholder="Eg. Fountain of Youth"
-                type="text"
-              />
-              <mat-error> Item name is <strong>required</strong> </mat-error>
-              <mat-hint align="start">
-                The <strong>name</strong> of the Item.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Name -->
-
-          <!-- start:: Category -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Category</mat-label>
-              <input
-                formControlName="equipment_category"
-                matInput
-                placeholder="Eg. Adventuring Gear"
-                type="text"
-              />
-              <mat-hint align="start">
-                The <strong>category</strong> of the Item.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Category -->
-        </div>
-
-        <div class="form-group row">
-          <!-- start:: Cost: Quantity -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Value (amount)</mat-label>
-              <input
-                formControlName="cost_quantity"
-                matInput
-                type="number"
-                min="0"
-              />
-              <mat-error>
-                Numeric amount of cost is <strong>required</strong>
-              </mat-error>
-              <mat-hint align="start">
-                The <strong>numeric amount</strong> of currency that the Item
-                costs.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Cost: Quantity -->
-
-          <!-- start:: Cost: Unit -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Value (pieces)</mat-label>
-              <mat-select formControlName="cost_unit">
-                <mat-option *ngFor="let item of CURRENCIES" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-              <mat-error>
-                Unit of currency is <strong>required</strong>
-              </mat-error>
-              <mat-hint align="start">
-                The <strong>unit of currency</strong> of the Item.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Cost: Unit -->
-        </div>
-
-        <div class="form-group row">
-          <!-- start:: Weight -->
-          <div class="col">
-            <mat-form-field>
-              <mat-label>Weight (pounds)</mat-label>
-              <input formControlName="weight" matInput type="number" />
-              <mat-hint align="start">
-                The <strong>weight</strong> of the Item.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Weight -->
-        </div>
-      </div>
-      <!-- * end:: FormGroup - General Information -->
-
-      <h3 class="tc-red" style="font-weight: bold">Description</h3>
-      <div class="divider"></div>
-
-      <!-- * start:: Description -->
-      <div formGroupName="generalInformation" class="form-group row">
-        <div class="col">
-          <mat-form-field appearance="outline">
-            <textarea
-              matInput
-              rows="5"
-              cols="50"
-              formControlName="description"
-              placeholder="Eg. Divine power emanates from this chalice. The creature that drinks from this vessel rolls a d20. On a 20, they are granted a wish from the Wish spell. On a roll of 1 or 2 they are killed instantly, and their soul is ferried to the afterlife."
-            ></textarea>
-            <mat-error> Item description is <strong>required</strong> </mat-error>
-            <mat-hint align="start">
-              The <strong>description</strong> of the Item.
-            </mat-hint>
-          </mat-form-field>
-        </div>
-      </div>
-      <!-- * end:: Description -->
-
-      <!-- start:: Footer -->
-      <div class="card-footer">
+    <!-- start:: Card Body -->
+    <div class="card-body">
+      <!-- start:: Form -->
+      <form [formGroup]="form">
         <!-- start:: KT Alert if form has errors. -->
         <kt-alert
           *ngIf="hasFormErrors"
@@ -166,32 +26,173 @@
         </kt-alert>
         <!-- start:: KT Alert if form has errors. -->
 
-        <div class="d-flex justify-content-between">
-          <div class="mr-2"></div>
-          <div>
-            <button
-              type="button"
-              mat-raised-button
-              mat-dialog-close
-              cdkFocusInitial
-              matTooltip="Cancel"
-            >
-              Cancel</button
-            >&nbsp;
-            <button
-              type="button"
-              mat-raised-button
-              color="primary"
-              (click)="onSubmit()"
-              matTooltip="Save Monster"
-            >
-              Save
-            </button>
+        <h3 class="tc-red" style="font-weight: bold">General Information</h3>
+        <div class="divider"></div>
+
+        <!-- * start:: FormGroup - General Information -->
+        <div formGroupName="generalInformation" class="form-group">
+          <div class="form-group row">
+            <!-- start:: Name -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input
+                  formControlName="name"
+                  matInput
+                  placeholder="Eg. Fountain of Youth"
+                  type="text"
+                />
+                <mat-error> Item name is <strong>required</strong> </mat-error>
+                <mat-hint align="start">
+                  The <strong>name</strong> of the Item.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Name -->
+
+            <!-- start:: Category -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Category</mat-label>
+                <input
+                  formControlName="equipment_category"
+                  matInput
+                  placeholder="Eg. Adventuring Gear"
+                  type="text"
+                />
+                <mat-hint align="start">
+                  The <strong>category</strong> of the Item.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Category -->
+          </div>
+
+          <div class="form-group row">
+            <!-- start:: Cost: Quantity -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Value (amount)</mat-label>
+                <input
+                  formControlName="cost_quantity"
+                  matInput
+                  type="number"
+                  min="0"
+                />
+                <mat-error>
+                  Numeric amount of cost is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="start">
+                  The <strong>numeric amount</strong> of currency that the Item
+                  costs.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Cost: Quantity -->
+
+            <!-- start:: Cost: Unit -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Value (pieces)</mat-label>
+                <mat-select formControlName="cost_unit">
+                  <mat-option *ngFor="let item of CURRENCIES" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>
+                  Unit of currency is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="start">
+                  The <strong>unit of currency</strong> of the Item.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Cost: Unit -->
+          </div>
+
+          <div class="form-group row">
+            <!-- start:: Weight -->
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Weight (pounds)</mat-label>
+                <input formControlName="weight" matInput type="number" />
+                <mat-hint align="start">
+                  The <strong>weight</strong> of the Item.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Weight -->
           </div>
         </div>
-      </div>
-      <!-- end:: Footer -->
-    </form>
-    <!-- end:: Form -->
-  </mat-dialog-content>
-</div>
+        <!-- * end:: FormGroup - General Information -->
+
+        <h3 class="tc-red" style="font-weight: bold">Description</h3>
+        <div class="divider"></div>
+
+        <!-- * start:: Description -->
+        <div formGroupName="generalInformation" class="form-group row">
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <textarea
+                matInput
+                rows="5"
+                cols="50"
+                formControlName="description"
+                placeholder="Eg. Divine power emanates from this chalice. The creature that drinks from this vessel rolls a d20. On a 20, they are granted a wish from the Wish spell. On a roll of 1 or 2 they are killed instantly, and their soul is ferried to the afterlife."
+              ></textarea>
+              <mat-error>
+                Item description is <strong>required</strong>
+              </mat-error>
+              <mat-hint align="start">
+                The <strong>description</strong> of the Item.
+              </mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- * end:: Description -->
+
+        <!-- start:: Footer -->
+        <div class="card-footer">
+          <!-- start:: KT Alert if form has errors. -->
+          <kt-alert
+            *ngIf="hasFormErrors"
+            type="warn"
+            [duration]="30000"
+            [showCloseButton]="true"
+            (close)="onAlertClose($event)"
+          >
+            {{ errorMessage }}
+          </kt-alert>
+          <!-- start:: KT Alert if form has errors. -->
+
+          <div class="d-flex justify-content-between">
+            <div class="mr-2"></div>
+            <div>
+              <button
+                type="button"
+                mat-raised-button
+                mat-dialog-close
+                cdkFocusInitial
+                matTooltip="Cancel"
+              >
+                Cancel</button
+              >&nbsp;
+              <button
+                type="button"
+                mat-raised-button
+                color="primary"
+                (click)="onSubmit()"
+                matTooltip="Save Monster"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- end:: Footer -->
+      </form>
+      <!-- end:: Form -->
+    </div>
+    <!-- end:: Card Body -->
+  </div>
+</mat-dialog-content>

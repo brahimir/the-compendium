@@ -121,27 +121,6 @@ const routes: Routes = [
           ),
       },
       {
-        path: "ngbootstrap",
-        loadChildren: () =>
-          import("./views/pages/ngbootstrap/ngbootstrap.module").then(
-            (m) => m.NgbootstrapModule
-          ),
-      },
-      {
-        path: "material",
-        loadChildren: () =>
-          import("./views/pages/material/material.module").then(
-            (m) => m.MaterialModule
-          ),
-      },
-      {
-        path: "user-management",
-        loadChildren: () =>
-          import("./views/pages/user-management/user-management.module").then(
-            (m) => m.UserManagementModule
-          ),
-      },
-      {
         path: "wizard",
         loadChildren: () =>
           import("./views/pages/wizard/wizard.module").then(

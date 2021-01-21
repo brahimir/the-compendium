@@ -8,6 +8,7 @@ import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 // Services
 import { HomebrewArmorsService } from "../../../../../../../core/resources/_services/homebrew-services/homebrew-armors.service";
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 
 @Component({
   selector: "kt-create-armor-dialog",
@@ -19,6 +20,8 @@ export class CreateArmorDialogComponent implements OnInit {
   form: FormGroup;
   hasFormErrors = false;
   isSubmitted: boolean = false;
+  headerTitle: string = "Create Homebrew Armor";
+
   // Error messages
   errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
 
@@ -30,7 +33,8 @@ export class CreateArmorDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CreateArmorDialogComponent>,
     private fb: FormBuilder,
-    private apiService: HomebrewArmorsService
+    private apiService: HomebrewArmorsService,
+    private layoutUtilsService: LayoutUtilsService
   ) {}
 
   ngOnInit(): void {
@@ -98,6 +102,16 @@ export class CreateArmorDialogComponent implements OnInit {
         this.dialogRef.close({ isisSubmitted: this.isSubmitted });
         console.log(err);
       }
+    );
+
+    // Show confirmation snackbar message.
+    const message = "Homebrew Armor successfully added.";
+    this.layoutUtilsService.showActionNotification(
+      message,
+      MessageType.Create,
+      10000,
+      true,
+      true
     );
   }
 

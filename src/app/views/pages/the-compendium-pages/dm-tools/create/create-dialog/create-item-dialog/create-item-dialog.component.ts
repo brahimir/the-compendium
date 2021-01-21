@@ -8,6 +8,7 @@ import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 // Services
 import { HomebrewItemsService } from "../../../../../../../core/resources/_services/homebrew-services/homebrew-items.service";
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 
 @Component({
   selector: "kt-create-item-dialog",
@@ -19,6 +20,8 @@ export class CreateItemDialogComponent implements OnInit {
   form: FormGroup;
   hasFormErrors = false;
   isSubmitted: boolean = false;
+  headerTitle: string = "Create Homebrew Item";
+
   // Error messages
   errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
 
@@ -29,7 +32,8 @@ export class CreateItemDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CreateItemDialogComponent>,
     private fb: FormBuilder,
-    private apiService: HomebrewItemsService
+    private apiService: HomebrewItemsService,
+    private layoutUtilsService: LayoutUtilsService
   ) {}
 
   ngOnInit(): void {
@@ -88,6 +92,16 @@ export class CreateItemDialogComponent implements OnInit {
         this.dialogRef.close({ isisSubmitted: this.isSubmitted });
         console.log(err);
       }
+    );
+
+    // Show confirmation snackbar message.
+    const message = "Homebrew Item successfully added.";
+    this.layoutUtilsService.showActionNotification(
+      message,
+      MessageType.Create,
+      10000,
+      true,
+      true
     );
   }
 

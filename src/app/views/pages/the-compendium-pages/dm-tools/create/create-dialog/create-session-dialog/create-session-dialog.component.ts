@@ -3,7 +3,8 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { CONSTANTS_CREATE_DIALOG } from "../../constants";
 // Models
 import { currentUser, User } from "src/app/core/auth";
-import { Session } from "src/app/core/resources/_models/dm_tools/session_summaries/session.model";
+// Services
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // MatDialog
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 // FormBuilder
@@ -40,7 +41,8 @@ export class CreateSessionDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     private store: Store<AppState>,
     private fb: FormBuilder,
-    private apiService: SessionSummariesService
+    private apiService: SessionSummariesService,
+    private layoutUtilsService: LayoutUtilsService
   ) {}
 
   ngOnInit(): void {
@@ -126,6 +128,16 @@ export class CreateSessionDialogComponent implements OnInit {
 
     // Close the dialog, and send the payload back to the CreateComponent.
     this.dialogRef.close(payload);
+
+    // Show confirmation snackbar message.
+    const message = "Session Summary successfully added.";
+    this.layoutUtilsService.showActionNotification(
+      message,
+      MessageType.Create,
+      10000,
+      true,
+      true
+    );
   }
 
   /**

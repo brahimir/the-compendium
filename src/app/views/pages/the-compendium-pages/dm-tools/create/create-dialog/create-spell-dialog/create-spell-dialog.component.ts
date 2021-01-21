@@ -11,6 +11,7 @@ import { HomebrewSpellsService } from "../../../../../../../core/resources/_serv
 // MatChipInput
 import { MatChipInputEvent } from "@angular/material/chips";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 
 export interface DnD_Class {
   name: string;
@@ -26,6 +27,8 @@ export class CreateSpellDialogComponent implements OnInit {
   form: FormGroup;
   hasFormErrors = false;
   isSubmitted: boolean = false;
+  headerTitle: string = "Create Homebrew Spell";
+
   // Error messages
   errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
 
@@ -44,7 +47,8 @@ export class CreateSpellDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CreateSpellDialogComponent>,
     private fb: FormBuilder,
-    private apiService: HomebrewSpellsService
+    private apiService: HomebrewSpellsService,
+    private layoutUtilsService: LayoutUtilsService
   ) {}
 
   ngOnInit(): void {
@@ -117,6 +121,16 @@ export class CreateSpellDialogComponent implements OnInit {
         this.dialogRef.close({ isisSubmitted: this.isSubmitted });
         console.log(err);
       }
+    );
+
+    // Show confirmation snackbar message.
+    const message = "Homebrew Spell successfully added.";
+    this.layoutUtilsService.showActionNotification(
+      message,
+      MessageType.Create,
+      10000,
+      true,
+      true
     );
   }
 

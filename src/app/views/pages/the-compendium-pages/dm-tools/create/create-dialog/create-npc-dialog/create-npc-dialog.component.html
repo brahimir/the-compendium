@@ -1,1035 +1,19 @@
-<div class="wrapper p-10">
-  <mat-dialog-content class="mat-typography">
-    <!-- start:: Header -->
-    <div class="dialog-header">
-      <div class="row">
-        <div class="col-6">
-          <h1>Create a Homebrew Monster</h1>
-        </div>
-        <div class="d-flex justify-content-end col-6">
-          <button mat-icon-button [mat-dialog-close]="true">
-            <mat-icon>close</mat-icon>
-          </button>
+<mat-dialog-content class="mat-typography">
+  <div class="card card-custom">
+    <!-- start:: Card Header -->
+    <div class="card-header">
+      <div class="card-title">
+        <div class="card-label">
+          <h1>{{ headerTitle }}</h1>
         </div>
       </div>
     </div>
-    <!-- end:: Header -->
+    <!-- end:: Card Header -->
 
-    <!-- start:: Form -->
-    <form [formGroup]="form">
-      <!-- start:: KT Alert if form has errors. -->
-      <kt-alert
-        *ngIf="hasFormErrors"
-        type="warn"
-        [duration]="30000"
-        [showCloseButton]="true"
-        (close)="onAlertClose($event)"
-      >
-        {{ errorMessage }}
-      </kt-alert>
-      <!-- start:: KT Alert if form has errors. -->
-
-      <h3 class="tc-red" style="font-weight: bold">General Information</h3>
-      <div class="divider"></div>
-
-      <!-- * start:: General Information -->
-      <div formGroupName="generalInformation" class="form-group">
-        <div class="form-group row">
-          <!-- start:: Name -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Name</mat-label>
-              <input
-                formControlName="name"
-                matInput
-                placeholder="Eg. Cthulu"
-                type="text"
-              />
-              <mat-error> Monster name is <strong>required</strong> </mat-error>
-              <mat-hint align="start">
-                The <strong>name</strong> of the Monster.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Name -->
-
-          <!-- start:: Size -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Size</mat-label>
-              <mat-select formControlName="size">
-                <mat-option *ngFor="let item of SIZES" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-              <mat-error> Monster size is <strong>required</strong> </mat-error>
-              <mat-hint align="start">
-                The <strong>size</strong> of the Monster.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Size -->
-        </div>
-
-        <div class="form-group row">
-          <!-- start:: Type -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Type</mat-label>
-              <input
-                formControlName="type"
-                matInput
-                placeholder="Eg. God"
-                type="text"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>type.</strong>
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Type -->
-
-          <!-- start:: Subtype -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Subtype</mat-label>
-              <input
-                formControlName="subtype"
-                matInput
-                placeholder="Eg. Eldritch"
-                type="text"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>subtype.</strong>
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Subtype -->
-        </div>
-
-        <div class="form-group row">
-          <!-- start:: Alignment -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Alignment</mat-label>
-              <mat-select formControlName="alignment">
-                <mat-option *ngFor="let item of ALIGNMENTS" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-              <mat-error>
-                Monster alignment is <strong>required</strong>
-              </mat-error>
-              <mat-hint align="start">
-                The Monster's <strong>alignment.</strong>
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Alignment -->
-
-          <!-- start:: Armor Class -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Armor Class</mat-label>
-              <input
-                formControlName="armor_class"
-                matInput
-                placeholder="Eg. 20"
-                type="number"
-                min="0"
-              />
-              <mat-error>
-                Monster armor class is <strong>required</strong>
-              </mat-error>
-              <mat-hint align="start">
-                The Monster's <strong>armor class.</strong>
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Armor Class -->
-        </div>
-
-        <div class="form-group row">
-          <!-- start:: Hitpoints -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Hitpoints</mat-label>
-              <input
-                formControlName="hit_points"
-                matInput
-                placeholder="Eg. God"
-                type="text"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>hitpoints.</strong>
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Hitpoints -->
-
-          <!-- start:: Hit Dice -->
-          <div class="col-3">
-            <mat-form-field>
-              <mat-label>Number of hit dice</mat-label>
-              <input
-                formControlName="hit_dice_number"
-                matInput
-                placeholder="Eg. 20"
-                type="number"
-                min="1"
-              />
-              <mat-hint align="start">
-                The number of <strong>hit dice</strong> the Monster has.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <div class="col-3">
-            <mat-form-field>
-              <mat-label>Type of hit die</mat-label>
-              <mat-select formControlName="hit_dice_die">
-                <mat-option *ngFor="let item of DICE" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-              <mat-hint align="start">
-                The type of <strong>hit dice</strong> the Monster uses.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Hit Dice -->
-        </div>
-
-        <div class="form-group row">
-          <!-- start:: Challenge Rating -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Challenge Rating</mat-label>
-              <input
-                formControlName="challenge_rating"
-                matInput
-                placeholder="Eg. 20"
-                type="number"
-                min="0"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>challenge rating.</strong>
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Challenge Rating -->
-
-          <!-- start:: XP -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>XP</mat-label>
-              <input
-                formControlName="xp"
-                matInput
-                placeholder="Eg. 20"
-                type="number"
-                min="0"
-              />
-              <mat-hint align="start">
-                <strong>Experience</strong> granted by the Monster.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- start:: XP -->
-        </div>
-
-        <!-- start:: Languages -->
-        <div class="form-group row">
-          <div class="col">
-            <mat-form-field>
-              <mat-label>Languages</mat-label>
-              <mat-chip-list #languages_chipList>
-                <mat-chip
-                  *ngFor="let item of languages"
-                  [selectable]="selectable"
-                  [removable]="removable"
-                  (removed)="remove(item, 'languages')"
-                >
-                  {{ item }}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-                <input
-                  placeholder="Eg. Common, Deep Speech, Telepathy"
-                  #languageInput
-                  [formControl]="languageCtrl"
-                  [matAutocomplete]="auto_languages"
-                  [matChipInputFor]="languages_chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  [matChipInputAddOnBlur]="addOnBlur"
-                  (matChipInputTokenEnd)="add($event, 'languages')"
-                />
-              </mat-chip-list>
-              <mat-autocomplete
-                #auto_languages="matAutocomplete"
-                (optionSelected)="selected($event)"
-              >
-                <mat-option
-                  *ngFor="let item of filteredLanguages | async"
-                  [value]="item"
-                >
-                  {{ item }}
-                </mat-option>
-              </mat-autocomplete>
-              <mat-hint align="start">
-                The <strong>languages</strong> the Monster speaks and
-                understands.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-        </div>
-        <!-- end:: Languages -->
-
-        <!-- todo start:: Proficiencies -->
-        <div class="form-group row"></div>
-        <!-- todo end:: Proficiencies -->
-      </div>
-      <!-- * end:: General Information -->
-
-      <div class="mt-2">
-        <span class="checkbox-label"> Movement </span>
-      </div>
-
-      <!-- * start:: Speed -->
-      <div formGroupName="speed" class="form-group">
-        <div class="row">
-          <div class="col-4">
-            <span *ngFor="let item of MOVEMENTS" class="pr-5">
-              <mat-checkbox formControlName="speed_{{ item }}" color="primary">
-                {{ item }}
-              </mat-checkbox>
-            </span>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <!-- start:: Speed - Walk -->
-          <div *ngIf="form.value.speed.speed_Walk" class="col">
-            <mat-form-field>
-              <mat-label>Walking speed (ft.)</mat-label>
-              <input
-                formControlName="speed_Walk"
-                matInput
-                placeholder="Eg. 60"
-                type="number"
-                min="0"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>walking speed</strong>.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Speed - Walk -->
-
-          <!-- start:: Speed - Fly -->
-          <div *ngIf="form.value.speed.speed_Fly" class="col">
-            <mat-form-field>
-              <mat-label>Flying speed (ft.)</mat-label>
-              <input
-                formControlName="speed_Fly"
-                matInput
-                placeholder="Eg. 120"
-                type="number"
-                min="0"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>flying speed</strong>.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Speed - Fly -->
-
-          <!-- start:: Speed - Swim -->
-          <div *ngIf="form.value.speed.speed_Swim" class="col">
-            <mat-form-field>
-              <mat-label>Swimming speed (ft.)</mat-label>
-              <input
-                formControlName="speed_Swim"
-                matInput
-                placeholder="Eg. 200"
-                type="number"
-                min="0"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>swimming speed.</strong>
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Speed - Swim -->
-        </div>
-      </div>
-      <!-- * start:: Speed -->
-
-      <h3 class="tc-red" style="font-weight: bold">Ability Scores</h3>
-      <div class="divider"></div>
-
-      <!-- * start:: Ability Scores -->
-      <div formGroupName="abilityScores" class="form-group">
-        <div class="form-group row">
-          <!-- start:: Strength -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Strength</mat-label>
-              <input
-                formControlName="ability_scores_STR"
-                matInput
-                placeholder="Eg. 10"
-                type="number"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>Strength</strong> score.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Strength -->
-
-          <!-- start:: Dexterity -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Dexterity</mat-label>
-              <input
-                formControlName="ability_scores_DEX"
-                matInput
-                placeholder="Eg. 10"
-                type="number"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>Dexterity</strong> score.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Dexterity -->
-        </div>
-
-        <div class="form-group row">
-          <!-- start:: Constitution -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Constitution</mat-label>
-              <input
-                formControlName="ability_scores_CON"
-                matInput
-                placeholder="Eg. 10"
-                type="number"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>Constitution</strong> score.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Constitution -->
-
-          <!-- start:: Intelligence -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Intelligence</mat-label>
-              <input
-                formControlName="ability_scores_INT"
-                matInput
-                placeholder="Eg. 10"
-                type="number"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>Intelligence</strong> score.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Intelligence -->
-        </div>
-
-        <div class="form-group row">
-          <!-- start:: Wisdom -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Wisdom</mat-label>
-              <input
-                formControlName="ability_scores_WIS"
-                matInput
-                placeholder="Eg. 10"
-                type="number"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>Wisdom</strong> score.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Wisdom -->
-
-          <!-- start:: Charisma -->
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>Charisma</mat-label>
-              <input
-                formControlName="ability_scores_CHA"
-                matInput
-                placeholder="Eg. 10"
-                type="number"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>Charisma</strong> score.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Charisma -->
-        </div>
-      </div>
-      <!-- * start:: Ability Scores -->
-
-      <h3 class="tc-red" style="font-weight: bold">
-        Resistances and Vunerabilities
-      </h3>
-      <div class="divider"></div>
-
-      <!-- * start:: Resistances, Immunities and Vunerabilities -->
-      <div formGroupName="resistancesAndVulnerabilities" class="form-group">
-        <!-- start:: Damage Vunerabilities -->
-        <div class="form-group row">
-          <div class="col">
-            <mat-form-field>
-              <mat-label>Damage Vunerabilities</mat-label>
-              <mat-chip-list #damage_vulnerabilities_chipList>
-                <mat-chip
-                  *ngFor="let item of damage_vulnerabilities"
-                  [selectable]="selectable"
-                  [removable]="removable"
-                  (removed)="remove(item, 'damage_vulnerabilities')"
-                >
-                  {{ item }}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-                <input
-                  placeholder="Eg. Slashing"
-                  [matChipInputFor]="damage_vulnerabilities_chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  [matChipInputAddOnBlur]="addOnBlur"
-                  (matChipInputTokenEnd)="add($event, 'damage_vulnerabilities')"
-                />
-              </mat-chip-list>
-              <mat-hint align="start">
-                Damage that the Monster is <strong>vulnerable</strong> to.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-        </div>
-        <!-- end:: Damage Vunerabilities -->
-
-        <!-- start:: Damage Resistances -->
-        <div class="form-group row">
-          <div class="col">
-            <mat-form-field>
-              <mat-label>Damage Resistances</mat-label>
-              <mat-chip-list #damage_resistances_chipList>
-                <mat-chip
-                  *ngFor="let item of damage_resistances"
-                  [selectable]="selectable"
-                  [removable]="removable"
-                  (removed)="remove(item, 'damage_resistances')"
-                >
-                  {{ item }}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-                <input
-                  placeholder="Eg. Slashing"
-                  [matChipInputFor]="damage_resistances_chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  [matChipInputAddOnBlur]="addOnBlur"
-                  (matChipInputTokenEnd)="add($event, 'damage_resistances')"
-                />
-              </mat-chip-list>
-              <mat-hint align="start">
-                Damage that the Monster is <strong>resistant</strong> to.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-        </div>
-        <!-- end:: Damage Resistances -->
-
-        <!-- start:: Damage Immunities -->
-        <div class="form-group row">
-          <div class="col">
-            <mat-form-field>
-              <mat-label>Damage Immunities</mat-label>
-              <mat-chip-list #damage_immunities_chipList>
-                <mat-chip
-                  *ngFor="let item of damage_immunities"
-                  [selectable]="selectable"
-                  [removable]="removable"
-                  (removed)="remove(item, 'damage_immunities')"
-                >
-                  {{ item }}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-                <input
-                  placeholder="Eg. Necrotic, Poison, Psychic, Bludgeoning, Piercing, Slashing from nonmagical attacks"
-                  [matChipInputFor]="damage_immunities_chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  [matChipInputAddOnBlur]="addOnBlur"
-                  (matChipInputTokenEnd)="add($event, 'damage_immunities')"
-                />
-              </mat-chip-list>
-              <mat-hint align="start">
-                Damage that the Monster is <strong>immune</strong> to.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-        </div>
-        <!-- end:: Damage Immunities -->
-
-        <!-- start:: Condition Immunities -->
-        <div class="form-group row">
-          <div class="col">
-            <mat-form-field>
-              <mat-label>Condition Immunities</mat-label>
-              <mat-chip-list #condition_immunities_chipList>
-                <mat-chip
-                  *ngFor="let item of condition_immunities"
-                  [selectable]="selectable"
-                  [removable]="removable"
-                  (removed)="remove(item, 'condition_immunities')"
-                >
-                  {{ item.name }}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-                <input
-                  placeholder="Eg. Blinded, Charmed, Deafened, Frightened, Petrified, Poisoned, Stunned"
-                  [matChipInputFor]="condition_immunities_chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  [matChipInputAddOnBlur]="addOnBlur"
-                  (matChipInputTokenEnd)="add($event, 'condition_immunities')"
-                />
-              </mat-chip-list>
-              <mat-hint align="start">
-                Condition(s) that the Monster is <strong>immune</strong> to.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-        </div>
-        <!-- end:: Condition Immunities -->
-      </div>
-      <!-- * end:: Resistances, Immunities and Vunerabilities -->
-
-      <h3 class="tc-red" style="font-weight: bold">Senses</h3>
-      <div class="divider"></div>
-
-      <!-- * start:: Senses -->
-      <div formGroupName="senses" class="form-group">
-        <div class="form-group row">
-          <div class="col">
-            <span *ngFor="let item of SENSES" class="pr-5">
-              <mat-checkbox formControlName="senses_{{ item }}" color="primary">
-                {{ formattingService.replaceUnderscoresWithSpaces(item) }}
-              </mat-checkbox>
-            </span>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <!-- start:: Senses - Blindsight -->
-          <div *ngIf="form.value.senses.senses_Blindsight" class="col">
-            <mat-form-field>
-              <mat-label>Blindsight (ft.)</mat-label>
-              <input
-                formControlName="senses_Blindsight"
-                matInput
-                placeholder="Eg. 60"
-                type="number"
-                min="0"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>blindsight</strong> range.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Senses - Blindsight -->
-
-          <!-- start:: Senses - Darkvision -->
-          <div *ngIf="form.value.senses.senses_Darkvision" class="col">
-            <mat-form-field>
-              <mat-label>Darkvision (ft.)</mat-label>
-              <input
-                formControlName="senses_Darkvision"
-                matInput
-                placeholder="Eg. 120"
-                type="number"
-                min="0"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>darkvision</strong> range.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Senses - Darkvision -->
-
-          <!-- start:: Senses - Tremorsense -->
-          <div *ngIf="form.value.senses.senses_Tremorsense" class="col">
-            <mat-form-field>
-              <mat-label>Tremorsense (ft.)</mat-label>
-              <input
-                formControlName="senses_Tremorsense"
-                matInput
-                placeholder="Eg. 120"
-                type="number"
-                min="0"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>tremorsense</strong> range.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Senses - Tremorsense -->
-
-          <!-- start:: Senses - Truesight -->
-          <div *ngIf="form.value.senses.senses_Truesight" class="col">
-            <mat-form-field>
-              <mat-label>Truesight (ft.)</mat-label>
-              <input
-                formControlName="senses_Truesight"
-                matInput
-                placeholder="Eg. 120"
-                type="number"
-                min="0"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>truesight</strong> range.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Senses - Truesight -->
-
-          <!-- start:: Senses - Passive Perception -->
-          <div
-            *ngIf="form.value.senses.senses_Passive_Perception"
-            class="col"
-          >
-            <mat-form-field>
-              <mat-label>Passive Perception</mat-label>
-              <input
-                formControlName="senses_Passive_Perception"
-                matInput
-                placeholder="Eg. 27"
-                type="number"
-                min="0"
-              />
-              <mat-hint align="start">
-                The Monster's <strong>passive perception</strong> value.
-              </mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- end:: Senses - Passive Perception -->
-        </div>
-      </div>
-      <!-- * end:: Senses -->
-
-      <!-- ! start:: FormGroup abilitiesAndActions -->
-      <div formGroupName="abilitiesAndActions" class="form-group">
-        <h3 class="tc-red" style="font-weight: bold">Special Abilities</h3>
-        <div class="divider"></div>
-
-        <!-- * start:: Special Abilities -->
-        <div formArrayName="special_abilities">
-          <!-- start:: Control Iterator -->
-          <div
-            *ngFor="
-              let special_ability of form.controls.abilitiesAndActions.get(
-                'special_abilities'
-              )['controls'];
-              let i = index
-            "
-          >
-            <div class="tc-card-wrapper">
-              <!-- start:: Special Ability Header -->
-              <div class="tc-card-header">
-                <div class="row">
-                  <div class="d-flex justify-content-start col-6">
-                    <h3>Special Ability {{ i + 1 }}</h3>
-                  </div>
-                  <div class="d-flex justify-content-end col-6">
-                    <!-- start:: REMOVE Special Ability Button -->
-                    <button
-                      class="remove-button"
-                      mat-icon-button
-                      (click)="removeActionOrAbility(i, 'special_ability')"
-                      matTooltip="Remove Special Ability"
-                    >
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                    <!-- end:: REMOVE Special Ability Button -->
-                  </div>
-                </div>
-              </div>
-              <!-- end:: Special Ability Header -->
-
-              <!-- start:: Special Ability Content-->
-              <div class="tc-card-content" [formGroupName]="i">
-                <!-- start:: Special Ability Name -->
-                <div class="form-group row">
-                  <div class="col">
-                    <mat-form-field>
-                      <mat-label>Special Ability Name</mat-label>
-                      <input
-                        matInput
-                        type="text"
-                        formControlName="name"
-                        placeholder="Eg. Amphibious"
-                      />
-                      <mat-hint align="start">
-                        The <strong>name</strong> of the Special Ability.
-                      </mat-hint>
-                    </mat-form-field>
-                  </div>
-                </div>
-                <!-- end:: Special Ability Name -->
-
-                <!-- start:: Special Ability Description -->
-                <div class="form-group row">
-                  <div class="col">
-                    <mat-form-field>
-                      <mat-label>Special Ability Description</mat-label>
-                      <textarea
-                        matInput
-                        rows="5"
-                        cols="50"
-                        formControlName="desc"
-                        placeholder="Eg. Cthulu can breathe air and water."
-                      ></textarea>
-                      <mat-hint align="start">
-                        The <strong>description</strong> of the Special Ability.
-                      </mat-hint>
-                    </mat-form-field>
-                  </div>
-                </div>
-                <!-- end:: Special Ability Description -->
-              </div>
-              <!-- end:: Special Ability Content -->
-            </div>
-          </div>
-          <!-- end:: Control Iterator -->
-
-          <!-- start:: ADD Special Ability -->
-          <div class="d-flex justify-content-between mt-4 mb-8">
-            <div class="mr-2"></div>
-            <button
-              type="button"
-              mat-raised-button
-              color="primary"
-              (click)="addActionOrAbility('special_ability')"
-              matTooltip="Add Special Ability"
-            >
-              Add Special Ability
-            </button>
-          </div>
-          <!-- end:: ADD Special Ability -->
-        </div>
-        <!-- * end:: Special Abilities -->
-
-        <h3 class="tc-red" style="font-weight: bold">Actions</h3>
-        <div class="divider"></div>
-
-        <!-- * start:: Actions -->
-        <div formArrayName="actions">
-          <!-- start:: FormControl Iterator -->
-          <div
-            *ngFor="
-              let action of form.controls.abilitiesAndActions.get('actions')[
-                'controls'
-              ];
-              let i = index
-            "
-          >
-            <div class="tc-card-wrapper">
-              <!-- start:: Action Header -->
-              <div class="tc-card-header">
-                <div class="row">
-                  <div class="d-flex justify-content-start col-6">
-                    <h3>Action {{ i + 1 }}</h3>
-                  </div>
-                  <div class="d-flex justify-content-end col-6">
-                    <!-- start:: REMOVE Action Button -->
-                    <button
-                      class="remove-button"
-                      mat-icon-button
-                      (click)="removeActionOrAbility(i, 'action')"
-                      matTooltip="Remove Action"
-                    >
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                    <!-- end:: REMOVE Action Button -->
-                  </div>
-                </div>
-              </div>
-              <!-- end:: Action Header -->
-
-              <!-- start:: Action Content-->
-              <div class="tc-card-content" [formGroupName]="i">
-                <!-- start:: Action Name -->
-                <div class="form-group row">
-                  <div class="col">
-                    <mat-form-field>
-                      <mat-label>Action Name</mat-label>
-                      <input
-                        matInput
-                        type="text"
-                        formControlName="name"
-                        placeholder="Eg. Multiattack"
-                      />
-                      <mat-hint align="start">
-                        The <strong>name</strong> of the Action.
-                      </mat-hint>
-                    </mat-form-field>
-                  </div>
-                </div>
-                <!-- end:: Action Name -->
-
-                <!-- start:: Action Description -->
-                <div class="form-group row">
-                  <div class="col">
-                    <mat-form-field>
-                      <mat-label>Action Description</mat-label>
-                      <textarea
-                        matInput
-                        rows="5"
-                        cols="50"
-                        formControlName="desc"
-                        placeholder="Eg. Cthulhu uses its Otherworldly Gaze. He then makes four attacks: two with his wings and two with his claws, or two with his tentacles and two with his claws."
-                      ></textarea>
-                      <mat-hint align="start">
-                        The <strong>description</strong> of the Action.
-                      </mat-hint>
-                    </mat-form-field>
-                  </div>
-                </div>
-                <!-- end:: Action Description -->
-              </div>
-              <!-- end:: Action Content -->
-            </div>
-          </div>
-          <!-- end:: FormControl Iterator -->
-
-          <!-- start:: ADD Action -->
-          <div class="d-flex justify-content-between mt-4 mb-8">
-            <div class="mr-2"></div>
-            <button
-              type="button"
-              mat-raised-button
-              color="primary"
-              (click)="addActionOrAbility('action')"
-              matTooltip="Add Action"
-            >
-              Add Action
-            </button>
-          </div>
-          <!-- end:: ADD Action -->
-        </div>
-        <!-- * end:: Actions -->
-
-        <h3 class="tc-red" style="font-weight: bold">Legendary Actions</h3>
-        <div class="divider"></div>
-
-        <!-- * start:: Legendary Actions -->
-        <div formArrayName="legendary_actions">
-          <!-- start:: FormControl Iterator -->
-          <div
-            *ngFor="
-              let legendary_action of form.controls.abilitiesAndActions.get(
-                'legendary_actions'
-              )['controls'];
-              let i = index
-            "
-          >
-            <div class="tc-card-wrapper">
-              <!-- start:: Legendary Action Header -->
-              <div class="tc-card-header">
-                <div class="row">
-                  <div class="d-flex justify-content-start col-6">
-                    <h3>Legendary Action {{ i + 1 }}</h3>
-                  </div>
-                  <div class="d-flex justify-content-end col-6">
-                    <!-- start:: REMOVE Legendary Action Button -->
-                    <button
-                      class="remove-button"
-                      mat-icon-button
-                      (click)="removeActionOrAbility(i, 'legendary_action')"
-                      matTooltip="Remove Legendary Action"
-                    >
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                    <!-- end:: REMOVE Action Button -->
-                  </div>
-                </div>
-              </div>
-              <!-- end:: Legendary Action Header -->
-
-              <!-- start:: Legendary Action Content-->
-              <div class="tc-card-content" [formGroupName]="i">
-                <!-- start:: Legendary Action Name -->
-                <div class="form-group row">
-                  <div class="col">
-                    <mat-form-field>
-                      <mat-label>Legendary Action Name</mat-label>
-                      <input
-                        matInput
-                        type="text"
-                        formControlName="name"
-                        placeholder="Eg. Legendary Resistance"
-                      />
-                      <mat-hint align="start">
-                        Enter the <strong>name</strong> of the Legendary Action.
-                      </mat-hint>
-                    </mat-form-field>
-                  </div>
-                </div>
-                <!-- end:: Legendary Action Name -->
-
-                <!-- start:: Legendary Action Description -->
-                <div class="form-group row">
-                  <div class="col">
-                    <mat-form-field>
-                      <mat-label>Legendary Action Description</mat-label>
-                      <textarea
-                        matInput
-                        rows="5"
-                        cols="50"
-                        formControlName="desc"
-                        placeholder="Eg. If Cthulu fails a saving throw, it can choose to succeed instead."
-                      ></textarea>
-                      <mat-hint align="start">
-                        Enter the <strong>description</strong> of the Legendary
-                        Action.
-                      </mat-hint>
-                    </mat-form-field>
-                  </div>
-                </div>
-                <!-- end:: Legendary Action Description -->
-              </div>
-              <!-- end:: Legendary Action Content -->
-            </div>
-          </div>
-          <!-- end:: FormControl Iterator -->
-
-          <!-- start:: ADD Legendary Action -->
-          <div class="d-flex justify-content-between mt-4 mb-8">
-            <div class="mr-2"></div>
-            <button
-              type="button"
-              mat-raised-button
-              color="primary"
-              (click)="addActionOrAbility('legendary_action')"
-              matTooltip="Add Legendary Action"
-            >
-              Add Legendary Action
-            </button>
-          </div>
-          <!-- end:: ADD Legendary Action -->
-        </div>
-        <!-- * end:: Legendary Actions -->
-      </div>
-      <!-- ! end:: FormGroup abilitiesAndActions -->
-
-      <!-- start:: Footer -->
-      <div class="card-footer">
+    <!-- start:: Card Body -->
+    <div class="card-body">
+      <!-- start:: Form -->
+      <form [formGroup]="form">
         <!-- start:: KT Alert if form has errors. -->
         <kt-alert
           *ngIf="hasFormErrors"
@@ -1042,32 +26,1061 @@
         </kt-alert>
         <!-- start:: KT Alert if form has errors. -->
 
-        <div class="d-flex justify-content-between">
-          <div class="mr-2"></div>
-          <div>
-            <button
-              type="button"
-              mat-raised-button
-              mat-dialog-close
-              cdkFocusInitial
-              matTooltip="Cancel"
-            >
-              Cancel</button
-            >&nbsp;
-            <button
-              type="button"
-              mat-raised-button
-              color="primary"
-              (click)="onSubmit()"
-              matTooltip="Save Monster"
-            >
-              Save
-            </button>
+        <h3 class="tc-red" style="font-weight: bold">General Information</h3>
+        <div class="divider"></div>
+
+        <!-- * start:: General Information -->
+        <div formGroupName="generalInformation" class="form-group">
+          <div class="form-group row">
+            <!-- start:: Name -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input
+                  formControlName="name"
+                  matInput
+                  placeholder="Eg. Cthulu"
+                  type="text"
+                />
+                <mat-error>
+                  Monster name is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="start">
+                  The <strong>name</strong> of the Monster.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Name -->
+
+            <!-- start:: Size -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Size</mat-label>
+                <mat-select formControlName="size">
+                  <mat-option *ngFor="let item of SIZES" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>
+                  Monster size is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="start">
+                  The <strong>size</strong> of the Monster.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Size -->
+          </div>
+
+          <div class="form-group row">
+            <!-- start:: Type -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Type</mat-label>
+                <input
+                  formControlName="type"
+                  matInput
+                  placeholder="Eg. God"
+                  type="text"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>type.</strong>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Type -->
+
+            <!-- start:: Subtype -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Subtype</mat-label>
+                <input
+                  formControlName="subtype"
+                  matInput
+                  placeholder="Eg. Eldritch"
+                  type="text"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>subtype.</strong>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Subtype -->
+          </div>
+
+          <div class="form-group row">
+            <!-- start:: Alignment -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Alignment</mat-label>
+                <mat-select formControlName="alignment">
+                  <mat-option *ngFor="let item of ALIGNMENTS" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>
+                  Monster alignment is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="start">
+                  The Monster's <strong>alignment.</strong>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Alignment -->
+
+            <!-- start:: Armor Class -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Armor Class</mat-label>
+                <input
+                  formControlName="armor_class"
+                  matInput
+                  placeholder="Eg. 20"
+                  type="number"
+                  min="0"
+                />
+                <mat-error>
+                  Monster armor class is <strong>required</strong>
+                </mat-error>
+                <mat-hint align="start">
+                  The Monster's <strong>armor class.</strong>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Armor Class -->
+          </div>
+
+          <div class="form-group row">
+            <!-- start:: Hitpoints -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Hitpoints</mat-label>
+                <input
+                  formControlName="hit_points"
+                  matInput
+                  placeholder="Eg. God"
+                  type="text"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>hitpoints.</strong>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Hitpoints -->
+
+            <!-- start:: Hit Dice -->
+            <div class="col-3">
+              <mat-form-field>
+                <mat-label>Number of hit dice</mat-label>
+                <input
+                  formControlName="hit_dice_number"
+                  matInput
+                  placeholder="Eg. 20"
+                  type="number"
+                  min="1"
+                />
+                <mat-hint align="start">
+                  The number of <strong>hit dice</strong> the Monster has.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field>
+                <mat-label>Type of hit die</mat-label>
+                <mat-select formControlName="hit_dice_die">
+                  <mat-option *ngFor="let item of DICE" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+                <mat-hint align="start">
+                  The type of <strong>hit dice</strong> the Monster uses.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Hit Dice -->
+          </div>
+
+          <div class="form-group row">
+            <!-- start:: Challenge Rating -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Challenge Rating</mat-label>
+                <input
+                  formControlName="challenge_rating"
+                  matInput
+                  placeholder="Eg. 20"
+                  type="number"
+                  min="0"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>challenge rating.</strong>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Challenge Rating -->
+
+            <!-- start:: XP -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>XP</mat-label>
+                <input
+                  formControlName="xp"
+                  matInput
+                  placeholder="Eg. 20"
+                  type="number"
+                  min="0"
+                />
+                <mat-hint align="start">
+                  <strong>Experience</strong> granted by the Monster.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- start:: XP -->
+          </div>
+
+          <!-- start:: Languages -->
+          <div class="form-group row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Languages</mat-label>
+                <mat-chip-list #languages_chipList>
+                  <mat-chip
+                    *ngFor="let item of languages"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(item, 'languages')"
+                  >
+                    {{ item }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Eg. Common, Deep Speech, Telepathy"
+                    #languageInput
+                    [formControl]="languageCtrl"
+                    [matAutocomplete]="auto_languages"
+                    [matChipInputFor]="languages_chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event, 'languages')"
+                  />
+                </mat-chip-list>
+                <mat-autocomplete
+                  #auto_languages="matAutocomplete"
+                  (optionSelected)="selected($event)"
+                >
+                  <mat-option
+                    *ngFor="let item of filteredLanguages | async"
+                    [value]="item"
+                  >
+                    {{ item }}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-hint align="start">
+                  The <strong>languages</strong> the Monster speaks and
+                  understands.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- end:: Languages -->
+
+          <!-- todo start:: Proficiencies -->
+          <div class="form-group row"></div>
+          <!-- todo end:: Proficiencies -->
+        </div>
+        <!-- * end:: General Information -->
+
+        <div class="mt-2">
+          <span class="checkbox-label"> Movement </span>
+        </div>
+
+        <!-- * start:: Speed -->
+        <div formGroupName="speed" class="form-group">
+          <div class="row">
+            <div class="col-4">
+              <span *ngFor="let item of MOVEMENTS" class="pr-5">
+                <mat-checkbox
+                  formControlName="speed_{{ item }}"
+                  color="primary"
+                >
+                  {{ item }}
+                </mat-checkbox>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <!-- start:: Speed - Walk -->
+            <div *ngIf="form.value.speed.speed_Walk" class="col">
+              <mat-form-field>
+                <mat-label>Walking speed (ft.)</mat-label>
+                <input
+                  formControlName="speed_Walk"
+                  matInput
+                  placeholder="Eg. 60"
+                  type="number"
+                  min="0"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>walking speed</strong>.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Speed - Walk -->
+
+            <!-- start:: Speed - Fly -->
+            <div *ngIf="form.value.speed.speed_Fly" class="col">
+              <mat-form-field>
+                <mat-label>Flying speed (ft.)</mat-label>
+                <input
+                  formControlName="speed_Fly"
+                  matInput
+                  placeholder="Eg. 120"
+                  type="number"
+                  min="0"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>flying speed</strong>.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Speed - Fly -->
+
+            <!-- start:: Speed - Swim -->
+            <div *ngIf="form.value.speed.speed_Swim" class="col">
+              <mat-form-field>
+                <mat-label>Swimming speed (ft.)</mat-label>
+                <input
+                  formControlName="speed_Swim"
+                  matInput
+                  placeholder="Eg. 200"
+                  type="number"
+                  min="0"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>swimming speed.</strong>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Speed - Swim -->
           </div>
         </div>
-      </div>
-      <!-- end:: Footer -->
-    </form>
-    <!-- end:: Form -->
-  </mat-dialog-content>
-</div>
+        <!-- * start:: Speed -->
+
+        <h3 class="tc-red" style="font-weight: bold">Ability Scores</h3>
+        <div class="divider"></div>
+
+        <!-- * start:: Ability Scores -->
+        <div formGroupName="abilityScores" class="form-group">
+          <div class="form-group row">
+            <!-- start:: Strength -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Strength</mat-label>
+                <input
+                  formControlName="ability_scores_STR"
+                  matInput
+                  placeholder="Eg. 10"
+                  type="number"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>Strength</strong> score.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Strength -->
+
+            <!-- start:: Dexterity -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Dexterity</mat-label>
+                <input
+                  formControlName="ability_scores_DEX"
+                  matInput
+                  placeholder="Eg. 10"
+                  type="number"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>Dexterity</strong> score.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Dexterity -->
+          </div>
+
+          <div class="form-group row">
+            <!-- start:: Constitution -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Constitution</mat-label>
+                <input
+                  formControlName="ability_scores_CON"
+                  matInput
+                  placeholder="Eg. 10"
+                  type="number"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>Constitution</strong> score.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Constitution -->
+
+            <!-- start:: Intelligence -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Intelligence</mat-label>
+                <input
+                  formControlName="ability_scores_INT"
+                  matInput
+                  placeholder="Eg. 10"
+                  type="number"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>Intelligence</strong> score.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Intelligence -->
+          </div>
+
+          <div class="form-group row">
+            <!-- start:: Wisdom -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Wisdom</mat-label>
+                <input
+                  formControlName="ability_scores_WIS"
+                  matInput
+                  placeholder="Eg. 10"
+                  type="number"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>Wisdom</strong> score.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Wisdom -->
+
+            <!-- start:: Charisma -->
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>Charisma</mat-label>
+                <input
+                  formControlName="ability_scores_CHA"
+                  matInput
+                  placeholder="Eg. 10"
+                  type="number"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>Charisma</strong> score.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Charisma -->
+          </div>
+        </div>
+        <!-- * start:: Ability Scores -->
+
+        <h3 class="tc-red" style="font-weight: bold">
+          Resistances and Vunerabilities
+        </h3>
+        <div class="divider"></div>
+
+        <!-- * start:: Resistances, Immunities and Vunerabilities -->
+        <div formGroupName="resistancesAndVulnerabilities" class="form-group">
+          <!-- start:: Damage Vunerabilities -->
+          <div class="form-group row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Damage Vunerabilities</mat-label>
+                <mat-chip-list #damage_vulnerabilities_chipList>
+                  <mat-chip
+                    *ngFor="let item of damage_vulnerabilities"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(item, 'damage_vulnerabilities')"
+                  >
+                    {{ item }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Eg. Slashing"
+                    [matChipInputFor]="damage_vulnerabilities_chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="
+                      add($event, 'damage_vulnerabilities')
+                    "
+                  />
+                </mat-chip-list>
+                <mat-hint align="start">
+                  Damage that the Monster is <strong>vulnerable</strong> to.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- end:: Damage Vunerabilities -->
+
+          <!-- start:: Damage Resistances -->
+          <div class="form-group row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Damage Resistances</mat-label>
+                <mat-chip-list #damage_resistances_chipList>
+                  <mat-chip
+                    *ngFor="let item of damage_resistances"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(item, 'damage_resistances')"
+                  >
+                    {{ item }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Eg. Slashing"
+                    [matChipInputFor]="damage_resistances_chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event, 'damage_resistances')"
+                  />
+                </mat-chip-list>
+                <mat-hint align="start">
+                  Damage that the Monster is <strong>resistant</strong> to.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- end:: Damage Resistances -->
+
+          <!-- start:: Damage Immunities -->
+          <div class="form-group row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Damage Immunities</mat-label>
+                <mat-chip-list #damage_immunities_chipList>
+                  <mat-chip
+                    *ngFor="let item of damage_immunities"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(item, 'damage_immunities')"
+                  >
+                    {{ item }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Eg. Necrotic, Poison, Psychic, Bludgeoning, Piercing, Slashing from nonmagical attacks"
+                    [matChipInputFor]="damage_immunities_chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event, 'damage_immunities')"
+                  />
+                </mat-chip-list>
+                <mat-hint align="start">
+                  Damage that the Monster is <strong>immune</strong> to.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- end:: Damage Immunities -->
+
+          <!-- start:: Condition Immunities -->
+          <div class="form-group row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Condition Immunities</mat-label>
+                <mat-chip-list #condition_immunities_chipList>
+                  <mat-chip
+                    *ngFor="let item of condition_immunities"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(item, 'condition_immunities')"
+                  >
+                    {{ item.name }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Eg. Blinded, Charmed, Deafened, Frightened, Petrified, Poisoned, Stunned"
+                    [matChipInputFor]="condition_immunities_chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event, 'condition_immunities')"
+                  />
+                </mat-chip-list>
+                <mat-hint align="start">
+                  Condition(s) that the Monster is <strong>immune</strong> to.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- end:: Condition Immunities -->
+        </div>
+        <!-- * end:: Resistances, Immunities and Vunerabilities -->
+
+        <h3 class="tc-red" style="font-weight: bold">Senses</h3>
+        <div class="divider"></div>
+
+        <!-- * start:: Senses -->
+        <div formGroupName="senses" class="form-group">
+          <div class="form-group row">
+            <div class="col">
+              <span *ngFor="let item of SENSES" class="pr-5">
+                <mat-checkbox
+                  formControlName="senses_{{ item }}"
+                  color="primary"
+                >
+                  {{ formattingService.replaceUnderscoresWithSpaces(item) }}
+                </mat-checkbox>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <!-- start:: Senses - Blindsight -->
+            <div *ngIf="form.value.senses.senses_Blindsight" class="col">
+              <mat-form-field>
+                <mat-label>Blindsight (ft.)</mat-label>
+                <input
+                  formControlName="senses_Blindsight"
+                  matInput
+                  placeholder="Eg. 60"
+                  type="number"
+                  min="0"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>blindsight</strong> range.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Senses - Blindsight -->
+
+            <!-- start:: Senses - Darkvision -->
+            <div *ngIf="form.value.senses.senses_Darkvision" class="col">
+              <mat-form-field>
+                <mat-label>Darkvision (ft.)</mat-label>
+                <input
+                  formControlName="senses_Darkvision"
+                  matInput
+                  placeholder="Eg. 120"
+                  type="number"
+                  min="0"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>darkvision</strong> range.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Senses - Darkvision -->
+
+            <!-- start:: Senses - Tremorsense -->
+            <div *ngIf="form.value.senses.senses_Tremorsense" class="col">
+              <mat-form-field>
+                <mat-label>Tremorsense (ft.)</mat-label>
+                <input
+                  formControlName="senses_Tremorsense"
+                  matInput
+                  placeholder="Eg. 120"
+                  type="number"
+                  min="0"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>tremorsense</strong> range.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Senses - Tremorsense -->
+
+            <!-- start:: Senses - Truesight -->
+            <div *ngIf="form.value.senses.senses_Truesight" class="col">
+              <mat-form-field>
+                <mat-label>Truesight (ft.)</mat-label>
+                <input
+                  formControlName="senses_Truesight"
+                  matInput
+                  placeholder="Eg. 120"
+                  type="number"
+                  min="0"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>truesight</strong> range.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Senses - Truesight -->
+
+            <!-- start:: Senses - Passive Perception -->
+            <div
+              *ngIf="form.value.senses.senses_Passive_Perception"
+              class="col"
+            >
+              <mat-form-field>
+                <mat-label>Passive Perception</mat-label>
+                <input
+                  formControlName="senses_Passive_Perception"
+                  matInput
+                  placeholder="Eg. 27"
+                  type="number"
+                  min="0"
+                />
+                <mat-hint align="start">
+                  The Monster's <strong>passive perception</strong> value.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <!-- end:: Senses - Passive Perception -->
+          </div>
+        </div>
+        <!-- * end:: Senses -->
+
+        <!-- ! start:: FormGroup abilitiesAndActions -->
+        <div formGroupName="abilitiesAndActions" class="form-group">
+          <h3 class="tc-red" style="font-weight: bold">Special Abilities</h3>
+          <div class="divider"></div>
+
+          <!-- * start:: Special Abilities -->
+          <div formArrayName="special_abilities">
+            <!-- start:: Control Iterator -->
+            <div
+              *ngFor="
+                let special_ability of form.controls.abilitiesAndActions.get(
+                  'special_abilities'
+                )['controls'];
+                let i = index
+              "
+            >
+              <div class="tc-card-wrapper">
+                <!-- start:: Special Ability Header -->
+                <div class="tc-card-header">
+                  <div class="row">
+                    <div class="d-flex justify-content-start col-6">
+                      <h3>Special Ability {{ i + 1 }}</h3>
+                    </div>
+                    <div class="d-flex justify-content-end col-6">
+                      <!-- start:: REMOVE Special Ability Button -->
+                      <button
+                        class="remove-button"
+                        mat-icon-button
+                        (click)="removeActionOrAbility(i, 'special_ability')"
+                        matTooltip="Remove Special Ability"
+                      >
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <!-- end:: REMOVE Special Ability Button -->
+                    </div>
+                  </div>
+                </div>
+                <!-- end:: Special Ability Header -->
+
+                <!-- start:: Special Ability Content-->
+                <div class="tc-card-content" [formGroupName]="i">
+                  <!-- start:: Special Ability Name -->
+                  <div class="form-group row">
+                    <div class="col">
+                      <mat-form-field>
+                        <mat-label>Special Ability Name</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          formControlName="name"
+                          placeholder="Eg. Amphibious"
+                        />
+                        <mat-hint align="start">
+                          The <strong>name</strong> of the Special Ability.
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- end:: Special Ability Name -->
+
+                  <!-- start:: Special Ability Description -->
+                  <div class="form-group row">
+                    <div class="col">
+                      <mat-form-field>
+                        <mat-label>Special Ability Description</mat-label>
+                        <textarea
+                          matInput
+                          rows="5"
+                          cols="50"
+                          formControlName="desc"
+                          placeholder="Eg. Cthulu can breathe air and water."
+                        ></textarea>
+                        <mat-hint align="start">
+                          The <strong>description</strong> of the Special
+                          Ability.
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- end:: Special Ability Description -->
+                </div>
+                <!-- end:: Special Ability Content -->
+              </div>
+            </div>
+            <!-- end:: Control Iterator -->
+
+            <!-- start:: ADD Special Ability -->
+            <div class="d-flex justify-content-between mt-4 mb-8">
+              <div class="mr-2"></div>
+              <button
+                type="button"
+                mat-raised-button
+                color="primary"
+                (click)="addActionOrAbility('special_ability')"
+                matTooltip="Add Special Ability"
+              >
+                Add Special Ability
+              </button>
+            </div>
+            <!-- end:: ADD Special Ability -->
+          </div>
+          <!-- * end:: Special Abilities -->
+
+          <h3 class="tc-red" style="font-weight: bold">Actions</h3>
+          <div class="divider"></div>
+
+          <!-- * start:: Actions -->
+          <div formArrayName="actions">
+            <!-- start:: FormControl Iterator -->
+            <div
+              *ngFor="
+                let action of form.controls.abilitiesAndActions.get('actions')[
+                  'controls'
+                ];
+                let i = index
+              "
+            >
+              <div class="tc-card-wrapper">
+                <!-- start:: Action Header -->
+                <div class="tc-card-header">
+                  <div class="row">
+                    <div class="d-flex justify-content-start col-6">
+                      <h3>Action {{ i + 1 }}</h3>
+                    </div>
+                    <div class="d-flex justify-content-end col-6">
+                      <!-- start:: REMOVE Action Button -->
+                      <button
+                        class="remove-button"
+                        mat-icon-button
+                        (click)="removeActionOrAbility(i, 'action')"
+                        matTooltip="Remove Action"
+                      >
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <!-- end:: REMOVE Action Button -->
+                    </div>
+                  </div>
+                </div>
+                <!-- end:: Action Header -->
+
+                <!-- start:: Action Content-->
+                <div class="tc-card-content" [formGroupName]="i">
+                  <!-- start:: Action Name -->
+                  <div class="form-group row">
+                    <div class="col">
+                      <mat-form-field>
+                        <mat-label>Action Name</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          formControlName="name"
+                          placeholder="Eg. Multiattack"
+                        />
+                        <mat-hint align="start">
+                          The <strong>name</strong> of the Action.
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- end:: Action Name -->
+
+                  <!-- start:: Action Description -->
+                  <div class="form-group row">
+                    <div class="col">
+                      <mat-form-field>
+                        <mat-label>Action Description</mat-label>
+                        <textarea
+                          matInput
+                          rows="5"
+                          cols="50"
+                          formControlName="desc"
+                          placeholder="Eg. Cthulhu uses its Otherworldly Gaze. He then makes four attacks: two with his wings and two with his claws, or two with his tentacles and two with his claws."
+                        ></textarea>
+                        <mat-hint align="start">
+                          The <strong>description</strong> of the Action.
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- end:: Action Description -->
+                </div>
+                <!-- end:: Action Content -->
+              </div>
+            </div>
+            <!-- end:: FormControl Iterator -->
+
+            <!-- start:: ADD Action -->
+            <div class="d-flex justify-content-between mt-4 mb-8">
+              <div class="mr-2"></div>
+              <button
+                type="button"
+                mat-raised-button
+                color="primary"
+                (click)="addActionOrAbility('action')"
+                matTooltip="Add Action"
+              >
+                Add Action
+              </button>
+            </div>
+            <!-- end:: ADD Action -->
+          </div>
+          <!-- * end:: Actions -->
+
+          <h3 class="tc-red" style="font-weight: bold">Legendary Actions</h3>
+          <div class="divider"></div>
+
+          <!-- * start:: Legendary Actions -->
+          <div formArrayName="legendary_actions">
+            <!-- start:: FormControl Iterator -->
+            <div
+              *ngFor="
+                let legendary_action of form.controls.abilitiesAndActions.get(
+                  'legendary_actions'
+                )['controls'];
+                let i = index
+              "
+            >
+              <div class="tc-card-wrapper">
+                <!-- start:: Legendary Action Header -->
+                <div class="tc-card-header">
+                  <div class="row">
+                    <div class="d-flex justify-content-start col-6">
+                      <h3>Legendary Action {{ i + 1 }}</h3>
+                    </div>
+                    <div class="d-flex justify-content-end col-6">
+                      <!-- start:: REMOVE Legendary Action Button -->
+                      <button
+                        class="remove-button"
+                        mat-icon-button
+                        (click)="removeActionOrAbility(i, 'legendary_action')"
+                        matTooltip="Remove Legendary Action"
+                      >
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <!-- end:: REMOVE Action Button -->
+                    </div>
+                  </div>
+                </div>
+                <!-- end:: Legendary Action Header -->
+
+                <!-- start:: Legendary Action Content-->
+                <div class="tc-card-content" [formGroupName]="i">
+                  <!-- start:: Legendary Action Name -->
+                  <div class="form-group row">
+                    <div class="col">
+                      <mat-form-field>
+                        <mat-label>Legendary Action Name</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          formControlName="name"
+                          placeholder="Eg. Legendary Resistance"
+                        />
+                        <mat-hint align="start">
+                          Enter the <strong>name</strong> of the Legendary
+                          Action.
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- end:: Legendary Action Name -->
+
+                  <!-- start:: Legendary Action Description -->
+                  <div class="form-group row">
+                    <div class="col">
+                      <mat-form-field>
+                        <mat-label>Legendary Action Description</mat-label>
+                        <textarea
+                          matInput
+                          rows="5"
+                          cols="50"
+                          formControlName="desc"
+                          placeholder="Eg. If Cthulu fails a saving throw, it can choose to succeed instead."
+                        ></textarea>
+                        <mat-hint align="start">
+                          Enter the <strong>description</strong> of the
+                          Legendary Action.
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- end:: Legendary Action Description -->
+                </div>
+                <!-- end:: Legendary Action Content -->
+              </div>
+            </div>
+            <!-- end:: FormControl Iterator -->
+
+            <!-- start:: ADD Legendary Action -->
+            <div class="d-flex justify-content-between mt-4 mb-8">
+              <div class="mr-2"></div>
+              <button
+                type="button"
+                mat-raised-button
+                color="primary"
+                (click)="addActionOrAbility('legendary_action')"
+                matTooltip="Add Legendary Action"
+              >
+                Add Legendary Action
+              </button>
+            </div>
+            <!-- end:: ADD Legendary Action -->
+          </div>
+          <!-- * end:: Legendary Actions -->
+        </div>
+        <!-- ! end:: FormGroup abilitiesAndActions -->
+
+        <!-- start:: Footer -->
+        <div class="card-footer">
+          <!-- start:: KT Alert if form has errors. -->
+          <kt-alert
+            *ngIf="hasFormErrors"
+            type="warn"
+            [duration]="30000"
+            [showCloseButton]="true"
+            (close)="onAlertClose($event)"
+          >
+            {{ errorMessage }}
+          </kt-alert>
+          <!-- start:: KT Alert if form has errors. -->
+
+          <div class="d-flex justify-content-between">
+            <div class="mr-2"></div>
+            <div>
+              <button
+                type="button"
+                mat-raised-button
+                mat-dialog-close
+                cdkFocusInitial
+                matTooltip="Cancel"
+              >
+                Cancel</button
+              >&nbsp;
+              <button
+                type="button"
+                mat-raised-button
+                color="primary"
+                (click)="onSubmit()"
+                matTooltip="Save Monster"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- end:: Footer -->
+      </form>
+      <!-- end:: Form -->
+    </div>
+    <!-- end:: Card Body -->
+  </div>
+</mat-dialog-content>
