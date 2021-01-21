@@ -107,20 +107,6 @@ const routes: Routes = [
       // end:: The Compendium Pages
 
       {
-        path: "mail",
-        loadChildren: () =>
-          import("./views/pages/apps/mail/mail.module").then(
-            (m) => m.MailModule
-          ),
-      },
-      {
-        path: "ecommerce",
-        loadChildren: () =>
-          import("./views/pages/apps/e-commerce/e-commerce.module").then(
-            (m) => m.ECommerceModule
-          ),
-      },
-      {
         path: "wizard",
         loadChildren: () =>
           import("./views/pages/wizard/wizard.module").then(
