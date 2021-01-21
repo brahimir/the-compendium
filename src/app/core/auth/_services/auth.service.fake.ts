@@ -21,7 +21,10 @@ import { Role } from "../_models/role.model";
 // The Compendium API
 import { API_ROUTES } from "src/environments/app-secrets";
 
+// TC Routes
 const USERS_URL = API_ROUTES.AUTH.USERS;
+const REGISTER_USER = API_ROUTES.AUTH.REGISTER_USER;
+
 const API_USERS_URL = "api/users";
 const API_PERMISSION_URL = "api/permissions";
 const API_ROLES_URL = "api/roles";
@@ -35,7 +38,7 @@ export class AuthService {
     if (!email || !password) {
       return of(null);
     }
-    
+
     return this.getAllUsers().pipe(
       map((result: User[]) => {
         if (result.length <= 0) {
@@ -65,16 +68,15 @@ export class AuthService {
 
     let httpHeaders = new HttpHeaders();
     httpHeaders = httpHeaders.set("Content-Type", "application/json");
-    return this.http
-      .post<User>(API_USERS_URL, user, { headers: httpHeaders })
-      .pipe(
-        map((res: User) => {
-          return res;
-        }),
-        catchError((err) => {
-          return null;
-        })
-      );
+
+    return this.http.post<User>(REGISTER_USER, user).pipe(
+      map((res: User) => {
+        return res;
+      }),
+      catchError((err) => {
+        return null;
+      })
+    );
   }
 
   requestPassword(email: string): Observable<any> {

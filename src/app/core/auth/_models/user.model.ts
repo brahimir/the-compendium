@@ -1,7 +1,5 @@
-import { BaseModel } from "../../_base/crud";
-
-export class User extends BaseModel {
-  _id: string;
+export class User {
+  _id?: string;
   username: string;
   password: string;
   email: string;
@@ -9,28 +7,57 @@ export class User extends BaseModel {
   refreshToken: string;
   roles: number[];
   fullName: string;
-  userSettings: {
-    dashboard: string[];
+  userSettings = {
+    dashboard: [],
     dmTools: {
-      campaigns: Object[];
+      campaigns: [],
       storyboard: {
-        plotsMain: {
-          title: string;
-          description: string;
-        };
-        plotsInProgress: {
-          title: string;
-          description: string;
-        };
-        plotsDone: {
-          title: string;
-          description: string;
-        };
-      };
-      sessions: Object[];
-    };
-    userProfile: {};
+        plotsMain: [],
+        plotsInProgress: [],
+        plotsDone: [],
+      },
+      sessions: [],
+    },
+    userProfile: {},
   };
+
+  constructor(
+    username: string,
+    password: string,
+    email: string,
+    roles: number[],
+    fullName: string,
+    accessToken?: string,
+    refreshToken?: string,
+    _id?: string,
+    userSettings?: {
+      dashboard: string[];
+      dmTools: {
+        campaigns: Object[];
+        storyboard: {
+          plotsMain: Object[];
+          plotsInProgress: Object[];
+          plotsDone: Object[];
+        };
+        sessions: Object[];
+      };
+      userProfile: Object;
+    }
+  ) {
+    this.username = username;
+    this.password = password;
+    this.email = email;
+    this.roles = roles;
+    this.fullName = fullName;
+    this.accessToken = accessToken;
+    this.refreshToken = refreshToken;
+    this._id = _id;
+
+    // Usually new users will have empty user settings (default)
+    if (userSettings) {
+      this.userSettings = userSettings;
+    }
+  }
 
   clear(): void {
     this._id = undefined;

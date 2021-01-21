@@ -3,6 +3,7 @@ export const API_ROUTES = {
   // Auth
   AUTH: {
     USERS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
+    REGISTER_USER: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/register-user",
     PERMISSIONS: "api/permissions",
     ROLES: "api/roles",
   },
