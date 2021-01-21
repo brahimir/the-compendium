@@ -14,6 +14,7 @@ import {
 } from "../../../core/_base/layout";
 // Auth
 import { AuthNoticeService } from "../../../core/auth";
+import { CONSTANTS_GLOBAL } from "../the-compendium-pages/constants";
 
 @Component({
   selector: "kt-auth",
@@ -26,8 +27,7 @@ export class AuthComponent implements OnInit {
   today: number = Date.now();
   headerLogo: string;
 
-  private REGISTRATION_WARNING: string =
-    "PLEASE READ - This web application is currently IN DEVELOPMENT. When registering, DO NOT use personal data or credentials. Thank you.";
+  REGISTRATION_WARNING: string = CONSTANTS_GLOBAL.WARNINGS.REGISTRATION;
 
   /**
    * Component constructor
