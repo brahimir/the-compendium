@@ -99,6 +99,7 @@ import { RemovePlotDialogComponent } from "./views/pages/the-compendium-pages/dm
 import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-session-dialog/create-session-dialog.component";
 import { EditSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
 import { RemoveSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
+import { MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material/dialog";
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -195,6 +196,11 @@ export function getHighlightLanguages() {
     KtDialogService,
     DataTableService,
     SplashScreenService,
+    // ! MatDialog Sizing
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: { minWidth: "60%", maxWidth: "60%", hasBackdrop: true },
+    },
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
