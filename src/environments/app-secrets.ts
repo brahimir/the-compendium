@@ -1,13 +1,17 @@
-// API Routes
+// TC API Routes
 export const API_ROUTES = {
-  // Auth
+  // * Auth
   AUTH: {
-    USERS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
-    REGISTER_USER: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/register-user",
+    USERS:
+      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
+    REGISTER_USER:
+      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/register-user",
     PERMISSIONS: "api/permissions",
     ROLES: "api/roles",
   },
-  // Resources
+
+  // * Resources
+  // Official
   OFFICIAL: {
     BASE: "https://www.dnd5eapi.co",
     WEAPONS: "https://www.dnd5eapi.co/api/equipment-categories/weapon",
@@ -17,6 +21,7 @@ export const API_ROUTES = {
     MONSTERS: "https://www.dnd5eapi.co/api/monsters",
     SPELLS: "https://www.dnd5eapi.co/api/spells",
   },
+  // Homebrew
   HOMEBREW: {
     WEAPONS:
       "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewWeapons",
@@ -29,13 +34,17 @@ export const API_ROUTES = {
     SPELLS:
       "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewSpells",
   },
-  // DM Tools
+
+  // * DM Tools
   DM_TOOLS: {
-    UPDATE_STORYBOARD: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/storyboard/",
-    UPDATE_SESSIONS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/sessions/",
-  }
+    UPDATE_STORYBOARD:
+      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/storyboard/",
+    UPDATE_SESSIONS:
+      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/sessions/",
+  },
 };
 
+// CONSTANTS - 5E Resources
 export const FIFTH_EDITION_RESOURCES = {
   // * General
   GENERAL: {
