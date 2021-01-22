@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-// Utilities
-import { TypesUtilsService } from "../../../../../../core/_base/crud/utils/types-utils.service";
+// Services
+import { FormattingService } from "src/app/core/resources/_services/formatting.service";
 
 @Component({
   selector: "kt-npc-details-dialog",
@@ -14,7 +14,7 @@ export class NpcDetailsDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<NpcDetailsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    private utilityService: TypesUtilsService
+    private formattingService: FormattingService
   ) {
     // Sets the incoming data to this Component's dialogData reference.
     this.dialogData = data;
@@ -29,6 +29,6 @@ export class NpcDetailsDialogComponent implements OnInit {
    * @returns {string} The formatted string.
    */
   capitalizeFirstLetter(data: string): string {
-    return this.utilityService.capitalizeFirstLetter(data);
+    return this.formattingService.capitalizeFirstLetter(data);
   }
 }

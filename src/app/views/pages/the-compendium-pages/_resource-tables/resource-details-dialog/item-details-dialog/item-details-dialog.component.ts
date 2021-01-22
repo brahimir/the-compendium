@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-// Utils
-import { TypesUtilsService } from "../../../../../../core/_base/crud/utils/types-utils.service";
+// Services
+import { FormattingService } from "src/app/core/resources/_services/formatting.service";
 
 @Component({
   selector: "kt-item-details-dialog",
@@ -14,7 +14,7 @@ export class ItemDetailsDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ItemDetailsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    private utilityService: TypesUtilsService
+    private formattingService: FormattingService
   ) {
     // Sets the incoming data to this Component's dialogData reference.
     this.dialogData = data;
@@ -29,6 +29,6 @@ export class ItemDetailsDialogComponent implements OnInit {
    * @returns The formatted string.
    */
   lowercaseFirstLetter(data: string) {
-    return this.utilityService.lowercaseAllLetters(data);
+    return this.formattingService.lowercaseAllLetters(data);
   }
 }
