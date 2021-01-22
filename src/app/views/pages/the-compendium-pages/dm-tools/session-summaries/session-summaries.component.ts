@@ -39,7 +39,7 @@ export class SessionSummariesComponent implements OnInit {
   dataSource: any;
 
   // Sessions
-  TABLE_DATA: Session[] = [];
+  TABLE_DATA: Session[];
 
   constructor(
     private store: Store<AppState>,
@@ -50,8 +50,8 @@ export class SessionSummariesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // todo - This is getting a "snapshot" of the user - need to explicitly call the API to get
-    // todo - up-to-date information on the Storyboard plots for the user.
+    // todo - This is getting a "snapshot" of the user - on refresh, the User Observable doesn't have
+    // todo - "data" to subscribe to - need to fix this.
     this.user$ = this.store.pipe(select(currentUser));
     this.user$.subscribe((data) => {
       this.userId = data._id;
