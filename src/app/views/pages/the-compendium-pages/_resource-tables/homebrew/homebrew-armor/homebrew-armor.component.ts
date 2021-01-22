@@ -16,7 +16,7 @@ import { ArmorDetailsDialogComponent } from "../../resource-details-dialog/armor
   templateUrl: "../../official/armor/armor.component.html",
   styleUrls: ["./homebrew-armor.component.scss", "../../../sass/tc-global.scss"],
 })
-export class HomebrewArmorComponent implements OnInit, AfterViewInit {
+export class HomebrewArmorsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 

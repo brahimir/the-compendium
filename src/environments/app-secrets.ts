@@ -1,4 +1,15 @@
-// TC API Routes
+import { HomebrewArmorsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-armor/homebrew-armor.component";
+import { HomebrewItemsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-items/homebrew-items.component";
+import { HomebrewNpcsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-npcs/homebrew-npcs.component";
+import { HomebrewSpellsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-spells/homebrew-spells.component";
+import { HomebrewWeaponsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-weapons/homebrew-weapons.component";
+import { ArmorsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/armor/armor.component";
+import { ItemsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/items/items.component";
+import { NpcsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/npcs/npcs.component";
+import { SpellsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/spells/spells.component";
+import { WeaponsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/weapons/weapons.component";
+
+// ! TC API Routes
 export const API_ROUTES = {
   // * Auth
   AUTH: {
@@ -44,7 +55,56 @@ export const API_ROUTES = {
   },
 };
 
-// CONSTANTS - 5E Resources
+// ! TC Constants
+export const TC_CONSTANTS = {
+  DASHBOARD_COMPONENTS: [
+    // Official Resources
+    {
+      name: "weapons",
+      component: WeaponsComponent,
+    },
+    {
+      name: "armors",
+      component: ArmorsComponent,
+    },
+    {
+      name: "items",
+      component: ItemsComponent,
+    },
+    {
+      name: "npcs",
+      component: NpcsComponent,
+    },
+    {
+      name: "spells",
+      component: SpellsComponent,
+    },
+
+    // Homebrew Resources
+    {
+      name: "homebrew-weapons",
+      component: HomebrewWeaponsComponent,
+    },
+    {
+      name: "homebrew-armors",
+      component: HomebrewArmorsComponent,
+    },
+    {
+      name: "homebrew-items",
+      component: HomebrewItemsComponent,
+    },
+    {
+      name: "homebrew-npcs",
+      component: HomebrewNpcsComponent,
+    },
+    {
+      name: "homebrew-spells",
+      component: HomebrewSpellsComponent,
+    },
+  ],
+};
+
+// ! 5E Constants
 export const FIFTH_EDITION_RESOURCES = {
   // * General
   GENERAL: {

@@ -19,7 +19,7 @@ import { ArmorDetailsDialogComponent } from "../../resource-details-dialog/armor
   templateUrl: "./armor.component.html",
   styleUrls: ["./armor.component.scss"],
 })
-export class ArmorComponent implements OnInit, AfterViewInit {
+export class ArmorsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 

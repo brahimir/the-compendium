@@ -51,8 +51,8 @@ import { CoreModule } from "../../core/core.module";
 // Dashboard Page
 import { DashboardComponent } from "./the-compendium-pages/dashboard/dashboard.component";
 // Official 5E Resource Pages
-import { WeaponComponent } from "./the-compendium-pages/_resource-tables/official/weapons/weapons.component";
-import { ArmorComponent } from "./the-compendium-pages/_resource-tables/official/armor/armor.component";
+import { WeaponsComponent } from "./the-compendium-pages/_resource-tables/official/weapons/weapons.component";
+import { ArmorsComponent } from "./the-compendium-pages/_resource-tables/official/armor/armor.component";
 import { ItemsComponent } from "./the-compendium-pages/_resource-tables/official/items/items.component";
 import { NpcsComponent } from "./the-compendium-pages/_resource-tables/official/npcs/npcs.component";
 import { SpellsComponent } from "./the-compendium-pages/_resource-tables/official/spells/spells.component";
@@ -80,7 +80,7 @@ import { CreateSessionDialogComponent } from "./the-compendium-pages/dm-tools/cr
 
 // Homebrew Pages
 import { HomebrewWeaponsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-weapons/homebrew-weapons.component";
-import { HomebrewArmorComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-armor/homebrew-armor.component";
+import { HomebrewArmorsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-armor/homebrew-armor.component";
 import { HomebrewItemsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-items/homebrew-items.component";
 import { HomebrewNpcsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-npcs/homebrew-npcs.component";
 import { HomebrewSpellsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-spells/homebrew-spells.component";
@@ -97,15 +97,15 @@ import { RemoveSessionDialogComponent } from "./the-compendium-pages/dm-tools/se
 @NgModule({
   declarations: [
     //The Compendium Pages
-    WeaponComponent,
-    ArmorComponent,
+    WeaponsComponent,
+    ArmorsComponent,
     ItemsComponent,
     NpcsComponent,
     SpellsComponent,
     StoryboardComponent,
     // Homebrew Pages
     HomebrewWeaponsComponent,
-    HomebrewArmorComponent,
+    HomebrewArmorsComponent,
     HomebrewItemsComponent,
     HomebrewNpcsComponent,
     HomebrewSpellsComponent,

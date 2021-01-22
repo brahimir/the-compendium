@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 // Components
-import { WeaponComponent } from "../_resource-tables/official/weapons/weapons.component";
-import { ArmorComponent } from "../_resource-tables/official/armor/armor.component";
+import { WeaponsComponent } from "../_resource-tables/official/weapons/weapons.component";
+import { ArmorsComponent } from "../_resource-tables/official/armor/armor.component";
 import { NpcsComponent } from "../_resource-tables/official/npcs/npcs.component";
 import { ItemsComponent } from "../_resource-tables/official/items/items.component";
 import { SpellsComponent } from "../_resource-tables/official/spells/spells.component";
@@ -23,28 +23,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(public router: Router, public dialog: MatDialog) {}
 
-  ngOnInit(): void {
-    // todo:: working on saving the draggable box states in local storage.
-    let myStorage = window.localStorage;
-    this.boxes.push(myStorage.getItem("window"));
-  }
-
-  openWindow(route: string) {
-    // Converts the route into a string that can be used
-    // with the window.open() function.
-    const url = this.router.serializeUrl(this.router.createUrlTree([route]));
-
-    window.open(url, "_blank");
-  }
-
-  // todo:: working on saving the draggable box states in local storage.
-  dragEnded(event: any) {
-    let boxCoords: string;
-
-    boxCoords = event.pointerPosition;
-    let myStorage = window.localStorage;
-    myStorage.setItem("box", boxCoords);
-  }
+  ngOnInit(): void {}
 
   /**
    * Opens Dialogs for each component on the Dashboard.
@@ -56,11 +35,11 @@ export class DashboardComponent implements OnInit {
 
     switch (windowName) {
       case "weapons":
-        dialogRef = this.dialog.open(WeaponComponent, this.dialogOptions);
+        dialogRef = this.dialog.open(WeaponsComponent, this.dialogOptions);
         break;
 
       case "armors":
-        dialogRef = this.dialog.open(ArmorComponent, this.dialogOptions);
+        dialogRef = this.dialog.open(ArmorsComponent, this.dialogOptions);
         break;
 
       case "items":

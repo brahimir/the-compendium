@@ -11,14 +11,14 @@ import { AuthGuard } from "./core/auth";
 // Dashboard Page
 import { DashboardComponent } from "./views/pages/the-compendium-pages/dashboard/dashboard.component";
 // Official 5E Resource Pages
-import { WeaponComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/weapons/weapons.component";
-import { ArmorComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/armor/armor.component";
+import { WeaponsComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/weapons/weapons.component";
+import { ArmorsComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/armor/armor.component";
 import { ItemsComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/items/items.component";
 import { NpcsComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/npcs/npcs.component";
 import { SpellsComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/spells/spells.component";
 //Homebrew Resource Pages
 import { HomebrewWeaponsComponent } from "./views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-weapons/homebrew-weapons.component";
-import { HomebrewArmorComponent } from "./views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-armor/homebrew-armor.component";
+import { HomebrewArmorsComponent } from "./views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-armor/homebrew-armor.component";
 import { HomebrewItemsComponent } from "./views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-items/homebrew-items.component";
 import { HomebrewNpcsComponent } from "./views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-npcs/homebrew-npcs.component";
 import { HomebrewSpellsComponent } from "./views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-spells/homebrew-spells.component";
@@ -52,11 +52,11 @@ const routes: Routes = [
       // 5e Resources
       {
         path: "weapons",
-        component: WeaponComponent,
+        component: WeaponsComponent,
       },
       {
         path: "armor",
-        component: ArmorComponent,
+        component: ArmorsComponent,
       },
       {
         path: "items",
@@ -77,7 +77,7 @@ const routes: Routes = [
       },
       {
         path: "homebrew-armor",
-        component: HomebrewArmorComponent,
+        component: HomebrewArmorsComponent,
       },
       {
         path: "homebrew-items",

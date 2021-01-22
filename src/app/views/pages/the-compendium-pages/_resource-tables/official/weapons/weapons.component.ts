@@ -19,7 +19,7 @@ import { WeaponDetailsDialogComponent } from "../../resource-details-dialog/weap
   templateUrl: "./weapons.component.html",
   styleUrls: ["./weapons.component.scss"],
 })
-export class WeaponComponent implements OnInit, AfterViewInit {
+export class WeaponsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
