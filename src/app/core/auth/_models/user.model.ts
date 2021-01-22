@@ -31,7 +31,7 @@ export class User {
     refreshToken?: string,
     _id?: string,
     userSettings?: {
-      dashboard: string[];
+      dashboard: Object[];
       dmTools: {
         campaigns: Object[];
         storyboard: {

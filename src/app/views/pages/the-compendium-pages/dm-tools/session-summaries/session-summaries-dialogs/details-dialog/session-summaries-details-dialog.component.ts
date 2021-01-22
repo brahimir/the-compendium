@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { currentUser, User } from "src/app/core/auth";
 import { Session } from "../../../../../../../core/resources/_models/dm_tools/session_summaries/session.model";
 // Services
-import { SessionSummariesService } from "src/app/core/resources/_services/dm-tools-services/session_summaries.service";
+import { SessionSummariesService } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries.service";
 // MatDialog
 import {
   MatDialog,

@@ -2,12 +2,11 @@ import { Injectable } from "@angular/core";
 // Models
 import { Session } from "src/app/core/resources/_models/dm_tools/session_summaries/session.model";
 // Routes
-import { API_ROUTES } from "../../../../../environments/app-secrets";
+import { API_ROUTES } from "../../../../../../environments/app-secrets";
 // Http
 import { HttpClient } from "@angular/common/http";
 // RXJS
-import { Observable, throwError } from "rxjs";
-import { map, catchError } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 // API urls
 const USERS_URL = API_ROUTES.AUTH.USERS;

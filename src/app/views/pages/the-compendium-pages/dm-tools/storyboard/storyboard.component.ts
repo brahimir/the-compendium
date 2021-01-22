@@ -4,7 +4,7 @@ import { CONSTANTS_STORYBOARD } from "./constants";
 // Models
 import { Plot } from "src/app/core/resources/_models/dm_tools/storyboard/plot.model";
 // Services
-import { StoryboardService } from "src/app/core/resources/_services/dm-tools-services/storyboard.service";
+import { StoryboardService } from "src/app/views/pages/the-compendium-pages/dm-tools/storyboard/storyboard.service";
 // CdkDragDrop
 import {
   CdkDragDrop,

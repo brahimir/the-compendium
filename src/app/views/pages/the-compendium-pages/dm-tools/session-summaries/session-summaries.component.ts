@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 import { currentUser, User } from "src/app/core/auth";
 import { Session } from "../../../../../core/resources/_models/dm_tools/session_summaries/session.model";
 // Services
-import { SessionSummariesService } from "../../../../../core/resources/_services/dm-tools-services/session_summaries.service";
+import { SessionSummariesService } from "./session-summaries.service";
 import { DateService } from "src/app/core/resources/_services/date.service";
 // Angular Material
 import { MatTableDataSource } from "@angular/material/table";

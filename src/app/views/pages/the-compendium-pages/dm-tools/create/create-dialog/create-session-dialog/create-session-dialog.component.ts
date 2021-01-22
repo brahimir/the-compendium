@@ -9,7 +9,7 @@ import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 // FormBuilder
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { SessionSummariesService } from "src/app/core/resources/_services/dm-tools-services/session_summaries.service";
+import { SessionSummariesService } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries.service";
 // State
 import { AppState } from "src/app/core/reducers";
 import { select, Store } from "@ngrx/store";

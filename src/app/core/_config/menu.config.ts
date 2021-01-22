@@ -403,7 +403,7 @@ export class MenuConfig {
           page: "/weapons",
         },
         {
-          title: "Armor",
+          title: "Armors",
           root: true,
           bullet: "dot",
           icon: "fas fa-shield-alt",

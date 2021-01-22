@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+// Constants
+import { TC_CONSTANTS } from "src/environments/app-secrets";
 // Components
 import { WeaponsComponent } from "../_resource-tables/official/weapons/weapons.component";
 import { ArmorsComponent } from "../_resource-tables/official/armor/armor.component";
@@ -8,6 +10,7 @@ import { ItemsComponent } from "../_resource-tables/official/items/items.compone
 import { SpellsComponent } from "../_resource-tables/official/spells/spells.component";
 // MatDialog
 import { MatDialog } from "@angular/material/dialog";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "kt-dashboard",
@@ -15,15 +18,17 @@ import { MatDialog } from "@angular/material/dialog";
   styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent implements OnInit {
-  // todo -
-  @Input() boxes: string[] = [];
-
-  // MatDialog options
-  dialogOptions = {};
+  // Dashboard Components Array
+  DASHBOARD_COMPONENTS = TC_CONSTANTS.DASHBOARD_COMPONENTS;
 
   constructor(public router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  getUserDashboard(): Observable<any> {
+    
+    return;
+  }
 
   /**
    * Opens Dialogs for each component on the Dashboard.
@@ -35,23 +40,23 @@ export class DashboardComponent implements OnInit {
 
     switch (windowName) {
       case "weapons":
-        dialogRef = this.dialog.open(WeaponsComponent, this.dialogOptions);
+        dialogRef = this.dialog.open(WeaponsComponent);
         break;
 
       case "armors":
-        dialogRef = this.dialog.open(ArmorsComponent, this.dialogOptions);
+        dialogRef = this.dialog.open(ArmorsComponent);
         break;
 
       case "items":
-        dialogRef = this.dialog.open(ItemsComponent, this.dialogOptions);
+        dialogRef = this.dialog.open(ItemsComponent);
         break;
 
       case "npcs":
-        dialogRef = this.dialog.open(NpcsComponent, this.dialogOptions);
+        dialogRef = this.dialog.open(NpcsComponent);
         break;
 
       case "spells":
-        dialogRef = this.dialog.open(SpellsComponent, this.dialogOptions);
+        dialogRef = this.dialog.open(SpellsComponent);
         break;
     }
   }
