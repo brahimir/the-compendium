@@ -3,8 +3,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { Npc } from "../../../../../../core/resources/_models/npc.model";
 // Services
 import { HomebrewNpcsService } from "../../../../../../core/resources/_services/homebrew-services/homebrew-npcs.service";
-// Utilities
-import { TypesUtilsService } from "../../../../../../core/_base/crud/utils/types-utils.service";
+import { FormattingService } from "src/app/core/resources/_services/formatting.service";
 // MatTable
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
@@ -39,7 +38,7 @@ export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
   constructor(
     private homebrewNpcsService: HomebrewNpcsService,
     public dialog: MatDialog,
-    private utilityService: TypesUtilsService
+    private formattingService: FormattingService
   ) {}
 
   ngOnInit(): void {
@@ -109,6 +108,6 @@ export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
    * @returns {string} The formatted string.
    */
   titleCase(data: string): string {
-    return this.utilityService.titleCase(data);
+    return this.formattingService.titleCase(data);
   }
 }

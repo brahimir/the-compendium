@@ -125,11 +125,7 @@
 
         <!-- start:: Loading spinner -->
         <div *ngIf="!TABLE_DATA.length" class="spinner-container">
-          <mat-spinner
-            [diameter]="50"
-            style="margin: auto"
-            *ngIf="!TABLE_DATA.length"
-          ></mat-spinner>
+          <mat-spinner [diameter]="50" style="margin: auto"></mat-spinner>
         </div>
         <!-- end:: Loading spinner -->
 

@@ -57,51 +57,21 @@ export const API_ROUTES = {
 
 // ! TC Constants
 export const TC_CONSTANTS = {
-  DASHBOARD_COMPONENTS: [
-    // Official Resources
-    {
-      name: "weapons",
-      component: WeaponsComponent,
-    },
-    {
-      name: "armors",
-      component: ArmorsComponent,
-    },
-    {
-      name: "items",
-      component: ItemsComponent,
-    },
-    {
-      name: "npcs",
-      component: NpcsComponent,
-    },
-    {
-      name: "spells",
-      component: SpellsComponent,
-    },
+  DASHBOARD_COMPONENTS: {
+    // Official
+    weapons: WeaponsComponent,
+    armors: ArmorsComponent,
+    items: ItemsComponent,
+    monsters: NpcsComponent,
+    spells: SpellsComponent,
 
-    // Homebrew Resources
-    {
-      name: "homebrew-weapons",
-      component: HomebrewWeaponsComponent,
-    },
-    {
-      name: "homebrew-armors",
-      component: HomebrewArmorsComponent,
-    },
-    {
-      name: "homebrew-items",
-      component: HomebrewItemsComponent,
-    },
-    {
-      name: "homebrew-npcs",
-      component: HomebrewNpcsComponent,
-    },
-    {
-      name: "homebrew-spells",
-      component: HomebrewSpellsComponent,
-    },
-  ],
+    // Homebrew
+    homebrewWeapons: HomebrewWeaponsComponent,
+    homebrewArmors: HomebrewArmorsComponent,
+    homebrewItems: HomebrewItemsComponent,
+    homebrewMonsters: HomebrewNpcsComponent,
+    homebrewSpells: HomebrewSpellsComponent,
+  },
 };
 
 // ! 5E Constants
