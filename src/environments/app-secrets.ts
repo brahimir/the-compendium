@@ -16,10 +16,16 @@ import { HomebrewSpellsComponent } from "src/app/views/pages/the-compendium-page
 export const API_ROUTES = {
   // * Auth
   AUTH: {
-    USERS:
-      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
-    REGISTER_USER:
-      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/register-user",
+    USERS: {
+      GET_ALL_USERS:
+        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
+      GET_USER_BY_ID:
+        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
+
+      REGISTER_USER:
+        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/register-user",
+    },
+    // todo - nest these with GETs like the USERS above.
     PERMISSIONS: "api/permissions",
     ROLES: "api/roles",
   },
