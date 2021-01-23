@@ -11,7 +11,7 @@ import { map, catchError } from "rxjs/operators";
 
 // API urls
 const USERS_URL = API_ROUTES.AUTH.USERS;
-const UPDATE_STORYBOARD = API_ROUTES.DM_TOOLS.UPDATE_STORYBOARD;
+const UPDATE_STORYBOARD = API_ROUTES.DM_TOOLS.STORYBOARD.UPDATE_STORYBOARD;
 
 @Injectable({
   providedIn: "root",

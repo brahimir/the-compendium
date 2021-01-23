@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
 
 // API urls
 const USERS_URL = API_ROUTES.AUTH.USERS;
-const UPDATE_SESSIONS = API_ROUTES.DM_TOOLS.UPDATE_SESSIONS;
+const UPDATE_SESSIONS = API_ROUTES.DM_TOOLS.SESSIONS.UPDATE_SESSIONS;
 
 @Injectable({
   providedIn: "root",
