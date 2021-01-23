@@ -22,8 +22,8 @@ import { Role } from "../_models/role.model";
 import { API_ROUTES } from "src/environments/app-secrets";
 
 // TC Routes
-const USERS_URL = API_ROUTES.AUTH.USERS;
-const REGISTER_USER = API_ROUTES.AUTH.REGISTER_USER;
+const USERS_URL = API_ROUTES.AUTH.USERS.GET_ALL_USERS;
+const REGISTER_USER = API_ROUTES.AUTH.USERS.REGISTER_USER;
 
 const API_USERS_URL = "api/users";
 const API_PERMISSION_URL = "api/permissions";
