@@ -4,7 +4,7 @@
     <div class="text-center mb-10 mb-lg-20">
       <h3 class="font-size-h1">Sign Up</h3>
       <p class="text-muted font-weight-bold">
-        Enter your details to create your account
+        Enter details to create your account
       </p>
     </div>
 
@@ -21,7 +21,7 @@
             formControlName="fullname"
           />
           <mat-error *ngIf="isControlHasError('fullname', 'required')">
-            <strong>{{ "AUTH.VALIDATION.REQUIRED_FIELD" | translate }}</strong>
+            <strong>Name is required.</strong>
           </mat-error>
           <mat-error *ngIf="isControlHasError('fullname', 'minlength')">
             <strong
@@ -46,10 +46,10 @@
             autocomplete="off"
           />
           <mat-error *ngIf="isControlHasError('email', 'required')">
-            <strong>{{ "AUTH.VALIDATION.REQUIRED_FIELD" | translate }}</strong>
+            <strong>Email is required.</strong>
           </mat-error>
           <mat-error *ngIf="isControlHasError('email', 'email')">
-            <strong>{{ "AUTH.VALIDATION.INVALID_FIELD" | translate }}</strong>
+            <strong>Please enter a valid email address.</strong>
           </mat-error>
           <mat-error *ngIf="isControlHasError('email', 'minlength')">
             <strong
@@ -73,7 +73,7 @@
             formControlName="username"
           />
           <mat-error *ngIf="isControlHasError('username', 'required')">
-            <strong>{{ "AUTH.VALIDATION.REQUIRED_FIELD" | translate }}</strong>
+            <strong>Username is required.</strong>
           </mat-error>
           <mat-error *ngIf="isControlHasError('username', 'minlength')">
             <strong
@@ -98,7 +98,7 @@
             autocomplete="off"
           />
           <mat-error *ngIf="isControlHasError('password', 'required')">
-            <strong>{{ "AUTH.VALIDATION.REQUIRED_FIELD" | translate }}</strong>
+            <strong>Password is required.</strong>
           </mat-error>
           <mat-error *ngIf="isControlHasError('password', 'minlength')">
             <strong
@@ -123,7 +123,7 @@
             autocomplete="off"
           />
           <mat-error *ngIf="isControlHasError('confirmPassword', 'required')">
-            <strong>{{ "AUTH.VALIDATION.REQUIRED_FIELD" | translate }}</strong>
+            <strong>Confirm password is required.</strong>
           </mat-error>
           <mat-error *ngIf="isControlHasError('confirmPassword', 'minlength')">
             <strong
@@ -144,21 +144,22 @@
             <strong>Passswords do not match.</strong>
           </mat-error>
         </mat-form-field>
-        <div class="form-group">
+        <div class="form-group mt-4">
           <mat-checkbox name="isDM" formControlName="isDM" color="primary">
             I want to register as a <a href="javascript:;">Dungeon Master.</a>
           </mat-checkbox>
+          <mat-checkbox name="agree" formControlName="agree" color="primary">
+            I accept the <a href="javascript:;">terms & conditions.</a>
+          </mat-checkbox>
         </div>
-      </div>
-      <div class="form-group">
-        <mat-checkbox name="agree" formControlName="agree" color="primary">
-          I accept the <a href="javascript:;">terms & conditions.</a>
-        </mat-checkbox>
       </div>
 
       <!--begin::Action-->
       <div class="form-group d-flex flex-wrap flex-center">
         <button
+          [disabled]="
+            registerForm.invalid || !registerForm.controls['agree'].value
+          "
           (click)="submit()"
           id="kt_login_signup_submit"
           class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4"

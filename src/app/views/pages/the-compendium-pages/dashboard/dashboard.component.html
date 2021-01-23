@@ -59,8 +59,12 @@
       </ng-container>
 
       <!-- start:: Loading spinner -->
-      <div *ngIf="!userDashboard" class="spinner-container" style="padding-top: 15rem;">
-        <mat-spinner [diameter]="100" style="margin: auto"></mat-spinner>
+      <div
+        *ngIf="!userDashboard"
+        class="spinner-container"
+        style="padding-top: 15rem"
+      >
+        <mat-spinner [diameter]="80" style="margin: auto"></mat-spinner>
       </div>
       <!-- end:: Loading spinner -->
     </div>

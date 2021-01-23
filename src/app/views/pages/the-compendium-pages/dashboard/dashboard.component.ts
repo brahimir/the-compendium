@@ -32,6 +32,9 @@ export class DashboardComponent implements OnInit {
   // Dashboard Components Array
   DASHBOARD_COMPONENTS = TC_CONSTANTS.DASHBOARD_COMPONENTS;
 
+  // Add Component Dropdown value.
+  addComponentValue: string = "";
+
   // Add Dashboard Component MatSelect dropdown
   DASHBOARD_DROPDOWN: string[] = [];
 
@@ -64,11 +67,10 @@ export class DashboardComponent implements OnInit {
     this.apiService.getUserDashboard(this.userId).subscribe((dashboard) => {
       this.userDashboard = dashboard;
     });
-    this.cdr.detectChanges();
 
     // ? This is a good fix for "refreshing" and re-obtaining the Observable User.
-    this.router.navigateByUrl("/weapons");
-    this.router.navigateByUrl("/dashboard");
+    // this.manualRefresh();
+    // this.cdr.detectChanges();
   }
 
   /**
@@ -84,9 +86,9 @@ export class DashboardComponent implements OnInit {
     );
 
     // Add the new component via API call.
-    this.user$.subscribe((user: User) => {
-      // Get User's current Dashboard.
-      let userDashboard = user.userSettings.dashboard;
+    // Get User's current Dashboard.
+    this.apiService.getUserDashboard(this.userId).subscribe((dashboard) => {
+      let userDashboard = dashboard;
 
       // Check if the new Component to be created already exists in the User's Dashboard.
       if (this.isDuplicateComponent(userDashboard, componentIndex)) {
@@ -119,10 +121,14 @@ export class DashboardComponent implements OnInit {
 
         // todo - update user's dashboard on server.
         this.apiService.updateUserDashboard(this.userId, newArray).subscribe();
-        this.refreshUserDashboard();
+
+        // ? This updates the local copy of the userDashboard so the DOM can be updated
+        // ? - bypasses the issue with refreshing the page into an undefined User Observable
+        this.userDashboard = newArray;
+        this.cdr.detectChanges();
 
         // Show confirmation snackbar message.
-        const message = "Dashboard Component successfully added.";
+        const message = `${value} Component successfully added.`;
         this.layoutUtilsService.showActionNotification(
           message,
           MessageType.Create,
@@ -174,6 +180,9 @@ export class DashboardComponent implements OnInit {
     this.DASHBOARD_DROPDOWN = result;
   }
 
+  // todo --
+  filterDropdownValues(): void {}
+
   /**
    * Opens Dialogs for each component on the Dashboard.
    *
@@ -189,5 +198,11 @@ export class DashboardComponent implements OnInit {
 
     let componentToRender = this.DASHBOARD_COMPONENTS[windowName].component;
     dialogRef = this.dialog.open(componentToRender);
+  }
+
+  // todo - maybe look into this?
+  manualRefresh(): void {
+    this.router.navigateByUrl("/weapons");
+    this.router.navigateByUrl("/dashboard");
   }
 }
