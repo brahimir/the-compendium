@@ -4,6 +4,44 @@
     <ng-container ktPortletTitle>
       <h1>Dashboard</h1>
     </ng-container>
+
+    <!-- start:: Portlet Tools -->
+    <!-- start:: Add Component -->
+    <ng-container ktPortletTools>
+      <div class="row">
+        <div class="col-9">
+          <mat-form-field>
+            <mat-label>Select a Component</mat-label>
+            <mat-select [(ngModel)]="addComponentValue">
+              <mat-option
+                *ngFor="let item of DASHBOARD_DROPDOWN"
+                [value]="item"
+              >
+                {{ item }}
+              </mat-option>
+            </mat-select>
+            <mat-hint align="start">
+              Add a component to the Dashboard.
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="d-flex justify-content-end col-3">
+          <button
+            [disabled]="!addComponentValue"
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="addComponent(addComponentValue)"
+            matTooltip="Add component"
+          >
+            <mat-icon style="margin-top: 0.5rem">add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <!-- end:: Add Component -->
+    <!-- end:: Portlet Tools -->
   </kt-portlet-header>
   <!-- end::Portlet Header -->
 
@@ -11,20 +49,20 @@
   <kt-portlet-body>
     <!-- start:: DM Screen -->
     <div class="screen">
-      <ng-container *ngIf="user$ | async as _user">
-        <div
-          *ngFor="let component of _user.userSettings.dashboard"
-          cdkDrag
-          cdkDragBoundary=".screen"
-        >
-          <div class="component-box">
-            <i [class]="component.icon"></i>
-            <a (click)="openDialog(component.name)">{{
-              formattingService.titleCase(component.name)
-            }}</a>
-          </div>
+      <ng-container *ngFor="let component of userDashboard">
+        <div class="component-box" cdkDrag cdkDragBoundary=".screen">
+          <i [class]="component.icon"></i>
+          <a (click)="openDialog(component.name)">
+            {{ formattingService.titleCase(component.name) }}
+          </a>
         </div>
       </ng-container>
+
+      <!-- start:: Loading spinner -->
+      <div *ngIf="!userDashboard" class="spinner-container" style="padding-top: 15rem;">
+        <mat-spinner [diameter]="100" style="margin: auto"></mat-spinner>
+      </div>
+      <!-- end:: Loading spinner -->
     </div>
     <!-- end:: DM Screen -->
   </kt-portlet-body>
