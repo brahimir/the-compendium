@@ -204,7 +204,7 @@ export class CreateNpcDialogComponent implements OnInit {
     this.layoutUtilsService.showActionNotification(
       message,
       MessageType.Create,
-      10000,
+      5000,
       true,
       true
     );
