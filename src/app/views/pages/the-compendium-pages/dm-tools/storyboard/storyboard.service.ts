@@ -10,8 +10,8 @@ import { Observable, throwError } from "rxjs";
 import { map, catchError } from "rxjs/operators";
 
 // API urls
-const USERS_URL = API_ROUTES.AUTH.USERS;
-const UPDATE_STORYBOARD = API_ROUTES.DM_TOOLS.STORYBOARD.UPDATE_STORYBOARD;
+const USERS_URL: string = API_ROUTES.AUTH.USERS.GET_ALL_USERS;
+const UPDATE_STORYBOARD: string = API_ROUTES.DM_TOOLS.STORYBOARD.UPDATE_STORYBOARD;
 
 @Injectable({
   providedIn: "root",
