@@ -19,9 +19,6 @@ export const API_ROUTES = {
     USERS: {
       GET_ALL_USERS:
         "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
-      GET_USER_BY_ID:
-        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
-
       REGISTER_USER:
         "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/register-user",
     },

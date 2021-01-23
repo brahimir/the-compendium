@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from "@angular/core";
 // Constants
 import { CONSTANTS_GLOBAL } from "../../../../constants";
 import { CONSTANTS_STORYBOARD } from "../../constants";
+// Services
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // MatDialog
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
@@ -21,6 +23,7 @@ export class RemovePlotDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<RemovePlotDialogComponent>,
+    private layoutUtilsService: LayoutUtilsService,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
     // Set the title for the Dialog.
@@ -37,5 +40,15 @@ export class RemovePlotDialogComponent implements OnInit {
 
     // Close the dialog, and send the payload back to the StoryboardComponent.
     this.dialogRef.close(payload);
+
+    // Show confirmation snackbar message.
+    const message = "Plot successfully removed.";
+    this.layoutUtilsService.showActionNotification(
+      message,
+      MessageType.Create,
+      5000,
+      true,
+      true
+    );
   }
 }

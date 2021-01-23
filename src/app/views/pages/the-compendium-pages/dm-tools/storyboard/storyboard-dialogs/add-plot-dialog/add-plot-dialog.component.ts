@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from "@angular/core";
 // Constants
 import { CONSTANTS_CREATE_DIALOG } from "../../../create/constants";
+// Services
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // MatDialog
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 // FormBuilder
@@ -25,7 +27,8 @@ export class AddPlotDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddPlotDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private layoutUtilsService: LayoutUtilsService
   ) {
     // Set the title for the Dialog.
     this.headerTitle = data.headerTitle;
@@ -75,6 +78,16 @@ export class AddPlotDialogComponent implements OnInit {
 
     // Close the dialog, and send the payload back to the StoryboardComponent.
     this.dialogRef.close(payload);
+
+    // Show confirmation snackbar message.
+    const message = "Plot successfully added.";
+    this.layoutUtilsService.showActionNotification(
+      message,
+      MessageType.Create,
+      5000,
+      true,
+      true
+    );
   }
 
   /**
