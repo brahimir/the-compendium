@@ -32,6 +32,16 @@ export class FormattingService {
   }
 
   /**
+   * Replaces spaces with underscores from string
+   *
+   * @param {string} data The string to process
+   * @returns {string} The proccessed string
+   */
+  replaceSpacesWithDashes(data: string): string {
+    return data.replace(" ", "-");
+  }
+
+  /**
    * Lowercases first letter in a strng.
    *
    * @param {*} string The string to format.
