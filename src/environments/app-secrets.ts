@@ -1,13 +1,16 @@
-import { HomebrewArmorsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-armor/homebrew-armor.component";
-import { HomebrewItemsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-items/homebrew-items.component";
-import { HomebrewNpcsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-npcs/homebrew-npcs.component";
-import { HomebrewSpellsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-spells/homebrew-spells.component";
-import { HomebrewWeaponsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-weapons/homebrew-weapons.component";
+// Components
+// Official
+import { WeaponsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/weapons/weapons.component";
 import { ArmorsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/armor/armor.component";
 import { ItemsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/items/items.component";
 import { NpcsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/npcs/npcs.component";
 import { SpellsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/spells/spells.component";
-import { WeaponsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/weapons/weapons.component";
+// Homebrew
+import { HomebrewWeaponsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-weapons/homebrew-weapons.component";
+import { HomebrewArmorsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-armor/homebrew-armor.component";
+import { HomebrewItemsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-items/homebrew-items.component";
+import { HomebrewNpcsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-npcs/homebrew-npcs.component";
+import { HomebrewSpellsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-spells/homebrew-spells.component";
 
 // ! TC API Routes
 export const API_ROUTES = {
@@ -48,10 +51,29 @@ export const API_ROUTES = {
 
   // * DM Tools
   DM_TOOLS: {
-    UPDATE_STORYBOARD:
-      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/storyboard/",
-    UPDATE_SESSIONS:
-      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/sessions/",
+    // Dashboard
+    DASHBOARD: {
+      GET_DASHBOARD:
+        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/dashboard/get/",
+      UPDATE_DASHBOARD:
+        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/dashboard/update/",
+    },
+
+    // Storyboard
+    STORYBOARD: {
+      GET_STORYBOARD:
+        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/storyboard/get/",
+      UPDATE_STORYBOARD:
+        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/storyboard/update/",
+    },
+
+    // Session Summaries
+    SESSIONS: {
+      GET_SESSIONS:
+        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/sessions/get/",
+      UPDATE_SESSIONS:
+        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/sessions/update/",
+    },
   },
 };
 
@@ -59,18 +81,68 @@ export const API_ROUTES = {
 export const TC_CONSTANTS = {
   DASHBOARD_COMPONENTS: {
     // Official
-    weapons: WeaponsComponent,
-    armors: ArmorsComponent,
-    items: ItemsComponent,
-    monsters: NpcsComponent,
-    spells: SpellsComponent,
+    weapons: {
+      index: "weapons",
+      name: "Weapons",
+      icon: "fas fa-hammer",
+      component: WeaponsComponent,
+    },
+    armors: {
+      index: "armors",
+      name: "Armors",
+      icon: "fas fa-shield-alt",
+      component: ArmorsComponent,
+    },
+    items: {
+      index: "items",
+      name: "Items",
+      icon: "fas fa-glass-martini",
+      component: ItemsComponent,
+    },
+    monsters: {
+      index: "monsters",
+      name: "Monsters",
+      icon: "fab fa-optin-monster",
+      component: NpcsComponent,
+    },
+    spells: {
+      index: "spells",
+      name: "Spells",
+      icon: "fas fa-hat-wizard",
+      component: SpellsComponent,
+    },
 
     // Homebrew
-    homebrewWeapons: HomebrewWeaponsComponent,
-    homebrewArmors: HomebrewArmorsComponent,
-    homebrewItems: HomebrewItemsComponent,
-    homebrewMonsters: HomebrewNpcsComponent,
-    homebrewSpells: HomebrewSpellsComponent,
+    "homebrew-weapons": {
+      index: "homebrew-weapons",
+      name: "Homebrew Weapons",
+      icon: "far fa-star",
+      component: HomebrewWeaponsComponent,
+    },
+    "homebrew-armors": {
+      index: "homebrew-armors",
+      name: "Homebrew Armors",
+      icon: "far fa-star",
+      component: HomebrewArmorsComponent,
+    },
+    "homebrew-monsters": {
+      index: "homebrew-monsters",
+      name: "Homebrew Monsters",
+      icon: "far fa-star",
+      component: HomebrewNpcsComponent,
+    },
+    "homebrew-items": {
+      index: "homebrew-items",
+      name: "Homebrew Items",
+      icon: "far fa-star",
+      component: HomebrewItemsComponent,
+    },
+    "homebrew-spells": {
+      index: "homebrew-spells",
+      name: "Homebrew Spells",
+      icon: "far fa-star",
+      component: HomebrewSpellsComponent,
+    },
   },
 };
 
