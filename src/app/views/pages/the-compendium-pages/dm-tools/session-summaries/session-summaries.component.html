@@ -73,18 +73,18 @@
         </table>
         <!-- end:: Table -->
 
+        <!-- start:: Loading spinner -->
+        <div *ngIf="!TABLE_DATA" class="spinner-container">
+          <mat-spinner [diameter]="50" style="margin: auto"></mat-spinner>
+        </div>
+        <!-- end:: Loading spinner -->
+
         <!-- start:: Paginator -->
         <mat-paginator
           [pageSizeOptions]="[25, 50, 100]"
           showFirstLastButtons
         ></mat-paginator>
         <!-- end:: Paginator -->
-
-        <!-- start:: Loading spinner -->
-        <div *ngIf="!TABLE_DATA" class="spinner-container">
-          <mat-spinner [diameter]="50" style="margin: auto"></mat-spinner>
-        </div>
-        <!-- end:: Loading spinner -->
       </mat-dialog-content>
     </div>
   </kt-portlet-body>

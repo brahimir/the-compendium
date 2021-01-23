@@ -1,20 +1,11 @@
 import { Component, Inject, OnInit } from "@angular/core";
 // Constants
+import { CONSTANTS_GLOBAL } from "../../../../constants";
 import { CONSTANTS_SESSION_SUMMARIES } from "../../constants";
-// Models
-import { currentUser, User } from "src/app/core/auth";
-import { Session } from "src/app/core/resources/_models/dm_tools/session_summaries/session.model";
+// Services
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // MatDialog
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-// FormBuilder
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { SessionSummariesService } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries.service";
-// State
-import { AppState } from "src/app/core/reducers";
-import { select, Store } from "@ngrx/store";
-// RxJS
-import { Observable } from "rxjs";
-import { CONSTANTS_GLOBAL } from "../../../../constants";
 
 @Component({
   selector: "kt-remove-session-dialog",
@@ -32,6 +23,7 @@ export class RemoveSessionDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<RemoveSessionDialogComponent>,
+    private layoutUtilsService: LayoutUtilsService,
     @Inject(MAT_DIALOG_DATA) public data
   ) {}
 
@@ -40,5 +32,15 @@ export class RemoveSessionDialogComponent implements OnInit {
   onDelete(): void {
     this.isDeleted = true;
     this.dialogRef.close(this.isDeleted);
+
+    // Show confirmation snackbar message.
+    const message = "Session Summary successfully deleted.";
+    this.layoutUtilsService.showActionNotification(
+      message,
+      MessageType.Create,
+      5000,
+      true,
+      true
+    );
   }
 }

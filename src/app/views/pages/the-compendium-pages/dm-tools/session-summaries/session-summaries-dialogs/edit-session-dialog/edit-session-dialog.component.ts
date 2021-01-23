@@ -1,17 +1,15 @@
 import { Component, Inject, OnInit } from "@angular/core";
 // Constants
 import { CONSTANTS_CREATE_DIALOG } from "../../../create/constants";
+// Services
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // Models
-import { currentUser, User } from "src/app/core/auth";
+import { User } from "src/app/core/auth";
 import { Session } from "src/app/core/resources/_models/dm_tools/session_summaries/session.model";
 // MatDialog
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 // FormBuilder
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { SessionSummariesService } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries.service";
-// State
-import { AppState } from "src/app/core/reducers";
-import { select, Store } from "@ngrx/store";
 // RxJS
 import { Observable } from "rxjs";
 
@@ -44,7 +42,8 @@ export class EditSessionDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditSessionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private layoutUtilsService: LayoutUtilsService
   ) {
     // Sets the incoming data to this Component's data references.
     this.sessionData = data.data;
@@ -108,6 +107,16 @@ export class EditSessionDialogComponent implements OnInit {
 
     // Close the dialog, and send the payload back to the SessionSummariesDetailsComponent.
     this.dialogRef.close(payload);
+
+    // Show confirmation snackbar message.
+    const message = "Session Summary successfully updated.";
+    this.layoutUtilsService.showActionNotification(
+      message,
+      MessageType.Create,
+      5000,
+      true,
+      true
+    );
   }
 
   /**

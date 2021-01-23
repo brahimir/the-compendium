@@ -46,7 +46,7 @@ export class CreateSessionDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-        // todo - This is getting a "snapshot" of the user - on refresh, the User Observable doesn't have 
+    // todo - This is getting a "snapshot" of the user - on refresh, the User Observable doesn't have
     // todo - "data" to subscribe to - need to fix this.
     this.user$ = this.store.pipe(select(currentUser));
     this.user$.subscribe((user) => {
@@ -134,7 +134,7 @@ export class CreateSessionDialogComponent implements OnInit {
     this.layoutUtilsService.showActionNotification(
       message,
       MessageType.Create,
-      10000,
+      5000,
       true,
       true
     );
