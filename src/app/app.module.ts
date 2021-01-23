@@ -104,6 +104,7 @@ import { RemovePlotDialogComponent } from "./views/pages/the-compendium-pages/dm
 import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-session-dialog/create-session-dialog.component";
 import { EditSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
 import { RemoveSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
+import { ActionNotificationComponent } from "./views/partials/content/crud";
 
 // MatDialog Defaults
 const MAT_DIALOG_DEFAULTS: MatDialogConfig = {
@@ -196,6 +197,9 @@ export function getHighlightLanguages() {
     CreateSpellDialogComponent,
     // Create Adventure Dialogs
     CreateSessionDialogComponent,
+    
+    // ! Add Partials Modules here - need to fix this in the future.
+    ActionNotificationComponent,
   ],
   exports: [],
   providers: [
