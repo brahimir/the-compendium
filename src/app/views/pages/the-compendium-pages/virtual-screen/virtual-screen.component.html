@@ -1,0 +1,74 @@
+<kt-portlet>
+  <!-- start::Portlet Header -->
+  <kt-portlet-header>
+    <ng-container ktPortletTitle>
+      <h1>Virtual Screen</h1>
+    </ng-container>
+
+    <!-- start:: Portlet Tools -->
+    <!-- start:: Add Card -->
+    <ng-container ktPortletTools>
+      <div class="row">
+        <div class="col-9">
+          <mat-form-field>
+            <mat-label>Select a card</mat-label>
+            <mat-select [(ngModel)]="addCardValue">
+              <mat-option
+                *ngFor="let item of VIRTUAL_SCREEN_DROPDOWN"
+                [value]="item"
+              >
+                {{ item }}
+              </mat-option>
+            </mat-select>
+            <mat-hint align="start">
+              Add a card to the virtual screen.
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="d-flex justify-content-end col-3">
+          <button
+            [disabled]="!addCardValue"
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="addCard(addCardValue)"
+            matTooltip="Adds the selected card to the screen."
+          >
+            <mat-icon style="margin-top: 0.5rem">add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <!-- end:: Add Card -->
+    <!-- end:: Portlet Tools -->
+  </kt-portlet-header>
+  <!-- end::Portlet Header -->
+
+  <!-- start:: Portlet Body -->
+  <kt-portlet-body>
+    <!-- start:: DM Screen -->
+    <div class="screen">
+      <ng-container *ngFor="let card of userVirtualScreen">
+        <div class="card-box" cdkDrag cdkDragBoundary=".screen">
+          <i [class]="card.icon"></i>
+          <a (click)="openDialog(card.name)">
+            {{ formattingService.titleCase(card.name) }}
+          </a>
+        </div>
+      </ng-container>
+
+      <!-- start:: Loading spinner -->
+      <div
+        *ngIf="!userVirtualScreen"
+        class="spinner-container"
+        style="padding-top: 15rem"
+      >
+        <mat-spinner [diameter]="80" style="margin: auto"></mat-spinner>
+      </div>
+      <!-- end:: Loading spinner -->
+    </div>
+    <!-- end:: DM Screen -->
+  </kt-portlet-body>
+  <!-- end:: Portlet Body -->
+</kt-portlet>

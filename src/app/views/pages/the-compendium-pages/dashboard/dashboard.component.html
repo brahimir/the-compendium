@@ -2,73 +2,61 @@
   <!-- start::Portlet Header -->
   <kt-portlet-header>
     <ng-container ktPortletTitle>
-      <h1>Dashboard</h1>
+      <h1>
+        <ng-container *ngIf="user$ | async as _user">
+          {{ _user.fullName }}'s
+        </ng-container>
+        Dashboard
+      </h1>
     </ng-container>
-
-    <!-- start:: Portlet Tools -->
-    <!-- start:: Add Component -->
-    <ng-container ktPortletTools>
-      <div class="row">
-        <div class="col-9">
-          <mat-form-field>
-            <mat-label>Select a Component</mat-label>
-            <mat-select [(ngModel)]="addComponentValue">
-              <mat-option
-                *ngFor="let item of DASHBOARD_DROPDOWN"
-                [value]="item"
-              >
-                {{ item }}
-              </mat-option>
-            </mat-select>
-            <mat-hint align="start">
-              Add a component to the Dashboard.
-            </mat-hint>
-          </mat-form-field>
-        </div>
-
-        <div class="d-flex justify-content-end col-3">
-          <button
-            [disabled]="!addComponentValue"
-            type="button"
-            mat-raised-button
-            color="primary"
-            (click)="addComponent(addComponentValue)"
-            matTooltip="Add component"
-          >
-            <mat-icon style="margin-top: 0.5rem">add</mat-icon>
-          </button>
-        </div>
-      </div>
-    </ng-container>
-    <!-- end:: Add Component -->
-    <!-- end:: Portlet Tools -->
   </kt-portlet-header>
   <!-- end::Portlet Header -->
 
   <!-- start:: Portlet Body -->
   <kt-portlet-body>
-    <!-- start:: DM Screen -->
-    <div class="screen">
-      <ng-container *ngFor="let component of userDashboard">
-        <div class="component-box" cdkDrag cdkDragBoundary=".screen">
-          <i [class]="component.icon"></i>
-          <a (click)="openDialog(component.name)">
-            {{ formattingService.titleCase(component.name) }}
-          </a>
-        </div>
-      </ng-container>
-
-      <!-- start:: Loading spinner -->
-      <div
-        *ngIf="!userDashboard"
-        class="spinner-container"
-        style="padding-top: 15rem"
-      >
-        <mat-spinner [diameter]="80" style="margin: auto"></mat-spinner>
-      </div>
-      <!-- end:: Loading spinner -->
+    <!-- start:: Development Warning -->
+    <div class="alert alert-warning mb-12" role="alert">
+      <p class="text-center">
+        This web application is still in development. Feel free to explore, and
+        if you have any improvements, suggestions, or just want to report a bug
+        - you can contact me at
+        <a href="mailto:nicolas.brahimir@mohawkcollege.ca">
+          nicolas.brahimir@mohawkcollege.ca
+        </a>
+      </p>
     </div>
-    <!-- end:: DM Screen -->
+    <!-- end:: Development Warning -->
+
+    <!-- start:: Dashboard Container -->
+    <div class="container">
+      <!-- start:: Quick Links -->
+      <div class="row">
+        <div class="col">
+          <h3>Quick Links</h3>
+          <p>Coming in a later update!</p>
+        </div>
+      </div>
+      <!-- end:: Quick Links -->
+
+      <!-- start:: My Characters -->
+      <div class="row">
+        <div class="col">
+          <h3>My Characters</h3>
+          <p>Coming in a later update!</p>
+        </div>
+      </div>
+      <!-- end:: My Characters -->
+
+      <!-- start:: My Artifacts -->
+      <div class="row">
+        <div class="col">
+          <h3>My Artifacts</h3>
+          <p>Coming in a later update!</p>
+        </div>
+      </div>
+      <!-- end:: My Artifacts -->
+    </div>
+    <!-- end:: Dashboard Container -->
   </kt-portlet-body>
   <!-- end:: Portlet Body -->
 </kt-portlet>

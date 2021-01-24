@@ -93,6 +93,7 @@ import { SessionSummariesComponent } from "./the-compendium-pages/dm-tools/sessi
 import { RouterModule } from "@angular/router";
 import { EditSessionDialogComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
 import { RemoveSessionDialogComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
+import { VirtualScreenComponent } from './the-compendium-pages/virtual-screen/virtual-screen.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import { RemoveSessionDialogComponent } from "./the-compendium-pages/dm-tools/se
     SessionSummariesDetailsDialogComponent,
     EditSessionDialogComponent,
     RemoveSessionDialogComponent,
+    VirtualScreenComponent,
   ],
   exports: [],
   imports: [

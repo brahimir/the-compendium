@@ -52,16 +52,24 @@ export const API_ROUTES = {
       "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewSpells",
   },
 
+  // Dashboard
+  DASHBOARD: {
+    GET_DASHBOARD:
+      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/dashboard/get/",
+    UPDATE_DASHBOARD:
+      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/dashboard/update/",
+  },
+
+  // Virtual Screen
+  VIRTUAL_SCREEN: {
+    GET_VIRTUAL_SCREEN:
+      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/virtual-screen/get/",
+    UPDATE_VIRTUAL_SCREEN:
+      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/virtual-screen/update/",
+  },
+
   // * DM Tools
   DM_TOOLS: {
-    // Dashboard
-    DASHBOARD: {
-      GET_DASHBOARD:
-        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/dashboard/get/",
-      UPDATE_DASHBOARD:
-        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/dashboard/update/",
-    },
-
     // Storyboard
     STORYBOARD: {
       GET_STORYBOARD:
@@ -82,7 +90,7 @@ export const API_ROUTES = {
 
 // ! TC Constants
 export const TC_CONSTANTS = {
-  DASHBOARD_COMPONENTS: {
+  VIRTUAL_SCREEN_COMPONENTS: {
     // Official
     weapons: {
       index: "weapons",

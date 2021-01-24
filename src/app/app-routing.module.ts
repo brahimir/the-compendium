@@ -8,8 +8,9 @@ import { BaseComponent } from "./views/theme/base/base.component";
 import { AuthGuard } from "./core/auth";
 
 // The Compendium Components
-// Dashboard Page
+// Dashboard and Virtual Screen Pages
 import { DashboardComponent } from "./views/pages/the-compendium-pages/dashboard/dashboard.component";
+import { VirtualScreenComponent } from "./views/pages/the-compendium-pages/virtual-screen/virtual-screen.component";
 // Official 5E Resource Pages
 import { WeaponsComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/weapons/weapons.component";
 import { ArmorsComponent } from "./views/pages/the-compendium-pages/_resource-tables/official/armor/armor.component";
@@ -44,10 +45,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       // start:: The Compendium Pages
-      // Dashboard
+      // Dashboard and Virtual Screen
       {
         path: "dashboard",
         component: DashboardComponent,
+      },
+      {
+        path: "virtual-screen",
+        component: VirtualScreenComponent,
       },
       // 5e Resources
       {

@@ -383,13 +383,20 @@ export class MenuConfig {
     aside: {
       self: {},
       items: [
-        // Dashboard
+        // Dashboard and Virtual Screen
         {
           title: "Dashboard",
           root: true,
           icon: "flaticon2-architecture-and-city",
           page: "/dashboard",
           translate: "MENU.DASHBOARD",
+          bullet: "dot",
+        },
+        {
+          title: "Virtual Screen",
+          root: true,
+          icon: "fas fa-desktop",
+          page: "/virtual-screen",
           bullet: "dot",
         },
 
@@ -482,7 +489,7 @@ export class MenuConfig {
           icon: "fas fa-magic",
           root: true,
           page: "/create",
-          permission: "accessToDMTools"
+          permission: "accessToDMTools",
         },
       ],
     },
