@@ -6,11 +6,7 @@ import { Plot } from "src/app/core/resources/_models/dm_tools/storyboard/plot.mo
 // Services
 import { StoryboardService } from "src/app/views/pages/the-compendium-pages/dm-tools/storyboard/storyboard.service";
 // CdkDragDrop
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from "@angular/cdk/drag-drop";
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 // RxJS
 import { Observable } from "rxjs";
 // NGRX
@@ -55,7 +51,7 @@ export class StoryboardComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     public dialog: MatDialog
   ) {
-    // todo - This is getting a "snapshot" of the user - on refresh, the User Observable doesn't have 
+    // todo - This is getting a "snapshot" of the user - on refresh, the User Observable doesn't have
     // todo - "data" to subscribe to - need to fix this.
     this.user$ = this.store.pipe(select(currentUser));
     this.user$.subscribe((user: User) => {
@@ -78,11 +74,7 @@ export class StoryboardComponent implements OnInit {
    */
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       // Update the user's storyboard on the server.
       this.updateStoryBoard();
     } else {
@@ -99,9 +91,9 @@ export class StoryboardComponent implements OnInit {
 
   /**
    * Gets the most current version of the user's Storyboard.
-   * todo - refactor so that the method subscribes and sets the plotsMain, plotsInProgress, 
+   * todo - refactor so that the method subscribes and sets the plotsMain, plotsInProgress,
    * todo - and plotsDone here.
-   * 
+   *
    * @returns {Observable<any>} Resulting Storyboard.
    */
   refreshStoryboard(): Observable<any> {
@@ -120,9 +112,7 @@ export class StoryboardComponent implements OnInit {
       plotsDone: this.plotsDone,
     };
 
-    this.apiService
-      .updateStoryboard(this.userId, bodyStoryboard)
-      .subscribe((data) => {});
+    this.apiService.updateStoryboard(this.userId, bodyStoryboard).subscribe((data) => {});
   }
 
   /**

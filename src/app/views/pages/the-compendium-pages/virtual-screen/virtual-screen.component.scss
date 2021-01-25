@@ -9,7 +9,7 @@ a {
 // Dashboard Screen
 .screen {
   width: 100%;
-  min-height: 50rem;
+  height: 45rem;
 }
 
 // Font Awesome Icons
@@ -26,15 +26,10 @@ i {
 
 // Component Boxes
 .card-box {
-  // width: 200px;
-  // height: 100px;
-  // padding: 10px;
-  // margin: 0 auto;
-
   width: 18rem;
   height: 9rem;
   // padding: 1rem;
-  margin: 0 auto;
+  // margin: auto;
 
   box-sizing: border-box;
   border: solid 1px #ccc;
@@ -53,8 +48,8 @@ i {
 }
 
 .card-box:active {
-  box-shadow: 0 5px 5px -3px #a9000077, 0 8px 10px 1px #a9000077,
-    0 3px 14px 2px #a9000077;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 // Mobile Card Virtual Screen display

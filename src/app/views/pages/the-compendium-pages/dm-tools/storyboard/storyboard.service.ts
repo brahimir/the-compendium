@@ -6,12 +6,9 @@ import { API_ROUTES } from "../../../../../../environments/app-secrets";
 // Http
 import { HttpClient } from "@angular/common/http";
 // RXJS
-import { Observable, throwError } from "rxjs";
-import { map, catchError } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 // API urls
-const USERS_URL: string = API_ROUTES.AUTH.USERS.GET_ALL_USERS;
-
 const GET_STORYBOARD: string = API_ROUTES.DM_TOOLS.STORYBOARD.GET_STORYBOARD;
 const UPDATE_STORYBOARD: string = API_ROUTES.DM_TOOLS.STORYBOARD.UPDATE_STORYBOARD;
 

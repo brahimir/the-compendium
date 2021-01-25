@@ -13,16 +13,11 @@
           <mat-form-field>
             <mat-label>Select a card</mat-label>
             <mat-select [(ngModel)]="addCardValue">
-              <mat-option
-                *ngFor="let item of VIRTUAL_SCREEN_DROPDOWN"
-                [value]="item"
-              >
+              <mat-option *ngFor="let item of VIRTUAL_SCREEN_DROPDOWN" [value]="item">
                 {{ item }}
               </mat-option>
             </mat-select>
-            <mat-hint align="start">
-              Add a card to the virtual screen.
-            </mat-hint>
+            <mat-hint align="start"> Add a card to the virtual screen. </mat-hint>
           </mat-form-field>
         </div>
 
@@ -51,7 +46,7 @@
     <div class="screen">
       <ng-container *ngFor="let card of userVirtualScreen">
         <!-- start:: Cards -->
-        <div
+        <span
           class="card-box"
           cdkDrag
           cdkDragBoundary=".screen"
@@ -76,16 +71,12 @@
               </a>
             </div>
           </div>
-        </div>
+        </span>
         <!-- start:: Cards -->
       </ng-container>
 
       <!-- start:: Loading spinner -->
-      <div
-        *ngIf="!userVirtualScreen"
-        class="spinner-container"
-        style="padding-top: 15rem"
-      >
+      <div *ngIf="!userVirtualScreen" class="spinner-container" style="padding-top: 15rem">
         <mat-spinner [diameter]="80" style="margin: auto"></mat-spinner>
       </div>
       <!-- end:: Loading spinner -->

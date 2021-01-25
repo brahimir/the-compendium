@@ -1,9 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  OnInit,
-} from "@angular/core";
+import { ChangeDetectorRef, Component, EventEmitter, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 // Models
 import { currentUser, User } from "src/app/core/auth";
@@ -23,6 +18,8 @@ import { AppState } from "src/app/core/reducers";
 import { select, Store } from "@ngrx/store";
 // RxJS
 import { Observable } from "rxjs";
+import { ConfirmationDialogComponent } from "../_global-dialogs/confirmation-dialog/confirmation-dialog.component";
+import { ConfirmationDialog } from "../_global-dialogs/confirmation-dialog/confirmation-dialog.model";
 
 @Component({
   selector: "kt-virtual-screen",
@@ -85,74 +82,62 @@ export class VirtualScreenComponent implements OnInit {
    *                        (used in the VIRTUAL_SCREEN_CARDS lookp).
    */
   addCard(value: string): void {
+    // Get the index value of the Card to add.
     let cardIndex: string = value.toLowerCase();
     cardIndex = this.formattingService.replaceSpacesWithDashes(cardIndex);
-
-    // Add the new Card via API call.
-    // Get User's current Dashboard.
 
     // Check if the new Cards to be created already exists in the User's Dashboard.
     if (this.isDuplicateCard(this.userVirtualScreen, cardIndex)) {
       // Display error notification.
       const message = `Oops! The ${value} Card is already on your Dashboard.`;
-      this.layoutUtilsService.showActionNotification(
-        message,
-        MessageType.Create,
-        5000,
-        true,
-        true
-      );
+      this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
       return;
     } else {
       // Get the Card to add from the Constants.
       let cardToAdd: any = this.VIRTUAL_SCREEN_CARDS[cardIndex];
 
       // Generate the Dashboard Card.
-      const newCard = new Card(cardToAdd.index, cardToAdd.name, cardToAdd.icon);
+      const newCard: Card = {
+        index: cardToAdd.index,
+        name: cardToAdd.name,
+        icon: cardToAdd.icon,
+        position: {
+          x: 0,
+          y: 0,
+        },
+      };
 
       // Add to current array of User's Dashboard Cards.
       let newArray = Object.assign([], this.userVirtualScreen);
       newArray.push(newCard);
 
-      // todo - update user's dashboard on server.
-      this.apiService
-        .updateUserVirtualScreen(this.userId, newArray)
-        .subscribe((data) => {
-          if (data.status === 200) {
-            // Show confirmation snackbar message.
-            const message = `${newCard.name} Card successfully removed.`;
-            this.layoutUtilsService.showActionNotification(
-              message,
-              MessageType.Create,
-              5000,
-              true,
-              true
-            );
-          } else {
-            // Show error snackbar message.
-            const message = `There was an error trying to add the ${newCard.name} Card. Please try again.`;
-            this.layoutUtilsService.showActionNotification(
-              message,
-              MessageType.Create,
-              5000,
-              true,
-              true
-            );
-          }
+      // Update user's dashboard on server.
+      this.apiService.updateUserVirtualScreen(this.userId, newArray).subscribe((data) => {
+        if (data.status === 200) {
+          // Show confirmation snackbar message.
+          const message = `${newCard.name} Card successfully added.`;
+          this.layoutUtilsService.showActionNotification(
+            message,
+            MessageType.Create,
+            5000,
+            true,
+            true
+          );
+        } else {
+          // Show error snackbar message.
+          const message = `There was an error trying to add the ${newCard.name} Card. Please try again.`;
+          this.layoutUtilsService.showActionNotification(
+            message,
+            MessageType.Create,
+            5000,
+            true,
+            true
+          );
+        }
 
-          this.userVirtualScreen = newArray;
-          this.cdr.detectChanges();
-        });
-
-      // Show confirmation snackbar message.
-      const message = `${value} Card successfully added.`;
-      this.layoutUtilsService.showActionNotification(
-        message,
-        MessageType.Create,
-        5000,
-        true,
-        true
-      );
+        this.userVirtualScreen = newArray;
+        this.cdr.detectChanges();
+      });
     }
   }
 
@@ -162,43 +147,58 @@ export class VirtualScreenComponent implements OnInit {
    * @param {Card} card The Card to remove.
    */
   removeCard(card: Card): void {
-    // Get index of the old Card, and replace old Card ref with new Card ref.
-    const cardIndex = this.userVirtualScreen.indexOf(card);
-    if (cardIndex !== -1) {
-      // Create local array reference to manipulate.
-      let newArray = this.userVirtualScreen;
-      newArray.splice(cardIndex, 1);
+    // Open confirmation dialog to confirm if User wants to delete the Card.
+    const dialogData: ConfirmationDialog = {
+      headerTitle: "Confirm Card Removal",
+      confirmationMessage: `Are you sure you want to delete the ${card.name} Card?`,
+      textAgreeButton: "Remove",
+      textCancelButton: "Cancel",
+    };
 
-      // Update the userVirtualScreen array on the server.
-      this.apiService
-        .updateUserVirtualScreen(this.userId, newArray)
-        .subscribe((data) => {
-          if (data.status === 200) {
-            // Show confirmation snackbar message.
-            const message = `${card.name} Card successfully removed.`;
-            this.layoutUtilsService.showActionNotification(
-              message,
-              MessageType.Create,
-              5000,
-              true,
-              true
-            );
-          } else {
-            // Show error snackbar message.
-            const message = `There was an error trying to remove the ${card.name} Card. Please try again.`;
-            this.layoutUtilsService.showActionNotification(
-              message,
-              MessageType.Create,
-              5000,
-              true,
-              true
-            );
-          }
+    let confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, { data: dialogData });
+    confirmationDialogRef.afterClosed().subscribe((data) => {
+      // Checks for null data return.
+      if (!data) return;
 
-          this.userVirtualScreen = newArray;
-          this.cdr.detectChanges();
-        });
-    }
+      // If User confirms removal.
+      if (data.isConfirmed) {
+        // Get index of the old Card, and replace old Card ref with new Card ref.
+        const cardIndex = this.userVirtualScreen.indexOf(card);
+        if (cardIndex !== -1) {
+          // Create local array reference to manipulate.
+          let newArray = this.userVirtualScreen;
+          newArray.splice(cardIndex, 1);
+
+          // Update the userVirtualScreen array on the server.
+          this.apiService.updateUserVirtualScreen(this.userId, newArray).subscribe((data) => {
+            if (data.status === 200) {
+              // Show confirmation snackbar message.
+              const message = `${card.name} Card successfully removed.`;
+              this.layoutUtilsService.showActionNotification(
+                message,
+                MessageType.Create,
+                5000,
+                true,
+                true
+              );
+            } else {
+              // Show error snackbar message.
+              const message = `There was an error trying to remove the ${card.name} Card. Please try again.`;
+              this.layoutUtilsService.showActionNotification(
+                message,
+                MessageType.Create,
+                5000,
+                true,
+                true
+              );
+            }
+
+            this.userVirtualScreen = newArray;
+            this.cdr.detectChanges();
+          });
+        }
+      } else return;
+    });
   }
 
   /**
@@ -210,13 +210,8 @@ export class VirtualScreenComponent implements OnInit {
    * @returns {boolean}                 True if the Card already exists in the User's Dashboard,
    *                                    False otherwise.
    */
-  isDuplicateCard(
-    userVirtualScreenArray: any[],
-    newCardIndex: string
-  ): boolean {
-    let result = userVirtualScreenArray.find(
-      ({ index }) => index === newCardIndex
-    );
+  isDuplicateCard(userVirtualScreenArray: any[], newCardIndex: string): boolean {
+    let result = userVirtualScreenArray.find(({ index }) => index === newCardIndex);
 
     if (result) return true;
     else return false;
@@ -250,9 +245,7 @@ export class VirtualScreenComponent implements OnInit {
     let dialogRef: any;
 
     // Parse window name.
-    windowName = this.formattingService.replaceSpacesWithDashes(
-      windowName.toLowerCase()
-    );
+    windowName = this.formattingService.replaceSpacesWithDashes(windowName.toLowerCase());
 
     let cardToRender = this.VIRTUAL_SCREEN_CARDS[windowName].component;
     dialogRef = this.dialog.open(cardToRender);
@@ -285,9 +278,7 @@ export class VirtualScreenComponent implements OnInit {
       newArray[cardIndex] = newCard;
 
       // Update the userVirtualScreen array on the server.
-      this.apiService
-        .updateUserVirtualScreen(this.userId, newArray)
-        .subscribe();
+      this.apiService.updateUserVirtualScreen(this.userId, newArray).subscribe();
 
       // Update client-side array to update display.
       this.userVirtualScreen = newArray;
