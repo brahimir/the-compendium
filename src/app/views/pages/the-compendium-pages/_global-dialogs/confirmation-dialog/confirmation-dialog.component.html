@@ -1,1 +1,50 @@
-<p>confirmation-dialog works!</p>
+<div class="card card-custom mat-typography">
+  <!-- start:: Card Header -->
+  <div class="card-header">
+    <div class="card-title">
+      <div class="card-label">
+        <h1>{{ headerTitle }}</h1>
+      </div>
+    </div>
+  </div>
+  <!-- end:: Card Header -->
+
+  <!-- start:: Card Body -->
+  <div class="card-body">
+    <h3 class="mb-5">{{ confirmationMessage }}</h3>
+  </div>
+  <!-- end:: Card Body -->
+
+  <!-- start:: Footer -->
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-6">
+        <div *ngIf="isNoUndo" class="mr-2">
+          <h3 class="tc-red">{{ WARNING_NO_UNDO }}</h3>
+          <mat-checkbox [(ngModel)]="isAgree"> I understand. </mat-checkbox>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="d-flex justify-content-between">
+          <div class="mr-2"></div>
+          <div>
+            <button type="button" mat-raised-button mat-dialog-close cdkFocusInitial>
+              {{ textCancelButton }}
+            </button>
+            &nbsp;
+            <button
+              type="button"
+              [disabled]="isNoUndo && !isAgree"
+              mat-raised-button
+              color="primary"
+              (click)="onSubmit()"
+            >
+              {{ textAgreeButton }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end:: Footer -->
+</div>

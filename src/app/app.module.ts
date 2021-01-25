@@ -1,9 +1,6 @@
 import { CommonModule } from "@angular/common";
 // Angular
-import {
-  BrowserModule,
-  HAMMER_GESTURE_CONFIG,
-} from "@angular/platform-browser";
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from "@angular/platform-browser";
 import { APP_INITIALIZER, NgModule } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientModule } from "@angular/common/http";
@@ -14,10 +11,7 @@ import { OverlayModule } from "@angular/cdk/overlay";
 // Angular in memory
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 // Perfect Scroll bar
-import {
-  PERFECT_SCROLLBAR_CONFIG,
-  PerfectScrollbarConfigInterface,
-} from "ngx-perfect-scrollbar";
+import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
 // SVG inline
 import { InlineSVGModule } from "ng-inline-svg";
 // Env
@@ -59,11 +53,7 @@ import {
 import { AuthModule } from "./views/pages/auth/auth.module";
 import { AuthService } from "./core/auth";
 // CRUD
-import {
-  HttpUtilsService,
-  LayoutUtilsService,
-  TypesUtilsService,
-} from "./core/_base/crud";
+import { HttpUtilsService, LayoutUtilsService, TypesUtilsService } from "./core/_base/crud";
 // Config
 import { LayoutConfig } from "./core/_config/layout.config";
 // Highlight JS
@@ -73,10 +63,7 @@ import json from "highlight.js/lib/languages/json";
 import scss from "highlight.js/lib/languages/scss";
 import typescript from "highlight.js/lib/languages/typescript";
 // MatDialog
-import {
-  MatDialogConfig,
-  MAT_DIALOG_DEFAULT_OPTIONS,
-} from "@angular/material/dialog";
+import { MatDialogConfig, MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material/dialog";
 
 // ! The Compendium
 // Details Dialogs
@@ -105,6 +92,7 @@ import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages
 import { EditSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
 import { RemoveSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
 import { ActionNotificationComponent } from "./views/partials/content/crud";
+import { ConfirmationDialogComponent } from "./views/pages/the-compendium-pages/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
 
 // MatDialog Defaults
 const MAT_DIALOG_DEFAULTS: MatDialogConfig = {
@@ -174,7 +162,10 @@ export function getHighlightLanguages() {
   ],
   // ! Add DialogComponents here
   entryComponents: [
-    // Details Dialogs
+    // * Global Dialogs
+    // Confirmation Dialog
+    ConfirmationDialogComponent,
+    // * Details Dialogs
     // Resource Details Dialogs
     WeaponDetailsDialogComponent,
     ArmorDetailsDialogComponent,
@@ -185,19 +176,21 @@ export function getHighlightLanguages() {
     SessionSummariesDetailsDialogComponent,
     EditSessionDialogComponent,
     RemoveSessionDialogComponent,
-    // Storyboard Plot Dialogs
+    // * Storyboard Dialogs
+    // Plot Dialogs
     AddPlotDialogComponent,
     RemovePlotDialogComponent,
     EditPlotDialogComponent,
-    // Create Homebrew Dialogs
+    // * Create Dialogs
+    // Homebrew Dialogs
     CreateWeaponDialogComponent,
     CreateArmorDialogComponent,
     CreateItemDialogComponent,
     CreateNpcDialogComponent,
     CreateSpellDialogComponent,
-    // Create Adventure Dialogs
+    // Adventure Dialogs
     CreateSessionDialogComponent,
-    
+
     // ! Add Partials Modules here - need to fix this in the future.
     ActionNotificationComponent,
   ],
