@@ -1,0 +1,18 @@
+@import "../../sass/tc-global.scss";
+
+// MatTables
+table {
+  width: 100%;
+}
+
+// MatTable search filter
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+// Loading spinners
+.spinner-container {
+  margin: auto;
+  padding: 50px;
+}

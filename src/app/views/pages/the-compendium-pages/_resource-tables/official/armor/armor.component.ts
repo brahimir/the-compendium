@@ -23,7 +23,7 @@ export class ArmorsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  columnsToDisplay: any[] = [
+  columnsToDisplay: string[] = [
     "name",
     "armor_category",
     "armor_class.base",
@@ -56,18 +56,16 @@ export class ArmorsComponent implements OnInit, AfterViewInit {
   updateArmors(): void {
     this.armorsService.getAllArmors().subscribe((equipmentData: any) => {
       equipmentData.forEach((element) => {
-        this.armorsService
-          .getArmorObject(element.url)
-          .subscribe((armorData: any) => {
-            this.TABLE_DATA.push(armorData);
+        this.armorsService.getArmorObject(element.url).subscribe((armorData: any) => {
+          this.TABLE_DATA.push(armorData);
 
-            // Set the DataSource for MatTableData.
-            this.dataSource = new MatTableDataSource<Armor>(this.TABLE_DATA);
+          // Set the DataSource for MatTableData.
+          this.dataSource = new MatTableDataSource<Armor>(this.TABLE_DATA);
 
-            // Set Paginators and Sorts.
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-          });
+          // Set Paginators and Sorts.
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        });
       });
     });
   }
@@ -86,10 +84,7 @@ export class ArmorsComponent implements OnInit, AfterViewInit {
     };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      ArmorDetailsDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(ArmorDetailsDialogComponent, dialogOptions);
 
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe((result) => {});

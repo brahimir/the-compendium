@@ -116,29 +116,20 @@ export class VirtualScreenComponent implements OnInit {
         if (data.status === 200) {
           // Show confirmation snackbar message.
           const message = `${newCard.name} Card successfully added.`;
-          this.layoutUtilsService.showActionNotification(
-            message,
-            MessageType.Create,
-            5000,
-            true,
-            true
-          );
+          this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
         } else {
           // Show error snackbar message.
           const message = `There was an error trying to add the ${newCard.name} Card. Please try again.`;
-          this.layoutUtilsService.showActionNotification(
-            message,
-            MessageType.Create,
-            5000,
-            true,
-            true
-          );
+          this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
         }
 
         this.userVirtualScreen = newArray;
         this.cdr.detectChanges();
       });
     }
+
+    // Reset the dropdown value.
+    this.addCardValue = "";
   }
 
   /**
@@ -234,7 +225,7 @@ export class VirtualScreenComponent implements OnInit {
   }
 
   // todo --
-  filterDropdownValues(): void {}
+  filterDropdownValues(userDashboardArray: any, dropdownArray: any): void {}
 
   /**
    * Opens Dialogs for a Card on the Dashboard.

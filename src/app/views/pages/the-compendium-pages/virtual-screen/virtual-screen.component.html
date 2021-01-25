@@ -46,7 +46,7 @@
     <div class="screen">
       <ng-container *ngFor="let card of userVirtualScreen">
         <!-- start:: Cards -->
-        <span
+        <div
           class="card-box"
           cdkDrag
           cdkDragBoundary=".screen"
@@ -64,14 +64,16 @@
             </div>
             <!-- end:: Remove Card Button -->
 
-            <div class="row justify-content-center">
+            <!-- start:: Card Content -->
+            <div class="card-content row justify-content-center">
               <i [class]="card.icon"></i>
               <a (click)="openDialog(card.name)">
                 {{ formattingService.titleCase(card.name) }}
               </a>
             </div>
+            <!-- start:: Card Content -->
           </div>
-        </span>
+        </div>
         <!-- start:: Cards -->
       </ng-container>
 

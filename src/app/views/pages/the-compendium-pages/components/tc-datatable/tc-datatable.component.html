@@ -1,0 +1,51 @@
+<kt-portlet>
+  <!-- start:: Portlet Header -->
+  <kt-portlet-header [class]="'card-head-lg'">
+    <ng-container ktPortletTitle>
+      <h1>{{ tableTitle }}</h1>
+    </ng-container>
+  </kt-portlet-header>
+  <!-- start:: Portlet Header -->
+
+  <!-- start:: Portlet Body -->
+  <kt-portlet-body>
+    <div class="wrapper">
+      <!-- start:: Filter -->
+      <div class="filter-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" />
+        </mat-form-field>
+      </div>
+      <!-- end:: Filter -->
+
+      <!-- start:: Table -->
+      <table class="lmat-elevation-z8" mat-table matSort [dataSource]="dataSource">
+        <!-- start:: Columns -->
+        <ng-container *ngFor="let column of columnsToDisplay">
+          <ng-container [matColumnDef]="column">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
+            <td mat-cell *matCellDef="let tableItem">
+              <span class="link" (click)="openDetails(tableItem)"> {{ tableItem.column }} </span>
+            </td>
+          </ng-container>
+        </ng-container>
+        <!-- end:: Columns -->
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+      </table>
+      <!-- end:: Table -->
+
+      <!-- start:: Loading spinner -->
+      <div *ngIf="!TABLE_DATA" class="spinner-container">
+        <mat-spinner [diameter]="50" style="margin: auto"></mat-spinner>
+      </div>
+      <!-- end:: Loading spinner -->
+
+      <!-- start:: Paginator -->
+      <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+      <!-- end:: Paginator -->
+    </div>
+  </kt-portlet-body>
+  <!-- end:: Portlet Body -->
+</kt-portlet>

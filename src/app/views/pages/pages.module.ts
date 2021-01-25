@@ -48,15 +48,20 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { CoreModule } from "../../core/core.module";
 
 // ! start:: The Compendium Pages
-// Dashboard Page
+// * Dashboard Page
 import { DashboardComponent } from "./the-compendium-pages/dashboard/dashboard.component";
-// Official 5E Resource Pages
+
+// * Virtual Screen Page
+import { VirtualScreenComponent } from "./the-compendium-pages/virtual-screen/virtual-screen.component";
+
+// * Official 5E Resource Pages
 import { WeaponsComponent } from "./the-compendium-pages/_resource-tables/official/weapons/weapons.component";
 import { ArmorsComponent } from "./the-compendium-pages/_resource-tables/official/armor/armor.component";
 import { ItemsComponent } from "./the-compendium-pages/_resource-tables/official/items/items.component";
 import { NpcsComponent } from "./the-compendium-pages/_resource-tables/official/npcs/npcs.component";
 import { SpellsComponent } from "./the-compendium-pages/_resource-tables/official/spells/spells.component";
-// Dialogs
+
+// * Dialogs
 // Details Dialogs
 import { MatDialogModule } from "@angular/material/dialog";
 import { ArmorDetailsDialogComponent } from "./the-compendium-pages/_resource-tables/resource-details-dialog/armor-details-dialog/armor-details-dialog.component";
@@ -77,24 +82,25 @@ import { RemovePlotDialogComponent } from "./the-compendium-pages/dm-tools/story
 // Session Summaries Dialogs
 import { SessionSummariesDetailsDialogComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component";
 import { CreateSessionDialogComponent } from "./the-compendium-pages/dm-tools/create/create-dialog/create-session-dialog/create-session-dialog.component";
+import { EditSessionDialogComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
+import { RemoveSessionDialogComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
 
-// Homebrew Pages
+// * Homebrew Pages
 import { HomebrewWeaponsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-weapons/homebrew-weapons.component";
 import { HomebrewArmorsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-armor/homebrew-armor.component";
 import { HomebrewItemsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-items/homebrew-items.component";
 import { HomebrewNpcsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-npcs/homebrew-npcs.component";
 import { HomebrewSpellsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-spells/homebrew-spells.component";
-// DM Tools Pages
+// * DM Tools Pages
 import { StoryboardComponent } from "./the-compendium-pages/dm-tools/storyboard/storyboard.component";
 import { CreateComponent } from "./the-compendium-pages/dm-tools/create/create.component";
 import { SessionSummariesComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries.component";
+// * Components
+import { ConfirmationDialogComponent } from "./the-compendium-pages/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
+import { TcDatatableComponent } from "./the-compendium-pages/components/tc-datatable/tc-datatable.component";
 // ! end:: The Compendium Pages
 
 import { RouterModule } from "@angular/router";
-import { EditSessionDialogComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
-import { RemoveSessionDialogComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
-import { VirtualScreenComponent } from './the-compendium-pages/virtual-screen/virtual-screen.component';
-import { ConfirmationDialogComponent } from './the-compendium-pages/_global-dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -136,6 +142,7 @@ import { ConfirmationDialogComponent } from './the-compendium-pages/_global-dial
     RemoveSessionDialogComponent,
     VirtualScreenComponent,
     ConfirmationDialogComponent,
+    TcDatatableComponent,
   ],
   exports: [],
   imports: [

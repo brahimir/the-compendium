@@ -14,22 +14,13 @@
         <!-- start:: Filter -->
         <div class="filter-header">
           <mat-form-field>
-            <input
-              matInput
-              (keyup)="applyFilter($event.target.value)"
-              placeholder="Search"
-            />
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" />
           </mat-form-field>
         </div>
         <!-- end:: Filter -->
 
         <!-- start:: Table -->
-        <table
-          class="lmat-elevation-z8"
-          mat-table
-          matSort
-          [dataSource]="dataSource"
-        >
+        <table class="lmat-elevation-z8" mat-table matSort [dataSource]="dataSource">
           <!-- start:: Armor Name -->
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
@@ -55,9 +46,7 @@
 
           <!-- start:: Armor Class -->
           <ng-container matColumnDef="armor_class.base">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Armor Class
-            </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Armor Class</th>
             <td mat-cell *matCellDef="let armor">
               <span *ngIf="armor.armor_class; else no_data">
                 {{ armor.armor_class.base }}
@@ -69,19 +58,11 @@
 
           <!-- start:: Armor Stealth Disadvantage -->
           <ng-container matColumnDef="stealth_disadvantage">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Stealth Disadvantage
-            </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Stealth Disadvantage</th>
             <td mat-cell *matCellDef="let armor">
-              <span
-                *ngIf="armor.stealth_disadvantage == null; then no_data"
-              ></span>
-              <span
-                *ngIf="armor.stealth_disadvantage === true; then stealth_true"
-              ></span>
-              <span
-                *ngIf="armor.stealth_disadvantage === false; then stealth_false"
-              ></span>
+              <span *ngIf="armor.stealth_disadvantage == null; then no_data"></span>
+              <span *ngIf="armor.stealth_disadvantage === true; then stealth_true"></span>
+              <span *ngIf="armor.stealth_disadvantage === false; then stealth_false"></span>
 
               <ng-template #stealth_true> Yes </ng-template>
               <ng-template #stealth_false> No </ng-template>
@@ -92,9 +73,7 @@
 
           <!-- start:: Armor Strength Minimum -->
           <ng-container matColumnDef="str_minimum">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Required Strength
-            </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Required Strength</th>
             <td mat-cell *matCellDef="let armor">
               <span *ngIf="armor.str_minimum == null; then no_data"></span>
               <span> {{ armor.str_minimum }} </span>
@@ -116,10 +95,7 @@
           <!-- end:: Armor Cost -->
 
           <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-          <tr
-            mat-row
-            *matRowDef="let myRowData; columns: columnsToDisplay"
-          ></tr>
+          <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
         </table>
         <!-- end:: Table -->
 
@@ -130,10 +106,7 @@
         <!-- end:: Loading spinner -->
 
         <!-- start:: Paginator -->
-        <mat-paginator
-          [pageSizeOptions]="[25, 50, 100]"
-          showFirstLastButtons
-        ></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
         <!-- end:: Paginator -->
       </mat-dialog-content>
     </div>
