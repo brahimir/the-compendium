@@ -47,15 +47,37 @@
 
   <!-- start:: Portlet Body -->
   <kt-portlet-body>
-    <!-- start:: DM Screen -->
+    <!-- start:: Virtual Screen -->
     <div class="screen">
       <ng-container *ngFor="let card of userVirtualScreen">
-        <div class="card-box" cdkDrag cdkDragBoundary=".screen">
-          <i [class]="card.icon"></i>
-          <a (click)="openDialog(card.name)">
-            {{ formattingService.titleCase(card.name) }}
-          </a>
+        <!-- start:: Cards -->
+        <div
+          class="card-box"
+          cdkDrag
+          cdkDragBoundary=".screen"
+          [cdkDragFreeDragPosition]="card.position"
+          (cdkDragReleased)="onDragEnded($event, card)"
+        >
+          <div class="container">
+            <!-- start:: Remove Card Button -->
+            <div class="row">
+              <div class="d-flex justify-content-end col container-remove-card">
+                <button mat-icon-button class="button-remove-card" (click)="removeCard(card)">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+            <!-- end:: Remove Card Button -->
+
+            <div class="row justify-content-center">
+              <i [class]="card.icon"></i>
+              <a (click)="openDialog(card.name)">
+                {{ formattingService.titleCase(card.name) }}
+              </a>
+            </div>
+          </div>
         </div>
+        <!-- start:: Cards -->
       </ng-container>
 
       <!-- start:: Loading spinner -->
@@ -68,7 +90,7 @@
       </div>
       <!-- end:: Loading spinner -->
     </div>
-    <!-- end:: DM Screen -->
+    <!-- end:: Virtual Screen -->
   </kt-portlet-body>
   <!-- end:: Portlet Body -->
 </kt-portlet>

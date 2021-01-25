@@ -9,20 +9,31 @@ a {
 // Dashboard Screen
 .screen {
   width: 100%;
-  min-height: 600px;
+  min-height: 50rem;
 }
 
 // Font Awesome Icons
 i {
   margin-right: 10px;
-  color: $tc-red; 
+  color: $tc-red;
+}
+
+// Remove Card
+.container-remove-card {
+  margin-top: -3.75rem;
+  padding-left: 16.75rem;
 }
 
 // Component Boxes
 .card-box {
-  width: 200px;
-  height: 100px;
-  padding: 10px;
+  // width: 200px;
+  // height: 100px;
+  // padding: 10px;
+  // margin: 0 auto;
+
+  width: 18rem;
+  height: 9rem;
+  // padding: 1rem;
   margin: 0 auto;
 
   box-sizing: border-box;
@@ -44,4 +55,16 @@ i {
 .card-box:active {
   box-shadow: 0 5px 5px -3px #a9000077, 0 8px 10px 1px #a9000077,
     0 3px 14px 2px #a9000077;
+}
+
+// Mobile Card Virtual Screen display
+/* Portrait and Landscape */
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
+  // Component Boxes
+  .card-box {
+    width: 10rem;
+    height: 5rem;
+    padding: 0.5rem;
+    margin: 0 auto;
+  }
 }

@@ -1,4 +1,9 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  OnInit,
+} from "@angular/core";
 import { Router } from "@angular/router";
 // Models
 import { currentUser, User } from "src/app/core/auth";
@@ -9,8 +14,9 @@ import { TC_CONSTANTS } from "src/environments/app-secrets";
 // Services
 import { FormattingService } from "src/app/core/resources/_services/formatting.service";
 import { VirtualScreenService } from "./virtual-screen.service";
-// MatDialog
+// Material
 import { MatDialog } from "@angular/material/dialog";
+import { CdkDragEnd } from "@angular/cdk/drag-drop";
 // State
 import { AppState } from "src/app/core/reducers";
 // NGRX
@@ -29,13 +35,13 @@ export class VirtualScreenComponent implements OnInit {
   userId: string;
   userVirtualScreen: Object[];
 
-  // Dashboard Components Array
-  VIRTUAL_SCREEN_COMPONENTS = TC_CONSTANTS.VIRTUAL_SCREEN_COMPONENTS;
+  // Dashboard Cards Array
+  VIRTUAL_SCREEN_CARDS = TC_CONSTANTS.VIRTUAL_SCREEN_CARDS;
 
-  // Add Component Dropdown value.
+  // Add Card Dropdown value.
   addCardValue: string = "";
 
-  // Add Dashboard Component MatSelect dropdown
+  // Add Dashboard Card MatSelect dropdown
   VIRTUAL_SCREEN_DROPDOWN: string[] = [];
 
   constructor(
@@ -57,109 +63,159 @@ export class VirtualScreenComponent implements OnInit {
     });
 
     // Get User's current Dashboard.
-    this.refreshUserDashboard();
+    this.refreshUserVirtualScreen();
 
-    // Get dropdown values for the Add Component MatSelect.
+    // Get dropdown values for the Add Card MatSelect.
     this.getDropdownValues();
   }
 
-  refreshUserDashboard(): void {
-    this.apiService.getUserVirtualScreen(this.userId).subscribe((screen) => {
-      this.userVirtualScreen = screen;
+  /**
+   * Gets the User's current Virtual Screen layout.
+   */
+  refreshUserVirtualScreen(): void {
+    this.apiService.getUserVirtualScreen(this.userId).subscribe((res) => {
+      this.userVirtualScreen = res.virtualScreen;
     });
-
-    // ? This is a good fix for "refreshing" and re-obtaining the Observable User.
-    // this.manualRefresh();
-    // this.cdr.detectChanges();
   }
 
   /**
-   *  Adds a Component to the User's Dashboard.
+   *  Adds a Card to the User's Dashboard.
    *
-   * @param {string} value  String representation of the Component to add
-   *                        (used in the VIRTUAL_SCREEN_COMPONENTS lookp).
+   * @param {string} value  String representation of the Card to add
+   *                        (used in the VIRTUAL_SCREEN_CARDS lookp).
    */
   addCard(value: string): void {
-    let componentIndex: string = value.toLowerCase();
-    componentIndex = this.formattingService.replaceSpacesWithDashes(
-      componentIndex
-    );
+    let cardIndex: string = value.toLowerCase();
+    cardIndex = this.formattingService.replaceSpacesWithDashes(cardIndex);
 
-    // Add the new component via API call.
+    // Add the new Card via API call.
     // Get User's current Dashboard.
-    this.apiService.getUserVirtualScreen(this.userId).subscribe((screen) => {
-      let userVirtualScreen = screen;
 
-      // Check if the new Component to be created already exists in the User's Dashboard.
-      if (this.isDuplicateComponent(userVirtualScreen, componentIndex)) {
-        // Display error notification.
-        const message = `Oops! The ${value} Component is already on your Dashboard.`;
-        this.layoutUtilsService.showActionNotification(
-          message,
-          MessageType.Create,
-          5000,
-          true,
-          true
-        );
-        return;
-      } else {
-        // Get the Component to add from the Constants.
-        let componentToAdd: any = this.VIRTUAL_SCREEN_COMPONENTS[
-          componentIndex
-        ];
+    // Check if the new Cards to be created already exists in the User's Dashboard.
+    if (this.isDuplicateCard(this.userVirtualScreen, cardIndex)) {
+      // Display error notification.
+      const message = `Oops! The ${value} Card is already on your Dashboard.`;
+      this.layoutUtilsService.showActionNotification(
+        message,
+        MessageType.Create,
+        5000,
+        true,
+        true
+      );
+      return;
+    } else {
+      // Get the Card to add from the Constants.
+      let cardToAdd: any = this.VIRTUAL_SCREEN_CARDS[cardIndex];
 
-        // Generate the Dashboard Card.
-        const newComponent = new Card(
-          componentToAdd.index,
-          componentToAdd.name,
-          componentToAdd.icon
-        );
+      // Generate the Dashboard Card.
+      const newCard = new Card(cardToAdd.index, cardToAdd.name, cardToAdd.icon);
 
-        // Add to current array of User's Dashboard Components.
-        let newArray = Object.assign([], userVirtualScreen);
-        newArray.push(newComponent);
+      // Add to current array of User's Dashboard Cards.
+      let newArray = Object.assign([], this.userVirtualScreen);
+      newArray.push(newCard);
 
-        // todo - update user's dashboard on server.
-        this.apiService
-          .updateUserVirtualScreen(this.userId, newArray)
-          .subscribe();
+      // todo - update user's dashboard on server.
+      this.apiService
+        .updateUserVirtualScreen(this.userId, newArray)
+        .subscribe((data) => {
+          if (data.status === 200) {
+            // Show confirmation snackbar message.
+            const message = `${newCard.name} Card successfully removed.`;
+            this.layoutUtilsService.showActionNotification(
+              message,
+              MessageType.Create,
+              5000,
+              true,
+              true
+            );
+          } else {
+            // Show error snackbar message.
+            const message = `There was an error trying to add the ${newCard.name} Card. Please try again.`;
+            this.layoutUtilsService.showActionNotification(
+              message,
+              MessageType.Create,
+              5000,
+              true,
+              true
+            );
+          }
 
-        // ? This updates the local copy of the userDashboard so the DOM can be updated
-        // ? - bypasses the issue with refreshing the page into an undefined User Observable
-        this.userVirtualScreen = newArray;
-        this.cdr.detectChanges();
+          this.userVirtualScreen = newArray;
+          this.cdr.detectChanges();
+        });
 
-        // Show confirmation snackbar message.
-        const message = `${value} Component successfully added.`;
-        this.layoutUtilsService.showActionNotification(
-          message,
-          MessageType.Create,
-          5000,
-          true,
-          true
-        );
-      }
-    });
+      // Show confirmation snackbar message.
+      const message = `${value} Card successfully added.`;
+      this.layoutUtilsService.showActionNotification(
+        message,
+        MessageType.Create,
+        5000,
+        true,
+        true
+      );
+    }
   }
 
-  // todo --
-  removeCard(value: string): void {}
+  /**
+   * Removes a Card from the Virtual Screen.
+   *
+   * @param {Card} card The Card to remove.
+   */
+  removeCard(card: Card): void {
+    // Get index of the old Card, and replace old Card ref with new Card ref.
+    const cardIndex = this.userVirtualScreen.indexOf(card);
+    if (cardIndex !== -1) {
+      // Create local array reference to manipulate.
+      let newArray = this.userVirtualScreen;
+      newArray.splice(cardIndex, 1);
+
+      // Update the userVirtualScreen array on the server.
+      this.apiService
+        .updateUserVirtualScreen(this.userId, newArray)
+        .subscribe((data) => {
+          if (data.status === 200) {
+            // Show confirmation snackbar message.
+            const message = `${card.name} Card successfully removed.`;
+            this.layoutUtilsService.showActionNotification(
+              message,
+              MessageType.Create,
+              5000,
+              true,
+              true
+            );
+          } else {
+            // Show error snackbar message.
+            const message = `There was an error trying to remove the ${card.name} Card. Please try again.`;
+            this.layoutUtilsService.showActionNotification(
+              message,
+              MessageType.Create,
+              5000,
+              true,
+              true
+            );
+          }
+
+          this.userVirtualScreen = newArray;
+          this.cdr.detectChanges();
+        });
+    }
+  }
 
   /**
-   *  Checks if string representation of a Component's index already exists in the
+   *  Checks if string representation of a Card's index already exists in the
    *  User's current Dashboard.
    *
-   * @param {any[]} userVirtualScreenArray  The User's current Dashboard.
-   * @param {string} newComponentIndex  The string representation of the Component's index.
-   * @returns {boolean}                 True if the Component already exists in the User's Dashboard,
+   * @param {any[]} userVirtualScreenArray The User's current Dashboard.
+   * @param {string} newCardIndex The string representation of the Card's index.
+   * @returns {boolean}                 True if the Card already exists in the User's Dashboard,
    *                                    False otherwise.
    */
-  isDuplicateComponent(
+  isDuplicateCard(
     userVirtualScreenArray: any[],
-    newComponentIndex: string
+    newCardIndex: string
   ): boolean {
     let result = userVirtualScreenArray.find(
-      ({ index }) => index === newComponentIndex
+      ({ index }) => index === newCardIndex
     );
 
     if (result) return true;
@@ -167,15 +223,15 @@ export class VirtualScreenComponent implements OnInit {
   }
 
   /**
-   *  Generates a simple string array of the Components readily available to add to a User's Dashboard.
+   *  Generates a simple string array of the Cards readily available to add to a User's Dashboard.
    *
    *  Note: See  src\environments\app-secrets.ts --> TC_CONSTANTS.DASHBOARD_CONSTANTS
    */
   getDropdownValues(): void {
     let result: string[] = [];
-    let virtualScreenComponents = Object.values(this.VIRTUAL_SCREEN_COMPONENTS);
+    let virtualScreenCards = Object.values(this.VIRTUAL_SCREEN_CARDS);
 
-    virtualScreenComponents.forEach((element) => {
+    virtualScreenCards.forEach((element) => {
       result.push(element.name);
     });
 
@@ -186,7 +242,7 @@ export class VirtualScreenComponent implements OnInit {
   filterDropdownValues(): void {}
 
   /**
-   * Opens Dialogs for each component on the Dashboard.
+   * Opens Dialogs for a Card on the Dashboard.
    *
    * @param {string} windowName The Dialog window name to open.
    */
@@ -198,14 +254,64 @@ export class VirtualScreenComponent implements OnInit {
       windowName.toLowerCase()
     );
 
-    let componentToRender = this.VIRTUAL_SCREEN_COMPONENTS[windowName]
-      .component;
-    dialogRef = this.dialog.open(componentToRender);
+    let cardToRender = this.VIRTUAL_SCREEN_CARDS[windowName].component;
+    dialogRef = this.dialog.open(cardToRender);
   }
 
-  // todo - maybe look into this?
-  manualRefresh(): void {
-    this.router.navigateByUrl("/weapons");
-    this.router.navigateByUrl("/dashboard");
+  /**
+   * Saves the new x and y coords of the dragged Card and saves them to the server.
+   *
+   * @param {*} event     The drag event.
+   * @param {Card} card   The Card that was dragged.
+   */
+  onDragEnded(event, card: Card) {
+    // Get previous coords.
+    let element = event.source.getRootElement();
+    let boundingClientRect = element.getBoundingClientRect();
+    let parentPosition = this.getPosition(element);
+
+    // Prepare a newCard to replace the old one.
+    let newCard: Card = card;
+
+    // Calculate and update newCard coords.
+    newCard.position.x = boundingClientRect.x - parentPosition.left;
+    newCard.position.y = boundingClientRect.y - parentPosition.top;
+
+    // Get index of the old Card, and replace old Card ref with new Card ref.
+    const cardIndex = this.userVirtualScreen.indexOf(card);
+    if (cardIndex !== -1) {
+      // Create local array reference to manipulate.
+      let newArray = this.userVirtualScreen;
+      newArray[cardIndex] = newCard;
+
+      // Update the userVirtualScreen array on the server.
+      this.apiService
+        .updateUserVirtualScreen(this.userId, newArray)
+        .subscribe();
+
+      // Update client-side array to update display.
+      this.userVirtualScreen = newArray;
+      this.cdr.detectChanges();
+    } else {
+      // todo - further error handling if something goes wrong during the replacement.
+      return;
+    }
+  }
+
+  /**
+   * Gets the position of a draggable element.
+   *
+   * @param {*} el  The element.
+   * @returns       Object with top and left coords of the dragged element.
+   */
+  getPosition(el) {
+    let x = 0;
+    let y = 0;
+    while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+      x += el.offsetLeft - el.scrollLeft;
+      y += el.offsetTop - el.scrollTop;
+      el = el.offsetParent;
+    }
+    return { top: y, left: x };
   }
 }

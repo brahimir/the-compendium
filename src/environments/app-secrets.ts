@@ -90,7 +90,7 @@ export const API_ROUTES = {
 
 // ! TC Constants
 export const TC_CONSTANTS = {
-  VIRTUAL_SCREEN_COMPONENTS: {
+  VIRTUAL_SCREEN_CARDS: {
     // Official
     weapons: {
       index: "weapons",
