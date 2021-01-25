@@ -65,10 +65,9 @@ export class StoryboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshStoryboard().subscribe((data) => {
-      this.plotsMain = data.userSettings.dmTools.storyboard.plotsMain;
-      this.plotsInProgress =
-        data.userSettings.dmTools.storyboard.plotsInProgress;
-      this.plotsDone = data.userSettings.dmTools.storyboard.plotsDone;
+      this.plotsMain = data.storyboard.plotsMain;
+      this.plotsInProgress = data.storyboard.plotsInProgress;
+      this.plotsDone = data.storyboard.plotsDone;
     });
   }
 
@@ -100,7 +99,9 @@ export class StoryboardComponent implements OnInit {
 
   /**
    * Gets the most current version of the user's Storyboard.
-   *
+   * todo - refactor so that the method subscribes and sets the plotsMain, plotsInProgress, 
+   * todo - and plotsDone here.
+   * 
    * @returns {Observable<any>} Resulting Storyboard.
    */
   refreshStoryboard(): Observable<any> {
@@ -126,6 +127,7 @@ export class StoryboardComponent implements OnInit {
 
   /**
    * Adds a plot to the corresponding array column.
+   * todo - this NEEDS to be refactored in the future.
    *
    * @param {string} plotColumn The array column to add the plot to.
    */

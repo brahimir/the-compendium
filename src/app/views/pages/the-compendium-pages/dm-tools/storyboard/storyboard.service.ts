@@ -11,6 +11,8 @@ import { map, catchError } from "rxjs/operators";
 
 // API urls
 const USERS_URL: string = API_ROUTES.AUTH.USERS.GET_ALL_USERS;
+
+const GET_STORYBOARD: string = API_ROUTES.DM_TOOLS.STORYBOARD.GET_STORYBOARD;
 const UPDATE_STORYBOARD: string = API_ROUTES.DM_TOOLS.STORYBOARD.UPDATE_STORYBOARD;
 
 @Injectable({
@@ -20,7 +22,7 @@ export class StoryboardService {
   constructor(private http: HttpClient) {}
 
   getStoryboard(userId: string): Observable<any> {
-    return this.http.get(`${USERS_URL}${userId}`);
+    return this.http.get(`${GET_STORYBOARD}${userId}`);
   }
 
   updateStoryboard(userId: string, body: any): Observable<any> {
