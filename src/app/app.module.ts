@@ -66,6 +66,10 @@ import typescript from "highlight.js/lib/languages/typescript";
 import { MatDialogConfig, MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material/dialog";
 
 // ! The Compendium
+// * Dialogs
+// Global Dialogs
+import { ConfirmationDialogComponent } from "./views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
+
 // Details Dialogs
 // Homebrew
 import { ArmorDetailsDialogComponent } from "./views/pages/the-compendium-pages/_resource-tables/resource-details-dialog/armor-details-dialog/armor-details-dialog.component";
@@ -92,7 +96,6 @@ import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages
 import { EditSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
 import { RemoveSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
 import { ActionNotificationComponent } from "./views/partials/content/crud";
-import { ConfirmationDialogComponent } from "./views/pages/the-compendium-pages/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
 
 // MatDialog Defaults
 const MAT_DIALOG_DEFAULTS: MatDialogConfig = {

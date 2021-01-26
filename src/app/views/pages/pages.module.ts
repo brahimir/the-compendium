@@ -96,7 +96,7 @@ import { StoryboardComponent } from "./the-compendium-pages/dm-tools/storyboard/
 import { CreateComponent } from "./the-compendium-pages/dm-tools/create/create.component";
 import { SessionSummariesComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries.component";
 // * Components
-import { ConfirmationDialogComponent } from "./the-compendium-pages/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
+import { ConfirmationDialogComponent } from "../components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
 import { TcDatatableComponent } from "../components/tc-datatable/tc-datatable.component";
 // ! end:: The Compendium Pages
 

@@ -9,17 +9,17 @@ import { TC_CONSTANTS } from "src/environments/app-secrets";
 // Services
 import { FormattingService } from "src/app/core/resources/_services/formatting.service";
 import { VirtualScreenService } from "./virtual-screen.service";
+// Dialogs
+import { ConfirmationDialogComponent } from "../../../components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
+import { ConfirmationDialog } from "../../../components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
 // Material
 import { MatDialog } from "@angular/material/dialog";
-import { CdkDragEnd } from "@angular/cdk/drag-drop";
 // State
 import { AppState } from "src/app/core/reducers";
 // NGRX
 import { select, Store } from "@ngrx/store";
 // RxJS
 import { Observable } from "rxjs";
-import { ConfirmationDialogComponent } from "../_global-dialogs/confirmation-dialog/confirmation-dialog.component";
-import { ConfirmationDialog } from "../_global-dialogs/confirmation-dialog/confirmation-dialog.model";
 
 @Component({
   selector: "kt-virtual-screen",

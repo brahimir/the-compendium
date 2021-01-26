@@ -1,9 +1,8 @@
 import { Component, Inject, OnInit } from "@angular/core";
 // Constants
-import { CONSTANTS_GLOBAL } from "../../constants";
+import { CONSTANTS_GLOBAL } from "../../../pages/the-compendium-pages/constants";
 // MatDialog
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import chVat from "dist/assets/plugins/formvalidation/src/js/validators/vat/chVat";
 
 @Component({
   selector: "kt-confirmation-dialog",
