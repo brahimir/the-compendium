@@ -1,4 +1,4 @@
-@import "../sass/tc-global.scss";
+@import "../../../../../assets/sass/pages/tc-pages/tc-global.scss";
 
 // Links
 a {
@@ -15,7 +15,7 @@ a {
 // Font Awesome Icons
 i {
   margin-right: 10px;
-  color: $tc-red; 
+  color: $tc-red;
 }
 
 // Component Boxes
@@ -42,6 +42,5 @@ i {
 }
 
 .component-box:active {
-  box-shadow: 0 5px 5px -3px #a9000077, 0 8px 10px 1px #a9000077,
-    0 3px 14px 2px #a9000077;
+  box-shadow: 0 5px 5px -3px #a9000077, 0 8px 10px 1px #a9000077, 0 3px 14px 2px #a9000077;
 }

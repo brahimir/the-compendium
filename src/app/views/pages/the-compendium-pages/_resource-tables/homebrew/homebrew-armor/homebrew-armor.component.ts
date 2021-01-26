@@ -14,7 +14,7 @@ import { ArmorDetailsDialogComponent } from "../../resource-details-dialog/armor
 @Component({
   selector: "kt-homebrew-armor",
   templateUrl: "../../official/armor/armor.component.html",
-  styleUrls: ["./homebrew-armor.component.scss", "../../../sass/tc-global.scss"],
+  styleUrls: ["./homebrew-armor.component.scss"],
 })
 export class HomebrewArmorsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -33,12 +33,9 @@ export class HomebrewArmorsComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Armors
-  TABLE_DATA: Armor[] =[];
+  TABLE_DATA: Armor[] = [];
 
-  constructor(
-    private homebrewArmorsService: HomebrewArmorsService,
-    public dialog: MatDialog
-  ) {}
+  constructor(private homebrewArmorsService: HomebrewArmorsService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.updateHomebrewArmors();
@@ -56,9 +53,7 @@ export class HomebrewArmorsComponent implements OnInit, AfterViewInit {
       this.TABLE_DATA = data;
 
       // Set the DataSource for MatTableData.
-      this.dataSource = new MatTableDataSource<Armor>(
-        this.TABLE_DATA
-      );
+      this.dataSource = new MatTableDataSource<Armor>(this.TABLE_DATA);
 
       // Set Paginators and Sorts.
       this.dataSource.paginator = this.paginator;
@@ -80,10 +75,7 @@ export class HomebrewArmorsComponent implements OnInit, AfterViewInit {
     };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      ArmorDetailsDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(ArmorDetailsDialogComponent, dialogOptions);
 
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe((result) => {});

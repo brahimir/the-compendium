@@ -1,27 +1,27 @@
-import { Subscription } from 'rxjs';
+import { Subscription } from "rxjs";
 // Angular
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
+import { NavigationEnd, Router } from "@angular/router";
 // Layout
-import { LayoutConfigService, SplashScreenService, TranslationService } from './core/_base/layout';
+import { LayoutConfigService, SplashScreenService, TranslationService } from "./core/_base/layout";
 // language list
-import { locale as enLang } from './core/_config/i18n/en';
-import { locale as chLang } from './core/_config/i18n/ch';
-import { locale as esLang } from './core/_config/i18n/es';
-import { locale as jpLang } from './core/_config/i18n/jp';
-import { locale as deLang } from './core/_config/i18n/de';
-import { locale as frLang } from './core/_config/i18n/fr';
+import { locale as enLang } from "./core/_config/i18n/en";
+import { locale as chLang } from "./core/_config/i18n/ch";
+import { locale as esLang } from "./core/_config/i18n/es";
+import { locale as jpLang } from "./core/_config/i18n/jp";
+import { locale as deLang } from "./core/_config/i18n/de";
+import { locale as frLang } from "./core/_config/i18n/fr";
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'body[kt-root]',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: "body[kt-root]",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit, OnDestroy {
   // Public properties
-  title = 'Metronic';
+  title = "The Compendium";
   loader: boolean;
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
 
@@ -37,8 +37,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private translationService: TranslationService,
     private router: Router,
     private layoutConfigService: LayoutConfigService,
-    private splashScreenService: SplashScreenService) {
-
+    private splashScreenService: SplashScreenService
+  ) {
     // register translations
     this.translationService.loadTranslations(enLang, chLang, esLang, jpLang, deLang, frLang);
   }
@@ -52,9 +52,9 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     // enable/disable loader
-    this.loader = this.layoutConfigService.getConfig('page-loader.type');
+    this.loader = this.layoutConfigService.getConfig("page-loader.type");
 
-    const routerSubscription = this.router.events.subscribe(event => {
+    const routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // hide splash screen
         this.splashScreenService.hide();
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
         // to display back the body content
         setTimeout(() => {
-          document.body.classList.add('page-loaded');
+          document.body.classList.add("page-loaded");
         }, 500);
       }
     });
@@ -75,6 +75,6 @@ export class AppComponent implements OnInit, OnDestroy {
    * On Destroy
    */
   ngOnDestroy() {
-    this.unsubscribe.forEach(sb => sb.unsubscribe());
+    this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 }

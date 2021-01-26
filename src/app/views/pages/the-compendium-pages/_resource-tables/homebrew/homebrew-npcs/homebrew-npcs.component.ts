@@ -15,19 +15,13 @@ import { NpcDetailsDialogComponent } from "../../resource-details-dialog/npc-det
 @Component({
   selector: "kt-homebrew-npcs",
   templateUrl: "../../official/npcs/npcs.component.html",
-  styleUrls: ["./homebrew-npcs.component.scss", "../../../sass/tc-global.scss"],
+  styleUrls: ["./homebrew-npcs.component.scss"],
 })
 export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  columnsToDisplay: any[] = [
-    "name",
-    "alignment",
-    "armor_class",
-    "hit_points",
-    "challenge_rating",
-  ];
+  columnsToDisplay: any[] = ["name", "alignment", "armor_class", "hit_points", "challenge_rating"];
 
   // Datasource for MatTable
   dataSource: any;
@@ -79,10 +73,7 @@ export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
     };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      NpcDetailsDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(NpcDetailsDialogComponent, dialogOptions);
 
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe((result) => {});

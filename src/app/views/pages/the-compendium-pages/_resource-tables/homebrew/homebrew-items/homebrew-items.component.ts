@@ -14,28 +14,21 @@ import { ItemDetailsDialogComponent } from "../../resource-details-dialog/item-d
 @Component({
   selector: "kt-homebrew-items",
   templateUrl: "../../official/items/items.component.html",
-  styleUrls: ["./homebrew-items.component.scss", "../../../sass/tc-global.scss"],
+  styleUrls: ["./homebrew-items.component.scss"],
 })
 export class HomebrewItemsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  columnsToDisplay: any[] = [
-    "name", 
-    "weight",
-    "cost"
-  ];
+  columnsToDisplay: any[] = ["name", "weight", "cost"];
 
   // Datasource for MatTable
   dataSource: any;
 
   // Weapons
-  TABLE_DATA: Weapon[] =[];
+  TABLE_DATA: Weapon[] = [];
 
-  constructor(
-    private homebrewItemsService: HomebrewItemsService,
-    public dialog: MatDialog
-  ) {}
+  constructor(private homebrewItemsService: HomebrewItemsService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.updateHomebrewWeapons();
@@ -53,9 +46,7 @@ export class HomebrewItemsComponent implements OnInit, AfterViewInit {
       this.TABLE_DATA = data;
 
       // Set the DataSource for MatTableData.
-      this.dataSource = new MatTableDataSource<Weapon>(
-        this.TABLE_DATA
-      );
+      this.dataSource = new MatTableDataSource<Weapon>(this.TABLE_DATA);
 
       // Set Paginators and Sorts.
       this.dataSource.paginator = this.paginator;
@@ -77,10 +68,7 @@ export class HomebrewItemsComponent implements OnInit, AfterViewInit {
     };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      ItemDetailsDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(ItemDetailsDialogComponent, dialogOptions);
 
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe((result) => {});

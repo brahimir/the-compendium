@@ -3,5 +3,5 @@ export class ConfirmationDialog {
   confirmationMessage: string;
   textAgreeButton?: string = "Yes";
   textCancelButton?: string = "No";
-  isNoUndo?: boolean = false;
+  isActionUndo?: boolean = false;
 }

@@ -19,7 +19,7 @@
   <div class="card-footer">
     <div class="row">
       <div class="col-6">
-        <div *ngIf="isNoUndo" class="mr-2">
+        <div *ngIf="isActionUndo" class="mr-2">
           <h3 class="tc-red">{{ WARNING_NO_UNDO }}</h3>
           <mat-checkbox [(ngModel)]="isAgree"> I understand. </mat-checkbox>
         </div>
@@ -34,7 +34,7 @@
             &nbsp;
             <button
               type="button"
-              [disabled]="isNoUndo && !isAgree"
+              [disabled]="isActionUndo && !isAgree"
               mat-raised-button
               color="primary"
               (click)="onSubmit()"

@@ -15,6 +15,7 @@ export class TcDatatableComponent implements OnInit {
 
   // Table data
   @Input() dataSource: MatTableDataSource<any>;
+  @Input() TABLE_DATA: any[];
   @Input() columnsToDisplay: string[];
 
   constructor(public dialog: MatDialog) {}

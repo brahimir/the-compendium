@@ -14,19 +14,13 @@ import { WeaponDetailsDialogComponent } from "../../resource-details-dialog/weap
 @Component({
   selector: "kt-homebrew-weapons",
   templateUrl: "../../official/weapons/weapons.component.html",
-  styleUrls: ["./homebrew-weapons.component.scss", "../../../sass/tc-global.scss"],
+  styleUrls: ["./homebrew-weapons.component.scss"],
 })
 export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  columnsToDisplay: any[] = [
-    "name",
-    "weapon_category",
-    "damage",
-    "range",
-    "cost",
-  ];
+  columnsToDisplay: any[] = ["name", "weapon_category", "damage", "range", "cost"];
 
   // Datasource for MatTable
   dataSource: any;
@@ -34,10 +28,7 @@ export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
   // Weapons
   TABLE_DATA: Weapon[] = [];
 
-  constructor(
-    private homebrewWeaponsService: HomebrewWeaponsService,
-    public dialog: MatDialog
-  ) {}
+  constructor(private homebrewWeaponsService: HomebrewWeaponsService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.updateHomebrewWeapons();
@@ -55,9 +46,7 @@ export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
       this.TABLE_DATA = data;
 
       // Set the DataSource for MatTableData.
-      this.dataSource = new MatTableDataSource<Weapon>(
-        this.TABLE_DATA
-      );
+      this.dataSource = new MatTableDataSource<Weapon>(this.TABLE_DATA);
 
       // Set Paginators and Sorts.
       this.dataSource.paginator = this.paginator;
@@ -79,10 +68,7 @@ export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
     };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      WeaponDetailsDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(WeaponDetailsDialogComponent, dialogOptions);
 
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe((result) => {});

@@ -91,6 +91,10 @@ export class VirtualScreenComponent implements OnInit {
       // Display error notification.
       const message = `Oops! The ${value} Card is already on your Dashboard.`;
       this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
+
+      // Reset the dropdown value.
+      this.addCardValue = "";
+
       return;
     } else {
       // Get the Card to add from the Constants.
@@ -126,10 +130,11 @@ export class VirtualScreenComponent implements OnInit {
         this.userVirtualScreen = newArray;
         this.cdr.detectChanges();
       });
-    }
 
-    // Reset the dropdown value.
-    this.addCardValue = "";
+      // Reset the dropdown value.
+      this.addCardValue = "";
+      return;
+    }
   }
 
   /**

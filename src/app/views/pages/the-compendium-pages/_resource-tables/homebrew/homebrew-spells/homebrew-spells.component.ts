@@ -14,19 +14,13 @@ import { SpellDetailsDialogComponent } from "../../resource-details-dialog/spell
 @Component({
   selector: "kt-homebrew-spells",
   templateUrl: "../../official/spells/spells.component.html",
-  styleUrls: ["./homebrew-spells.component.scss", "../../../sass/tc-global.scss"],
+  styleUrls: ["./homebrew-spells.component.scss"],
 })
 export class HomebrewSpellsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  columnsToDisplay: any[] = [
-    "name",
-    "level",
-    "classes",
-    "casting_time",
-    "range",
-  ];
+  columnsToDisplay: any[] = ["name", "level", "classes", "casting_time", "range"];
 
   // Datasource for MatTable
   dataSource: any;
@@ -34,10 +28,7 @@ export class HomebrewSpellsComponent implements OnInit, AfterViewInit {
   // Weapons
   TABLE_DATA: Spell[] = [];
 
-  constructor(
-    private homebrewWeaponsService: HomebrewSpellsService,
-    public dialog: MatDialog
-  ) {}
+  constructor(private homebrewWeaponsService: HomebrewSpellsService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.updateHomebrewWeapons();
@@ -55,9 +46,7 @@ export class HomebrewSpellsComponent implements OnInit, AfterViewInit {
       this.TABLE_DATA = data;
 
       // Set the DataSource for MatTableData.
-      this.dataSource = new MatTableDataSource<Spell>(
-        this.TABLE_DATA
-      );
+      this.dataSource = new MatTableDataSource<Spell>(this.TABLE_DATA);
 
       // Set Paginators and Sorts.
       this.dataSource.paginator = this.paginator;
@@ -79,10 +68,7 @@ export class HomebrewSpellsComponent implements OnInit, AfterViewInit {
     };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      SpellDetailsDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(SpellDetailsDialogComponent, dialogOptions);
 
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe((result) => {});
