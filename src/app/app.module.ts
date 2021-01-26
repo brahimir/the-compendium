@@ -207,11 +207,12 @@ export function getHighlightLanguages() {
     KtDialogService,
     DataTableService,
     SplashScreenService,
-    // ! MatDialog Sizing
+    // ! start:: MatDialog Defaults
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: MAT_DIALOG_DEFAULTS,
     },
+    // ! end:: MatDialog Defaults
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,

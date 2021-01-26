@@ -48,6 +48,9 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { CoreModule } from "../../core/core.module";
 
 // ! start:: The Compendium Pages
+// * Test Page
+import { TestPageComponent } from "./the-compendium-pages/test-page/test-page.component";
+
 // * Dashboard Page
 import { DashboardComponent } from "./the-compendium-pages/dashboard/dashboard.component";
 
@@ -143,6 +146,7 @@ import { RouterModule } from "@angular/router";
     VirtualScreenComponent,
     ConfirmationDialogComponent,
     TcDatatableComponent,
+    TestPageComponent,
   ],
   exports: [],
   imports: [
