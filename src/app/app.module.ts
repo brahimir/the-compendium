@@ -96,6 +96,7 @@ import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages
 import { EditSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
 import { RemoveSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
 import { ActionNotificationComponent } from "./views/partials/content/crud";
+import { CardDialogComponent } from "./views/pages/the-compendium-pages/virtual-screen/card-dialog/card-dialog.component";
 
 // MatDialog Defaults
 const MAT_DIALOG_DEFAULTS: MatDialogConfig = {
@@ -165,6 +166,8 @@ export function getHighlightLanguages() {
   ],
   // ! Add DialogComponents here
   entryComponents: [
+    // * Virtual Screen Dialogs
+    CardDialogComponent,
     // * Global Dialogs
     // Confirmation Dialog
     ConfirmationDialogComponent,

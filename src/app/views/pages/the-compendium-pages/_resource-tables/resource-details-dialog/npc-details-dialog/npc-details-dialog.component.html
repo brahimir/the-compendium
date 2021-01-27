@@ -7,7 +7,7 @@
           <h1 class="tc-red">{{ dialogData.name }}</h1>
         </div>
         <div class="d-flex justify-content-end col-2">
-          <button mat-icon-button [mat-dialog-close]="true">
+          <button class="dialog-button-close" mat-icon-button [mat-dialog-close]="true">
             <mat-icon>close</mat-icon>
           </button>
         </div>
@@ -19,9 +19,7 @@
     <div *ngIf="dialogData.size || dialogData.alignment" class="row">
       <div class="col">
         <span class="font-italic"> {{ dialogData.size }} </span>
-        <span *ngIf="dialogData.alignment" class="font-italic"
-          >, {{ dialogData.alignment }}
-        </span>
+        <span *ngIf="dialogData.alignment" class="font-italic">, {{ dialogData.alignment }} </span>
       </div>
     </div>
     <!-- end::Size and Alignment -->
@@ -59,12 +57,8 @@
       </div>
       <div class="col">
         <span *ngIf="dialogData.speed.walk"> {{ dialogData.speed.walk }} </span>
-        <span *ngIf="dialogData.speed.fly">
-          fly {{ dialogData.speed.fly }}
-        </span>
-        <span *ngIf="dialogData.speed.swim">
-          swim {{ dialogData.speed.swim }}
-        </span>
+        <span *ngIf="dialogData.speed.fly"> fly {{ dialogData.speed.fly }} </span>
+        <span *ngIf="dialogData.speed.swim"> swim {{ dialogData.speed.swim }} </span>
       </div>
     </div>
     <!-- end::Speed -->
@@ -124,10 +118,7 @@
     <!-- end:: ABILITY SCORES DISPLAY -->
 
     <!-- start::Proficiencies -->
-    <div
-      *ngIf="dialogData.proficiencies && dialogData.proficiencies.length !== 0"
-      class="row"
-    >
+    <div *ngIf="dialogData.proficiencies && dialogData.proficiencies.length !== 0" class="row">
       <div class="col-3">
         <p class="font-weight-bolder">Proficiencies:</p>
       </div>
@@ -140,13 +131,7 @@
     <!-- end::Proficiencies -->
 
     <!-- start::Damage Resistances -->
-    <div
-      *ngIf="
-        dialogData.damage_resistances &&
-        dialogData.damage_resistances.length !== 0
-      "
-      class="row"
-    >
+    <div *ngIf="dialogData.damage_resistances && dialogData.damage_resistances.length !== 0" class="row">
       <div class="col-3">
         <p class="font-weight-bolder">Damage Resistances:</p>
       </div>
@@ -160,10 +145,7 @@
 
     <!-- start::Damage Vunerabilities -->
     <div
-      *ngIf="
-        dialogData.damage_vunerabilities &&
-        dialogData.damage_vunerabilities.length !== 0
-      "
+      *ngIf="dialogData.damage_vunerabilities && dialogData.damage_vunerabilities.length !== 0"
       class="row"
     >
       <div class="col-3">
@@ -178,13 +160,7 @@
     <!-- end::Damage Vunerabilities -->
 
     <!-- start::Damage Immunities -->
-    <div
-      *ngIf="
-        dialogData.damage_immunities &&
-        dialogData.damage_immunities.length !== 0
-      "
-      class="row"
-    >
+    <div *ngIf="dialogData.damage_immunities && dialogData.damage_immunities.length !== 0" class="row">
       <div class="col-3">
         <p class="font-weight-bolder">Damage Immunities:</p>
       </div>
@@ -198,10 +174,7 @@
 
     <!-- start::Condition Immunities -->
     <div
-      *ngIf="
-        dialogData.condition_immunities &&
-        dialogData.condition_immunities.length !== 0
-      "
+      *ngIf="dialogData.condition_immunities && dialogData.condition_immunities.length !== 0"
       class="row"
     >
       <div class="col-3">
@@ -221,18 +194,12 @@
         <p class="font-weight-bolder">Senses:</p>
       </div>
       <div class="col">
-        <span *ngIf="dialogData.senses.blindsight">
-          Blindsight {{ dialogData.senses.blindsight }}
-        </span>
-        <span *ngIf="dialogData.senses.darkvision">
-          Darkvision {{ dialogData.senses.darkvision }}
-        </span>
+        <span *ngIf="dialogData.senses.blindsight"> Blindsight {{ dialogData.senses.blindsight }} </span>
+        <span *ngIf="dialogData.senses.darkvision"> Darkvision {{ dialogData.senses.darkvision }} </span>
         <span *ngIf="dialogData.senses.tremorsight">
           Tremorsight {{ dialogData.senses.tremorsight }}
         </span>
-        <span *ngIf="dialogData.senses.truesight">
-          Truesight {{ dialogData.senses.truesight }}
-        </span>
+        <span *ngIf="dialogData.senses.truesight"> Truesight {{ dialogData.senses.truesight }} </span>
         <span *ngIf="dialogData.senses.passive_perception">
           Passive Perception {{ dialogData.senses.passive_perception }}
         </span>
@@ -276,9 +243,7 @@
       <div *ngFor="let item of dialogData.special_abilities" class="row">
         <div class="col">
           <p>
-            <span class="font-italic font-weight-bolder">
-              {{ item.name }}.
-            </span>
+            <span class="font-italic font-weight-bolder"> {{ item.name }}. </span>
             {{ item.desc }}
           </p>
         </div>

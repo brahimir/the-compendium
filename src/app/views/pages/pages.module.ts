@@ -104,6 +104,7 @@ import { TcDatatableComponent } from "../components/tc-datatable/tc-datatable.co
 // ! end:: The Compendium Pages
 
 import { RouterModule } from "@angular/router";
+import { CardDialogComponent } from './the-compendium-pages/virtual-screen/card-dialog/card-dialog.component';
 
 @NgModule({
   declarations: [
@@ -147,6 +148,7 @@ import { RouterModule } from "@angular/router";
     ConfirmationDialogComponent,
     TcDatatableComponent,
     TestPageComponent,
+    CardDialogComponent,
   ],
   exports: [],
   imports: [

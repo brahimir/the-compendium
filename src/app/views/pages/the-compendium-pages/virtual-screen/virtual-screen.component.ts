@@ -20,6 +20,7 @@ import { AppState } from "src/app/core/reducers";
 import { select, Store } from "@ngrx/store";
 // RxJS
 import { Observable } from "rxjs";
+import { remove } from "lodash";
 
 @Component({
   selector: "kt-virtual-screen",
@@ -111,9 +112,15 @@ export class VirtualScreenComponent implements OnInit {
         },
       };
 
-      // Add to current array of User's Dashboard Cards.
+      // ! This is used purely as a reference to offset each Card's y coordinate when a new Card is
+      // ! added to the Virtual Screen (adding a new Card pushes the existing Cards down by 117px).
+      let displayArray = this.userVirtualScreen;
+
+      // Make a copy of the User's current Virtual Screen array.
       let newArray = Object.assign([], this.userVirtualScreen);
-      newArray.push(newCard);
+
+      // Add to current array of User's Dashboard Cards.
+      newArray.unshift(newCard);
 
       // Update user's dashboard on server.
       this.apiService.updateUserVirtualScreen(this.userId, newArray).subscribe((data) => {
@@ -126,6 +133,12 @@ export class VirtualScreenComponent implements OnInit {
           const message = `There was an error trying to add the ${newCard.name} Card. Please try again.`;
           this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
         }
+
+        // ! This is used purely as a reference to offset each Card's y coordinate when a new Card is
+        // ! added to the Virtual Screen (adding a new Card pushes the existing Cards down by 117px).
+        displayArray.forEach((element: Card) => {
+          element.position = { x: element.position.x, y: element.position.y - 117 };
+        });
 
         this.userVirtualScreen = newArray;
         this.cdr.detectChanges();
@@ -146,7 +159,7 @@ export class VirtualScreenComponent implements OnInit {
     // Open confirmation dialog to confirm if User wants to delete the Card.
     const dialogData: ConfirmationDialog = {
       headerTitle: "Confirm Card Removal",
-      confirmationMessage: `Are you sure you want to delete the ${card.name} Card?`,
+      confirmationMessage: `Are you sure you want to remove the ${card.name} Card?`,
       textAgreeButton: "Remove",
       textCancelButton: "Cancel",
     };
@@ -159,11 +172,17 @@ export class VirtualScreenComponent implements OnInit {
       // If User confirms removal.
       if (data.isConfirmed) {
         // Get index of the old Card, and replace old Card ref with new Card ref.
-        const cardIndex = this.userVirtualScreen.indexOf(card);
-        if (cardIndex !== -1) {
+        const removeCardIndex = this.userVirtualScreen.indexOf(card);
+        if (removeCardIndex !== -1) {
           // Create local array reference to manipulate.
           let newArray = this.userVirtualScreen;
-          newArray.splice(cardIndex, 1);
+
+          newArray.forEach((element: Card) => {
+            if (newArray.indexOf(element) > removeCardIndex)
+              element.position = { x: element.position.x, y: element.position.y + 117 };
+          });
+
+          newArray.splice(removeCardIndex, 1);
 
           // Update the userVirtualScreen array on the server.
           this.apiService.updateUserVirtualScreen(this.userId, newArray).subscribe((data) => {
