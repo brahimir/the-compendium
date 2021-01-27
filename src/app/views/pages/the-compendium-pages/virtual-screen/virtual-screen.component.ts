@@ -40,7 +40,7 @@ export class VirtualScreenComponent implements OnInit {
   addCardValue: string = "";
 
   // Add Dashboard Card MatSelect dropdown
-  VIRTUAL_SCREEN_DROPDOWN: string[] = [];
+  dropdownAddCard: string[] = [];
 
   constructor(
     public router: Router,
@@ -107,8 +107,8 @@ export class VirtualScreenComponent implements OnInit {
         name: cardToAdd.name,
         icon: cardToAdd.icon,
         position: {
-          x: 0,
-          y: 0,
+          x: 400,
+          y: 225,
         },
       };
 
@@ -245,11 +245,11 @@ export class VirtualScreenComponent implements OnInit {
       result.push(element.name);
     });
 
-    this.VIRTUAL_SCREEN_DROPDOWN = result;
+    this.dropdownAddCard = result;
   }
 
   // todo --
-  filterDropdownValues(userDashboardArray: any, dropdownArray: any): void {}
+  filterDropdownValues(screenCards: Card[], dropdownArray: any): void {}
 
   /**
    * Opens Dialogs for a Card on the Dashboard.

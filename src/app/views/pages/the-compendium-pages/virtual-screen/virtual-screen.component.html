@@ -13,7 +13,7 @@
           <mat-form-field>
             <mat-label>Select a card</mat-label>
             <mat-select [(ngModel)]="addCardValue">
-              <mat-option *ngFor="let item of VIRTUAL_SCREEN_DROPDOWN" [value]="item">
+              <mat-option *ngFor="let item of dropdownAddCard" [value]="item">
                 {{ item }}
               </mat-option>
             </mat-select>

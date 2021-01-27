@@ -17,8 +17,7 @@ export const API_ROUTES = {
   // * Auth
   AUTH: {
     USERS: {
-      GET_ALL_USERS:
-        "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
+      GET_ALL_USERS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
       REGISTER_USER:
         "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/register-user",
     },
@@ -40,16 +39,11 @@ export const API_ROUTES = {
   },
   // Homebrew
   HOMEBREW: {
-    WEAPONS:
-      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewWeapons",
-    ARMORS:
-      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewArmors",
-    ITEMS:
-      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewItems",
-    NPCS:
-      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewNpcs",
-    SPELLS:
-      "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewSpells",
+    WEAPONS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewWeapons",
+    ARMORS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewArmors",
+    ITEMS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewItems",
+    NPCS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewNpcs",
+    SPELLS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/homebrewSpells",
   },
 
   // Dashboard
@@ -192,16 +186,7 @@ export const FIFTH_EDITION_RESOURCES = {
     ],
     DICE: ["d4", "d6", "d8", "d10", "d12", "d20"],
     LANGUAGES: {
-      STANDARD: [
-        "Common",
-        "Dwarvish",
-        "Elvish",
-        "Giant",
-        "Gnomish",
-        "Goblin",
-        "Halfling",
-        "Orc",
-      ],
+      STANDARD: ["Common", "Dwarvish", "Elvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc"],
       EXOTIC: [
         "Abyssal",
         "Celestial",
@@ -214,23 +199,10 @@ export const FIFTH_EDITION_RESOURCES = {
       ],
     },
     MOVEMENTS: ["Walk", "Fly", "Swim"],
-    RARITIES: [
-      "Common",
-      "Uncommon",
-      "Rare",
-      "Very Rare",
-      "Legendary",
-      "Artifact",
-    ],
+    RARITIES: ["Common", "Uncommon", "Rare", "Very Rare", "Legendary", "Artifact"],
     RANGES: ["Melee", "Ranged"],
     SIZES: ["Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"],
-    SENSES: [
-      "Blindsight",
-      "Darkvision",
-      "Tremorsense",
-      "Truesight",
-      "Passive Perception",
-    ],
+    SENSES: ["Blindsight", "Darkvision", "Tremorsense", "Truesight", "Passive Perception"],
   },
 
   // * Weapons
