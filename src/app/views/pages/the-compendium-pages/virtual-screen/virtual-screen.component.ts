@@ -64,7 +64,7 @@ export class VirtualScreenComponent implements OnInit {
     this.refreshUserVirtualScreen();
 
     // Get dropdown values for the Add Card MatSelect.
-    this.getDropdownValues();
+    this.refreshDropdownValues();
   }
 
   /**
@@ -107,14 +107,10 @@ export class VirtualScreenComponent implements OnInit {
         name: cardToAdd.name,
         icon: cardToAdd.icon,
         position: {
-          x: 400,
-          y: 225,
+          x: 500,
+          y: 325,
         },
       };
-
-      // ! This is used purely as a reference to offset each Card's y coordinate when a new Card is
-      // ! added to the Virtual Screen (adding a new Card pushes the existing Cards down by 117px).
-      let displayArray = this.userVirtualScreen;
 
       // Make a copy of the User's current Virtual Screen array.
       let newArray = Object.assign([], this.userVirtualScreen);
@@ -134,13 +130,19 @@ export class VirtualScreenComponent implements OnInit {
           this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
         }
 
-        // ! This is used purely as a reference to offset each Card's y coordinate when a new Card is
-        // ! added to the Virtual Screen (adding a new Card pushes the existing Cards down by 117px).
-        displayArray.forEach((element: Card) => {
-          element.position = { x: element.position.x, y: element.position.y - 117 };
+        // ! Offsets the Cards for when they get shifted when a Card is added.
+        newArray.forEach((element: Card) => {
+          element.position = { x: element.position.x, y: element.position.y - 110 };
         });
 
+        // ! This call updates the screen again once the Cards have been adjusted to compensate for
+        // ! the shift on Card adds.
+        this.apiService.updateUserVirtualScreen(this.userId, newArray).subscribe();
+
         this.userVirtualScreen = newArray;
+
+        // Update dropdown values.
+        this.refreshDropdownValues();
         this.cdr.detectChanges();
       });
 
@@ -179,7 +181,7 @@ export class VirtualScreenComponent implements OnInit {
 
           newArray.forEach((element: Card) => {
             if (newArray.indexOf(element) > removeCardIndex)
-              element.position = { x: element.position.x, y: element.position.y + 117 };
+              element.position = { x: element.position.x, y: element.position.y + 110 };
           });
 
           newArray.splice(removeCardIndex, 1);
@@ -209,6 +211,9 @@ export class VirtualScreenComponent implements OnInit {
             }
 
             this.userVirtualScreen = newArray;
+
+            // Update dropdown values.
+            this.refreshDropdownValues();
             this.cdr.detectChanges();
           });
         }
@@ -237,19 +242,37 @@ export class VirtualScreenComponent implements OnInit {
    *
    *  Note: See  src\environments\app-secrets.ts --> TC_CONSTANTS.DASHBOARD_CONSTANTS
    */
-  getDropdownValues(): void {
-    let result: string[] = [];
-    let virtualScreenCards = Object.values(this.VIRTUAL_SCREEN_CARDS);
+  refreshDropdownValues(): void {
+    let results: string[] = [];
 
-    virtualScreenCards.forEach((element) => {
-      result.push(element.name);
+    // All Screen Cards.
+    let allScreenCards: any[] = Object.values(this.VIRTUAL_SCREEN_CARDS);
+
+    // Get all the indexes of the Screen Cards.
+    let allScreenCardNames: string[] = [];
+    allScreenCards.forEach((element) => {
+      allScreenCardNames.push(element.name);
     });
 
-    this.dropdownAddCard = result;
-  }
+    this.apiService.getUserVirtualScreen(this.userId).subscribe((data: any) => {
+      const userScreen = data.virtualScreen;
 
-  // todo --
-  filterDropdownValues(screenCards: Card[], dropdownArray: any): void {}
+      let userScreenCardNames: string[] = [];
+
+      // Get all the indexes of the Screen Cards.
+      userScreen.forEach((element) => {
+        userScreenCardNames.push(element.name);
+      });
+
+      allScreenCardNames.forEach((element) => {
+        if (!userScreenCardNames.includes(element)) {
+          results.push(element);
+        }
+      });
+    });
+
+    this.dropdownAddCard = results;
+  }
 
   /**
    * Opens Dialogs for a Card on the Dashboard.
