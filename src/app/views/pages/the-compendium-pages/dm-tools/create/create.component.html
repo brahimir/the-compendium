@@ -1,14 +1,14 @@
-<kt-portlet>
-  <!-- start:: Portlet Header -->
-  <kt-portlet-header [class]="'card-head-lg'">
-    <ng-container ktPortletTitle>
-      <h1>What would you like to create?</h1>
-    </ng-container>
-  </kt-portlet-header>
-  <!-- end:: Portlet Header -->
+<div class="card card-custom card-stretch">
+  <!-- start:: Card Header -->
+  <div class="card-header py-3">
+    <div class="card-title align-items-start flex-column">
+      <h1 class="font-weight-bolder text-dark">What would you like to create?</h1>
+    </div>
+  </div>
+  <!-- end:: Card Header -->
 
-  <!-- start:: Portlet Body -->
-  <kt-portlet-body>
+  <!-- start:: Card Body -->
+  <div class="card-body">
     <!-- start:: Resources-->
     <div class="wrapper">
       <div class="resources">
@@ -17,11 +17,7 @@
         <div class="row">
           <!-- start:: Create Weapon -->
           <div class="col-6">
-            <button
-              (click)="openCreateDialog('weapon')"
-              mat-raised-button
-              class="button"
-            >
+            <button (click)="openCreateDialog('weapon')" mat-raised-button class="button">
               <i class="fas fa-hammer"></i>
               Weapon
             </button>
@@ -30,11 +26,7 @@
 
           <!-- start:: Create Armor -->
           <div class="col-6">
-            <button
-              (click)="openCreateDialog('armor')"
-              mat-raised-button
-              class="button"
-            >
+            <button (click)="openCreateDialog('armor')" mat-raised-button class="button">
               <i class="fas fa-shield-alt"></i>
               Armor
             </button>
@@ -45,11 +37,7 @@
         <div class="row">
           <!-- start:: Create Item -->
           <div class="col-6">
-            <button
-              (click)="openCreateDialog('item')"
-              mat-raised-button
-              class="button"
-            >
+            <button (click)="openCreateDialog('item')" mat-raised-button class="button">
               <i class="fas fa-glass-martini"></i>
               Item
             </button>
@@ -58,11 +46,7 @@
 
           <!-- start:: Create Spell -->
           <div class="col-6">
-            <button
-              (click)="openCreateDialog('spell')"
-              mat-raised-button
-              class="button"
-            >
+            <button (click)="openCreateDialog('spell')" mat-raised-button class="button">
               <i class="fas fa-hat-wizard"></i>
               Spell
             </button>
@@ -73,11 +57,7 @@
         <div class="row">
           <!-- start:: Create Monster -->
           <div class="col">
-            <button
-              (click)="openCreateDialog('npc')"
-              mat-raised-button
-              class="button"
-            >
+            <button (click)="openCreateDialog('npc')" mat-raised-button class="button">
               <i class="fab fa-optin-monster"></i>
               Monster
             </button>
@@ -96,11 +76,7 @@
         <div class="row">
           <!-- start:: Create Session Summary -->
           <div class="col-6">
-            <button
-              (click)="openCreateDialog('session')"
-              mat-raised-button
-              class="button"
-            >
+            <button (click)="openCreateDialog('session')" mat-raised-button class="button">
               <i class="fas fa-clipboard-list"></i>
               Session
             </button>
@@ -109,12 +85,7 @@
 
           <!-- start:: Create Adventure -->
           <div class="col-6">
-            <button
-              (click)="openCreateDialog('adventure')"
-              mat-raised-button
-              disabled
-              class="button"
-            >
+            <button (click)="openCreateDialog('adventure')" mat-raised-button disabled class="button">
               <i class="fas fa-globe-americas"></i>
               Adventure (coming soon)
             </button>
@@ -124,6 +95,6 @@
       </div>
     </div>
     <!-- end:: Adventures -->
-  </kt-portlet-body>
-  <!-- end:: Portlet Body -->
-</kt-portlet>
+  </div>
+  <!-- end:: Card Body -->
+</div>

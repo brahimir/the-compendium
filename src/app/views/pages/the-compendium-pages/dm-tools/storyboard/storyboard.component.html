@@ -1,18 +1,18 @@
-<kt-portlet>
-  <!-- start::Portlet Header -->
-  <kt-portlet-header>
-    <ng-container ktPortletTitle>
-      <h1>Storyboard</h1>
-    </ng-container>
-  </kt-portlet-header>
-  <!-- end::Portlet Header -->
+<div class="card card-custom card-stretch">
+  <!-- start:: Card Header -->
+  <div class="card-header py-3">
+    <div class="card-title align-items-start flex-column">
+      <h1 class="text-dark">Storyboard</h1>
+    </div>
+  </div>
+  <!-- end:: Card Header -->
 
-  <!-- start:: Portlet Body -->
-  <kt-portlet-body>
+  <!-- start:: Card Body -->
+  <div class="card-body">
     <div class="row">
       <!-- start:: Main Plots -->
       <div class="col">
-        <h4>Main Plots</h4>
+        <h4>Plots</h4>
         <div
           cdkDropList
           #mainPlots="cdkDropList"
@@ -21,35 +21,18 @@
           class="list"
           (cdkDropListDropped)="drop($event)"
         >
-          <div
-            class="box"
-            *ngFor="let plot of plotsMain; let plotIndex = index"
-            cdkDrag
-          >
+          <div class="box" *ngFor="let plot of plotsMain; let plotIndex = index" cdkDrag>
             <!-- start:: Plot Options Button -->
             <div class="row">
-              <div
-                class="d-flex justify-content-end col container-plot-options"
-              >
-                <button
-                  mat-icon-button
-                  class="button-plot-options"
-                  [matMenuTriggerFor]="plotMenu"
-                >
+              <div class="d-flex justify-content-end col container-plot-options">
+                <button mat-icon-button class="button-plot-options" [matMenuTriggerFor]="plotMenu">
                   <mat-icon>more_horiz</mat-icon>
                 </button>
                 <mat-menu #plotMenu="matMenu">
                   <div *ngFor="let option of PLOT_OPTIONS">
                     <button
                       mat-menu-item
-                      (click)="
-                        modifyStoryboardPlot(
-                          'plotsMain',
-                          option,
-                          plot,
-                          plotIndex
-                        )
-                      "
+                      (click)="modifyStoryboardPlot('plotsMain', option, plot, plotIndex)"
                     >
                       {{ option }}
                     </button>
@@ -83,11 +66,7 @@
         <!-- start:: Add Plot -->
         <div *ngIf="plotsMain">
           <div class="d-flex justify-content-center mt-2 mb-2">
-            <button
-              mat-button
-              class="button-add-plot"
-              (click)="addStoryboardPlot('plotsMain')"
-            >
+            <button mat-button class="button-add-plot" (click)="addStoryboardPlot('plotsMain')">
               <mat-icon class="icon-add-plot">add</mat-icon>
             </button>
           </div>
@@ -107,35 +86,18 @@
           class="list"
           (cdkDropListDropped)="drop($event)"
         >
-          <div
-            class="box"
-            *ngFor="let plot of plotsInProgress; let plotIndex = index"
-            cdkDrag
-          >
+          <div class="box" *ngFor="let plot of plotsInProgress; let plotIndex = index" cdkDrag>
             <!-- start:: Plot Options Button -->
             <div class="row">
-              <div
-                class="d-flex justify-content-end col container-plot-options"
-              >
-                <button
-                  mat-icon-button
-                  class="button-plot-options"
-                  [matMenuTriggerFor]="plotMenu"
-                >
+              <div class="d-flex justify-content-end col container-plot-options">
+                <button mat-icon-button class="button-plot-options" [matMenuTriggerFor]="plotMenu">
                   <mat-icon>more_horiz</mat-icon>
                 </button>
                 <mat-menu #plotMenu="matMenu">
                   <div *ngFor="let option of PLOT_OPTIONS">
                     <button
                       mat-menu-item
-                      (click)="
-                        modifyStoryboardPlot(
-                          'plotsInProgress',
-                          option,
-                          plot,
-                          plotIndex
-                        )
-                      "
+                      (click)="modifyStoryboardPlot('plotsInProgress', option, plot, plotIndex)"
                     >
                       {{ option }}
                     </button>
@@ -169,11 +131,7 @@
         <!-- start:: Add Plot -->
         <div *ngIf="plotsInProgress">
           <div class="d-flex justify-content-center mt-2 mb-2">
-            <button
-              mat-button
-              class="button-add-plot"
-              (click)="addStoryboardPlot('plotsInProgress')"
-            >
+            <button mat-button class="button-add-plot" (click)="addStoryboardPlot('plotsInProgress')">
               <mat-icon class="icon-add-plot">add</mat-icon>
             </button>
           </div>
@@ -193,35 +151,18 @@
           class="list"
           (cdkDropListDropped)="drop($event)"
         >
-          <div
-            class="box"
-            *ngFor="let plot of plotsDone; let plotIndex = index"
-            cdkDrag
-          >
+          <div class="box" *ngFor="let plot of plotsDone; let plotIndex = index" cdkDrag>
             <!-- start:: Plot Options Button -->
             <div class="row">
-              <div
-                class="d-flex justify-content-end col container-plot-options"
-              >
-                <button
-                  mat-icon-button
-                  class="button-plot-options"
-                  [matMenuTriggerFor]="plotMenu"
-                >
+              <div class="d-flex justify-content-end col container-plot-options">
+                <button mat-icon-button class="button-plot-options" [matMenuTriggerFor]="plotMenu">
                   <mat-icon>more_horiz</mat-icon>
                 </button>
                 <mat-menu #plotMenu="matMenu">
                   <div *ngFor="let option of PLOT_OPTIONS">
                     <button
                       mat-menu-item
-                      (click)="
-                        modifyStoryboardPlot(
-                          'plotsDone',
-                          option,
-                          plot,
-                          plotIndex
-                        )
-                      "
+                      (click)="modifyStoryboardPlot('plotsDone', option, plot, plotIndex)"
                     >
                       {{ option }}
                     </button>
@@ -254,6 +195,6 @@
       </div>
       <!-- end:: Plots Done -->
     </div>
-  </kt-portlet-body>
-  <!-- end:: Portlet Body -->
-</kt-portlet>
+  </div>
+  <!-- end:: Card Body -->
+</div>

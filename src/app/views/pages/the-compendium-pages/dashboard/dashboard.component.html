@@ -1,28 +1,23 @@
-<kt-portlet>
-  <!-- start::Portlet Header -->
-  <kt-portlet-header>
-    <ng-container ktPortletTitle>
-      <h1>
-        <ng-container *ngIf="user$ | async as _user">
-          {{ _user.fullName }}'s
-        </ng-container>
+<div class="card card-custom card-stretch">
+  <!-- start:: Card Header -->
+  <div class="card-header py-3">
+    <div class="card-title align-items-start flex-column">
+      <h1 class="text-dark">
+        <ng-container *ngIf="user$ | async as _user"> {{ _user.fullName }}'s </ng-container>
         Dashboard
       </h1>
-    </ng-container>
-  </kt-portlet-header>
-  <!-- end::Portlet Header -->
+    </div>
+  </div>
+  <!-- end:: Card Header -->
 
   <!-- start:: Portlet Body -->
-  <kt-portlet-body>
+  <div class="card-body">
     <!-- start:: Development Warning -->
     <div class="alert alert-warning mb-12" role="alert">
       <p class="text-center">
-        This web application is still in development. Feel free to explore, and
-        if you have any improvements, suggestions, or just want to report a bug
-        - you can contact me at
-        <a href="mailto:nicolas.brahimir@mohawkcollege.ca">
-          nicolas.brahimir@mohawkcollege.ca
-        </a>
+        This web application is still in development. Feel free to explore, and if you have any feature
+        suggestions, improvements, or want to report a bug - you can contact me at
+        <a href="mailto:nicolas.brahimir@mohawkcollege.ca"> nicolas.brahimir@mohawkcollege.ca </a>
       </p>
       <p class="text-center">Thank you for using The Compendium!</p>
     </div>
@@ -30,6 +25,28 @@
 
     <!-- start:: Dashboard Container -->
     <div class="container">
+      <!-- start:: Getting Started -->
+      <div class="row">
+        <div class="col">
+          <h3>Getting Started</h3>
+          <p>
+            The Compendium offers many of DnD's resources in a centralized app - check them all out in
+            the sidebar! Any new additions will appear in the <a href="#news">News section.</a>
+          </p>
+          <p>There</p>
+        </div>
+      </div>
+      <!-- end:: Getting Started -->
+
+      <!-- start:: News -->
+      <div class="row">
+        <div class="col">
+          <h3 id="news">News</h3>
+          <p>Coming in a later update!</p>
+        </div>
+      </div>
+      <!-- end:: News -->
+
       <!-- start:: Quick Links -->
       <div class="row">
         <div class="col">
@@ -58,6 +75,6 @@
       <!-- end:: My Artifacts -->
     </div>
     <!-- end:: Dashboard Container -->
-  </kt-portlet-body>
+  </div>
   <!-- end:: Portlet Body -->
-</kt-portlet>
+</div>

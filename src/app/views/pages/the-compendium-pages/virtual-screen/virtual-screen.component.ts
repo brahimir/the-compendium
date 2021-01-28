@@ -132,7 +132,7 @@ export class VirtualScreenComponent implements OnInit {
 
         // ! Offsets the Cards for when they get shifted when a Card is added.
         newArray.forEach((element: Card) => {
-          element.position = { x: element.position.x, y: element.position.y - 110 };
+          element.position = { x: element.position.x, y: element.position.y - 115 };
         });
 
         // ! This call updates the screen again once the Cards have been adjusted to compensate for
@@ -181,7 +181,7 @@ export class VirtualScreenComponent implements OnInit {
 
           newArray.forEach((element: Card) => {
             if (newArray.indexOf(element) > removeCardIndex)
-              element.position = { x: element.position.x, y: element.position.y + 110 };
+              element.position = { x: element.position.x, y: element.position.y + 115 };
           });
 
           newArray.splice(removeCardIndex, 1);

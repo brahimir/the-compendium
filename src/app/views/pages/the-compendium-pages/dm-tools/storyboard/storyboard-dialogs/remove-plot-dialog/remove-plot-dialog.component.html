@@ -1,66 +1,62 @@
-<div class="wrapper p-10">
-  <mat-dialog-content class="mat-typography">
-    <!-- start:: Header -->
-    <div class="dialog-header">
-      <div class="row">
-        <div class="col-10">
-          <h1>{{ CONFIRMATION_MESSAGE }}</h1>
-        </div>
-        <div class="d-flex justify-content-end col-2">
-          <button mat-icon-button mat-dialog-close>
-            <mat-icon>close</mat-icon>
-          </button>
-        </div>
+<div class="card card-custom card-stretch">
+  <!-- start:: Card Header -->
+  <div class="card-header py-3">
+    <div class="card-title align-items-start flex-column">
+      <h2 class="text-dark">{{ CONFIRMATION_MESSAGE }}</h2>
+    </div>
+    <!-- start:: Card Toolbar -->
+    <div class="card-toolbar">
+      <div class="d-flex justify-content-end">
+        <button mat-icon-button mat-dialog-close>
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
     </div>
-    <!-- end:: Header -->
+    <!-- end:: Card Toolbar -->
+  </div>
+  <!-- end:: Card Header -->
 
-    <div class="wrapper">
-      <!-- start:: Plot Title -->
-      <div class="row">
-        <div class="col">
-          <h2 class="tc-red">{{ plotTitle }}</h2>
-        </div>
-      </div>
-      <!-- end:: Plot Title -->
-
-      <!-- start:: Plot Description -->
-      <div class="row">
-        <div class="col">
-          <h4>{{ plotDescription }}</h4>
-        </div>
-      </div>
-      <!-- end:: Plot Description -->
-    </div>
-
-    <!-- start:: Footer -->
-    <div class="card-footer">
-      <div class="d-flex justify-content-between">
-        <div class="mr-2">
-          <h3 class="tc-red">{{ WARNING_NO_UNDO }}</h3>
-        </div>
-        <div>
-          <button
-            type="button"
-            mat-raised-button
-            mat-dialog-close
-            cdkFocusInitial
-            matTooltip="Cancel"
-          >
-            Cancel</button
-          >&nbsp;
-          <button
-            type="button"
-            mat-raised-button
-            color="primary"
-            (click)="onDelete()"
-            matTooltip="Delete plot"
-          >
-            Remove
-          </button>
-        </div>
+  <!-- start:: Card Body -->
+  <div class="card-body">
+    <!-- start:: Plot Title -->
+    <div class="row">
+      <div class="col">
+        <h3>{{ plotTitle }}</h3>
       </div>
     </div>
-    <!-- end:: Footer -->
-  </mat-dialog-content>
+    <!-- end:: Plot Title -->
+
+    <!-- start:: Plot Description -->
+    <div class="row">
+      <div class="col">
+        <p>{{ plotDescription }}</p>
+      </div>
+    </div>
+    <!-- end:: Plot Description -->
+  </div>
+  <!-- end:: Card Body -->
+
+  <!-- start:: Footer -->
+  <div class="card-footer">
+    <div class="d-flex justify-content-between">
+      <div class="mr-2">
+        <h6 class="tc-red">{{ WARNING_NO_UNDO }}</h6>
+      </div>
+      <div>
+        <button type="button" mat-raised-button mat-dialog-close cdkFocusInitial matTooltip="Cancel">
+          Cancel</button
+        >&nbsp;
+        <button
+          type="button"
+          mat-raised-button
+          color="primary"
+          (click)="onDelete()"
+          matTooltip="Delete plot"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- end:: Footer -->
 </div>
