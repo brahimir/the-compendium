@@ -468,6 +468,14 @@ export class MenuConfig {
         // DM Tools
         { section: "Dungeon Master Tools" },
         {
+          title: "Combat Tracker",
+          root: true,
+          bullet: "dot",
+          icon: "fas fa-list-ol",
+          page: "/combat-tracker",
+          permission: "accessToDMTools",
+        },
+        {
           title: "Storyboard",
           root: true,
           bullet: "dot",

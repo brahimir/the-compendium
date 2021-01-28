@@ -104,33 +104,51 @@ import { TcDatatableComponent } from "../components/tc-datatable/tc-datatable.co
 // ! end:: The Compendium Pages
 
 import { RouterModule } from "@angular/router";
-import { CardDialogComponent } from './the-compendium-pages/virtual-screen/card-dialog/card-dialog.component';
+import { CardDialogComponent } from "./the-compendium-pages/virtual-screen/card-dialog/card-dialog.component";
+import { CombatTrackerComponent } from "./the-compendium-pages/dm-tools/combat-tracker/combat-tracker.component";
 
 @NgModule({
   declarations: [
     //The Compendium Pages
+    // Global Components
+    TcDatatableComponent,
+    TestPageComponent,
+    ConfirmationDialogComponent,
+
+    // Dashboard and Virtual Screen
+    DashboardComponent,
+    VirtualScreenComponent,
+    CardDialogComponent,
+
+    // Resource Pages
+    // Official
     WeaponsComponent,
     ArmorsComponent,
     ItemsComponent,
     NpcsComponent,
     SpellsComponent,
     StoryboardComponent,
+
     // Homebrew Pages
     HomebrewWeaponsComponent,
     HomebrewArmorsComponent,
     HomebrewItemsComponent,
     HomebrewNpcsComponent,
     HomebrewSpellsComponent,
+
     // DM Tools Pages
+    CombatTrackerComponent,
     StoryboardComponent,
     CreateComponent,
+
+    // Player Tools Pages
+
     // Dialogs
     ArmorDetailsDialogComponent,
     NpcDetailsDialogComponent,
     WeaponDetailsDialogComponent,
     ItemDetailsDialogComponent,
     SpellDetailsDialogComponent,
-    DashboardComponent,
     CreateWeaponDialogComponent,
     CreateArmorDialogComponent,
     CreateItemDialogComponent,
@@ -144,11 +162,6 @@ import { CardDialogComponent } from './the-compendium-pages/virtual-screen/card-
     SessionSummariesDetailsDialogComponent,
     EditSessionDialogComponent,
     RemoveSessionDialogComponent,
-    VirtualScreenComponent,
-    ConfirmationDialogComponent,
-    TcDatatableComponent,
-    TestPageComponent,
-    CardDialogComponent,
   ],
   exports: [],
   imports: [

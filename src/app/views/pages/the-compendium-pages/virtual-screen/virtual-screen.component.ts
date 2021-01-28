@@ -1,5 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 // Models
 import { currentUser, User } from "src/app/core/auth";
 import { Card } from "./card.model";
@@ -20,7 +19,6 @@ import { AppState } from "src/app/core/reducers";
 import { select, Store } from "@ngrx/store";
 // RxJS
 import { Observable } from "rxjs";
-import { remove } from "lodash";
 
 @Component({
   selector: "kt-virtual-screen",
@@ -43,7 +41,6 @@ export class VirtualScreenComponent implements OnInit {
   dropdownAddCard: string[] = [];
 
   constructor(
-    public router: Router,
     private store: Store<AppState>,
     private cdr: ChangeDetectorRef,
     public dialog: MatDialog,

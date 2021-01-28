@@ -21,6 +21,11 @@ $tc-white: #ffffff;
   padding-bottom: 1rem;
 }
 
+// Buttons
+.button-hover:hover {
+  background-color: #e9e9e9;
+}
+
 // Links
 a {
   text-decoration: underline;

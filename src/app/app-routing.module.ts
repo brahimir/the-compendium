@@ -30,6 +30,7 @@ import { HomebrewNpcsComponent } from "./views/pages/the-compendium-pages/_resou
 import { HomebrewSpellsComponent } from "./views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-spells/homebrew-spells.component";
 
 // DM Tools
+import { CombatTrackerComponent } from "./views/pages/the-compendium-pages/dm-tools/combat-tracker/combat-tracker.component";
 import { StoryboardComponent } from "./views/pages/the-compendium-pages/dm-tools/storyboard/storyboard.component";
 import { SessionSummariesComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries.component";
 import { CreateComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create.component";
@@ -117,6 +118,10 @@ const routes: Routes = [
       {
         path: "create",
         component: CreateComponent,
+      },
+      {
+        path: "combat-tracker",
+        component: CombatTrackerComponent,
       },
       // end:: The Compendium Pages
 
