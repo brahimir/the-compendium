@@ -7,7 +7,7 @@
           <h1>{{ headerTitle }}</h1>
         </div>
         <div class="d-flex justify-content-end col-6">
-          <button mat-icon-button mat-dialog-close>
+          <button class="dialog-button-close" mat-icon-button mat-dialog-close>
             <mat-icon>close</mat-icon>
           </button>
         </div>
@@ -34,12 +34,16 @@
         <div class="col">
           <mat-form-field>
             <mat-label>Chapter title</mat-label>
-            <input formControlName="chapter" matInput placeholder="Eg. Chapter I
-            – Into the World" type="text" [value]=sessionData.chapter/>
+            <input
+              formControlName="chapter"
+              matInput
+              placeholder="Eg. Chapter I
+            – Into the World"
+              type="text"
+              [value]="sessionData.chapter"
+            />
             <mat-error> Chapter title is <strong>required.</strong> </mat-error>
-            <mat-hint align="start">
-              The <strong>chapter title</strong>.
-            </mat-hint>
+            <mat-hint align="start"> The <strong>chapter title</strong>. </mat-hint>
           </mat-form-field>
         </div>
       </div>
@@ -55,12 +59,10 @@
               matInput
               placeholder="Eg. 	Episode 6 – A New Enemy"
               type="text"
-              [value]=sessionData.episode
+              [value]="sessionData.episode"
             />
             <mat-error> Episode title is <strong>required.</strong> </mat-error>
-            <mat-hint align="start">
-              The <strong>episode title</strong>.
-            </mat-hint>
+            <mat-hint align="start"> The <strong>episode title</strong>. </mat-hint>
           </mat-form-field>
         </div>
       </div>
@@ -75,14 +77,10 @@
               rows="10"
               formControlName="content"
               placeholder="Eg. As Splimffs made her way into the home of Gregory Briarwood, she discovered that the home itself, while not being lived in, was neatly kept. Taking note of the draped windows to avoid direct sunlight, she made her way upstairs to further her investigation. After mitigating a misstep of hers with the power of Quen, she was able to successfully navigate her way up the staircase to the second floor. Upon investigating one of the rooms, she was met with 2 armed Clasp members, who appeared to have taken an individual hostage. After making short work of the Clasp members with the help of their captive and a stray window, Splimffs assisted the hostage with regaining their strength and apparel. Introducing himself as Dario Mohanus, he explained he is a Witcher himself. After getting acquainted with one another, both of our Witchers split to investigate the rest of the home for any sign of Gregory or his whereabouts. While investigating the home, Splimffs managed to discover a make-shift alchemy table, where she was able to discover the remnants of experimentation of Blood Infusions between vampiric blood and other sources. She also discovered a ruined map of the sewer systems beneath Westruun, with strange markings on them that she did not recognize. As she began her way into the hallway, she noticed a strange glow emitting from the fireplace at the end of the hall. A greatsword bathing in white flames presented itself to her. She suffered intense radiance, but her efforts in retrieving the blade were successful. Unsatisfied with her journey involving the staircase, Splimffs elected to utilize the convenient blown-out window to make her descent back to street level – until yet another small misstep landed her in Gregory’s garden. Dario’s response to her fall allowed Splimffs to learn the extended healing properties of vampiric blood, and its extremely dangerous side effects. Parting their ways, Splimffs made her way back to the barracks with her new-found knowledge. Sponkarr and Degwynn were officially introduced to margrave Brandon Zimmerset, who addressed the offer made by Raxxon with regards to the Party joining the Shield of the Plain as Elite members. Tabling the discussion until the full Party was present, Sponkarr ensured Brandon that this was something that they were interested in. Dwar’Gre took to interrogating one of the captured Clasp members as mentioned by Raxxon previously. During his interrogation, Dwar’Gre inquired about Dario Mohannus and learned that he was a high value target that the Clasp was interested in capturing or killing. Dwar’Gre was also offered a position in the Clasp by the captured prisoner, as well as payment for helping secure his escape. With no immediate interest in these offers, Dwar’Gre offered the prisoner a way to freedom – a trial by combat. After agreeing to the terms, Dwar’Gre returned to Raxxon and the others to share the information he learned and the proposition he made with the others. As the Party settled down to rest until the trial by combat at midnight, they were startled by a feint BOOM in the distance, followed by the sounding of the city bells. Raxxon ordered Keagan, an officer of the Shields, to rally the troops in the Garrison to send immediate assistance to the location of the initial blast. The Party took to assisting the primary response team, when they were greeted by an unfamiliar foe; unfamiliar to most of them. A hooded masked entity emerged from a brief shimmering purple portal, recognizing Sponkarr almost immediately. After a brief introduction and conversation within the mind of Sponkarr, he assaulted Sponkarr’s mind, leaving him stunned with visions of the Earth Ashari tribe at Terra perishing in flames and chaos. Before the entity departed, he summoned a magical wave of force that disintegrated 90% of the garrisoned troops, along with Keagan himself. After vanishing, the Party was met with archer assailants as well as additional foes emerging from similar shimmering purple portals. One of these individuals was the captured Clasp member that Dwar’Gre interrogated. The other entity was equipped with a sort of purple energy blade, and wielded powers that the Party had yet to encounter in their journey. After concluding their conflict with their assailants, the Party made their way into the Resident Ward where the initial blast occurred, while Dwar’Gre had his eyes on a much larger prize…"
-              [value]=sessionData.content
+              [value]="sessionData.content"
             ></textarea>
-            <mat-error>
-              The contents of the session summary are <strong>required.</strong>
-            </mat-error>
-            <mat-hint align="start">
-              The <strong>session summary.</strong>
-            </mat-hint>
+            <mat-error> The contents of the session summary are <strong>required.</strong> </mat-error>
+            <mat-hint align="start"> The <strong>session summary.</strong> </mat-hint>
           </mat-form-field>
         </div>
       </div>
