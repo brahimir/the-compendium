@@ -1,28 +1,29 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 // Models
 import { currentUser, User } from "src/app/core/auth";
 import { CombatInstance } from "./_models/combat-instance.model";
+import { CombatUnit } from "./_models/combat-unit.model";
 // Services
 import { CombatTrackerService } from "./combat-tracker.service";
 import { FormattingService } from "src/app/core/resources/_services/formatting.service";
 import { LayoutUtilsService } from "src/app/core/_base/crud";
 // MatDialog
 import { MatDialog } from "@angular/material/dialog";
+// MatTable
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
 // RxJS
 import { Observable } from "rxjs";
 // NGRX
 import { select, Store } from "@ngrx/store";
 import { AppState } from "src/app/core/reducers";
-import { CombatUnit } from "./_models/combat-unit.model";
-import { MatSort, Sort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: "kt-combat-tracker",
   templateUrl: "./combat-tracker.component.html",
   styleUrls: ["./combat-tracker.component.scss"],
 })
-export class CombatTrackerComponent implements OnInit {
+export class CombatTrackerComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   // Public properties
@@ -32,7 +33,7 @@ export class CombatTrackerComponent implements OnInit {
 
   // MatTable
   displayedColumns: string[] = ["name", "initiative", "hitpoints", "actions"];
-  datasources: MatTableDataSource<any>[] = [];
+  datasources: MatTableDataSource<CombatUnit>[] = [];
 
   constructor(
     private store: Store<AppState>,
@@ -92,6 +93,7 @@ export class CombatTrackerComponent implements OnInit {
   generateDataSource(unitArray: CombatUnit[]): MatTableDataSource<CombatUnit> {
     let newDataSource = new MatTableDataSource(unitArray);
     newDataSource.sort = this.sort;
+
     this.datasources.push(newDataSource);
 
     return newDataSource;
