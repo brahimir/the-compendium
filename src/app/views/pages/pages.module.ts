@@ -106,7 +106,7 @@ import { TcDatatableComponent } from "../components/tc-datatable/tc-datatable.co
 import { RouterModule } from "@angular/router";
 import { CardDialogComponent } from "./the-compendium-pages/virtual-screen/card-dialog/card-dialog.component";
 import { CombatTrackerComponent } from "./the-compendium-pages/dm-tools/combat-tracker/combat-tracker.component";
-import { AddUnitDialogComponent } from './the-compendium-pages/dm-tools/combat-tracker/_dialogs/add-unit-dialog/add-unit-dialog.component';
+import { AddUnitDialogComponent } from "./the-compendium-pages/dm-tools/combat-tracker/_dialogs/add-unit-dialog/add-unit-dialog.component";
 
 @NgModule({
   declarations: [

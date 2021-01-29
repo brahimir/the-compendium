@@ -161,15 +161,16 @@ export class VirtualScreenComponent implements OnInit {
       confirmationMessage: `Are you sure you want to remove the ${card.name} Card?`,
       textAgreeButton: "Remove",
       textCancelButton: "Cancel",
+      warnNoUndo: false,
     };
 
     let confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, { data: dialogData });
-    confirmationDialogRef.afterClosed().subscribe((data) => {
+    confirmationDialogRef.afterClosed().subscribe((res) => {
       // Checks for null data return.
-      if (!data) return;
+      if (!res) return;
 
       // If User confirms removal.
-      if (data.isConfirmed) {
+      if (res.isConfirmed) {
         // Get index of the old Card, and replace old Card ref with new Card ref.
         const removeCardIndex = this.userVirtualScreen.indexOf(card);
         if (removeCardIndex !== -1) {

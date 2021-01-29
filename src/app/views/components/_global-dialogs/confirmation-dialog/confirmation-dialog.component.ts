@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { CONSTANTS_GLOBAL } from "../../../pages/the-compendium-pages/constants";
 // MatDialog
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { ConfirmationDialog } from "./confirmation-dialog.model";
 
 @Component({
   selector: "kt-confirmation-dialog",
@@ -18,21 +19,21 @@ export class ConfirmationDialogComponent implements OnInit {
   confirmationMessage: string;
   textAgreeButton: string;
   textCancelButton: string;
-  isNoUndo: boolean;
+  warnNoUndo: boolean;
 
   // Confirmation checkbox value
   isAgree: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data
+    @Inject(MAT_DIALOG_DATA) public data: ConfirmationDialog
   ) {
     // Set headerTitle and buttons texts.
     this.headerTitle = data.headerTitle;
     this.confirmationMessage = data.confirmationMessage;
     this.textAgreeButton = data.textAgreeButton;
     this.textCancelButton = data.textCancelButton;
-    this.isNoUndo = data.isNoUndo;
+    this.warnNoUndo = data.warnNoUndo;
   }
 
   ngOnInit(): void {}
