@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 // Models
 import { currentUser, User } from "src/app/core/auth";
 import { CombatInstance } from "./_models/combat-instance.model";
@@ -6,9 +6,10 @@ import { CombatUnit } from "./_models/combat-unit.model";
 // Services
 import { CombatTrackerService } from "./combat-tracker.service";
 import { FormattingService } from "src/app/core/resources/_services/formatting.service";
-import { LayoutUtilsService } from "src/app/core/_base/crud";
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // MatDialog
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { AddUnitDialogComponent } from "./_dialogs/add-unit-dialog/add-unit-dialog.component";
 // MatTable
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -23,7 +24,7 @@ import { AppState } from "src/app/core/reducers";
   templateUrl: "./combat-tracker.component.html",
   styleUrls: ["./combat-tracker.component.scss"],
 })
-export class CombatTrackerComponent implements OnInit, AfterViewInit {
+export class CombatTrackerComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   // Public properties
@@ -33,7 +34,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
 
   // MatTable
   displayedColumns: string[] = ["name", "initiative", "hitpoints", "actions"];
-  datasources: MatTableDataSource<CombatUnit>[] = [];
+  // datasources: MatTableDataSource<CombatUnit>[] = [];
 
   constructor(
     private store: Store<AppState>,
@@ -54,8 +55,6 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
 
     this.refreshCombatTrackers();
   }
-
-  ngAfterViewInit(): void {}
 
   /**
    * Gets updated Combat Tracker arrays for the User.
@@ -90,18 +89,73 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
     // todo
   }
 
+  addCombatUnit(combatInstance: CombatInstance): void {
+    // Open the dialog, sending the title of the Combat Instance.
+    let dialogData: any = {
+      combatInstanceTitle: combatInstance.instanceName,
+    };
+    let dialogRef: MatDialogRef<AddUnitDialogComponent> = this.dialog.open(AddUnitDialogComponent, {
+      data: dialogData,
+    });
+
+    // Update combatInstance with the newly created Unit, and save it to the server.
+    dialogRef.afterClosed().subscribe((newUnit: CombatUnit) => {
+      if (!newUnit) return;
+      else {
+        // Get index of the combatInstance to update.
+        let index: number = this.userCombatTrackers.indexOf(combatInstance);
+
+        // Copy existing array for modification.
+        let newUnitsArray = Object.assign([], combatInstance.units);
+        newUnitsArray.push(newUnit);
+
+        // Overwrite old array of Units.
+        combatInstance.units = newUnitsArray;
+
+        // Modify existing array of Combat Trackers.
+        this.userCombatTrackers.splice(index, 1, combatInstance);
+
+        // Save updated Combat Instance to the server.
+        this.apiService
+          .updateUserCombatTrackers(this.userId, this.userCombatTrackers)
+          .subscribe((res) => {
+            if (res.status === 200) {
+              // Show success snackbar message.
+              const message = `${newUnit.name} successfully added to "${combatInstance.instanceName}" Combat.`;
+              this.layoutUtilsService.showActionNotification(
+                message,
+                MessageType.Create,
+                5000,
+                true,
+                true
+              );
+            } else {
+              // Show error snackbar message.
+              const message = `There was an error adding "${newUnit.name}" to "${combatInstance.instanceName}" Combat.`;
+              this.layoutUtilsService.showActionNotification(
+                message,
+                MessageType.Create,
+                5000,
+                true,
+                true
+              );
+            }
+          });
+      }
+    });
+  }
+
   generateDataSource(unitArray: CombatUnit[]): MatTableDataSource<CombatUnit> {
     let newDataSource = new MatTableDataSource(unitArray);
     newDataSource.sort = this.sort;
 
-    this.datasources.push(newDataSource);
-
     return newDataSource;
   }
 
+  // todo
   refreshSorts(): void {
-    this.datasources.forEach((element) => {
-      element.sort = this.sort;
-    });
+    // this.datasources.forEach((element) => {
+    //   element.sort = this.sort;
+    // });
   }
 }

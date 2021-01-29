@@ -18,20 +18,20 @@
 
   <!-- start:: Card Body -->
   <div class="card-body">
+    <!-- start:: KT Alert if form has errors. -->
+    <kt-alert
+      *ngIf="hasFormErrors"
+      type="warn"
+      [duration]="30000"
+      [showCloseButton]="true"
+      (close)="onAlertClose($event)"
+    >
+      {{ errorMessage }}
+    </kt-alert>
+    <!-- start:: KT Alert if form has errors. -->
+
     <!-- start:: Form -->
     <form [formGroup]="form" class="form-group">
-      <!-- start:: KT Alert if form has errors. -->
-      <kt-alert
-        *ngIf="hasFormErrors"
-        type="warn"
-        [duration]="30000"
-        [showCloseButton]="true"
-        (close)="onAlertClose($event)"
-      >
-        {{ errorMessage }}
-      </kt-alert>
-      <!-- start:: KT Alert if form has errors. -->
-
       <!-- start:: Plot Title -->
       <div class="form-group row">
         <div class="col">

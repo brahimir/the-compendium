@@ -72,7 +72,7 @@
           type="button"
           mat-raised-button
           color="primary"
-          (click)="addCombatUnit(addCardValue)"
+          (click)="addCombatUnit(combatInstance)"
           matTooltip="Add a unit to this combat instance"
         >
           Add Unit
@@ -101,7 +101,11 @@
       <!-- Unit Hitpoints Column -->
       <ng-container matColumnDef="hitpoints">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Hitpoints</th>
-        <td mat-cell *matCellDef="let unit">{{ unit.hitpoints }}</td>
+        <td mat-cell *matCellDef="let unit">
+          <ng-container *ngIf="unit.hitpoints; else no_data"></ng-container>
+          {{ unit.hitpoints }}
+          <ng-template #no_data> - </ng-template>
+        </td>
       </ng-container>
 
       <!-- Unit Conditions Column -->

@@ -81,6 +81,8 @@ import { SpellDetailsDialogComponent } from "./views/pages/the-compendium-pages/
 import { SessionSummariesDetailsDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component";
 
 // CRUD Dialogs
+// Virtual Screen
+import { CardDialogComponent } from "./views/pages/the-compendium-pages/virtual-screen/card-dialog/card-dialog.component";
 // Homebrew
 import { CreateWeaponDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-weapon-dialog/create-weapon-dialog.component";
 import { CreateArmorDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-armor-dialog/create-armor-dialog.component";
@@ -95,8 +97,11 @@ import { RemovePlotDialogComponent } from "./views/pages/the-compendium-pages/dm
 import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-session-dialog/create-session-dialog.component";
 import { EditSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
 import { RemoveSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
+// Comback Tracker
+import { AddUnitDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/combat-tracker/_dialogs/add-unit-dialog/add-unit-dialog.component";
+
+// Notification Dialogs
 import { ActionNotificationComponent } from "./views/partials/content/crud";
-import { CardDialogComponent } from "./views/pages/the-compendium-pages/virtual-screen/card-dialog/card-dialog.component";
 
 // MatDialog Defaults
 const MAT_DIALOG_DEFAULTS: MatDialogConfig = {
@@ -196,6 +201,8 @@ export function getHighlightLanguages() {
     CreateSpellDialogComponent,
     // Adventure Dialogs
     CreateSessionDialogComponent,
+    // * Combat Tracker Dialogs
+    AddUnitDialogComponent,
 
     // ! Add Partials Modules here - need to fix this in the future.
     ActionNotificationComponent,

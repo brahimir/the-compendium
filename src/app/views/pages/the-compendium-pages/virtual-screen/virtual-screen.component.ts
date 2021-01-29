@@ -184,8 +184,8 @@ export class VirtualScreenComponent implements OnInit {
           newArray.splice(removeCardIndex, 1);
 
           // Update the userVirtualScreen array on the server.
-          this.apiService.updateUserVirtualScreen(this.userId, newArray).subscribe((data) => {
-            if (data.status === 200) {
+          this.apiService.updateUserVirtualScreen(this.userId, newArray).subscribe((res) => {
+            if (res.status === 200) {
               // Show confirmation snackbar message.
               const message = `${card.name} Card successfully removed.`;
               this.layoutUtilsService.showActionNotification(
