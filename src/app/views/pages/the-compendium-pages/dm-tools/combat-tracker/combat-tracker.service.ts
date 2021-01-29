@@ -43,7 +43,7 @@ export class CombatTrackerService {
    * @param {*} body The body - the new Combat Tracker.
    * @returns {Observable<any>} Observable result from server.
    */
-  updateUserCombatTrackers(userId: string, body: any): Observable<any> {
+  updateUserCombatTrackers(userId: string, body: CombatInstance[]): Observable<any> {
     return this.http.put(`${UPDATE_COMBAT_TRACKER}${userId}`, body);
   }
 }

@@ -1,6 +1,6 @@
 import { CombatUnit } from "./combat-unit.model";
 
 export interface CombatInstance {
-  instanceName: string;
+  name: string;
   units: CombatUnit[];
 }

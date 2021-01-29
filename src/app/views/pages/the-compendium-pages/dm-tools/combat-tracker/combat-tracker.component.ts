@@ -21,6 +21,7 @@ import { AppState } from "src/app/core/reducers";
 import { ConfirmationDialogComponent } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
 import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
 import { EditUnitDialogComponent } from "./_dialogs/edit-unit-dialog/edit-unit-dialog.component";
+import { AddCombatInstanceComponent } from "./_dialogs/add-combat-instance/add-combat-instance.component";
 
 @Component({
   selector: "kt-combat-tracker",
@@ -91,18 +92,116 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
    * @memberof CombatTrackerComponent
    */
   addCombatInstance(): void {
-    // todo
+    // Open the dialog.
+    let dialogRef: MatDialogRef<AddCombatInstanceComponent> = this.dialog.open(
+      AddCombatInstanceComponent
+    );
+
+    // Update combatInstance with the newly created Unit, and save it to the server.
+    dialogRef.afterClosed().subscribe((newCombatInstance: CombatInstance) => {
+      if (!newCombatInstance) return;
+      else {
+        let newUserCombatTrackers = Object.assign([], this.userCombatTrackers);
+        newUserCombatTrackers.push(newCombatInstance);
+
+        // Save updated Combat Instance to the server.
+        this.apiService.updateUserCombatTrackers(this.userId, newUserCombatTrackers).subscribe((res) => {
+          if (res.status === 200) {
+            // Show success snackbar message.
+            const message = `"${newCombatInstance.name}" successfully added.`;
+            this.layoutUtilsService.showActionNotification(
+              message,
+              MessageType.Create,
+              5000,
+              true,
+              true
+            );
+          } else {
+            // Show error snackbar message.
+            const message = `There was an error adding "${newCombatInstance.name}".`;
+            this.layoutUtilsService.showActionNotification(
+              message,
+              MessageType.Create,
+              5000,
+              true,
+              true
+            );
+          }
+
+          this.userCombatTrackers = newUserCombatTrackers;
+          this.cdr.detectChanges();
+        });
+      }
+    });
+  }
+
+  removeCombatInstance(combatInstance: CombatInstance): void {
+    // Open the dialog, sending the title of the Combat Instance.
+    let dialogData: ConfirmationDialog = {
+      headerTitle: "Confirm Combat Instance Removal",
+      confirmationMessage: `Are you sure you want to remove "${combatInstance.name}"?`,
+      textAgreeButton: "Remove",
+      textCancelButton: "Cancel",
+      warnNoUndo: true,
+    };
+
+    let dialogRef: MatDialogRef<ConfirmationDialogComponent> = this.dialog.open(
+      ConfirmationDialogComponent,
+      {
+        data: dialogData,
+      }
+    );
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+      if (result.isConfirmed) {
+        // Get indexes for the removed Unit and the Combat Instance to update.
+        let index: number = this.userCombatTrackers.indexOf(combatInstance);
+
+        // Modify existing array of Combat Trackers.
+        this.userCombatTrackers.splice(index, 1);
+
+        // Save updated Combat Instance to the server.
+        this.apiService
+          .updateUserCombatTrackers(this.userId, this.userCombatTrackers)
+          .subscribe((res) => {
+            if (res.status === 200) {
+              // Show success snackbar message.
+              const message = `"${combatInstance.name}" successfully removed.`;
+              this.layoutUtilsService.showActionNotification(
+                message,
+                MessageType.Create,
+                5000,
+                true,
+                true
+              );
+            } else {
+              // Show error snackbar message.
+              const message = `There was an error removing "${combatInstance.name}".`;
+              this.layoutUtilsService.showActionNotification(
+                message,
+                MessageType.Create,
+                5000,
+                true,
+                true
+              );
+            }
+
+            this.cdr.detectChanges();
+          });
+      } else return;
+    });
   }
 
   /**
    * Adds a Unit to the specified Combat Instance.
    *
-   * @param {CombatInstance} combatInstance The Combat instance.
+   * @param {CombatInstance} combatInstance The Combat Instance.
    */
   addCombatUnit(combatInstance: CombatInstance): void {
     // Open the dialog, sending the title of the Combat Instance.
     let dialogData: any = {
-      combatInstanceTitle: combatInstance.instanceName,
+      combatInstanceTitle: combatInstance.name,
     };
     let dialogRef: MatDialogRef<AddUnitDialogComponent> = this.dialog.open(AddUnitDialogComponent, {
       data: dialogData,
@@ -131,7 +230,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
           .subscribe((res) => {
             if (res.status === 200) {
               // Show success snackbar message.
-              const message = `"${newUnit.name}" successfully added to "${combatInstance.instanceName}".`;
+              const message = `"${newUnit.name}" successfully added to "${combatInstance.name}".`;
               this.layoutUtilsService.showActionNotification(
                 message,
                 MessageType.Create,
@@ -141,7 +240,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
               );
             } else {
               // Show error snackbar message.
-              const message = `There was an error adding "${newUnit.name}" to "${combatInstance.instanceName}".`;
+              const message = `There was an error adding "${newUnit.name}" to "${combatInstance.name}".`;
               this.layoutUtilsService.showActionNotification(
                 message,
                 MessageType.Create,
@@ -157,6 +256,12 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Updates an existing Unit in the specified Combat Instance.
+   *
+   * @param {CombatInstance} combatInstance The Combat Instance.
+   * @param {CombatUnit} unit The Unit to update.
+   */
   editCombatUnit(combatInstance: CombatInstance, unit: CombatUnit): void {
     // Open the dialog, sending the title of the Combat Instance.
     let dialogData: any = {
@@ -191,7 +296,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
           .subscribe((res) => {
             if (res.status === 200) {
               // Show success snackbar message.
-              const message = `"${unit.name}" successfully removed from "${combatInstance.instanceName}".`;
+              const message = `"${unit.name}" successfully removed from "${combatInstance.name}".`;
               this.layoutUtilsService.showActionNotification(
                 message,
                 MessageType.Create,
@@ -201,7 +306,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
               );
             } else {
               // Show error snackbar message.
-              const message = `There was an error adding "${unit.name}" to "${combatInstance.instanceName}".`;
+              const message = `There was an error adding "${unit.name}" to "${combatInstance.name}".`;
               this.layoutUtilsService.showActionNotification(
                 message,
                 MessageType.Create,
@@ -225,7 +330,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
     // Open the dialog, sending the title of the Combat Instance.
     let dialogData: ConfirmationDialog = {
       headerTitle: "Confirm Unit Removal",
-      confirmationMessage: `Are you sure you want to remove "${unit.name}" from "${combatInstance.instanceName}"?`,
+      confirmationMessage: `Are you sure you want to remove "${unit.name}" from "${combatInstance.name}"?`,
       textAgreeButton: "Remove",
       textCancelButton: "Cancel",
       warnNoUndo: false,
@@ -261,7 +366,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
           .subscribe((res) => {
             if (res.status === 200) {
               // Show success snackbar message.
-              const message = `"${unit.name}" successfully removed from "${combatInstance.instanceName}".`;
+              const message = `"${unit.name}" successfully removed from "${combatInstance.name}".`;
               this.layoutUtilsService.showActionNotification(
                 message,
                 MessageType.Create,
@@ -271,7 +376,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
               );
             } else {
               // Show error snackbar message.
-              const message = `There was an error adding "${unit.name}" to "${combatInstance.instanceName}".`;
+              const message = `There was an error adding "${unit.name}" to "${combatInstance.name}".`;
               this.layoutUtilsService.showActionNotification(
                 message,
                 MessageType.Create,
@@ -286,6 +391,13 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Dynamically generated MatTableDataSources for each array of Units, from each Combat Instance,
+   * retreived from the server.
+   *
+   * @param {CombatUnit[]} unitArray The Unit arrays.
+   * @returns {MatTableDataSource<CombatUnit>} The MatTableDataSource.
+   */
   generateDataSource(unitArray: CombatUnit[]): MatTableDataSource<CombatUnit> {
     let newDataSource = new MatTableDataSource(unitArray);
 

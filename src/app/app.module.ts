@@ -98,6 +98,7 @@ import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages
 import { EditSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
 import { RemoveSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
 // Combact Tracker
+import { AddCombatInstanceComponent } from "./views/pages/the-compendium-pages/dm-tools/combat-tracker/_dialogs/add-combat-instance/add-combat-instance.component";
 import { AddUnitDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/combat-tracker/_dialogs/add-unit-dialog/add-unit-dialog.component";
 import { EditUnitDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/combat-tracker/_dialogs/edit-unit-dialog/edit-unit-dialog.component";
 
@@ -203,6 +204,7 @@ export function getHighlightLanguages() {
     // Adventure Dialogs
     CreateSessionDialogComponent,
     // * Combat Tracker Dialogs
+    AddCombatInstanceComponent,
     AddUnitDialogComponent,
     EditUnitDialogComponent,
 
