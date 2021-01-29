@@ -30,7 +30,9 @@ export class CombatTrackerComponent implements OnInit {
   userId: string;
   userCombatTrackers: CombatInstance[];
 
+  // MatTable
   displayedColumns: string[] = ["name", "initiative", "hitpoints", "actions"];
+  datasources: MatTableDataSource<any>[] = [];
 
   constructor(
     private store: Store<AppState>,
@@ -51,6 +53,8 @@ export class CombatTrackerComponent implements OnInit {
 
     this.refreshCombatTrackers();
   }
+
+  ngAfterViewInit(): void {}
 
   /**
    * Gets updated Combat Tracker arrays for the User.
@@ -86,6 +90,16 @@ export class CombatTrackerComponent implements OnInit {
   }
 
   generateDataSource(unitArray: CombatUnit[]): MatTableDataSource<CombatUnit> {
-    return new MatTableDataSource(unitArray);
+    let newDataSource = new MatTableDataSource(unitArray);
+    newDataSource.sort = this.sort;
+    this.datasources.push(newDataSource);
+
+    return newDataSource;
+  }
+
+  refreshSorts(): void {
+    this.datasources.forEach((element) => {
+      element.sort = this.sort;
+    });
   }
 }
