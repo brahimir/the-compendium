@@ -1,0 +1,107 @@
+<mat-dialog-content>
+  <div class="card card-custom card-stretch">
+    <!-- start:: Card Header -->
+    <div class="card-header py-3">
+      <div class="card-title align-items-start flex-column">
+        <h2 class="text-dark">
+          Edit <span class="tc-red">{{ unitName }}</span>
+        </h2>
+      </div>
+      <!-- start:: Card Toolbar -->
+      <div class="card-toolbar">
+        <div class="d-flex justify-content-end">
+          <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <!-- end:: Card Toolbar -->
+    </div>
+    <!-- end:: Card Header -->
+
+    <!-- start:: Card Body -->
+    <div class="card-body">
+      <!-- start:: Form -->
+      <form [formGroup]="form" class="form-group">
+        <!-- start:: Unit Name -->
+        <div class="form-group row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input formControlName="name" matInput placeholder="Eg. Baselieos Dawnwing" type="text" />
+              <mat-error>Your <strong>unit</strong> needs a name!</mat-error>
+              <mat-hint align="start"> The <strong>name</strong> of the unit. </mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- end:: Unit Name -->
+
+        <!-- start:: Unit Hitpoints -->
+        <div class="form-group row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Hitpoints</mat-label>
+              <input formControlName="hitpoints" matInput type="number" min="0" />
+              <mat-hint align="start">The <strong>number of hitpoints</strong> the unit has.</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- end:: Unit Hitpoints -->
+
+        <!-- start:: Unit Initiative -->
+        <div class="form-group row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Initiative</mat-label>
+              <input formControlName="initiative" matInput type="number" min="0" />
+              <mat-error>The unit's <strong>initiative score</strong> is required.</mat-error>
+              <mat-hint align="start">The unit's <strong>initiative</strong> score.</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- end:: Unit Initiative -->
+      </form>
+    </div>
+    <!-- end:: Card Body -->
+
+    <!-- start:: Footer -->
+    <div class="card-footer">
+      <!-- start:: KT Alert if form has errors. -->
+      <kt-alert
+        *ngIf="hasFormErrors"
+        type="warn"
+        [duration]="30000"
+        [showCloseButton]="true"
+        (close)="onAlertClose($event)"
+      >
+        {{ errorMessage }}
+      </kt-alert>
+      <!-- start:: KT Alert if form has errors. -->
+
+      <div class="d-flex justify-content-between">
+        <div class="mr-2"></div>
+        <div>
+          <button
+            type="button"
+            mat-raised-button
+            mat-dialog-close
+            cdkFocusInitial
+            matTooltip="Discard changes"
+          >
+            Cancel</button
+          >&nbsp;
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="onSubmit()"
+            matTooltip="Update unit"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end:: Footer -->
+  </div>
+</mat-dialog-content>

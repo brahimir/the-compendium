@@ -107,6 +107,7 @@ import { RouterModule } from "@angular/router";
 import { CardDialogComponent } from "./the-compendium-pages/virtual-screen/card-dialog/card-dialog.component";
 import { CombatTrackerComponent } from "./the-compendium-pages/dm-tools/combat-tracker/combat-tracker.component";
 import { AddUnitDialogComponent } from "./the-compendium-pages/dm-tools/combat-tracker/_dialogs/add-unit-dialog/add-unit-dialog.component";
+import { EditUnitDialogComponent } from './the-compendium-pages/dm-tools/combat-tracker/_dialogs/edit-unit-dialog/edit-unit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -164,6 +165,7 @@ import { AddUnitDialogComponent } from "./the-compendium-pages/dm-tools/combat-t
     EditSessionDialogComponent,
     RemoveSessionDialogComponent,
     AddUnitDialogComponent,
+    EditUnitDialogComponent,
   ],
   exports: [],
   imports: [

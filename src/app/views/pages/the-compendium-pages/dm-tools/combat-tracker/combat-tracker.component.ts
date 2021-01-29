@@ -20,6 +20,7 @@ import { select, Store } from "@ngrx/store";
 import { AppState } from "src/app/core/reducers";
 import { ConfirmationDialogComponent } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
 import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
+import { EditUnitDialogComponent } from "./_dialogs/edit-unit-dialog/edit-unit-dialog.component";
 
 @Component({
   selector: "kt-combat-tracker",
@@ -150,6 +151,65 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
               );
             }
 
+            this.cdr.detectChanges();
+          });
+      }
+    });
+  }
+
+  editCombatUnit(combatInstance: CombatInstance, unit: CombatUnit): void {
+    // Open the dialog, sending the title of the Combat Instance.
+    let dialogData: any = {
+      unit: unit,
+    };
+
+    let dialogRef: MatDialogRef<EditUnitDialogComponent> = this.dialog.open(EditUnitDialogComponent, {
+      data: dialogData,
+    });
+
+    // Update combatInstance with the newly created Unit, and save it to the server.
+    dialogRef.afterClosed().subscribe((updatedUnit: CombatUnit) => {
+      if (!updatedUnit) return;
+      else {
+        // Get indexes for the removed Unit and the Combat Instance to update.
+        let indexUnit: number = combatInstance.units.indexOf(unit);
+        let indexCombatInstance: number = this.userCombatTrackers.indexOf(combatInstance);
+
+        // Copy existing array for modification.
+        let newUnitsArray = Object.assign([], combatInstance.units);
+        newUnitsArray.splice(indexUnit, 1, updatedUnit);
+
+        // Overwrite old array of Units.
+        combatInstance.units = newUnitsArray;
+
+        // Modify existing array of Combat Trackers.
+        this.userCombatTrackers.splice(indexCombatInstance, 1, combatInstance);
+
+        // Save updated Combat Instance to the server.
+        this.apiService
+          .updateUserCombatTrackers(this.userId, this.userCombatTrackers)
+          .subscribe((res) => {
+            if (res.status === 200) {
+              // Show success snackbar message.
+              const message = `"${unit.name}" successfully removed from "${combatInstance.instanceName}".`;
+              this.layoutUtilsService.showActionNotification(
+                message,
+                MessageType.Create,
+                5000,
+                true,
+                true
+              );
+            } else {
+              // Show error snackbar message.
+              const message = `There was an error adding "${unit.name}" to "${combatInstance.instanceName}".`;
+              this.layoutUtilsService.showActionNotification(
+                message,
+                MessageType.Create,
+                5000,
+                true,
+                true
+              );
+            }
             this.cdr.detectChanges();
           });
       }

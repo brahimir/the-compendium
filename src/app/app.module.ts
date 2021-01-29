@@ -97,8 +97,9 @@ import { RemovePlotDialogComponent } from "./views/pages/the-compendium-pages/dm
 import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-session-dialog/create-session-dialog.component";
 import { EditSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
 import { RemoveSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
-// Comback Tracker
+// Combact Tracker
 import { AddUnitDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/combat-tracker/_dialogs/add-unit-dialog/add-unit-dialog.component";
+import { EditUnitDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/combat-tracker/_dialogs/edit-unit-dialog/edit-unit-dialog.component";
 
 // Notification Dialogs
 import { ActionNotificationComponent } from "./views/partials/content/crud";
@@ -203,6 +204,7 @@ export function getHighlightLanguages() {
     CreateSessionDialogComponent,
     // * Combat Tracker Dialogs
     AddUnitDialogComponent,
+    EditUnitDialogComponent,
 
     // ! Add Partials Modules here - need to fix this in the future.
     ActionNotificationComponent,
