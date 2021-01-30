@@ -4,7 +4,7 @@ import { currentUser, User } from "src/app/core/auth";
 import { Card } from "./card.model";
 import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // Constants
-import { TC_CONSTANTS } from "src/environments/app-secrets";
+import { TcScreenCard, TC_CONSTANTS } from "src/environments/app-secrets";
 // Services
 import { FormattingService } from "src/app/core/resources/_services/formatting.service";
 import { VirtualScreenService } from "./virtual-screen.service";
@@ -29,6 +29,8 @@ export class VirtualScreenComponent implements OnInit {
   // Public properties
   user$: Observable<User>;
   userId: string;
+  userRoles: number[];
+  userIsDm: boolean;
   userVirtualScreen: Object[];
 
   // Dashboard Cards Array
@@ -55,7 +57,11 @@ export class VirtualScreenComponent implements OnInit {
     this.user$ = this.store.pipe(select(currentUser));
     this.user$.subscribe((user: User) => {
       this.userId = user._id;
+      this.userRoles = user.roles;
     });
+
+    // Check if the User is a DM.
+    this.userIsDm = this.isUserDm();
 
     // Get User's current Dashboard.
     this.refreshUserVirtualScreen();
@@ -244,27 +250,28 @@ export class VirtualScreenComponent implements OnInit {
     let results: string[] = [];
 
     // All Screen Cards.
-    let allScreenCards: any[] = Object.values(this.VIRTUAL_SCREEN_CARDS);
+    let allScreenCards: TcScreenCard[] = Object.values(this.VIRTUAL_SCREEN_CARDS);
 
-    // Get all the indexes of the Screen Cards.
-    let allScreenCardNames: string[] = [];
-    allScreenCards.forEach((element) => {
-      allScreenCardNames.push(element.name);
+    // Filter DM Screen Cards if the User is not a DM.
+    let filteredScreenCards: TcScreenCard[] = [];
+    allScreenCards.forEach((element: TcScreenCard) => {
+      if (element.isDmTool && !this.userIsDm) return;
+      else filteredScreenCards.push(element);
     });
 
     this.apiService.getUserVirtualScreen(this.userId).subscribe((data: any) => {
       const userScreen = data.virtualScreen;
 
-      let userScreenCardNames: string[] = [];
+      let userScreenCardIndexes: string[] = [];
 
       // Get all the indexes of the Screen Cards.
       userScreen.forEach((element) => {
-        userScreenCardNames.push(element.name);
+        userScreenCardIndexes.push(element.index);
       });
 
-      allScreenCardNames.forEach((element) => {
-        if (!userScreenCardNames.includes(element)) {
-          results.push(element);
+      filteredScreenCards.forEach((element: TcScreenCard) => {
+        if (!userScreenCardIndexes.includes(element.index)) {
+          results.push(element.name);
         }
       });
     });
@@ -340,5 +347,15 @@ export class VirtualScreenComponent implements OnInit {
       el = el.offsetParent;
     }
     return { top: y, left: x };
+  }
+
+  /**
+   * Checks if the user is a DM (for use in displaying Components in the Dropdown.)
+   *
+   * @returns {boolean} True if the User is a DM, False otherwise.
+   */
+  isUserDm(): boolean {
+    if (this.userRoles.includes(1) || this.userRoles.includes(2)) return true;
+    else return false;
   }
 }

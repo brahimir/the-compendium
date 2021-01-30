@@ -296,7 +296,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
           .subscribe((res) => {
             if (res.status === 200) {
               // Show success snackbar message.
-              const message = `"${unit.name}" successfully updated from "${combatInstance.name}".`;
+              const message = `"${unit.name}" successfully updated in "${combatInstance.name}".`;
               this.layoutUtilsService.showActionNotification(
                 message,
                 MessageType.Create,
@@ -306,7 +306,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
               );
             } else {
               // Show error snackbar message.
-              const message = `There was an error updating "${unit.name}" from "${combatInstance.name}".`;
+              const message = `There was an error updating "${unit.name}" in "${combatInstance.name}".`;
               this.layoutUtilsService.showActionNotification(
                 message,
                 MessageType.Create,

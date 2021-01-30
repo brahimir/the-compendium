@@ -1,3 +1,11 @@
+export interface TcScreenCard {
+  index: string;
+  name: string;
+  icon: string;
+  isDmTool: boolean;
+  component: any;
+}
+
 // ! Components
 // * Resources
 // Official

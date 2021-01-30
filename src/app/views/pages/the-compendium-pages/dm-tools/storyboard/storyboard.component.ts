@@ -178,12 +178,7 @@ export class StoryboardComponent implements OnInit {
    * @param {string} modifyOption The modification option (i.e remove, edit)
    * @param {*} plot The plot Object.
    */
-  modifyStoryboardPlot(
-    plotColumn: string,
-    modifyOption: string,
-    plot: any,
-    plotIndex: number
-  ): void {
+  modifyStoryboardPlot(plotColumn: string, modifyOption: string, plot: any, plotIndex: number): void {
     let dialogRef: any;
 
     switch (plotColumn) {
@@ -287,7 +282,8 @@ export class StoryboardComponent implements OnInit {
                   this.plotsInProgress.splice(plotIndex, 1);
                 } else {
                   return;
-                } // Subscribe to result after Dialog is closed, and push the new
+                }
+                // Subscribe to result after Dialog is closed, and push the new
                 // plot to the corresponding local array.
                 dialogRef.afterClosed().subscribe((result) => {
                   if (!result) {
