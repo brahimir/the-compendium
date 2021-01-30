@@ -1,4 +1,5 @@
-// Components
+// ! Components
+// * Resources
 // Official
 import { WeaponsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/weapons/weapons.component";
 import { ArmorsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/official/armor/armor.component";
@@ -11,6 +12,10 @@ import { HomebrewArmorsComponent } from "src/app/views/pages/the-compendium-page
 import { HomebrewItemsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-items/homebrew-items.component";
 import { HomebrewNpcsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-npcs/homebrew-npcs.component";
 import { HomebrewSpellsComponent } from "src/app/views/pages/the-compendium-pages/_resource-tables/homebrew/homebrew-spells/homebrew-spells.component";
+// * DM Tools
+import { StoryboardComponent } from "src/app/views/pages/the-compendium-pages/dm-tools/storyboard/storyboard.component";
+import { SessionSummariesComponent } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries.component";
+import { CombatTrackerComponent } from "src/app/views/pages/the-compendium-pages/dm-tools/combat-tracker/combat-tracker.component";
 
 // ! TC API Routes
 export const API_ROUTES = {
@@ -93,6 +98,7 @@ export const API_ROUTES = {
 // ! TC Constants
 export const TC_CONSTANTS = {
   VIRTUAL_SCREEN_CARDS: {
+    // * Resources
     // Official
     weapons: {
       index: "weapons",
@@ -129,7 +135,6 @@ export const TC_CONSTANTS = {
       isDmTool: false,
       component: SpellsComponent,
     },
-
     // Homebrew
     "homebrew-weapons": {
       index: "homebrew-weapons",
@@ -165,6 +170,33 @@ export const TC_CONSTANTS = {
       icon: "far fa-star",
       isDmTool: false,
       component: HomebrewSpellsComponent,
+    },
+
+    // * Storyboard
+    storyboard: {
+      index: "storyboard",
+      name: "Storyboard",
+      icon: "fas fa-chalkboard",
+      isDmTool: true,
+      component: StoryboardComponent,
+    },
+
+    // * Session Summaries
+    "session-summaries": {
+      index: "session-summaries",
+      name: "Session Summaries",
+      icon: "fas fa-book",
+      isDmTool: true,
+      component: SessionSummariesComponent,
+    },
+
+    // * Comat Tracker
+    "combat-tracker": {
+      index: "combat-tracker",
+      name: "Combat Tracker",
+      icon: "fas fa-list-ol",
+      isDmTool: true,
+      component: CombatTrackerComponent,
     },
   },
 };

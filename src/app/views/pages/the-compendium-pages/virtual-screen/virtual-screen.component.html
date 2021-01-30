@@ -1,8 +1,10 @@
-<div class="card card-custom card-stretch">
+<div class="card card-custom">
   <!-- start:: Card Header -->
   <div class="card-header py-3">
     <div class="card-title align-items-start flex-column">
-      <h1 class="text-dark">Virtual Screen</h1>
+      <ng-container *ngIf="user$ | async as user">
+        <h1 class="text-dark">{{ user.fullName }}'s Virtual Screen</h1>
+      </ng-container>
     </div>
     <!-- start:: Card Toolbar -->
     <div class="card-toolbar">

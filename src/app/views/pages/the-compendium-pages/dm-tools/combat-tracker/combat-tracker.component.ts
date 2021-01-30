@@ -138,7 +138,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
   removeCombatInstance(combatInstance: CombatInstance): void {
     // Open the dialog, sending the title of the Combat Instance.
     let dialogData: ConfirmationDialog = {
-      headerTitle: "Confirm Combat Instance Removal",
+      headerTitle: "Remove Combat Instance",
       confirmationMessage: `Are you sure you want to remove "${combatInstance.name}"?`,
       textAgreeButton: "Remove",
       textCancelButton: "Cancel",
@@ -296,7 +296,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
           .subscribe((res) => {
             if (res.status === 200) {
               // Show success snackbar message.
-              const message = `"${unit.name}" successfully removed from "${combatInstance.name}".`;
+              const message = `"${unit.name}" successfully updated from "${combatInstance.name}".`;
               this.layoutUtilsService.showActionNotification(
                 message,
                 MessageType.Create,
@@ -306,7 +306,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
               );
             } else {
               // Show error snackbar message.
-              const message = `There was an error adding "${unit.name}" to "${combatInstance.name}".`;
+              const message = `There was an error updating "${unit.name}" from "${combatInstance.name}".`;
               this.layoutUtilsService.showActionNotification(
                 message,
                 MessageType.Create,
@@ -329,7 +329,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
   removeCombatUnit(combatInstance: CombatInstance, unit: CombatUnit): void {
     // Open the dialog, sending the title of the Combat Instance.
     let dialogData: ConfirmationDialog = {
-      headerTitle: "Confirm Unit Removal",
+      headerTitle: "Remove Unit",
       confirmationMessage: `Are you sure you want to remove "${unit.name}" from "${combatInstance.name}"?`,
       textAgreeButton: "Remove",
       textCancelButton: "Cancel",
@@ -376,7 +376,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
               );
             } else {
               // Show error snackbar message.
-              const message = `There was an error adding "${unit.name}" to "${combatInstance.name}".`;
+              const message = `There was an error removing "${unit.name}" from "${combatInstance.name}".`;
               this.layoutUtilsService.showActionNotification(
                 message,
                 MessageType.Create,
