@@ -1,4 +1,6 @@
+// Angular
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ComponentType } from "@angular/cdk/portal";
 // Models
 import { currentUser, User } from "src/app/core/auth";
 import { UserCard } from "./user-card.model";
@@ -11,6 +13,7 @@ import { VirtualScreenService } from "./virtual-screen.service";
 // Dialogs
 import { ConfirmationDialogComponent } from "../../../components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
 import { ConfirmationDialog } from "../../../components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
+import { CardDialogComponent } from "./card-dialog/card-dialog.component";
 // Material
 import { MatDialog } from "@angular/material/dialog";
 // State
@@ -286,8 +289,13 @@ export class VirtualScreenComponent implements OnInit {
    * @param {string} index The Dialog window to open.
    */
   openDialog(index: string): void {
-    let cardToRender = this.VIRTUAL_SCREEN_CARDS[index].component;
-    this.dialog.open(cardToRender);
+    let cardToRender: ComponentType<any> = this.VIRTUAL_SCREEN_CARDS[index].component;
+
+    let dialogData: any = {
+      component: cardToRender,
+    };
+
+    this.dialog.open(CardDialogComponent, { data: dialogData });
   }
 
   /**

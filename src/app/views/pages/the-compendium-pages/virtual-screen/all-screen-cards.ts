@@ -1,17 +1,5 @@
-/**
- * TC Screen Card Model
- *
- * @interface TcScreenCard
- */
-export interface TcScreenCard {
-  index: string;
-  name: string;
-  icon: string;
-  isDmTool: boolean;
-  component: any;
-}
-
-// * Components
+// Angular
+import { ComponentType } from "@angular/cdk/portal";
 // Resources
 import { WeaponsComponent } from "../_resource-tables/official/weapons/weapons.component";
 import { ArmorsComponent } from "../_resource-tables/official/armor/armor.component";
@@ -29,6 +17,20 @@ import { HomebrewSpellsComponent } from "../_resource-tables/homebrew/homebrew-s
 import { CombatTrackerComponent } from "../dm-tools/combat-tracker/combat-tracker.component";
 import { StoryboardComponent } from "../dm-tools/storyboard/storyboard.component";
 import { SessionSummariesComponent } from "../dm-tools/session-summaries/session-summaries.component";
+import { CreateComponent } from "../dm-tools/create/create.component";
+
+/**
+ * TC Screen Card Model
+ *
+ * @interface TcScreenCard
+ */
+export interface TcScreenCard {
+  index: string;
+  name: string;
+  icon: string;
+  isDmTool: boolean;
+  component: ComponentType<any>;
+}
 
 // ! Card Constants
 export const VIRTUAL_SCREEN_CARDS = {
@@ -131,5 +133,14 @@ export const VIRTUAL_SCREEN_CARDS = {
     icon: "fas fa-list-ol",
     isDmTool: true,
     component: CombatTrackerComponent,
+  },
+
+  // * Create
+  create: {
+    index: "create",
+    name: "Create",
+    icon: "fas fa-magic",
+    isDmTool: true,
+    component: CreateComponent,
   },
 };
