@@ -295,7 +295,7 @@ export class VirtualScreenComponent implements OnInit {
       component: cardToRender,
     };
 
-    this.dialog.open(CardDialogComponent, { data: dialogData });
+    this.dialog.open(CardDialogComponent, { data: dialogData, minWidth: "80%" });
   }
 
   /**
