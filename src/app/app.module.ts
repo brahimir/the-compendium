@@ -228,10 +228,10 @@ export function getHighlightLanguages() {
       useValue: MAT_DIALOG_DEFAULTS,
     },
     // ! end:: MatDialog Defaults
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    },
+    // {
+    //   provide: PERFECT_SCROLLBAR_CONFIG,
+    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    // },
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: GestureConfig,

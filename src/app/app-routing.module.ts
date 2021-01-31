@@ -7,10 +7,7 @@ import { BaseComponent } from "./views/theme/base/base.component";
 // Auth
 import { AuthGuard } from "./core/auth";
 
-// The Compendium Components
-// Test Page
-import { TestPageComponent } from "./views/pages/the-compendium-pages/test-page/test-page.component";
-
+// ! The Compendium Components
 // Dashboard and Virtual Screen Pages
 import { DashboardComponent } from "./views/pages/the-compendium-pages/dashboard/dashboard.component";
 import { VirtualScreenComponent } from "./views/pages/the-compendium-pages/virtual-screen/virtual-screen.component";
@@ -49,12 +46,7 @@ const routes: Routes = [
     component: BaseComponent,
     canActivate: [AuthGuard],
     children: [
-      // start:: The Compendium Pages
-      // Test Page
-      {
-        path: "test-page",
-        component: TestPageComponent,
-      },
+      // ! start:: The Compendium Pages
       // Dashboard and Virtual Screen
       {
         path: "dashboard",
@@ -123,7 +115,7 @@ const routes: Routes = [
         path: "combat-tracker",
         component: CombatTrackerComponent,
       },
-      // end:: The Compendium Pages
+      // ! end:: The Compendium Pages
 
       {
         path: "wizard",

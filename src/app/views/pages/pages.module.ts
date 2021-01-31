@@ -48,9 +48,6 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { CoreModule } from "../../core/core.module";
 
 // ! start:: The Compendium Pages
-// * Test Page
-import { TestPageComponent } from "./the-compendium-pages/test-page/test-page.component";
-
 // * Dashboard Page
 import { DashboardComponent } from "./the-compendium-pages/dashboard/dashboard.component";
 
@@ -107,15 +104,14 @@ import { RouterModule } from "@angular/router";
 import { CardDialogComponent } from "./the-compendium-pages/virtual-screen/card-dialog/card-dialog.component";
 import { CombatTrackerComponent } from "./the-compendium-pages/dm-tools/combat-tracker/combat-tracker.component";
 import { AddUnitDialogComponent } from "./the-compendium-pages/dm-tools/combat-tracker/_dialogs/add-unit-dialog/add-unit-dialog.component";
-import { EditUnitDialogComponent } from './the-compendium-pages/dm-tools/combat-tracker/_dialogs/edit-unit-dialog/edit-unit-dialog.component';
-import { AddCombatInstanceComponent } from './the-compendium-pages/dm-tools/combat-tracker/_dialogs/add-combat-instance/add-combat-instance.component';
+import { EditUnitDialogComponent } from "./the-compendium-pages/dm-tools/combat-tracker/_dialogs/edit-unit-dialog/edit-unit-dialog.component";
+import { AddCombatInstanceComponent } from "./the-compendium-pages/dm-tools/combat-tracker/_dialogs/add-combat-instance/add-combat-instance.component";
 
 @NgModule({
   declarations: [
     //The Compendium Pages
     // Global Components
     TcDatatableComponent,
-    TestPageComponent,
     ConfirmationDialogComponent,
 
     // Dashboard and Virtual Screen
