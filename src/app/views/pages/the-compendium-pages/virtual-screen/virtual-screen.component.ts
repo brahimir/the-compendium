@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 // Models
 import { currentUser, User } from "src/app/core/auth";
-import { Card } from "./card.model";
+import { UserCard } from "./user-card.model";
 import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // Constants
-import { TcScreenCard, TC_CONSTANTS } from "src/environments/app-secrets";
+import { TcScreenCard, VIRTUAL_SCREEN_CARDS } from "./all-screen-cards";
 // Services
 import { FormattingService } from "src/app/core/resources/_services/formatting.service";
 import { VirtualScreenService } from "./virtual-screen.service";
@@ -34,7 +34,7 @@ export class VirtualScreenComponent implements OnInit {
   userVirtualScreen: Object[];
 
   // Dashboard Cards Array
-  VIRTUAL_SCREEN_CARDS = TC_CONSTANTS.VIRTUAL_SCREEN_CARDS;
+  VIRTUAL_SCREEN_CARDS = VIRTUAL_SCREEN_CARDS;
 
   // Add Card Dropdown value.
   addCardValue: string = "";
@@ -80,10 +80,10 @@ export class VirtualScreenComponent implements OnInit {
   }
 
   /**
-   *  Adds a Card to the User's Dashboard.
+   * Adds a Card to the User's Dashboard.
    *
-   * @param {string} value  String representation of the Card to add
-   *                        (used in the VIRTUAL_SCREEN_CARDS lookp).
+   * @param {string} value String representation of the Card to add
+   *                       (used in the VIRTUAL_SCREEN_CARDS lookup).
    */
   addCard(value: string): void {
     // Get the index value of the Card to add.
@@ -105,7 +105,7 @@ export class VirtualScreenComponent implements OnInit {
       let cardToAdd: any = this.VIRTUAL_SCREEN_CARDS[cardIndex];
 
       // Generate the Dashboard Card.
-      const newCard: Card = {
+      const newCard: UserCard = {
         index: cardToAdd.index,
         name: cardToAdd.name,
         icon: cardToAdd.icon,
@@ -134,7 +134,7 @@ export class VirtualScreenComponent implements OnInit {
         }
 
         // ! Offsets the Cards for when they get shifted when a Card is added.
-        newArray.forEach((element: Card) => {
+        newArray.forEach((element: UserCard) => {
           element.position = { x: element.position.x, y: element.position.y - 115 };
         });
 
@@ -160,7 +160,7 @@ export class VirtualScreenComponent implements OnInit {
    *
    * @param {Card} card The Card to remove.
    */
-  removeCard(card: Card): void {
+  removeCard(card: UserCard): void {
     // Open confirmation dialog to confirm if User wants to delete the Card.
     const dialogData: ConfirmationDialog = {
       headerTitle: "Confirm Card Removal",
@@ -183,7 +183,7 @@ export class VirtualScreenComponent implements OnInit {
           // Create local array reference to manipulate.
           let newArray = this.userVirtualScreen;
 
-          newArray.forEach((element: Card) => {
+          newArray.forEach((element: UserCard) => {
             if (newArray.indexOf(element) > removeCardIndex)
               element.position = { x: element.position.x, y: element.position.y + 115 };
           });
@@ -226,13 +226,12 @@ export class VirtualScreenComponent implements OnInit {
   }
 
   /**
-   *  Checks if string representation of a Card's index already exists in the
-   *  User's current Dashboard.
+   * Checks if string representation of a Card's index already exists in the
+   * User's current Dashboard.
    *
    * @param {any[]} userVirtualScreenArray The User's current Dashboard.
    * @param {string} newCardIndex The string representation of the Card's index.
-   * @returns {boolean}                 True if the Card already exists in the User's Dashboard,
-   *                                    False otherwise.
+   * @returns {boolean} True if the Card already exists in the User's Dashboard, False otherwise.
    */
   isDuplicateCard(userVirtualScreenArray: any[], newCardIndex: string): boolean {
     let result = userVirtualScreenArray.find(({ index }) => index === newCardIndex);
@@ -242,9 +241,9 @@ export class VirtualScreenComponent implements OnInit {
   }
 
   /**
-   *  Generates a simple string array of the Cards readily available to add to a User's Dashboard.
+   * Generates a simple string array of the Cards readily available to add to a User's Dashboard.
    *
-   *  Note: See  src\environments\app-secrets.ts --> TC_CONSTANTS.DASHBOARD_CONSTANTS
+   * Note: See  src\environments\app-secrets.ts --> TC_CONSTANTS.DASHBOARD_CONSTANTS
    */
   refreshDropdownValues(): void {
     let results: string[] = [];
@@ -282,32 +281,29 @@ export class VirtualScreenComponent implements OnInit {
   /**
    * Opens Dialogs for a Card on the Dashboard.
    *
-   * @param {string} windowName The Dialog window name to open.
+   * Note: See  src\environments\app-secrets.ts --> TC_CONSTANTS.DASHBOARD_CONSTANTS
+   *
+   * @param {string} index The Dialog window to open.
    */
-  openDialog(windowName: string): void {
-    let dialogRef: any;
-
-    // Parse window name.
-    windowName = this.formattingService.replaceSpacesWithDashes(windowName.toLowerCase());
-
-    let cardToRender = this.VIRTUAL_SCREEN_CARDS[windowName].component;
-    dialogRef = this.dialog.open(cardToRender);
+  openDialog(index: string): void {
+    let cardToRender = this.VIRTUAL_SCREEN_CARDS[index].component;
+    this.dialog.open(cardToRender);
   }
 
   /**
    * Saves the new x and y coords of the dragged Card and saves them to the server.
    *
-   * @param {*} event     The drag event.
-   * @param {Card} card   The Card that was dragged.
+   * @param {*} event The drag event.
+   * @param {Card} card The Card that was dragged.
    */
-  onDragEnded(event, card: Card) {
+  onDragEnded(event, card: UserCard) {
     // Get previous coords.
     let element = event.source.getRootElement();
     let boundingClientRect = element.getBoundingClientRect();
     let parentPosition = this.getPosition(element);
 
     // Prepare a newCard to replace the old one.
-    let newCard: Card = card;
+    let newCard: UserCard = card;
 
     // Calculate and update newCard coords.
     newCard.position.x = boundingClientRect.x - parentPosition.left;
@@ -338,13 +334,13 @@ export class VirtualScreenComponent implements OnInit {
    * @param {*} el  The element.
    * @returns       Object with top and left coords of the dragged element.
    */
-  getPosition(el) {
+  getPosition(element) {
     let x = 0;
     let y = 0;
-    while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
-      x += el.offsetLeft - el.scrollLeft;
-      y += el.offsetTop - el.scrollTop;
-      el = el.offsetParent;
+    while (element && !isNaN(element.offsetLeft) && !isNaN(element.offsetTop)) {
+      x += element.offsetLeft - element.scrollLeft;
+      y += element.offsetTop - element.scrollTop;
+      element = element.offsetParent;
     }
     return { top: y, left: x };
   }

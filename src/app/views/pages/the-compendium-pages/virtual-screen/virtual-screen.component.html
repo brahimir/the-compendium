@@ -54,8 +54,12 @@
           <div class="container">
             <!-- start:: Remove Card Button -->
             <div class="row">
-              <div class="d-flex justify-content-end col container-remove-card">
-                <button mat-icon-button class="button-remove-card" (click)="removeCard(card)">
+              <div class="d-flex justify-content-end col container-button-remove-card">
+                <button
+                  mat-icon-button
+                  class="button-remove-card dialog-button-close"
+                  (click)="removeCard(card)"
+                >
                   <mat-icon>close</mat-icon>
                 </button>
               </div>
@@ -65,7 +69,7 @@
             <!-- start:: Card Content -->
             <div class="card-content row justify-content-center">
               <i [class]="card.icon"></i>
-              <a (click)="openDialog(card.name)">
+              <a (click)="openDialog(card.index)">
                 {{ formattingService.titleCase(card.name) }}
               </a>
             </div>
