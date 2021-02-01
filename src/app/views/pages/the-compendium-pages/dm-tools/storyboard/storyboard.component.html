@@ -65,7 +65,7 @@
           </div>
 
           <!-- start:: Loading spinner -->
-          <div *ngIf="isLoading" class="mt-6 mb-6">
+          <div *ngIf="!plotsMain" class="mt-6 mb-6">
             <mat-spinner [diameter]="30" style="margin: auto"></mat-spinner>
           </div>
           <!-- end:: Loading spinner -->
@@ -130,7 +130,7 @@
           </div>
 
           <!-- start:: Loading spinner -->
-          <div *ngIf="isLoading" class="mt-6 mb-6">
+          <div *ngIf="!plotsInProgress" class="mt-6 mb-6">
             <mat-spinner [diameter]="30" style="margin: auto"></mat-spinner>
           </div>
           <!-- end:: Loading spinner -->
@@ -195,7 +195,7 @@
           </div>
 
           <!-- start:: Loading spinner -->
-          <div *ngIf="isLoading" class="mt-6 mb-6">
+          <div *ngIf="!plotsDone" class="mt-6 mb-6">
             <mat-spinner [diameter]="30" style="margin: auto"></mat-spinner>
           </div>
           <!-- end:: Loading spinner -->

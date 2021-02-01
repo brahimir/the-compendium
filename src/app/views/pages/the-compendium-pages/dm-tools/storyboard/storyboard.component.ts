@@ -144,7 +144,6 @@ export class StoryboardComponent implements OnInit {
 
             // Update plot arrays on the server and refresh the Storyboard.
             this.updateStoryBoard();
-            this.refreshStoryboard();
             this.cdr.detectChanges();
           }
         });
@@ -166,7 +165,6 @@ export class StoryboardComponent implements OnInit {
 
             // Update plot arrays on the server and refresh the Storyboard.
             this.updateStoryBoard();
-            this.refreshStoryboard();
             this.cdr.detectChanges();
           }
         });
@@ -222,14 +220,12 @@ export class StoryboardComponent implements OnInit {
 
                     // Update plot arrays on the server and refresh the Storyboard.
                     this.updateStoryBoard();
-                    this.refreshStoryboard();
                     this.cdr.detectChanges();
                   }
                 });
 
                 // Update plot arrays on the server and refresh the Storyboard.
                 this.updateStoryBoard();
-                this.refreshStoryboard();
                 this.cdr.detectChanges();
               }
             });
@@ -255,7 +251,6 @@ export class StoryboardComponent implements OnInit {
 
                 // Update plot arrays on the server and refresh the Storyboard.
                 this.updateStoryBoard();
-                this.refreshStoryboard();
                 this.cdr.detectChanges();
               }
             });
@@ -301,14 +296,12 @@ export class StoryboardComponent implements OnInit {
 
                     // Update plot arrays on the server and refresh the Storyboard.
                     this.updateStoryBoard();
-                    this.refreshStoryboard();
                     this.cdr.detectChanges();
                   }
                 });
 
                 // Update plot arrays on the server and refresh the Storyboard.
                 this.updateStoryBoard();
-                this.refreshStoryboard();
                 this.cdr.detectChanges();
               }
             });
@@ -334,7 +327,6 @@ export class StoryboardComponent implements OnInit {
 
                 // Update plot arrays on the server and refresh the Storyboard.
                 this.updateStoryBoard();
-                this.refreshStoryboard();
                 this.cdr.detectChanges();
               }
             });
@@ -379,14 +371,12 @@ export class StoryboardComponent implements OnInit {
 
                     // Update plot arrays on the server and refresh the Storyboard.
                     this.updateStoryBoard();
-                    this.refreshStoryboard();
                     this.cdr.detectChanges();
                   }
                 });
 
                 // Update plot arrays on the server and refresh the Storyboard.
                 this.updateStoryBoard();
-                this.refreshStoryboard();
                 this.cdr.detectChanges();
               }
             });
@@ -412,7 +402,6 @@ export class StoryboardComponent implements OnInit {
 
                 // Update plot arrays on the server and refresh the Storyboard.
                 this.updateStoryBoard();
-                this.refreshStoryboard();
                 this.cdr.detectChanges();
               }
             });
