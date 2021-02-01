@@ -1,7 +1,13 @@
+@import "../../../../../assets/sass/pages/tc-pages/tc-global.scss";
+
+.theme-dark {
+  background-color: $tc-theme-dark;
+}
+
 :host {
-	::ng-deep {
-		ngb-tabset > .nav-tabs {
-			display: none;
-		}
-	}
+  ::ng-deep {
+    ngb-tabset > .nav-tabs {
+      display: none;
+    }
+  }
 }

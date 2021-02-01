@@ -1,4 +1,12 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from "@angular/core";
 // Models
 import { currentUser, User } from "src/app/core/auth";
 import { CombatInstance } from "./_models/combat-instance.model";
@@ -9,19 +17,19 @@ import { FormattingService } from "src/app/core/resources/_services/formatting.s
 import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // MatDialog
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { AddCombatInstanceComponent } from "./_dialogs/add-combat-instance/add-combat-instance.component";
 import { AddUnitDialogComponent } from "./_dialogs/add-unit-dialog/add-unit-dialog.component";
+import { EditUnitDialogComponent } from "./_dialogs/edit-unit-dialog/edit-unit-dialog.component";
+import { ConfirmationDialogComponent } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
+import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
 // MatTable
-import { MatSort, Sort } from "@angular/material/sort";
+import { MatSort, MatSortable, Sort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 // RxJS
 import { Observable } from "rxjs";
 // NGRX
 import { select, Store } from "@ngrx/store";
 import { AppState } from "src/app/core/reducers";
-import { ConfirmationDialogComponent } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
-import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
-import { EditUnitDialogComponent } from "./_dialogs/edit-unit-dialog/edit-unit-dialog.component";
-import { AddCombatInstanceComponent } from "./_dialogs/add-combat-instance/add-combat-instance.component";
 
 @Component({
   selector: "kt-combat-tracker",
@@ -30,6 +38,7 @@ import { AddCombatInstanceComponent } from "./_dialogs/add-combat-instance/add-c
 })
 export class CombatTrackerComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
+  // @ViewChildren(MatSort) sorts = new QueryList<MatSort>();
 
   // Public properties
   user$: Observable<User>;
@@ -38,7 +47,8 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
 
   // MatTable
   displayedColumns: string[] = ["name", "initiative", "hitpoints", "actions"];
-  // datasources: MatTableDataSource<CombatUnit>[] = [];
+  dataSources: MatTableDataSource<CombatUnit>[] = [];
+  dataSorts: MatSort[] = [];
 
   constructor(
     private store: Store<AppState>,
@@ -400,16 +410,10 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
    */
   generateDataSource(unitArray: CombatUnit[]): MatTableDataSource<CombatUnit> {
     let newDataSource = new MatTableDataSource(unitArray);
+    this.dataSources.push(newDataSource);
 
     newDataSource.sort = this.sort;
 
     return newDataSource;
-  }
-
-  // todo
-  refreshSorts(): void {
-    // this.datasources.forEach((element) => {
-    //   element.sort = this.sort;
-    // });
   }
 }
