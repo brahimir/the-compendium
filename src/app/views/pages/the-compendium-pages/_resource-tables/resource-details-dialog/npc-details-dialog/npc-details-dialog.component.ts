@@ -22,6 +22,13 @@ export class NpcDetailsDialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  calcAbilityModifier(abilityScore: number): string {
+    let result: any = Math.ceil((abilityScore - 10) / 2);
+
+    if (result >= 0) return (result = "+" + result);
+    else return result;
+  }
+
   /**
    * Utility - Capitalizes first letter in a string.
    *

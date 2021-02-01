@@ -39,6 +39,7 @@ export class StoryboardComponent implements OnInit {
   // Public properties
   user$: Observable<User>;
   userId: string;
+  isLoading: boolean;
 
   // Storyboard Plots
   plotsMain: Object[];
@@ -60,11 +61,7 @@ export class StoryboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.refreshStoryboard().subscribe((data) => {
-      this.plotsMain = data.storyboard.plotsMain;
-      this.plotsInProgress = data.storyboard.plotsInProgress;
-      this.plotsDone = data.storyboard.plotsDone;
-    });
+    this.refreshStoryboard();
   }
 
   /**
@@ -96,8 +93,14 @@ export class StoryboardComponent implements OnInit {
    *
    * @returns {Observable<any>} Resulting Storyboard.
    */
-  refreshStoryboard(): Observable<any> {
-    return this.apiService.getStoryboard(this.userId);
+  refreshStoryboard(): void {
+    this.isLoading = true;
+    this.apiService.getStoryboard(this.userId).subscribe((data: any) => {
+      this.plotsMain = data.storyboard.plotsMain;
+      this.plotsInProgress = data.storyboard.plotsInProgress;
+      this.plotsDone = data.storyboard.plotsDone;
+      this.isLoading = false;
+    });
   }
 
   /**

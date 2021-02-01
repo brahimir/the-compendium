@@ -44,6 +44,7 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
   user$: Observable<User>;
   userId: string;
   userCombatTrackers: CombatInstance[];
+  isLoading: boolean;
 
   // MatTable
   displayedColumns: string[] = ["name", "initiative", "hitpoints", "actions"];
@@ -76,8 +77,10 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
    * Gets updated Combat Tracker arrays for the User.
    */
   refreshCombatTrackers(): void {
+    this.isLoading = true;
     this.apiService.getUserCombatTrackers(this.userId).subscribe((data: CombatInstance[]) => {
       this.userCombatTrackers = data;
+      this.isLoading = false;
     });
   }
 

@@ -7,7 +7,7 @@
 
     <div class="card-toolbar">
       <!-- start:: Loading spinner -->
-      <div *ngIf="!userCombatTrackers" class="spinner-container-p-0">
+      <div *ngIf="isLoading" class="spinner-container-p-0">
         <mat-spinner [diameter]="35" style="margin: auto"></mat-spinner>
       </div>
       <!-- end:: Loading spinner -->
@@ -21,6 +21,7 @@
     <div class="row">
       <div class="col">
         <button
+          [disabled]="isLoading"
           type="button"
           mat-raised-button
           color="primary"

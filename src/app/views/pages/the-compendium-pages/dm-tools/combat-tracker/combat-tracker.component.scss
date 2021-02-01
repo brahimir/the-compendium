@@ -6,6 +6,22 @@
   margin-bottom: 1rem;
 }
 
+// todo - change color of table cell on click (allows user to track who's turn it is.
+// Table hover and onlcick
+.mat-row:hover > .mat-cell {
+  background-color: $tc-red-highlight;
+}
+
+.mat-row:focus {
+  background-color: $tc-red-highlight;
+  outline: none;
+}
+
+.mat-row:focus mat-cell {
+  color: white;
+}
+
+// Cards
 .card-unit {
   background-color: #eaeaff;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),

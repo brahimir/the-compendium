@@ -30,7 +30,7 @@
 
     <!-- start::Armor Class -->
     <div *ngIf="dialogData.armor_class" class="row">
-      <div class="col-3">
+      <div class="col-2">
         <p class="font-weight-bolder">Armor Class:</p>
       </div>
       <div class="col">
@@ -41,7 +41,7 @@
 
     <!-- start::Hit Points and Hit Dice -->
     <div *ngIf="dialogData.hit_points || dialogData.hit_dice" class="row">
-      <div class="col-3">
+      <div class="col-2">
         <p class="font-weight-bolder">Hit Points:</p>
       </div>
       <div class="col">
@@ -52,7 +52,7 @@
 
     <!-- start::Speed -->
     <div *ngIf="dialogData.speed" class="row">
-      <div class="col-3">
+      <div class="col-2">
         <p class="font-weight-bolder">Speed:</p>
       </div>
       <div class="col">
@@ -95,22 +95,22 @@
       <!-- start::Ability Scores -->
       <div class="row">
         <div *ngIf="dialogData.strength" class="col-2 text-center">
-          <p>{{ dialogData.strength }}</p>
+          <p>{{ dialogData.strength }} ({{ calcAbilityModifier(dialogData.strength) }})</p>
         </div>
         <div *ngIf="dialogData.dexterity" class="col-2 text-center">
-          <p>{{ dialogData.dexterity }}</p>
+          <p>{{ dialogData.dexterity }} ({{ calcAbilityModifier(dialogData.dexterity) }})</p>
         </div>
         <div *ngIf="dialogData.constitution" class="col-2 text-center">
-          <p>{{ dialogData.constitution }}</p>
+          <p>{{ dialogData.constitution }} ({{ calcAbilityModifier(dialogData.constitution) }})</p>
         </div>
         <div *ngIf="dialogData.intelligence; no_data" class="col-2 text-center">
-          <p>{{ dialogData.intelligence }}</p>
+          <p>{{ dialogData.intelligence }} ({{ calcAbilityModifier(dialogData.intelligence) }})</p>
         </div>
         <div *ngIf="dialogData.wisdom" class="col-2 text-center">
-          <p>{{ dialogData.wisdom }}</p>
+          <p>{{ dialogData.wisdom }} ({{ calcAbilityModifier(dialogData.wisdom) }})</p>
         </div>
         <div *ngIf="dialogData.charisma" class="col-2 text-center">
-          <p>{{ dialogData.charisma }}</p>
+          <p>{{ dialogData.charisma }} ({{ calcAbilityModifier(dialogData.charisma) }})</p>
         </div>
       </div>
       <!-- end::Ability Scores -->
@@ -119,7 +119,7 @@
 
     <!-- start::Proficiencies -->
     <div *ngIf="dialogData.proficiencies && dialogData.proficiencies.length !== 0" class="row">
-      <div class="col-3">
+      <div class="col-2">
         <p class="font-weight-bolder">Proficiencies:</p>
       </div>
       <div class="col">
@@ -132,7 +132,7 @@
 
     <!-- start::Damage Resistances -->
     <div *ngIf="dialogData.damage_resistances && dialogData.damage_resistances.length !== 0" class="row">
-      <div class="col-3">
+      <div class="col-2">
         <p class="font-weight-bolder">Damage Resistances:</p>
       </div>
       <div class="col">
@@ -148,7 +148,7 @@
       *ngIf="dialogData.damage_vunerabilities && dialogData.damage_vunerabilities.length !== 0"
       class="row"
     >
-      <div class="col-3">
+      <div class="col-2">
         <p class="font-weight-bolder">Damage Vunerabilities:</p>
       </div>
       <div class="col">
@@ -161,7 +161,7 @@
 
     <!-- start::Damage Immunities -->
     <div *ngIf="dialogData.damage_immunities && dialogData.damage_immunities.length !== 0" class="row">
-      <div class="col-3">
+      <div class="col-2">
         <p class="font-weight-bolder">Damage Immunities:</p>
       </div>
       <div class="col">
@@ -177,7 +177,7 @@
       *ngIf="dialogData.condition_immunities && dialogData.condition_immunities.length !== 0"
       class="row"
     >
-      <div class="col-3">
+      <div class="col-2">
         <p class="font-weight-bolder">Condition Immunities:</p>
       </div>
       <div class="col">
@@ -190,7 +190,7 @@
 
     <!-- start::Senses -->
     <div *ngIf="dialogData.senses" class="row">
-      <div class="col-3">
+      <div class="col-2">
         <p class="font-weight-bolder">Senses:</p>
       </div>
       <div class="col">
@@ -209,7 +209,7 @@
 
     <!-- start::Languages -->
     <div *ngIf="dialogData.languages" class="row">
-      <div class="col-3">
+      <div class="col-2">
         <p class="font-weight-bolder">Languages:</p>
       </div>
       <div class="col">
@@ -220,7 +220,7 @@
 
     <!-- start::Challenge Rating -->
     <div *ngIf="dialogData.challenge_rating || dialogData.xp" class="row">
-      <div class="col-3">
+      <div class="col-2">
         <p class="font-weight-bolder">Challenge Rating:</p>
       </div>
       <div class="col">
