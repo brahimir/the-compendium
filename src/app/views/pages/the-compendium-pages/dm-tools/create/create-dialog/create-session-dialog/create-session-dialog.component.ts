@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { CONSTANTS_CREATE_DIALOG } from "../../constants";
 // Models
 import { currentUser, User } from "src/app/core/auth";
+import { Session } from "src/app/core/resources/_models/dm_tools/session_summaries/session.model";
 // Services
 import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // MatDialog
@@ -25,7 +26,7 @@ export class CreateSessionDialogComponent implements OnInit {
   // Public properties
   user$: Observable<User>;
   userId: string;
-  userSessionSummaries: Object[];
+  userSessionSummaries: Session[];
 
   // Form properties
   form: FormGroup;
@@ -74,8 +75,8 @@ export class CreateSessionDialogComponent implements OnInit {
   }
 
   refreshSessions(): void {
-    this.apiService.getSessionSummaries(this.userId).subscribe((data: User) => {
-      this.userSessionSummaries = data.userSettings.dmTools.sessions;
+    this.apiService.getSessionSummaries(this.userId).subscribe((sessions: Session[]) => {
+      this.userSessionSummaries = sessions;
     });
   }
 
@@ -84,10 +85,10 @@ export class CreateSessionDialogComponent implements OnInit {
    *
    * @returns {Object} The payload Object.
    */
-  preparePayload(): Object {
+  preparePayload(): Session {
     let formValues = this.form.value;
 
-    let payload: any = {
+    let payload: Session = {
       chapter: formValues.chapter,
       episode: formValues.episode,
       date: new Date().toISOString(),
@@ -106,9 +107,7 @@ export class CreateSessionDialogComponent implements OnInit {
 
     // Check form for errors.
     if (this.form.invalid) {
-      Object.keys(controls).forEach((controlName) =>
-        controls[controlName].markAsTouched()
-      );
+      Object.keys(controls).forEach((controlName) => controls[controlName].markAsTouched());
 
       this.hasFormErrors = true;
       return;
@@ -118,26 +117,23 @@ export class CreateSessionDialogComponent implements OnInit {
     let payload = this.preparePayload();
 
     // Add the new Session Summary to the existing Session Summaries.
-    let newArray = Object.assign([], this.userSessionSummaries);
+    let newArray: Session[] = Object.assign([], this.userSessionSummaries);
     newArray.push(payload);
 
     // Update User Session Summaries on server.
-    this.apiService
-      .updateSessionSummaries(this.userId, newArray)
-      .subscribe((data) => {});
+    this.apiService.updateSessionSummaries(this.userId, newArray).subscribe((res) => {
+      if (res.status === 200) {
+        // Show confirmation snackbar message.
+        const message = "Session Summary successfully added.";
+        this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
+      } else {
+        // Show error snackbar message.
+        const message = "There was a problem adding your Session Summary. Please try again.";
+        this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
+      }
+    });
 
-    // Close the dialog, and send the payload back to the CreateComponent.
-    this.dialogRef.close(payload);
-
-    // Show confirmation snackbar message.
-    const message = "Session Summary successfully added.";
-    this.layoutUtilsService.showActionNotification(
-      message,
-      MessageType.Create,
-      5000,
-      true,
-      true
-    );
+    this.dialogRef.close();
   }
 
   /**
