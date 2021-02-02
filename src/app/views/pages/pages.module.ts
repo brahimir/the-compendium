@@ -78,7 +78,6 @@ import { CreateSpellDialogComponent } from "./the-compendium-pages/dm-tools/crea
 // Storyboard Dialogs
 import { AddPlotDialogComponent } from "./the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
 import { EditPlotDialogComponent } from "./the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
-import { RemovePlotDialogComponent } from "./the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
 // Session Summaries Dialogs
 import { SessionSummariesDetailsDialogComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component";
 import { CreateSessionDialogComponent } from "./the-compendium-pages/dm-tools/create/create-dialog/create-session-dialog/create-session-dialog.component";
@@ -155,7 +154,6 @@ import { AddCombatInstanceComponent } from "./the-compendium-pages/dm-tools/comb
     CreateNpcDialogComponent,
     AddPlotDialogComponent,
     EditPlotDialogComponent,
-    RemovePlotDialogComponent,
     CreateSessionDialogComponent,
     SessionSummariesComponent,
     SessionSummariesDetailsDialogComponent,

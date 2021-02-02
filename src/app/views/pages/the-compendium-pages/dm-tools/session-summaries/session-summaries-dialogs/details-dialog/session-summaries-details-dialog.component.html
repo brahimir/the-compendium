@@ -1,62 +1,67 @@
-<div class="wrapper p-10">
-  <mat-dialog-content class="mat-typography">
-    <!-- start:: Header - Chapter Title -->
-    <div class="details-dialog-header">
-      <div class="row">
-        <div class="col-10">
-          <h1 class="tc-red">{{ sessionData.chapter }}</h1>
-        </div>
-        <div class="d-flex justify-content-end col-2">
-          <button class="dialog-button-close" mat-icon-button [mat-dialog-close]>
-            <mat-icon>close</mat-icon>
-          </button>
-        </div>
+<div class="card card-custom card-stretch">
+  <!-- start:: Card Header -->
+  <div class="card-header py-3">
+    <div class="card-title align-items-start flex-column">
+      <h1 class="tc-red">{{ sessionData.chapter }}</h1>
+    </div>
+    <!-- start:: Card Toolbar -->
+    <div class="card-toolbar">
+      <div class="d-flex justify-content-end">
+        <button mat-icon-button mat-dialog-close class="dialog-button-close">
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
     </div>
-    <!-- end:: Header - Chapter Title -->
+    <!-- end:: Card Toolbar -->
+  </div>
+  <!-- end:: Card Header -->
 
-    <!-- start:: Episode Title -->
+  <!-- start:: Card Body -->
+  <div class="card-body">
+    <!-- start:: Session Episode Title -->
     <div *ngIf="sessionData.episode" class="row">
       <div class="col">
         <h3 class="font-italic mb-6">{{ sessionData.episode }}</h3>
       </div>
     </div>
-    <!-- end:: Episode Title -->
+    <!-- end:: Session Episode Title -->
 
-    <!-- start:: Content -->
+    <!-- start:: Session Content -->
     <div *ngIf="sessionData.content" class="row">
       <div class="col">
         <p>{{ sessionData.content }}</p>
       </div>
     </div>
     <!-- end:: Content -->
+  </div>
+  <!-- end:: Session Card Body -->
 
-    <!-- start:: Footer -->
-    <div class="card-footer">
-      <div class="d-flex justify-content-between">
-        <div class="mr-2"></div>
-        <div>
-          <button
-            type="button"
-            mat-raised-button
-            cdkFocusInitial
-            (click)="editSession()"
-            matTooltip="Edit session"
-          >
-            Edit</button
-          >&nbsp;
-          <button
-            type="button"
-            mat-raised-button
-            color="primary"
-            (click)="removeSession()"
-            matTooltip="Remove session"
-          >
-            Remove
-          </button>
-        </div>
+  <!-- start:: Footer -->
+  <div class="card-footer">
+    <div class="d-flex justify-content-between">
+      <div class="mr-2"></div>
+      <div>
+        <button
+          type="button"
+          mat-raised-button
+          mat-dialog-close
+          cdkFocusInitial
+          (click)="editSession()"
+          matTooltip="Edit the session"
+        >
+          Edit</button
+        >&nbsp;
+        <button
+          type="button"
+          mat-raised-button
+          color="primary"
+          (click)="removeSession()"
+          matTooltip="Remove the session"
+        >
+          Remove
+        </button>
       </div>
     </div>
-    <!-- end:: Footer -->
-  </mat-dialog-content>
+  </div>
+  <!-- end:: Footer -->
 </div>

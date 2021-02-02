@@ -92,7 +92,6 @@ import { CreateSpellDialogComponent } from "./views/pages/the-compendium-pages/d
 // Storyboard Plots
 import { AddPlotDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
 import { EditPlotDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
-import { RemovePlotDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/storyboard/storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
 // Session Summaries
 import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-session-dialog/create-session-dialog.component";
 import { EditSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
@@ -192,7 +191,6 @@ export function getHighlightLanguages() {
     // * Storyboard Dialogs
     // Plot Dialogs
     AddPlotDialogComponent,
-    RemovePlotDialogComponent,
     EditPlotDialogComponent,
     // * Create Dialogs
     // Homebrew Dialogs

@@ -1,20 +1,23 @@
-<div class="wrapper p-10">
-  <mat-dialog-content class="mat-typography">
-    <!-- start:: Header -->
-    <div class="dialog-header">
-      <div class="row">
-        <div class="col-6">
-          <h1>{{ headerTitle }}</h1>
-        </div>
-        <div class="d-flex justify-content-end col-6">
-          <button class="dialog-button-close" mat-icon-button mat-dialog-close>
-            <mat-icon>close</mat-icon>
-          </button>
-        </div>
+<div class="card card-custom card-stretch">
+  <!-- start:: Card Header -->
+  <div class="card-header py-3">
+    <div class="card-title align-items-start flex-column">
+      <h1>{{ headerTitle }}</h1>
+    </div>
+    <!-- start:: Card Toolbar -->
+    <div class="card-toolbar">
+      <div class="d-flex justify-content-end">
+        <button mat-icon-button mat-dialog-close class="dialog-button-close">
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
     </div>
-    <!-- end:: Header -->
+    <!-- end:: Card Toolbar -->
+  </div>
+  <!-- end:: Card Header -->
 
+  <!-- start:: Card Body -->
+  <div class="card-body">
     <!-- start:: Form -->
     <form [formGroup]="form" class="form-group">
       <!-- start:: KT Alert if form has errors. -->
@@ -37,8 +40,7 @@
             <input
               formControlName="chapter"
               matInput
-              placeholder="Eg. Chapter I
-            – Into the World"
+              placeholder="Eg. Chapter 1 - Into the World"
               type="text"
               [value]="sessionData.chapter"
             />
@@ -57,7 +59,7 @@
             <input
               formControlName="episode"
               matInput
-              placeholder="Eg. 	Episode 6 – A New Enemy"
+              placeholder="Eg. Episode 6 - A New Enemy"
               type="text"
               [value]="sessionData.episode"
             />
@@ -85,47 +87,48 @@
         </div>
       </div>
       <!-- end:: Content -->
-
-      <!-- start:: Footer -->
-      <div class="card-footer">
-        <!-- start:: KT Alert if form has errors. -->
-        <kt-alert
-          *ngIf="hasFormErrors"
-          type="warn"
-          [duration]="30000"
-          [showCloseButton]="true"
-          (close)="onAlertClose($event)"
-        >
-          {{ errorMessage }}
-        </kt-alert>
-        <!-- start:: KT Alert if form has errors. -->
-
-        <div class="d-flex justify-content-between">
-          <div class="mr-2"></div>
-          <div>
-            <button
-              type="button"
-              mat-raised-button
-              mat-dialog-close
-              cdkFocusInitial
-              matTooltip="Discard changes"
-            >
-              Cancel</button
-            >&nbsp;
-            <button
-              type="button"
-              mat-raised-button
-              color="primary"
-              (click)="onSubmit()"
-              matTooltip="Save changes"
-            >
-              Save
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- end:: Footer -->
     </form>
     <!-- end:: Form -->
-  </mat-dialog-content>
+  </div>
+  <!-- end:: Session Card Body -->
+
+  <!-- start:: Footer -->
+  <div class="card-footer">
+    <!-- start:: KT Alert if form has errors. -->
+    <kt-alert
+      *ngIf="hasFormErrors"
+      type="warn"
+      [duration]="30000"
+      [showCloseButton]="true"
+      (close)="onAlertClose($event)"
+    >
+      {{ errorMessage }}
+    </kt-alert>
+    <!-- start:: KT Alert if form has errors. -->
+
+    <div class="d-flex justify-content-between">
+      <div class="mr-2"></div>
+      <div>
+        <button
+          type="button"
+          mat-raised-button
+          mat-dialog-close
+          cdkFocusInitial
+          matTooltip="Discard changes"
+        >
+          Cancel</button
+        >&nbsp;
+        <button
+          type="button"
+          mat-raised-button
+          color="primary"
+          (click)="onSubmit()"
+          matTooltip="Save changes"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- end:: Footer -->
 </div>

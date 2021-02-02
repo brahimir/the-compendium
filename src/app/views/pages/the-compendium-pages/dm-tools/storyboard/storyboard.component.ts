@@ -23,7 +23,6 @@ import { MatDialog } from "@angular/material/dialog";
 import { AddPlotDialogComponent } from "./storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
 import { EditPlotDialogComponent } from "./storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
 import { ConfirmationDialogComponent } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
-import { CONSTANTS_GLOBAL } from "../../constants";
 
 /**
  * Storyboard Kanban Board.
