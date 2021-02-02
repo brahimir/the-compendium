@@ -1,18 +1,16 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, Inject, OnInit } from "@angular/core";
 // Models
+import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
 import { currentUser, User } from "src/app/core/auth";
 import { Session } from "../../../../../../../core/resources/_models/dm_tools/session_summaries/session.model";
 // Services
 import { SessionSummariesService } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries.service";
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // MatDialog
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from "@angular/material/dialog";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 // Dialogs
 import { EditSessionDialogComponent } from "../edit-session-dialog/edit-session-dialog.component";
-import { RemoveSessionDialogComponent } from "../remove-session-dialog/remove-session-dialog.component";
+import { ConfirmationDialogComponent } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
 // RxJS
 import { Observable } from "rxjs";
 // State
@@ -41,7 +39,9 @@ export class SessionSummariesDetailsDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     public dialog: MatDialog,
     private apiService: SessionSummariesService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private layoutUtilsService: LayoutUtilsService,
+    private cdr: ChangeDetectorRef
   ) {
     // Sets the incoming data to this Component's data references.
     this.sessionData = data.data;
@@ -55,7 +55,7 @@ export class SessionSummariesDetailsDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-        // todo - This is getting a "snapshot" of the user - on refresh, the User Observable doesn't have 
+    // todo - This is getting a "snapshot" of the user - on refresh, the User Observable doesn't have
     // todo - "data" to subscribe to - need to fix this.
     this.user$ = this.store.pipe(select(currentUser));
     this.user$.subscribe((user) => {
@@ -74,32 +74,47 @@ export class SessionSummariesDetailsDialogComponent implements OnInit {
     };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      EditSessionDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(EditSessionDialogComponent, dialogOptions);
 
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe((payload) => {
       if (!payload) {
         return;
       } else {
-        this.apiService
-          .getSessionSummaries(this.userId)
-          .subscribe((data: User) => {
-            let userSessionSummaries = data.userSettings.dmTools.sessions;
+        this.apiService.getSessionSummaries(this.userId).subscribe((sessions: Session[]) => {
+          let userSessionSummaries = sessions;
 
-            // Edit the Session Summary
-            let newArray = userSessionSummaries;
-            newArray.splice(this.sessionIndex, 1, payload);
+          // Edit the Session Summary
+          let newArray = userSessionSummaries;
+          newArray.splice(this.sessionIndex, 1, payload);
 
-            // Update User Session Summaries on server.
-            this.apiService
-              .updateSessionSummaries(this.userId, newArray)
-              .subscribe((data) => {});
-
-            this.dialog.closeAll();
+          // Update User Session Summaries on server.
+          this.apiService.updateSessionSummaries(this.userId, newArray).subscribe((res) => {
+            if (res.status === 200) {
+              // Show confirmation snackbar message.
+              const message = "Session Summary successfully updated.";
+              this.layoutUtilsService.showActionNotification(
+                message,
+                MessageType.Create,
+                5000,
+                true,
+                true
+              );
+            } else {
+              // Show error snackbar message.
+              const message = "There was a problem updating the Session Summary. Please try again.";
+              this.layoutUtilsService.showActionNotification(
+                message,
+                MessageType.Create,
+                5000,
+                true,
+                true
+              );
+            }
           });
+
+          this.dialog.closeAll();
+        });
       }
     });
   }
@@ -108,38 +123,60 @@ export class SessionSummariesDetailsDialogComponent implements OnInit {
    * Opens the RemoveSessionDialogComponent to remove a Session Summary.
    */
   removeSession(): void {
-    // Set the dialogOptions.
-    const dialogOptions = {
-      data: this.dialogData,
+    let dialogData: ConfirmationDialog = {
+      headerTitle: "Confirm Session Summary Removal",
+      confirmationMessage: `Are you sure you want to remove this Session Summary?`,
+      textAgreeButton: "Remove",
+      textCancelButton: "Cancel",
+      warnNoUndo: true,
     };
 
-    // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      RemoveSessionDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: dialogData,
+    });
 
-    // Handles dialog closing - can do something when the dialog is closed.
-    dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
-      if (!isDeleted) {
-        return;
-      } else {
-        this.apiService
-          .getSessionSummaries(this.userId)
-          .subscribe((data: User) => {
-            let userSessionSummaries = data.userSettings.dmTools.sessions;
+    // Subscribe to result after Dialog is closed, and push the new
+    // plot to the corresponding local array.
+    dialogRef.afterClosed().subscribe((res) => {
+      // Checks for null data return.
+      if (!res) return;
 
-            // Edit the Session Summary
-            let newArray = userSessionSummaries;
-            newArray.splice(this.sessionIndex, 1);
+      // If the User confirms removal.
+      if (res.isConfirmed) {
+        this.apiService.getSessionSummaries(this.userId).subscribe((sessions: Session[]) => {
+          let userSessionSummaries = sessions;
 
-            // Update User Session Summaries on server.
-            this.apiService
-              .updateSessionSummaries(this.userId, newArray)
-              .subscribe((data) => {});
+          // Edit the Session Summary
+          let newArray = userSessionSummaries;
+          newArray.splice(this.sessionIndex, 1);
 
-            this.dialog.closeAll();
+          // Update User Session Summaries on server.
+          this.apiService.updateSessionSummaries(this.userId, newArray).subscribe((res) => {
+            if (res.status === 200) {
+              // Show confirmation snackbar message.
+              const message = "Session Summary successfully removed.";
+              this.layoutUtilsService.showActionNotification(
+                message,
+                MessageType.Create,
+                5000,
+                true,
+                true
+              );
+            } else {
+              // Show error snackbar message.
+              const message = "There was a problem removing the Session Summary. Please try again.";
+              this.layoutUtilsService.showActionNotification(
+                message,
+                MessageType.Create,
+                5000,
+                true,
+                true
+              );
+            }
           });
+
+          this.dialog.closeAll();
+        });
       }
     });
   }

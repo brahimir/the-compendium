@@ -31,7 +31,7 @@ export class SessionSummariesComponent implements OnInit {
   // Public properties
   user$: Observable<User>;
   userId: string;
-  userSessionSummaries: Object[];
+  userSessionSummaries: Session[];
 
   columnsToDisplay: any[] = ["chapter", "episode", "date"];
 
@@ -61,11 +61,9 @@ export class SessionSummariesComponent implements OnInit {
   }
 
   refreshSessions(): void {
-    this.apiService.getSessionSummaries(this.userId).subscribe((data: User) => {
-      this.userSessionSummaries = data.userSettings.dmTools.sessions;
-      this.TABLE_DATA = this.apiService.generateSessionObjects(
-        this.userSessionSummaries
-      );
+    this.apiService.getSessionSummaries(this.userId).subscribe((sessions: Session[]) => {
+      this.userSessionSummaries = sessions;
+      this.TABLE_DATA = this.userSessionSummaries;
 
       // Set the DataSource for MatTableData.
       this.dataSource = new MatTableDataSource<Session>(this.TABLE_DATA);
@@ -73,9 +71,9 @@ export class SessionSummariesComponent implements OnInit {
       // Set Paginators and Sorts.
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    });
 
-    this.cdr.detectChanges();
+      this.cdr.detectChanges();
+    });
   }
 
   openDetails(session: Session): void {
@@ -94,13 +92,10 @@ export class SessionSummariesComponent implements OnInit {
     };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      SessionSummariesDetailsDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(SessionSummariesDetailsDialogComponent, dialogOptions);
 
     // Handles dialog closing - can do something when the dialog is closed.
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.refreshSessions();
       this.cdr.detectChanges();
     });

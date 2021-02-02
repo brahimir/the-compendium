@@ -94,9 +94,7 @@ export class EditSessionDialogComponent implements OnInit {
 
     // Check form for errors.
     if (this.form.invalid) {
-      Object.keys(controls).forEach((controlName) =>
-        controls[controlName].markAsTouched()
-      );
+      Object.keys(controls).forEach((controlName) => controls[controlName].markAsTouched());
 
       this.hasFormErrors = true;
       return;
@@ -107,16 +105,6 @@ export class EditSessionDialogComponent implements OnInit {
 
     // Close the dialog, and send the payload back to the SessionSummariesDetailsComponent.
     this.dialogRef.close(payload);
-
-    // Show confirmation snackbar message.
-    const message = "Session Summary successfully updated.";
-    this.layoutUtilsService.showActionNotification(
-      message,
-      MessageType.Create,
-      5000,
-      true,
-      true
-    );
   }
 
   /**
