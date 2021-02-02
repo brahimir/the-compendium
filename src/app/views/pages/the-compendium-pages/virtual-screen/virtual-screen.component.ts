@@ -35,6 +35,7 @@ export class VirtualScreenComponent implements OnInit {
   userRoles: number[];
   userIsDm: boolean;
   userVirtualScreen: Object[];
+  isLoading: boolean;
 
   // Dashboard Cards Array
   VIRTUAL_SCREEN_CARDS = VIRTUAL_SCREEN_CARDS;
@@ -77,8 +78,10 @@ export class VirtualScreenComponent implements OnInit {
    * Gets the User's current Virtual Screen layout.
    */
   refreshUserVirtualScreen(): void {
+    this.isLoading = true;
     this.apiService.getUserVirtualScreen(this.userId).subscribe((res) => {
       this.userVirtualScreen = res.virtualScreen;
+      this.isLoading = false;
     });
   }
 
