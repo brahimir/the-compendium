@@ -69,17 +69,18 @@
             <mat-spinner [diameter]="30" style="margin: auto"></mat-spinner>
           </div>
           <!-- end:: Loading spinner -->
+
+          <div *ngIf="plotsMain">
+            <div class="d-flex justify-content-center mt-2 mb-2">
+              <button mat-button class="button-add-plot" (click)="addStoryboardPlot('plotsMain')">
+                <mat-icon class="icon-add-plot">add</mat-icon> Add another Plot
+              </button>
+            </div>
+          </div>
+          <!-- end:: Add Plot -->
         </div>
 
         <!-- start:: Add Plot -->
-        <div *ngIf="plotsMain">
-          <div class="d-flex justify-content-center mt-2 mb-2">
-            <button mat-button class="button-add-plot" (click)="addStoryboardPlot('plotsMain')">
-              <mat-icon class="icon-add-plot">add</mat-icon>
-            </button>
-          </div>
-        </div>
-        <!-- end:: Add Plot -->
       </div>
       <!-- end:: Main Plots -->
 
@@ -134,17 +135,17 @@
             <mat-spinner [diameter]="30" style="margin: auto"></mat-spinner>
           </div>
           <!-- end:: Loading spinner -->
-        </div>
 
-        <!-- start:: Add Plot -->
-        <div *ngIf="plotsInProgress">
-          <div class="d-flex justify-content-center mt-2 mb-2">
-            <button mat-button class="button-add-plot" (click)="addStoryboardPlot('plotsInProgress')">
-              <mat-icon class="icon-add-plot">add</mat-icon>
-            </button>
+          <!-- start:: Add Plot -->
+          <div *ngIf="plotsInProgress">
+            <div class="d-flex justify-content-center mt-2 mb-2">
+              <button mat-button class="button-add-plot" (click)="addStoryboardPlot('plotsInProgress')">
+                <mat-icon class="icon-add-plot">add</mat-icon> Add another Plot
+              </button>
+            </div>
           </div>
+          <!-- end:: Add Plot -->
         </div>
-        <!-- end:: Add Plot -->
       </div>
       <!-- end:: Plots in Progress -->
 
