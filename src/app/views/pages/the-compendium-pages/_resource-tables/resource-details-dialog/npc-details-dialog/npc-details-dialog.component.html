@@ -1,296 +1,292 @@
-<div class="wrapper p-10">
-  <mat-dialog-content class="mat-typography">
-    <!-- start:: Header -->
-    <div class="details-dialog-header">
-      <div class="row">
-        <div class="col-10">
-          <h1 class="tc-red">{{ dialogData.name }}</h1>
-        </div>
-        <div class="d-flex justify-content-end col-2">
-          <button class="dialog-button-close" mat-icon-button [mat-dialog-close]="true">
-            <mat-icon>close</mat-icon>
-          </button>
-        </div>
+<div class="wrapper">
+  <!-- start:: Header -->
+  <div class="details-dialog-header">
+    <div class="row">
+      <div class="col-10">
+        <h1 class="tc-red">{{ dialogData.name }}</h1>
+      </div>
+      <div class="d-flex justify-content-end col-2">
+        <button class="dialog-button-close" mat-icon-button [mat-dialog-close]="true">
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
     </div>
-    <!-- end:: Header -->
+  </div>
+  <!-- end:: Header -->
 
-    <!-- start::Size and Alignment -->
-    <div *ngIf="dialogData.size || dialogData.alignment" class="row">
+  <!-- start::Size and Alignment -->
+  <div *ngIf="dialogData.size || dialogData.alignment" class="row">
+    <div class="col">
+      <span class="font-italic"> {{ dialogData.size }} </span>
+      <span *ngIf="dialogData.alignment" class="font-italic">, {{ dialogData.alignment }} </span>
+    </div>
+  </div>
+  <!-- end::Size and Alignment -->
+
+  <!-- start::DIVIDER -->
+  <div *ngIf="dialogData.size || dialogData.alignment" class="divider"></div>
+  <!-- end::DIVIDER -->
+
+  <!-- start::Armor Class -->
+  <div *ngIf="dialogData.armor_class" class="row">
+    <div class="col-2">
+      <p class="font-weight-bolder">Armor Class:</p>
+    </div>
+    <div class="col">
+      <p>{{ dialogData.armor_class }}</p>
+    </div>
+  </div>
+  <!-- end::Armor Class -->
+
+  <!-- start::Hit Points and Hit Dice -->
+  <div *ngIf="dialogData.hit_points || dialogData.hit_dice" class="row">
+    <div class="col-2">
+      <p class="font-weight-bolder">Hit Points:</p>
+    </div>
+    <div class="col">
+      <p>{{ dialogData.hit_points }} ({{ dialogData.hit_dice }})</p>
+    </div>
+  </div>
+  <!-- end::Hit Points and Hit Dice -->
+
+  <!-- start::Speed -->
+  <div *ngIf="dialogData.speed" class="row">
+    <div class="col-2">
+      <p class="font-weight-bolder">Speed:</p>
+    </div>
+    <div class="col">
+      <span *ngIf="dialogData.speed.walk"> {{ dialogData.speed.walk }} </span>
+      <span *ngIf="dialogData.speed.fly"> fly {{ dialogData.speed.fly }} </span>
+      <span *ngIf="dialogData.speed.swim"> swim {{ dialogData.speed.swim }} </span>
+    </div>
+  </div>
+  <!-- end::Speed -->
+
+  <!-- start:: ABILITY SCORES DISPLAY -->
+  <div class="pt-5 pb-7">
+    <!-- start:: Divider -->
+    <div class="divider"></div>
+    <!-- end:: Divider -->
+
+    <!-- start:: Ability Scores Titles -->
+    <div class="row">
+      <div class="col-2 text-center">
+        <span class="tc-red font-weight-bolder">STR</span>
+      </div>
+      <div class="col-2 text-center">
+        <span class="tc-red font-weight-bolder">DEX</span>
+      </div>
+      <div class="col-2 text-center">
+        <span class="tc-red font-weight-bolder">CON</span>
+      </div>
+      <div class="col-2 text-center">
+        <span class="tc-red font-weight-bolder">INT</span>
+      </div>
+      <div class="col-2 text-center">
+        <span class="tc-red font-weight-bolder">WIS</span>
+      </div>
+      <div class="col-2 text-center">
+        <span class="tc-red font-weight-bolder">CHA</span>
+      </div>
+    </div>
+    <!-- end:: Ability Scores Titles -->
+
+    <!-- start::Ability Scores -->
+    <div class="row">
+      <div *ngIf="dialogData.strength" class="col-2 text-center">
+        <p>{{ dialogData.strength }} ({{ calcAbilityModifier(dialogData.strength) }})</p>
+      </div>
+      <div *ngIf="dialogData.dexterity" class="col-2 text-center">
+        <p>{{ dialogData.dexterity }} ({{ calcAbilityModifier(dialogData.dexterity) }})</p>
+      </div>
+      <div *ngIf="dialogData.constitution" class="col-2 text-center">
+        <p>{{ dialogData.constitution }} ({{ calcAbilityModifier(dialogData.constitution) }})</p>
+      </div>
+      <div *ngIf="dialogData.intelligence; no_data" class="col-2 text-center">
+        <p>{{ dialogData.intelligence }} ({{ calcAbilityModifier(dialogData.intelligence) }})</p>
+      </div>
+      <div *ngIf="dialogData.wisdom" class="col-2 text-center">
+        <p>{{ dialogData.wisdom }} ({{ calcAbilityModifier(dialogData.wisdom) }})</p>
+      </div>
+      <div *ngIf="dialogData.charisma" class="col-2 text-center">
+        <p>{{ dialogData.charisma }} ({{ calcAbilityModifier(dialogData.charisma) }})</p>
+      </div>
+    </div>
+    <!-- end::Ability Scores -->
+  </div>
+  <!-- end:: ABILITY SCORES DISPLAY -->
+
+  <!-- start::Proficiencies -->
+  <div *ngIf="dialogData.proficiencies && dialogData.proficiencies.length !== 0" class="row">
+    <div class="col-2">
+      <p class="font-weight-bolder">Proficiencies:</p>
+    </div>
+    <div class="col">
+      <p *ngFor="let item of dialogData.proficiencies">{{ item.proficiency.name }} +{{ item.value }}</p>
+    </div>
+  </div>
+  <!-- end::Proficiencies -->
+
+  <!-- start::Damage Resistances -->
+  <div *ngIf="dialogData.damage_resistances && dialogData.damage_resistances.length !== 0" class="row">
+    <div class="col-2">
+      <p class="font-weight-bolder">Damage Resistances:</p>
+    </div>
+    <div class="col">
+      <p *ngFor="let item of dialogData.damage_resistances">
+        {{ capitalizeFirstLetter(item) }}
+      </p>
+    </div>
+  </div>
+  <!-- end::Damage Resistances -->
+
+  <!-- start::Damage Vunerabilities -->
+  <div
+    *ngIf="dialogData.damage_vunerabilities && dialogData.damage_vunerabilities.length !== 0"
+    class="row"
+  >
+    <div class="col-2">
+      <p class="font-weight-bolder">Damage Vunerabilities:</p>
+    </div>
+    <div class="col">
+      <p *ngFor="let item of dialogData.damage_vunerabilities">
+        {{ capitalizeFirstLetter(item) }}
+      </p>
+    </div>
+  </div>
+  <!-- end::Damage Vunerabilities -->
+
+  <!-- start::Damage Immunities -->
+  <div *ngIf="dialogData.damage_immunities && dialogData.damage_immunities.length !== 0" class="row">
+    <div class="col-2">
+      <p class="font-weight-bolder">Damage Immunities:</p>
+    </div>
+    <div class="col">
+      <p *ngFor="let item of dialogData.damage_immunities">
+        {{ capitalizeFirstLetter(item) }}
+      </p>
+    </div>
+  </div>
+  <!-- end::Damage Immunities -->
+
+  <!-- start::Condition Immunities -->
+  <div
+    *ngIf="dialogData.condition_immunities && dialogData.condition_immunities.length !== 0"
+    class="row"
+  >
+    <div class="col-2">
+      <p class="font-weight-bolder">Condition Immunities:</p>
+    </div>
+    <div class="col">
+      <span *ngFor="let item of dialogData.condition_immunities">
+        {{ capitalizeFirstLetter(item.name) }}
+      </span>
+    </div>
+  </div>
+  <!-- end::Condition Immunities -->
+
+  <!-- start::Senses -->
+  <div *ngIf="dialogData.senses" class="row">
+    <div class="col-2">
+      <p class="font-weight-bolder">Senses:</p>
+    </div>
+    <div class="col">
+      <span *ngIf="dialogData.senses.blindsight"> Blindsight {{ dialogData.senses.blindsight }} </span>
+      <span *ngIf="dialogData.senses.darkvision"> Darkvision {{ dialogData.senses.darkvision }} </span>
+      <span *ngIf="dialogData.senses.tremorsight">
+        Tremorsight {{ dialogData.senses.tremorsight }}
+      </span>
+      <span *ngIf="dialogData.senses.truesight"> Truesight {{ dialogData.senses.truesight }} </span>
+      <span *ngIf="dialogData.senses.passive_perception">
+        Passive Perception {{ dialogData.senses.passive_perception }}
+      </span>
+    </div>
+  </div>
+  <!-- end::Senses -->
+
+  <!-- start::Languages -->
+  <div *ngIf="dialogData.languages" class="row">
+    <div class="col-2">
+      <p class="font-weight-bolder">Languages:</p>
+    </div>
+    <div class="col">
+      <p>{{ dialogData.languages }}</p>
+    </div>
+  </div>
+  <!-- end::Languages -->
+
+  <!-- start::Challenge Rating -->
+  <div *ngIf="dialogData.challenge_rating || dialogData.xp" class="row">
+    <div class="col-2">
+      <p class="font-weight-bolder">Challenge Rating:</p>
+    </div>
+    <div class="col">
+      <p *ngIf="dialogData.challenge_rating">
+        {{ dialogData.challenge_rating }}
+        <span *ngIf="dialogData.xp"> ({{ dialogData.xp }} XP)</span>
+      </p>
+    </div>
+  </div>
+  <!-- end::Challenge Rating -->
+
+  <!-- start::Special Abilities -->
+  <div *ngIf="dialogData.special_abilities">
+    <h3 class="tc-red pt-5 font-weight-bolder">Special Abilities</h3>
+
+    <!-- start:: DIVIDER -->
+    <div *ngIf="dialogData.special_abilities" class="divider"></div>
+    <!-- end:: DIVIDER -->
+
+    <div *ngFor="let item of dialogData.special_abilities" class="row">
       <div class="col">
-        <span class="font-italic"> {{ dialogData.size }} </span>
-        <span *ngIf="dialogData.alignment" class="font-italic">, {{ dialogData.alignment }} </span>
-      </div>
-    </div>
-    <!-- end::Size and Alignment -->
-
-    <!-- start::DIVIDER -->
-    <div *ngIf="dialogData.size || dialogData.alignment" class="divider"></div>
-    <!-- end::DIVIDER -->
-
-    <!-- start::Armor Class -->
-    <div *ngIf="dialogData.armor_class" class="row">
-      <div class="col-2">
-        <p class="font-weight-bolder">Armor Class:</p>
-      </div>
-      <div class="col">
-        <p>{{ dialogData.armor_class }}</p>
-      </div>
-    </div>
-    <!-- end::Armor Class -->
-
-    <!-- start::Hit Points and Hit Dice -->
-    <div *ngIf="dialogData.hit_points || dialogData.hit_dice" class="row">
-      <div class="col-2">
-        <p class="font-weight-bolder">Hit Points:</p>
-      </div>
-      <div class="col">
-        <p>{{ dialogData.hit_points }} ({{ dialogData.hit_dice }})</p>
-      </div>
-    </div>
-    <!-- end::Hit Points and Hit Dice -->
-
-    <!-- start::Speed -->
-    <div *ngIf="dialogData.speed" class="row">
-      <div class="col-2">
-        <p class="font-weight-bolder">Speed:</p>
-      </div>
-      <div class="col">
-        <span *ngIf="dialogData.speed.walk"> {{ dialogData.speed.walk }} </span>
-        <span *ngIf="dialogData.speed.fly"> fly {{ dialogData.speed.fly }} </span>
-        <span *ngIf="dialogData.speed.swim"> swim {{ dialogData.speed.swim }} </span>
-      </div>
-    </div>
-    <!-- end::Speed -->
-
-    <!-- start:: ABILITY SCORES DISPLAY -->
-    <div class="pt-5 pb-7">
-      <!-- start:: Divider -->
-      <div class="divider"></div>
-      <!-- end:: Divider -->
-
-      <!-- start:: Ability Scores Titles -->
-      <div class="row">
-        <div class="col-2 text-center">
-          <span class="tc-red font-weight-bolder">STR</span>
-        </div>
-        <div class="col-2 text-center">
-          <span class="tc-red font-weight-bolder">DEX</span>
-        </div>
-        <div class="col-2 text-center">
-          <span class="tc-red font-weight-bolder">CON</span>
-        </div>
-        <div class="col-2 text-center">
-          <span class="tc-red font-weight-bolder">INT</span>
-        </div>
-        <div class="col-2 text-center">
-          <span class="tc-red font-weight-bolder">WIS</span>
-        </div>
-        <div class="col-2 text-center">
-          <span class="tc-red font-weight-bolder">CHA</span>
-        </div>
-      </div>
-      <!-- end:: Ability Scores Titles -->
-
-      <!-- start::Ability Scores -->
-      <div class="row">
-        <div *ngIf="dialogData.strength" class="col-2 text-center">
-          <p>{{ dialogData.strength }} ({{ calcAbilityModifier(dialogData.strength) }})</p>
-        </div>
-        <div *ngIf="dialogData.dexterity" class="col-2 text-center">
-          <p>{{ dialogData.dexterity }} ({{ calcAbilityModifier(dialogData.dexterity) }})</p>
-        </div>
-        <div *ngIf="dialogData.constitution" class="col-2 text-center">
-          <p>{{ dialogData.constitution }} ({{ calcAbilityModifier(dialogData.constitution) }})</p>
-        </div>
-        <div *ngIf="dialogData.intelligence; no_data" class="col-2 text-center">
-          <p>{{ dialogData.intelligence }} ({{ calcAbilityModifier(dialogData.intelligence) }})</p>
-        </div>
-        <div *ngIf="dialogData.wisdom" class="col-2 text-center">
-          <p>{{ dialogData.wisdom }} ({{ calcAbilityModifier(dialogData.wisdom) }})</p>
-        </div>
-        <div *ngIf="dialogData.charisma" class="col-2 text-center">
-          <p>{{ dialogData.charisma }} ({{ calcAbilityModifier(dialogData.charisma) }})</p>
-        </div>
-      </div>
-      <!-- end::Ability Scores -->
-    </div>
-    <!-- end:: ABILITY SCORES DISPLAY -->
-
-    <!-- start::Proficiencies -->
-    <div *ngIf="dialogData.proficiencies && dialogData.proficiencies.length !== 0" class="row">
-      <div class="col-2">
-        <p class="font-weight-bolder">Proficiencies:</p>
-      </div>
-      <div class="col">
-        <p *ngFor="let item of dialogData.proficiencies">
-          {{ item.proficiency.name }} +{{ item.value }}
+        <p>
+          <span class="font-italic font-weight-bolder"> {{ item.name }}. </span>
+          {{ item.desc }}
         </p>
       </div>
     </div>
-    <!-- end::Proficiencies -->
+  </div>
+  <!-- end::Special Abilities-->
 
-    <!-- start::Damage Resistances -->
-    <div *ngIf="dialogData.damage_resistances && dialogData.damage_resistances.length !== 0" class="row">
-      <div class="col-2">
-        <p class="font-weight-bolder">Damage Resistances:</p>
-      </div>
+  <!-- start:: Actions -->
+  <div *ngIf="dialogData.actions">
+    <h3 class="tc-red pt-5 font-weight-bolder">Actions</h3>
+
+    <!-- start:: DIVIDER -->
+    <div class="divider"></div>
+    <!-- end:: DIVIDER -->
+
+    <div *ngFor="let item of dialogData.actions" class="row">
       <div class="col">
-        <p *ngFor="let item of dialogData.damage_resistances">
-          {{ capitalizeFirstLetter(item) }}
+        <p>
+          <span class="font-weight-bolder font-italic">
+            {{ item.name }}<span *ngIf="item.name">.</span>
+          </span>
+          {{ item.desc }}
         </p>
       </div>
     </div>
-    <!-- end::Damage Resistances -->
+  </div>
+  <!-- end:: Actions-->
 
-    <!-- start::Damage Vunerabilities -->
-    <div
-      *ngIf="dialogData.damage_vunerabilities && dialogData.damage_vunerabilities.length !== 0"
-      class="row"
-    >
-      <div class="col-2">
-        <p class="font-weight-bolder">Damage Vunerabilities:</p>
-      </div>
+  <!-- start:: Legendary Actions -->
+  <div *ngIf="dialogData.legendary_actions">
+    <h3 class="tc-red pt-5 font-weight-bolder">Legendary Actions</h3>
+
+    <!-- start:: DIVIDER -->
+    <div class="divider"></div>
+    <!-- end:: DIVIDER -->
+
+    <div *ngFor="let item of dialogData.legendary_actions" class="row">
       <div class="col">
-        <p *ngFor="let item of dialogData.damage_vunerabilities">
-          {{ capitalizeFirstLetter(item) }}
+        <p>
+          <span class="font-weight-bolder font-italic">
+            {{ item.name }}<span *ngIf="item.name">.</span>
+          </span>
+          {{ item.desc }}
         </p>
       </div>
     </div>
-    <!-- end::Damage Vunerabilities -->
-
-    <!-- start::Damage Immunities -->
-    <div *ngIf="dialogData.damage_immunities && dialogData.damage_immunities.length !== 0" class="row">
-      <div class="col-2">
-        <p class="font-weight-bolder">Damage Immunities:</p>
-      </div>
-      <div class="col">
-        <p *ngFor="let item of dialogData.damage_immunities">
-          {{ capitalizeFirstLetter(item) }}
-        </p>
-      </div>
-    </div>
-    <!-- end::Damage Immunities -->
-
-    <!-- start::Condition Immunities -->
-    <div
-      *ngIf="dialogData.condition_immunities && dialogData.condition_immunities.length !== 0"
-      class="row"
-    >
-      <div class="col-2">
-        <p class="font-weight-bolder">Condition Immunities:</p>
-      </div>
-      <div class="col">
-        <span *ngFor="let item of dialogData.condition_immunities">
-          {{ capitalizeFirstLetter(item.name) }}
-        </span>
-      </div>
-    </div>
-    <!-- end::Condition Immunities -->
-
-    <!-- start::Senses -->
-    <div *ngIf="dialogData.senses" class="row">
-      <div class="col-2">
-        <p class="font-weight-bolder">Senses:</p>
-      </div>
-      <div class="col">
-        <span *ngIf="dialogData.senses.blindsight"> Blindsight {{ dialogData.senses.blindsight }} </span>
-        <span *ngIf="dialogData.senses.darkvision"> Darkvision {{ dialogData.senses.darkvision }} </span>
-        <span *ngIf="dialogData.senses.tremorsight">
-          Tremorsight {{ dialogData.senses.tremorsight }}
-        </span>
-        <span *ngIf="dialogData.senses.truesight"> Truesight {{ dialogData.senses.truesight }} </span>
-        <span *ngIf="dialogData.senses.passive_perception">
-          Passive Perception {{ dialogData.senses.passive_perception }}
-        </span>
-      </div>
-    </div>
-    <!-- end::Senses -->
-
-    <!-- start::Languages -->
-    <div *ngIf="dialogData.languages" class="row">
-      <div class="col-2">
-        <p class="font-weight-bolder">Languages:</p>
-      </div>
-      <div class="col">
-        <p>{{ dialogData.languages }}</p>
-      </div>
-    </div>
-    <!-- end::Languages -->
-
-    <!-- start::Challenge Rating -->
-    <div *ngIf="dialogData.challenge_rating || dialogData.xp" class="row">
-      <div class="col-2">
-        <p class="font-weight-bolder">Challenge Rating:</p>
-      </div>
-      <div class="col">
-        <p *ngIf="dialogData.challenge_rating">
-          {{ dialogData.challenge_rating }}
-          <span *ngIf="dialogData.xp"> ({{ dialogData.xp }} XP)</span>
-        </p>
-      </div>
-    </div>
-    <!-- end::Challenge Rating -->
-
-    <!-- start::Special Abilities -->
-    <div *ngIf="dialogData.special_abilities">
-      <h3 class="tc-red pt-5 font-weight-bolder">Special Abilities</h3>
-
-      <!-- start:: DIVIDER -->
-      <div *ngIf="dialogData.special_abilities" class="divider"></div>
-      <!-- end:: DIVIDER -->
-
-      <div *ngFor="let item of dialogData.special_abilities" class="row">
-        <div class="col">
-          <p>
-            <span class="font-italic font-weight-bolder"> {{ item.name }}. </span>
-            {{ item.desc }}
-          </p>
-        </div>
-      </div>
-    </div>
-    <!-- end::Special Abilities-->
-
-    <!-- start:: Actions -->
-    <div *ngIf="dialogData.actions">
-      <h3 class="tc-red pt-5 font-weight-bolder">Actions</h3>
-
-      <!-- start:: DIVIDER -->
-      <div class="divider"></div>
-      <!-- end:: DIVIDER -->
-
-      <div *ngFor="let item of dialogData.actions" class="row">
-        <div class="col">
-          <p>
-            <span class="font-weight-bolder font-italic">
-              {{ item.name }}<span *ngIf="item.name">.</span>
-            </span>
-            {{ item.desc }}
-          </p>
-        </div>
-      </div>
-    </div>
-    <!-- end:: Actions-->
-
-    <!-- start:: Legendary Actions -->
-    <div *ngIf="dialogData.legendary_actions">
-      <h3 class="tc-red pt-5 font-weight-bolder">Legendary Actions</h3>
-
-      <!-- start:: DIVIDER -->
-      <div class="divider"></div>
-      <!-- end:: DIVIDER -->
-
-      <div *ngFor="let item of dialogData.legendary_actions" class="row">
-        <div class="col">
-          <p>
-            <span class="font-weight-bolder font-italic">
-              {{ item.name }}<span *ngIf="item.name">.</span>
-            </span>
-            {{ item.desc }}
-          </p>
-        </div>
-      </div>
-    </div>
-    <!-- end:: Legendary Actions -->
-  </mat-dialog-content>
+  </div>
+  <!-- end:: Legendary Actions -->
 </div>

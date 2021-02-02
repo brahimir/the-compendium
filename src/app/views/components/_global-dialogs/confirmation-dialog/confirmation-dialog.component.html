@@ -1,17 +1,27 @@
-<div class="card card-custom mat-typography">
+<div class="card card-custom">
   <!-- start:: Card Header -->
   <div class="card-header">
     <div class="card-title">
       <div class="card-label">
-        <h1>{{ headerTitle }}</h1>
+        <h2>{{ headerTitle }}</h2>
       </div>
     </div>
+
+    <!-- start:: Card Toolbar -->
+    <div class="card-toolbar">
+      <div class="d-flex justify-content-end">
+        <button mat-icon-button mat-dialog-close>
+          <mat-icon class="dialog-button-close">close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <!-- end:: Card Toolbar -->
   </div>
   <!-- end:: Card Header -->
 
   <!-- start:: Card Body -->
   <div class="card-body">
-    <h3 class="mb-5">{{ confirmationMessage }}</h3>
+    <p class="mb-5">{{ confirmationMessage }}</p>
   </div>
   <!-- end:: Card Body -->
 
@@ -20,7 +30,7 @@
     <div class="row">
       <div class="col-6">
         <div *ngIf="warnNoUndo" class="mr-2">
-          <h3 class="tc-red">{{ WARNING_NO_UNDO }}</h3>
+          <p class="tc-red font-weight-bold m-0">{{ WARNING_NO_UNDO }}</p>
           <mat-checkbox color="primary" [(ngModel)]="isAgree"> I understand. </mat-checkbox>
         </div>
       </div>
