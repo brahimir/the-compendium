@@ -36,6 +36,7 @@ export class VirtualScreenComponent implements OnInit {
   userIsDm: boolean;
   userVirtualScreen: Object[];
   isLoading: boolean;
+  cardHeight: number = 100;
 
   // Dashboard Cards Array
   VIRTUAL_SCREEN_CARDS = VIRTUAL_SCREEN_CARDS;
@@ -129,6 +130,7 @@ export class VirtualScreenComponent implements OnInit {
 
       // Update user's dashboard on server.
       this.apiService.updateUserVirtualScreen(this.userId, newArray).subscribe((data) => {
+        this.isLoading = true;
         if (data.status === 200) {
           // Show confirmation snackbar message.
           const message = `${newCard.name} Card successfully added.`;
@@ -141,7 +143,7 @@ export class VirtualScreenComponent implements OnInit {
 
         // ! Offsets the Cards for when they get shifted when a Card is added.
         newArray.forEach((element: UserCard) => {
-          element.position = { x: element.position.x, y: element.position.y - 115 };
+          element.position = { x: element.position.x, y: element.position.y - this.cardHeight };
         });
 
         // ! This call updates the screen again once the Cards have been adjusted to compensate for
@@ -153,6 +155,7 @@ export class VirtualScreenComponent implements OnInit {
         // Update dropdown values.
         this.refreshDropdownValues();
         this.cdr.detectChanges();
+        this.isLoading = false;
       });
 
       // Reset the dropdown value.
@@ -191,13 +194,14 @@ export class VirtualScreenComponent implements OnInit {
 
           newArray.forEach((element: UserCard) => {
             if (newArray.indexOf(element) > removeCardIndex)
-              element.position = { x: element.position.x, y: element.position.y + 115 };
+              element.position = { x: element.position.x, y: element.position.y + this.cardHeight };
           });
 
           newArray.splice(removeCardIndex, 1);
 
           // Update the userVirtualScreen array on the server.
           this.apiService.updateUserVirtualScreen(this.userId, newArray).subscribe((res) => {
+            this.isLoading = true;
             if (res.status === 200) {
               // Show confirmation snackbar message.
               const message = `${card.name} Card successfully removed.`;
@@ -225,6 +229,7 @@ export class VirtualScreenComponent implements OnInit {
             // Update dropdown values.
             this.refreshDropdownValues();
             this.cdr.detectChanges();
+            this.isLoading = false;
           });
         }
       } else return;
@@ -344,8 +349,8 @@ export class VirtualScreenComponent implements OnInit {
   /**
    * Gets the position of a draggable element.
    *
-   * @param {*} el  The element.
-   * @returns       Object with top and left coords of the dragged element.
+   * @param {*} element The element.
+   * @returns Object with top and left coords of the dragged element.
    */
   getPosition(element) {
     let x = 0;

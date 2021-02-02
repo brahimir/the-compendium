@@ -20,8 +20,8 @@ i {
 
 // Remove Card
 .container-button-remove-card {
-  margin-top: -4rem;
-  padding-left: 17.25rem;
+  margin-top: -3rem;
+  padding-left: 14rem;
 }
 
 .icon-close:hover {
@@ -30,10 +30,10 @@ i {
 
 // Component Boxes
 .card-box {
-  width: 235px;
-  height: 115px;
-  // padding: 1rem;
-  // margin: auto;
+  // ! If the pixel height is changed here, it must be updated in the virtual-screen-component to match
+  // ! the offset when adding/removing cards.
+  width: 200px;
+  height: 100px;
 
   box-sizing: border-box;
   border: solid 1px #ccc;

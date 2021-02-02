@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from "@angular/core";
 // Constants
 import { CONSTANTS_CREATE_DIALOG } from "../../../create/constants";
+// Models
+import { Plot } from "src/app/core/resources/_models/dm_tools/storyboard/plot.model";
 // Services
 import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // MatDialog
@@ -19,7 +21,7 @@ export class EditPlotDialogComponent implements OnInit {
   hasFormErrors = false;
 
   // Header title
-  headerTitle: string;
+  plot: string;
 
   // Plot metadata
   plotTitle: string;
@@ -35,7 +37,7 @@ export class EditPlotDialogComponent implements OnInit {
     private layoutUtilsService: LayoutUtilsService
   ) {
     // Set the title for the Dialog.
-    this.headerTitle = data.headerTitle;
+    this.plot = data.plot;
     this.plotTitle = data.plotTitle;
     this.plotDescription = data.plotDescription;
   }
@@ -51,10 +53,10 @@ export class EditPlotDialogComponent implements OnInit {
     });
   }
 
-  preparePayload(): Object {
+  preparePayload(): Plot {
     let formValues = this.form.value;
 
-    let payload: any = {
+    let payload: Plot = {
       title: formValues.title,
       description: formValues.description,
     };
@@ -71,9 +73,7 @@ export class EditPlotDialogComponent implements OnInit {
 
     // Check form for errors.
     if (this.form.invalid) {
-      Object.keys(controls).forEach((controlName) =>
-        controls[controlName].markAsTouched()
-      );
+      Object.keys(controls).forEach((controlName) => controls[controlName].markAsTouched());
 
       this.hasFormErrors = true;
       return;
@@ -87,13 +87,7 @@ export class EditPlotDialogComponent implements OnInit {
 
     // Show confirmation snackbar message.
     const message = "Plot successfully updated.";
-    this.layoutUtilsService.showActionNotification(
-      message,
-      MessageType.Create,
-      5000,
-      true,
-      true
-    );
+    this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
   }
 
   /**

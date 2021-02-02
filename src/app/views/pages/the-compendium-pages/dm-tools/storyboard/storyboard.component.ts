@@ -3,6 +3,8 @@ import { Component, OnInit } from "@angular/core";
 import { CONSTANTS_STORYBOARD } from "./constants";
 // Models
 import { Plot } from "src/app/core/resources/_models/dm_tools/storyboard/plot.model";
+import { Storyboard } from "./_models/storyboard.model";
+import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
 // Services
 import { StoryboardService } from "src/app/views/pages/the-compendium-pages/dm-tools/storyboard/storyboard.service";
 // CdkDragDrop
@@ -20,7 +22,8 @@ import { ChangeDetectorRef } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { AddPlotDialogComponent } from "./storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
 import { EditPlotDialogComponent } from "./storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
-import { RemovePlotDialogComponent } from "./storyboard-dialogs/remove-plot-dialog/remove-plot-dialog.component";
+import { ConfirmationDialogComponent } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
+import { CONSTANTS_GLOBAL } from "../../constants";
 
 /**
  * Storyboard Kanban Board.
@@ -39,12 +42,13 @@ export class StoryboardComponent implements OnInit {
   // Public properties
   user$: Observable<User>;
   userId: string;
+  userStoryboard: Storyboard;
   isLoading: boolean;
 
   // Storyboard Plots
-  plotsMain: Object[];
-  plotsInProgress: Object[];
-  plotsDone: Object[];
+  plotsMain: Plot[];
+  plotsInProgress: Plot[];
+  plotsDone: Plot[];
 
   constructor(
     private store: Store<AppState>,
@@ -88,10 +92,6 @@ export class StoryboardComponent implements OnInit {
 
   /**
    * Gets the most current version of the user's Storyboard.
-   * todo - refactor so that the method subscribes and sets the plotsMain, plotsInProgress,
-   * todo - and plotsDone here.
-   *
-   * @returns {Observable<any>} Resulting Storyboard.
    */
   refreshStoryboard(): void {
     this.isLoading = true;
@@ -109,13 +109,13 @@ export class StoryboardComponent implements OnInit {
    * @returns {Observable<any>} The resulting Storyboard.
    */
   updateStoryBoard(): void {
-    let bodyStoryboard = {
+    let storyboard: Storyboard = {
       plotsMain: this.plotsMain,
       plotsInProgress: this.plotsInProgress,
       plotsDone: this.plotsDone,
     };
 
-    this.apiService.updateStoryboard(this.userId, bodyStoryboard).subscribe((data) => {});
+    this.apiService.updateStoryboard(this.userId, storyboard).subscribe();
   }
 
   /**
@@ -131,7 +131,7 @@ export class StoryboardComponent implements OnInit {
       case "plotsMain":
         // Open the Dialog.
         dialogRef = this.dialog.open(AddPlotDialogComponent, {
-          data: { headerTitle: "Create a Main Plot" },
+          data: { plot: "Main Plot" },
         });
 
         // Subscribe to result after Dialog is closed, and push the new
@@ -152,7 +152,7 @@ export class StoryboardComponent implements OnInit {
       case "plotsInProgress":
         // Open the Dialog.
         dialogRef = this.dialog.open(AddPlotDialogComponent, {
-          data: { headerTitle: "Create a Plot in Progress" },
+          data: { plot: "Plot in Progress" },
         });
 
         // Subscribe to result after Dialog is closed, and push the new
@@ -179,7 +179,7 @@ export class StoryboardComponent implements OnInit {
    * @param {string} modifyOption The modification option (i.e remove, edit)
    * @param {*} plot The plot Object.
    */
-  modifyStoryboardPlot(plotColumn: string, modifyOption: string, plot: any, plotIndex: number): void {
+  modifyStoryboardPlot(plotColumn: string, modifyOption: string, plot: Plot, plotIndex: number): void {
     let dialogRef: any;
 
     switch (plotColumn) {
@@ -187,54 +187,42 @@ export class StoryboardComponent implements OnInit {
       case "plotsMain":
         switch (modifyOption) {
           case "Remove":
-            dialogRef = this.dialog.open(RemovePlotDialogComponent, {
-              data: {
-                plotTitle: plot.title,
-                plotDescription: plot.description,
-              },
+            let dialogData: ConfirmationDialog = {
+              headerTitle: "Confirm Plot Removal",
+              confirmationMessage: `Are you sure you want to remove "${plot.title}"?`,
+              textAgreeButton: "Remove",
+              textCancelButton: "Cancel",
+              warnNoUndo: true,
+            };
+
+            dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+              data: dialogData,
             });
 
             // Subscribe to result after Dialog is closed, and push the new
             // plot to the corresponding local array.
-            dialogRef.afterClosed().subscribe((result) => {
-              if (!result) {
-                return;
-              } else {
-                // Check if the delete is confirmed by the user, then delete the plot from the array.
-                if (result.isConfirmedDelete) {
-                  this.plotsMain.splice(plotIndex, 1);
-                } else {
-                  return;
-                } // Subscribe to result after Dialog is closed, and push the new
-                // plot to the corresponding local array.
-                dialogRef.afterClosed().subscribe((result) => {
-                  if (!result) {
-                    return;
-                  } else {
-                    // Check if the delete is confirmed by the user, then delete the plot from the array.
-                    if (result.isConfirmedDelete) {
-                      this.plotsMain.splice(plotIndex, 1);
-                    } else {
-                      return;
-                    }
+            dialogRef.afterClosed().subscribe((res) => {
+              // Checks for null data return.
+              if (!res) return;
 
-                    // Update plot arrays on the server and refresh the Storyboard.
-                    this.updateStoryBoard();
-                    this.cdr.detectChanges();
-                  }
-                });
-
+              // If the User confirms removal.
+              if (res.isConfirmed) {
+                this.plotsMain.splice(plotIndex, 1);
                 // Update plot arrays on the server and refresh the Storyboard.
                 this.updateStoryBoard();
                 this.cdr.detectChanges();
               }
+
+              // Update plot arrays on the server and refresh the Storyboard.
+              this.updateStoryBoard();
+              this.cdr.detectChanges();
             });
             break;
 
           case "Edit":
             dialogRef = this.dialog.open(EditPlotDialogComponent, {
               data: {
-                headerTitle: "Edit Plot",
+                plot: `${plot.title}`,
                 plotTitle: plot.title,
                 plotDescription: plot.description,
               },
@@ -262,55 +250,41 @@ export class StoryboardComponent implements OnInit {
       case "plotsInProgress":
         switch (modifyOption) {
           case "Remove":
-            dialogRef = this.dialog.open(RemovePlotDialogComponent, {
-              data: {
-                plotTitle: plot.title,
-                plotDescription: plot.description,
-              },
-            });
+            let dialogData: ConfirmationDialog = {
+              headerTitle: "Confirm Plot Removal",
+              confirmationMessage: `Are you sure you want to remove "${plot.title}"?`,
+              textAgreeButton: "Remove",
+              textCancelButton: "Cancel",
+              warnNoUndo: true,
+            };
 
+            dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+              data: dialogData,
+            });
             // Subscribe to result after Dialog is closed, and push the new
             // plot to the corresponding local array.
-            dialogRef.afterClosed().subscribe((result) => {
-              if (!result) {
-                return;
-              } else {
-                // Check if the delete is confirmed by the user, then delete the plot from the array.
-                if (result.isConfirmedDelete) {
-                  this.plotsInProgress.splice(plotIndex, 1);
-                } else {
-                  return;
-                }
-                // Subscribe to result after Dialog is closed, and push the new
-                // plot to the corresponding local array.
-                dialogRef.afterClosed().subscribe((result) => {
-                  if (!result) {
-                    return;
-                  } else {
-                    // Check if the delete is confirmed by the user, then delete the plot from the array.
-                    if (result.isConfirmedDelete) {
-                      this.plotsMain.splice(plotIndex, 1);
-                    } else {
-                      return;
-                    }
+            dialogRef.afterClosed().subscribe((res) => {
+              // Checks for null data return.
+              if (!res) return;
 
-                    // Update plot arrays on the server and refresh the Storyboard.
-                    this.updateStoryBoard();
-                    this.cdr.detectChanges();
-                  }
-                });
-
+              // If the User confirms removal.
+              if (res.isConfirmed) {
+                this.plotsInProgress.splice(plotIndex, 1);
                 // Update plot arrays on the server and refresh the Storyboard.
                 this.updateStoryBoard();
                 this.cdr.detectChanges();
               }
+
+              // Update plot arrays on the server and refresh the Storyboard.
+              this.updateStoryBoard();
+              this.cdr.detectChanges();
             });
             break;
 
           case "Edit":
             dialogRef = this.dialog.open(EditPlotDialogComponent, {
               data: {
-                headerTitle: "Edit Plot",
+                plot: `${plot.title}`,
                 plotTitle: plot.title,
                 plotDescription: plot.description,
               },
@@ -338,47 +312,35 @@ export class StoryboardComponent implements OnInit {
       case "plotsDone":
         switch (modifyOption) {
           case "Remove":
-            dialogRef = this.dialog.open(RemovePlotDialogComponent, {
-              data: {
-                plotTitle: plot.title,
-                plotDescription: plot.description,
-              },
+            let dialogData: ConfirmationDialog = {
+              headerTitle: "Confirm Plot Removal",
+              confirmationMessage: `Are you sure you want to remove "${plot.title}"?`,
+              textAgreeButton: "Remove",
+              textCancelButton: "Cancel",
+              warnNoUndo: true,
+            };
+
+            dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+              data: dialogData,
             });
 
             // Subscribe to result after Dialog is closed, and push the new
             // plot to the corresponding local array.
-            dialogRef.afterClosed().subscribe((result) => {
-              if (!result) {
-                return;
-              } else {
-                // Check if the delete is confirmed by the user, then delete the plot from the array.
-                if (result.isConfirmedDelete) {
-                  this.plotsDone.splice(plotIndex, 1);
-                } else {
-                  return;
-                } // Subscribe to result after Dialog is closed, and push the new
-                // plot to the corresponding local array.
-                dialogRef.afterClosed().subscribe((result) => {
-                  if (!result) {
-                    return;
-                  } else {
-                    // Check if the delete is confirmed by the user, then delete the plot from the array.
-                    if (result.isConfirmedDelete) {
-                      this.plotsDone.splice(plotIndex, 1);
-                    } else {
-                      return;
-                    }
+            dialogRef.afterClosed().subscribe((res) => {
+              // Checks for null data return.
+              if (!res) return;
 
-                    // Update plot arrays on the server and refresh the Storyboard.
-                    this.updateStoryBoard();
-                    this.cdr.detectChanges();
-                  }
-                });
-
+              // If the User confirms removal.
+              if (res.isConfirmed) {
+                this.plotsDone.splice(plotIndex, 1);
                 // Update plot arrays on the server and refresh the Storyboard.
                 this.updateStoryBoard();
                 this.cdr.detectChanges();
               }
+
+              // Update plot arrays on the server and refresh the Storyboard.
+              this.updateStoryBoard();
+              this.cdr.detectChanges();
             });
             break;
 

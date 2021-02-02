@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from "@angular/core";
 // Constants
 import { CONSTANTS_CREATE_DIALOG } from "../../../create/constants";
+// Models
+import { Plot } from "src/app/core/resources/_models/dm_tools/storyboard/plot.model";
 // Services
 import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // MatDialog
@@ -19,7 +21,7 @@ export class AddPlotDialogComponent implements OnInit {
   hasFormErrors = false;
 
   // Header title
-  headerTitle: string;
+  plot: string;
 
   // Error messages
   errorMessage: string = CONSTANTS_CREATE_DIALOG.ERRORS.MISSING_REQ_FIELDS;
@@ -31,7 +33,7 @@ export class AddPlotDialogComponent implements OnInit {
     private layoutUtilsService: LayoutUtilsService
   ) {
     // Set the title for the Dialog.
-    this.headerTitle = data.headerTitle;
+    this.plot = data.plot;
   }
 
   ngOnInit(): void {
@@ -45,10 +47,10 @@ export class AddPlotDialogComponent implements OnInit {
     });
   }
 
-  preparePayload(): Object {
+  preparePayload(): Plot {
     let formValues = this.form.value;
 
-    let payload: any = {
+    let payload: Plot = {
       title: formValues.title,
       description: formValues.description,
     };
@@ -65,9 +67,7 @@ export class AddPlotDialogComponent implements OnInit {
 
     // Check form for errors.
     if (this.form.invalid) {
-      Object.keys(controls).forEach((controlName) =>
-        controls[controlName].markAsTouched()
-      );
+      Object.keys(controls).forEach((controlName) => controls[controlName].markAsTouched());
 
       this.hasFormErrors = true;
       return;
@@ -81,13 +81,7 @@ export class AddPlotDialogComponent implements OnInit {
 
     // Show confirmation snackbar message.
     const message = "Plot successfully added.";
-    this.layoutUtilsService.showActionNotification(
-      message,
-      MessageType.Create,
-      5000,
-      true,
-      true
-    );
+    this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
   }
 
   /**

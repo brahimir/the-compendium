@@ -84,7 +84,7 @@
       </ng-container>
 
       <!-- start:: Loading spinner -->
-      <div *ngIf="!userVirtualScreen" class="spinner-container" style="padding-top: 15rem">
+      <div *ngIf="isLoading" class="spinner-container" style="padding-top: 15rem">
         <mat-spinner [diameter]="80" style="margin: auto"></mat-spinner>
       </div>
       <!-- end:: Loading spinner -->
