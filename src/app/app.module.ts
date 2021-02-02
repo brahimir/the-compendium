@@ -107,9 +107,8 @@ import { ActionNotificationComponent } from "./views/partials/content/crud";
 
 // MatDialog Defaults
 const MAT_DIALOG_DEFAULTS: MatDialogConfig = {
-  minWidth: "60%",
+  minWidth: "70%",
   maxWidth: "80%",
-  maxHeight: "90%",
   hasBackdrop: true,
 };
 
@@ -228,10 +227,10 @@ export function getHighlightLanguages() {
       useValue: MAT_DIALOG_DEFAULTS,
     },
     // ! end:: MatDialog Defaults
-    // {
-    //   provide: PERFECT_SCROLLBAR_CONFIG,
-    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    // },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: GestureConfig,

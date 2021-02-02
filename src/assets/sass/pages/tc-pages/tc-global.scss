@@ -16,6 +16,11 @@ $tc-page-bg-dark: #36364e;
 }
 
 // * Angular Material
+// MatDialogs
+.mat-dialog-content {
+  padding: 0;
+  margin: 0;
+}
 // MatCards
 .mat-card-header {
   border-bottom: 1px solid #ebedf3;
