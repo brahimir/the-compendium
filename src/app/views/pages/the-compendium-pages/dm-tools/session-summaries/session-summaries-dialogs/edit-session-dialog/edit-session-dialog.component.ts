@@ -5,7 +5,7 @@ import { CONSTANTS_CREATE_DIALOG } from "../../../create/constants";
 import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // Models
 import { User } from "src/app/core/auth";
-import { Session } from "src/app/core/resources/_models/dm_tools/session_summaries/session.model";
+import { Session } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/_models - todo/session.model";
 // MatDialog
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 // FormBuilder
@@ -42,8 +42,7 @@ export class EditSessionDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditSessionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    private fb: FormBuilder,
-    private layoutUtilsService: LayoutUtilsService
+    private fb: FormBuilder
   ) {
     // Sets the incoming data to this Component's data references.
     this.sessionData = data.data;

@@ -1,4 +1,4 @@
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content>
   <div class="card card-custom">
     <!-- start:: Card Header -->
     <div class="card-header">
@@ -36,16 +36,9 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Name</mat-label>
-                <input
-                  formControlName="name"
-                  matInput
-                  placeholder="Eg. Fountain of Youth"
-                  type="text"
-                />
+                <input formControlName="name" matInput placeholder="Eg. Fountain of Youth" type="text" />
                 <mat-error> Item name is <strong>required</strong> </mat-error>
-                <mat-hint align="start">
-                  The <strong>name</strong> of the Item.
-                </mat-hint>
+                <mat-hint align="start"> The <strong>name</strong> of the Item. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Name -->
@@ -60,9 +53,7 @@
                   placeholder="Eg. Adventuring Gear"
                   type="text"
                 />
-                <mat-hint align="start">
-                  The <strong>category</strong> of the Item.
-                </mat-hint>
+                <mat-hint align="start"> The <strong>category</strong> of the Item. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Category -->
@@ -73,18 +64,10 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Value (amount)</mat-label>
-                <input
-                  formControlName="cost_quantity"
-                  matInput
-                  type="number"
-                  min="0"
-                />
-                <mat-error>
-                  Numeric amount of cost is <strong>required</strong>
-                </mat-error>
+                <input formControlName="cost_quantity" matInput type="number" min="0" />
+                <mat-error> Numeric amount of cost is <strong>required</strong> </mat-error>
                 <mat-hint align="start">
-                  The <strong>numeric amount</strong> of currency that the Item
-                  costs.
+                  The <strong>numeric amount</strong> of currency that the Item costs.
                 </mat-hint>
               </mat-form-field>
             </div>
@@ -99,12 +82,8 @@
                     {{ item }}
                   </mat-option>
                 </mat-select>
-                <mat-error>
-                  Unit of currency is <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The <strong>unit of currency</strong> of the Item.
-                </mat-hint>
+                <mat-error> Unit of currency is <strong>required</strong> </mat-error>
+                <mat-hint align="start"> The <strong>unit of currency</strong> of the Item. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Cost: Unit -->
@@ -116,9 +95,7 @@
               <mat-form-field>
                 <mat-label>Weight (pounds)</mat-label>
                 <input formControlName="weight" matInput type="number" />
-                <mat-hint align="start">
-                  The <strong>weight</strong> of the Item.
-                </mat-hint>
+                <mat-hint align="start"> The <strong>weight</strong> of the Item. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Weight -->
@@ -140,12 +117,8 @@
                 formControlName="description"
                 placeholder="Eg. Divine power emanates from this chalice. The creature that drinks from this vessel rolls a d20. On a 20, they are granted a wish from the Wish spell. On a roll of 1 or 2 they are killed instantly, and their soul is ferried to the afterlife."
               ></textarea>
-              <mat-error>
-                Item description is <strong>required</strong>
-              </mat-error>
-              <mat-hint align="start">
-                The <strong>description</strong> of the Item.
-              </mat-hint>
+              <mat-error> Item description is <strong>required</strong> </mat-error>
+              <mat-hint align="start"> The <strong>description</strong> of the Item. </mat-hint>
             </mat-form-field>
           </div>
         </div>

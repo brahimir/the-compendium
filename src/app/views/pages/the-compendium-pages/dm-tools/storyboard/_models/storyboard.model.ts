@@ -1,4 +1,4 @@
-import { Plot } from "src/app/core/resources/_models/dm_tools/storyboard/plot.model";
+import { Plot } from "./plot.model";
 
 export interface Storyboard {
   plotsMain: Array<Plot>;

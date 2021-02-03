@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { CONSTANTS_CREATE_DIALOG } from "../../constants";
 // Models
 import { currentUser, User } from "src/app/core/auth";
-import { Session } from "src/app/core/resources/_models/dm_tools/session_summaries/session.model";
+import { Session } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/_models - todo/session.model";
 // Services
 import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // MatDialog

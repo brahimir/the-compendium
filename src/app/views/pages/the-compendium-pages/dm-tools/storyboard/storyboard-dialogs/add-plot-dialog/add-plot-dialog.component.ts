@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from "@angular/core";
 // Constants
 import { CONSTANTS_CREATE_DIALOG } from "../../../create/constants";
 // Models
-import { Plot } from "src/app/core/resources/_models/dm_tools/storyboard/plot.model";
+import { Plot } from "../../_models/plot.model";
 // Services
 import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // MatDialog

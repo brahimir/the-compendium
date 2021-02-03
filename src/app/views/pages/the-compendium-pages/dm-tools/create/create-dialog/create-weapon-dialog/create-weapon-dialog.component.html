@@ -1,4 +1,4 @@
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content>
   <div class="card card-custom">
     <!-- start:: Card Header -->
     <div class="card-header">
@@ -36,18 +36,9 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Name</mat-label>
-                <input
-                  formControlName="name"
-                  matInput
-                  placeholder="Eg. Silverlight"
-                  type="text"
-                />
-                <mat-error>
-                  Weapon name is <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The <strong>name</strong> of the Weapon.
-                </mat-hint>
+                <input formControlName="name" matInput placeholder="Eg. Silverlight" type="text" />
+                <mat-error> Weapon name is <strong>required</strong> </mat-error>
+                <mat-hint align="start"> The <strong>name</strong> of the Weapon. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Name -->
@@ -62,9 +53,7 @@
                   placeholder="Eg. Martial"
                   type="text"
                 />
-                <mat-hint align="start">
-                  The <strong>category</strong> of the Weapon.
-                </mat-hint>
+                <mat-hint align="start"> The <strong>category</strong> of the Weapon. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Category -->
@@ -80,9 +69,7 @@
                     {{ item }}
                   </mat-option>
                 </mat-select>
-                <mat-hint align="start">
-                  The <strong>range</strong> of the Weapon.
-                </mat-hint>
+                <mat-hint align="start"> The <strong>range</strong> of the Weapon. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Range -->
@@ -91,18 +78,10 @@
             <div class="col-4">
               <mat-form-field>
                 <mat-label>Value (amount)</mat-label>
-                <input
-                  formControlName="cost_quantity"
-                  matInput
-                  type="number"
-                  min="0"
-                />
-                <mat-error>
-                  Numeric amount of cost is <strong>required</strong>
-                </mat-error>
+                <input formControlName="cost_quantity" matInput type="number" min="0" />
+                <mat-error> Numeric amount of cost is <strong>required</strong> </mat-error>
                 <mat-hint align="start">
-                  The <strong>numeric amount</strong> of currency that the
-                  Weapon costs.
+                  The <strong>numeric amount</strong> of currency that the Weapon costs.
                 </mat-hint>
               </mat-form-field>
             </div>
@@ -117,12 +96,8 @@
                     {{ item }}
                   </mat-option>
                 </mat-select>
-                <mat-error>
-                  Unit of currency is <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The <strong>unit of currency</strong> of the Weapon.
-                </mat-hint>
+                <mat-error> Unit of currency is <strong>required</strong> </mat-error>
+                <mat-hint align="start"> The <strong>unit of currency</strong> of the Weapon. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Cost: Unit -->
@@ -134,9 +109,7 @@
               <mat-form-field>
                 <mat-label>Weight (pounds)</mat-label>
                 <input formControlName="weight" matInput type="number" />
-                <mat-hint align="start">
-                  The <strong>weight</strong> of the Weapon.
-                </mat-hint>
+                <mat-hint align="start"> The <strong>weight</strong> of the Weapon. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Weight -->
@@ -151,9 +124,7 @@
                   </mat-option>
                 </mat-select>
                 <mat-error>Rarity is <strong>required</strong> </mat-error>
-                <mat-hint align="start">
-                  The <strong>rarity</strong> of the Weapon.
-                </mat-hint>
+                <mat-hint align="start"> The <strong>rarity</strong> of the Weapon. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Rarity -->
@@ -162,10 +133,7 @@
           <!-- start:: Requires Attunement -->
           <div class="form-group row">
             <div class="col">
-              <mat-checkbox
-                formControlName="requires_attunement"
-                color="primary"
-              >
+              <mat-checkbox formControlName="requires_attunement" color="primary">
                 Requires attunement
               </mat-checkbox>
             </div>
@@ -184,15 +152,8 @@
             <div class="col-3">
               <mat-form-field>
                 <mat-label>Number of damage dice</mat-label>
-                <input
-                  formControlName="damage_dice_number"
-                  matInput
-                  type="number"
-                  min="1"
-                />
-                <mat-error
-                  >Number of damage dice is <strong>required</strong>
-                </mat-error>
+                <input formControlName="damage_dice_number" matInput type="number" min="1" />
+                <mat-error>Number of damage dice is <strong>required</strong> </mat-error>
                 <mat-hint align="start">
                   The <strong>number of damage dice</strong> the Weapon has.
                 </mat-hint>
@@ -206,9 +167,7 @@
                     {{ item }}
                   </mat-option>
                 </mat-select>
-                <mat-error
-                  >Type of damage die is <strong>required</strong>
-                </mat-error>
+                <mat-error>Type of damage die is <strong>required</strong> </mat-error>
                 <mat-hint align="start">
                   The <strong>type of damage die</strong> of the Weapon.
                 </mat-hint>
@@ -220,40 +179,23 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Damage type</mat-label>
-                <input
-                  matInput
-                  formControlName="damage_type"
-                  placeholder="Eg. Slashing"
-                  type="text"
-                />
-                <mat-error
-                  >The weapon's damage type is<strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The Weapon's <strong>damage type.</strong>
-                </mat-hint>
+                <input matInput formControlName="damage_type" placeholder="Eg. Slashing" type="text" />
+                <mat-error>The weapon's damage type is<strong>required</strong> </mat-error>
+                <mat-hint align="start"> The Weapon's <strong>damage type.</strong> </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Damage Type -->
           </div>
 
           <div
-            *ngIf="
-              form.controls.generalInformation.get('weapon_range').value ===
-              'Ranged'
-            "
+            *ngIf="form.controls.generalInformation.get('weapon_range').value === 'Ranged'"
             class="form-group row"
           >
             <!-- start:: Normal Range -->
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Normal range (ft.)</mat-label>
-                <input
-                  formControlName="range_normal"
-                  matInput
-                  type="number"
-                  min="0"
-                />
+                <input formControlName="range_normal" matInput type="number" min="0" />
               </mat-form-field>
             </div>
             <!-- end:: Normal Range -->
@@ -262,12 +204,7 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Long range (ft.)</mat-label>
-                <input
-                  formControlName="range_long"
-                  matInput
-                  type="number"
-                  min="0"
-                />
+                <input formControlName="range_long" matInput type="number" min="0" />
               </mat-form-field>
             </div>
             <!-- end:: Long Range -->
@@ -284,10 +221,7 @@
           <div class="form-group row">
             <div class="col">
               <span *ngFor="let item of WEAPON_PROPERTIES" class="pr-5">
-                <mat-checkbox
-                  formControlName="properties_{{ item }}"
-                  color="primary"
-                >
+                <mat-checkbox formControlName="properties_{{ item }}" color="primary">
                   {{ formattingService.replaceUnderscoresWithSpaces(item) }}
                 </mat-checkbox>
               </span>
@@ -311,12 +245,8 @@
                 formControlName="description"
                 placeholder="Eg. This weapon has a +2 to hit on attack rolls. This weapon also deals additional 2d6 Radiant damage to undead, demons, and lycanthrope targets."
               ></textarea>
-              <mat-error>
-                Weapon description is <strong>required</strong>
-              </mat-error>
-              <mat-hint align="start">
-                The description of the <strong>weapon.</strong>
-              </mat-hint>
+              <mat-error> Weapon description is <strong>required</strong> </mat-error>
+              <mat-hint align="start"> The description of the <strong>weapon.</strong> </mat-hint>
             </mat-form-field>
           </div>
         </div>

@@ -1,4 +1,4 @@
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content>
   <div class="card card-custom">
     <!-- start:: Card Header -->
     <div class="card-header">
@@ -36,16 +36,9 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Name</mat-label>
-                <input
-                  formControlName="name"
-                  matInput
-                  placeholder="Eg. Expelliarmus"
-                  type="text"
-                />
+                <input formControlName="name" matInput placeholder="Eg. Expelliarmus" type="text" />
                 <mat-error> Spell name is <strong>required</strong> </mat-error>
-                <mat-hint align="start">
-                  The <strong>name</strong> of the Spell.
-                </mat-hint>
+                <mat-hint align="start"> The <strong>name</strong> of the Spell. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Name -->
@@ -54,19 +47,9 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Level</mat-label>
-                <input
-                  formControlName="level"
-                  matInput
-                  placeholder="Eg. 1"
-                  type="number"
-                  min="0"
-                />
-                <mat-error>
-                  Spell level is <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The <strong>level</strong> of the Spell.
-                </mat-hint>
+                <input formControlName="level" matInput placeholder="Eg. 1" type="number" min="0" />
+                <mat-error> Spell level is <strong>required</strong> </mat-error>
+                <mat-hint align="start"> The <strong>level</strong> of the Spell. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Level -->
@@ -77,18 +60,9 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Range (ft.)</mat-label>
-                <input
-                  formControlName="range"
-                  matInput
-                  placeholder="Eg. 60"
-                  type="number"
-                />
-                <mat-error>
-                  Spell range is <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The <strong>range</strong> of the Spell.
-                </mat-hint>
+                <input formControlName="range" matInput placeholder="Eg. 60" type="number" />
+                <mat-error> Spell range is <strong>required</strong> </mat-error>
+                <mat-hint align="start"> The <strong>range</strong> of the Spell. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Range -->
@@ -97,18 +71,9 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Casting Time</mat-label>
-                <input
-                  formControlName="casting_time"
-                  matInput
-                  placeholder="Eg. 1 Action"
-                  type="text"
-                />
-                <mat-error>
-                  Spell casting time is <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The <strong>casting time</strong> of the Spell.
-                </mat-hint>
+                <input formControlName="casting_time" matInput placeholder="Eg. 1 Action" type="text" />
+                <mat-error> Spell casting time is <strong>required</strong> </mat-error>
+                <mat-hint align="start"> The <strong>casting time</strong> of the Spell. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Casting Time -->
@@ -119,18 +84,9 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Duration</mat-label>
-                <input
-                  formControlName="duration"
-                  matInput
-                  placeholder="Eg. Instantaneous"
-                  type="text"
-                />
-                <mat-error>
-                  Spell duration is <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The <strong>duration</strong> of the Spell.
-                </mat-hint>
+                <input formControlName="duration" matInput placeholder="Eg. Instantaneous" type="text" />
+                <mat-error> Spell duration is <strong>required</strong> </mat-error>
+                <mat-hint align="start"> The <strong>duration</strong> of the Spell. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Duration -->
@@ -155,30 +111,18 @@
 
             <!-- start:: Is Ritual Spell -->
             <div class="col-4">
-              <mat-checkbox formControlName="ritual" color="primary">
-                Ritual spell
-              </mat-checkbox>
+              <mat-checkbox formControlName="ritual" color="primary"> Ritual spell </mat-checkbox>
             </div>
             <!-- end:: Is Ritual Spell -->
           </div>
 
-          <div
-            *ngIf="form.value.generalInformation.is_attack_spell"
-            class="form-group row"
-          >
+          <div *ngIf="form.value.generalInformation.is_attack_spell" class="form-group row">
             <!-- start:: Attack Type -->
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Attack Type</mat-label>
-                <input
-                  formControlName="attack_type"
-                  matInput
-                  placeholder="Eg. Ranged"
-                  type="text"
-                />
-                <mat-hint align="start">
-                  The <strong>attack type</strong> of the Spell.
-                </mat-hint>
+                <input formControlName="attack_type" matInput placeholder="Eg. Ranged" type="text" />
+                <mat-hint align="start"> The <strong>attack type</strong> of the Spell. </mat-hint>
               </mat-form-field>
             </div>
             <!-- start:: Attack Type -->
@@ -187,15 +131,8 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Damage Type</mat-label>
-                <input
-                  formControlName="damage_type"
-                  matInput
-                  placeholder="Eg. Fire"
-                  type="text"
-                />
-                <mat-hint align="start">
-                  The <strong>damage type</strong> of the Spell.
-                </mat-hint>
+                <input formControlName="damage_type" matInput placeholder="Eg. Fire" type="text" />
+                <mat-hint align="start"> The <strong>damage type</strong> of the Spell. </mat-hint>
               </mat-form-field>
             </div>
             <!-- start:: Damage Type -->
@@ -238,12 +175,7 @@
             <div class="col">
               <mat-form-field>
                 <mat-label>School</mat-label>
-                <input
-                  formControlName="school"
-                  matInput
-                  placeholder="Eg. Evocation"
-                  type="text"
-                />
+                <input formControlName="school" matInput placeholder="Eg. Evocation" type="text" />
                 <mat-hint align="start">
                   The <strong>school</strong> of magic the Spell belongs to.
                 </mat-hint>
@@ -261,22 +193,14 @@
             <div class="form-group row">
               <div class="col-3">
                 <span *ngFor="let item of SPELL_COMPONENTS" class="pr-5">
-                  <mat-checkbox
-                    formControlName="spellComponent_{{ item }}"
-                    color="primary"
-                  >
+                  <mat-checkbox formControlName="spellComponent_{{ item }}" color="primary">
                     {{ item }}
                   </mat-checkbox>
                 </span>
               </div>
 
               <!-- start:: Material -->
-              <div
-                *ngIf="
-                  form.value.generalInformation.spellComponents.spellComponent_M
-                "
-                class="col-9"
-              >
+              <div *ngIf="form.value.generalInformation.spellComponents.spellComponent_M" class="col-9">
                 <mat-form-field>
                   <mat-label>Materials required</mat-label>
                   <input
@@ -298,9 +222,7 @@
           <!-- * end:: FormGroup - General Information -->
         </div>
 
-        <h3 class="tc-red" style="font-weight: bold">
-          Description & Casting at Higher Levels
-        </h3>
+        <h3 class="tc-red" style="font-weight: bold">Description & Casting at Higher Levels</h3>
         <div class="divider"></div>
 
         <div formGroupName="generalInformation">
@@ -316,12 +238,8 @@
                   formControlName="description"
                   placeholder="Eg. Fires a disarming charm at a target within 60 feet. The target must succeed on a Strength saving throw against your Spellcasting DC, otherwise they drop their main-hand weapon."
                 ></textarea>
-                <mat-error>
-                  Spell description is <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The <strong>description</strong> of the Spell.
-                </mat-hint>
+                <mat-error> Spell description is <strong>required</strong> </mat-error>
+                <mat-hint align="start"> The <strong>description</strong> of the Spell. </mat-hint>
               </mat-form-field>
             </div>
           </div>

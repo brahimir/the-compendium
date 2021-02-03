@@ -1,4 +1,4 @@
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content>
   <div class="card card-custom">
     <!-- start:: Card Header -->
     <div class="card-header">
@@ -36,18 +36,9 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Name</mat-label>
-                <input
-                  formControlName="name"
-                  matInput
-                  placeholder="Eg. Cthulu"
-                  type="text"
-                />
-                <mat-error>
-                  Monster name is <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The <strong>name</strong> of the Monster.
-                </mat-hint>
+                <input formControlName="name" matInput placeholder="Eg. Cthulu" type="text" />
+                <mat-error> Monster name is <strong>required</strong> </mat-error>
+                <mat-hint align="start"> The <strong>name</strong> of the Monster. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Name -->
@@ -61,12 +52,8 @@
                     {{ item }}
                   </mat-option>
                 </mat-select>
-                <mat-error>
-                  Monster size is <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The <strong>size</strong> of the Monster.
-                </mat-hint>
+                <mat-error> Monster size is <strong>required</strong> </mat-error>
+                <mat-hint align="start"> The <strong>size</strong> of the Monster. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Size -->
@@ -77,15 +64,8 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Type</mat-label>
-                <input
-                  formControlName="type"
-                  matInput
-                  placeholder="Eg. God"
-                  type="text"
-                />
-                <mat-hint align="start">
-                  The Monster's <strong>type.</strong>
-                </mat-hint>
+                <input formControlName="type" matInput placeholder="Eg. God" type="text" />
+                <mat-hint align="start"> The Monster's <strong>type.</strong> </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Type -->
@@ -94,15 +74,8 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Subtype</mat-label>
-                <input
-                  formControlName="subtype"
-                  matInput
-                  placeholder="Eg. Eldritch"
-                  type="text"
-                />
-                <mat-hint align="start">
-                  The Monster's <strong>subtype.</strong>
-                </mat-hint>
+                <input formControlName="subtype" matInput placeholder="Eg. Eldritch" type="text" />
+                <mat-hint align="start"> The Monster's <strong>subtype.</strong> </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Subtype -->
@@ -118,12 +91,8 @@
                     {{ item }}
                   </mat-option>
                 </mat-select>
-                <mat-error>
-                  Monster alignment is <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The Monster's <strong>alignment.</strong>
-                </mat-hint>
+                <mat-error> Monster alignment is <strong>required</strong> </mat-error>
+                <mat-hint align="start"> The Monster's <strong>alignment.</strong> </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Alignment -->
@@ -139,12 +108,8 @@
                   type="number"
                   min="0"
                 />
-                <mat-error>
-                  Monster armor class is <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">
-                  The Monster's <strong>armor class.</strong>
-                </mat-hint>
+                <mat-error> Monster armor class is <strong>required</strong> </mat-error>
+                <mat-hint align="start"> The Monster's <strong>armor class.</strong> </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Armor Class -->
@@ -155,15 +120,8 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>Hitpoints</mat-label>
-                <input
-                  formControlName="hit_points"
-                  matInput
-                  placeholder="Eg. God"
-                  type="text"
-                />
-                <mat-hint align="start">
-                  The Monster's <strong>hitpoints.</strong>
-                </mat-hint>
+                <input formControlName="hit_points" matInput placeholder="Eg. God" type="text" />
+                <mat-hint align="start"> The Monster's <strong>hitpoints.</strong> </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Hitpoints -->
@@ -212,9 +170,7 @@
                   type="number"
                   min="0"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>challenge rating.</strong>
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>challenge rating.</strong> </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Challenge Rating -->
@@ -223,16 +179,8 @@
             <div class="col-6">
               <mat-form-field>
                 <mat-label>XP</mat-label>
-                <input
-                  formControlName="xp"
-                  matInput
-                  placeholder="Eg. 20"
-                  type="number"
-                  min="0"
-                />
-                <mat-hint align="start">
-                  <strong>Experience</strong> granted by the Monster.
-                </mat-hint>
+                <input formControlName="xp" matInput placeholder="Eg. 20" type="number" min="0" />
+                <mat-hint align="start"> <strong>Experience</strong> granted by the Monster. </mat-hint>
               </mat-form-field>
             </div>
             <!-- start:: XP -->
@@ -264,20 +212,13 @@
                     (matChipInputTokenEnd)="add($event, 'languages')"
                   />
                 </mat-chip-list>
-                <mat-autocomplete
-                  #auto_languages="matAutocomplete"
-                  (optionSelected)="selected($event)"
-                >
-                  <mat-option
-                    *ngFor="let item of filteredLanguages | async"
-                    [value]="item"
-                  >
+                <mat-autocomplete #auto_languages="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let item of filteredLanguages | async" [value]="item">
                     {{ item }}
                   </mat-option>
                 </mat-autocomplete>
                 <mat-hint align="start">
-                  The <strong>languages</strong> the Monster speaks and
-                  understands.
+                  The <strong>languages</strong> the Monster speaks and understands.
                 </mat-hint>
               </mat-form-field>
             </div>
@@ -299,10 +240,7 @@
           <div class="row">
             <div class="col-4">
               <span *ngFor="let item of MOVEMENTS" class="pr-5">
-                <mat-checkbox
-                  formControlName="speed_{{ item }}"
-                  color="primary"
-                >
+                <mat-checkbox formControlName="speed_{{ item }}" color="primary">
                   {{ item }}
                 </mat-checkbox>
               </span>
@@ -321,9 +259,7 @@
                   type="number"
                   min="0"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>walking speed</strong>.
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>walking speed</strong>. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Speed - Walk -->
@@ -339,9 +275,7 @@
                   type="number"
                   min="0"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>flying speed</strong>.
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>flying speed</strong>. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Speed - Fly -->
@@ -357,9 +291,7 @@
                   type="number"
                   min="0"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>swimming speed.</strong>
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>swimming speed.</strong> </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Speed - Swim -->
@@ -383,9 +315,7 @@
                   placeholder="Eg. 10"
                   type="number"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>Strength</strong> score.
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>Strength</strong> score. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Strength -->
@@ -400,9 +330,7 @@
                   placeholder="Eg. 10"
                   type="number"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>Dexterity</strong> score.
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>Dexterity</strong> score. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Dexterity -->
@@ -419,9 +347,7 @@
                   placeholder="Eg. 10"
                   type="number"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>Constitution</strong> score.
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>Constitution</strong> score. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Constitution -->
@@ -436,9 +362,7 @@
                   placeholder="Eg. 10"
                   type="number"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>Intelligence</strong> score.
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>Intelligence</strong> score. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Intelligence -->
@@ -455,9 +379,7 @@
                   placeholder="Eg. 10"
                   type="number"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>Wisdom</strong> score.
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>Wisdom</strong> score. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Wisdom -->
@@ -472,9 +394,7 @@
                   placeholder="Eg. 10"
                   type="number"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>Charisma</strong> score.
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>Charisma</strong> score. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Charisma -->
@@ -482,9 +402,7 @@
         </div>
         <!-- * start:: Ability Scores -->
 
-        <h3 class="tc-red" style="font-weight: bold">
-          Resistances and Vunerabilities
-        </h3>
+        <h3 class="tc-red" style="font-weight: bold">Resistances and Vunerabilities</h3>
         <div class="divider"></div>
 
         <!-- * start:: Resistances, Immunities and Vunerabilities -->
@@ -509,9 +427,7 @@
                     [matChipInputFor]="damage_vulnerabilities_chipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="
-                      add($event, 'damage_vulnerabilities')
-                    "
+                    (matChipInputTokenEnd)="add($event, 'damage_vulnerabilities')"
                   />
                 </mat-chip-list>
                 <mat-hint align="start">
@@ -625,10 +541,7 @@
           <div class="form-group row">
             <div class="col">
               <span *ngFor="let item of SENSES" class="pr-5">
-                <mat-checkbox
-                  formControlName="senses_{{ item }}"
-                  color="primary"
-                >
+                <mat-checkbox formControlName="senses_{{ item }}" color="primary">
                   {{ formattingService.replaceUnderscoresWithSpaces(item) }}
                 </mat-checkbox>
               </span>
@@ -647,9 +560,7 @@
                   type="number"
                   min="0"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>blindsight</strong> range.
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>blindsight</strong> range. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Senses - Blindsight -->
@@ -665,9 +576,7 @@
                   type="number"
                   min="0"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>darkvision</strong> range.
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>darkvision</strong> range. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Senses - Darkvision -->
@@ -683,9 +592,7 @@
                   type="number"
                   min="0"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>tremorsense</strong> range.
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>tremorsense</strong> range. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Senses - Tremorsense -->
@@ -701,18 +608,13 @@
                   type="number"
                   min="0"
                 />
-                <mat-hint align="start">
-                  The Monster's <strong>truesight</strong> range.
-                </mat-hint>
+                <mat-hint align="start"> The Monster's <strong>truesight</strong> range. </mat-hint>
               </mat-form-field>
             </div>
             <!-- end:: Senses - Truesight -->
 
             <!-- start:: Senses - Passive Perception -->
-            <div
-              *ngIf="form.value.senses.senses_Passive_Perception"
-              class="col"
-            >
+            <div *ngIf="form.value.senses.senses_Passive_Perception" class="col">
               <mat-form-field>
                 <mat-label>Passive Perception</mat-label>
                 <input
@@ -742,9 +644,9 @@
             <!-- start:: Control Iterator -->
             <div
               *ngFor="
-                let special_ability of form.controls.abilitiesAndActions.get(
-                  'special_abilities'
-                )['controls'];
+                let special_ability of form.controls.abilitiesAndActions.get('special_abilities')[
+                  'controls'
+                ];
                 let i = index
               "
             >
@@ -805,8 +707,7 @@
                           placeholder="Eg. Cthulu can breathe air and water."
                         ></textarea>
                         <mat-hint align="start">
-                          The <strong>description</strong> of the Special
-                          Ability.
+                          The <strong>description</strong> of the Special Ability.
                         </mat-hint>
                       </mat-form-field>
                     </div>
@@ -843,9 +744,7 @@
             <!-- start:: FormControl Iterator -->
             <div
               *ngFor="
-                let action of form.controls.abilitiesAndActions.get('actions')[
-                  'controls'
-                ];
+                let action of form.controls.abilitiesAndActions.get('actions')['controls'];
                 let i = index
               "
             >
@@ -885,9 +784,7 @@
                           formControlName="name"
                           placeholder="Eg. Multiattack"
                         />
-                        <mat-hint align="start">
-                          The <strong>name</strong> of the Action.
-                        </mat-hint>
+                        <mat-hint align="start"> The <strong>name</strong> of the Action. </mat-hint>
                       </mat-form-field>
                     </div>
                   </div>
@@ -943,9 +840,9 @@
             <!-- start:: FormControl Iterator -->
             <div
               *ngFor="
-                let legendary_action of form.controls.abilitiesAndActions.get(
-                  'legendary_actions'
-                )['controls'];
+                let legendary_action of form.controls.abilitiesAndActions.get('legendary_actions')[
+                  'controls'
+                ];
                 let i = index
               "
             >
@@ -986,8 +883,7 @@
                           placeholder="Eg. Legendary Resistance"
                         />
                         <mat-hint align="start">
-                          Enter the <strong>name</strong> of the Legendary
-                          Action.
+                          Enter the <strong>name</strong> of the Legendary Action.
                         </mat-hint>
                       </mat-form-field>
                     </div>
@@ -1007,8 +903,7 @@
                           placeholder="Eg. If Cthulu fails a saving throw, it can choose to succeed instead."
                         ></textarea>
                         <mat-hint align="start">
-                          Enter the <strong>description</strong> of the
-                          Legendary Action.
+                          Enter the <strong>description</strong> of the Legendary Action.
                         </mat-hint>
                       </mat-form-field>
                     </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 // Constants
 import { CONSTANTS_STORYBOARD } from "./constants";
 // Models
-import { Plot } from "src/app/core/resources/_models/dm_tools/storyboard/plot.model";
+import { Plot } from "./_models/plot.model";
 import { Storyboard } from "./_models/storyboard.model";
 import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
 // Services
@@ -94,10 +94,10 @@ export class StoryboardComponent implements OnInit {
    */
   refreshStoryboard(): void {
     this.isLoading = true;
-    this.apiService.getStoryboard(this.userId).subscribe((data: any) => {
-      this.plotsMain = data.storyboard.plotsMain;
-      this.plotsInProgress = data.storyboard.plotsInProgress;
-      this.plotsDone = data.storyboard.plotsDone;
+    this.apiService.getStoryboard(this.userId).subscribe((storyboard: Storyboard) => {
+      this.plotsMain = storyboard.plotsMain;
+      this.plotsInProgress = storyboard.plotsInProgress;
+      this.plotsDone = storyboard.plotsDone;
       this.isLoading = false;
     });
   }
@@ -107,14 +107,14 @@ export class StoryboardComponent implements OnInit {
    *
    * @returns {Observable<any>} The resulting Storyboard.
    */
-  updateStoryBoard(): void {
+  updateStoryBoard(): Observable<any> {
     let storyboard: Storyboard = {
       plotsMain: this.plotsMain,
       plotsInProgress: this.plotsInProgress,
       plotsDone: this.plotsDone,
     };
 
-    this.apiService.updateStoryboard(this.userId, storyboard).subscribe();
+    return this.apiService.updateStoryboard(this.userId, storyboard);
   }
 
   /**
@@ -208,7 +208,9 @@ export class StoryboardComponent implements OnInit {
               if (res.isConfirmed) {
                 this.plotsMain.splice(plotIndex, 1);
                 // Update plot arrays on the server and refresh the Storyboard.
-                this.updateStoryBoard();
+                this.updateStoryBoard().subscribe((res) => {
+                  if ()
+                });
                 this.cdr.detectChanges();
               }
 

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 // Models
 import { currentUser, User } from "src/app/core/auth";
-import { Session } from "../../../../../core/resources/_models/dm_tools/session_summaries/session.model";
+import { Session } from "./_models - todo/session.model";
 // Services
 import { SessionSummariesService } from "./session-summaries.service";
 import { DateService } from "src/app/core/resources/_services/date.service";

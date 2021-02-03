@@ -1,67 +1,69 @@
-<div class="card card-custom card-stretch">
-  <!-- start:: Card Header -->
-  <div class="card-header py-3">
-    <div class="card-title align-items-start flex-column">
-      <h1 class="tc-red">{{ sessionData.chapter }}</h1>
-    </div>
-    <!-- start:: Card Toolbar -->
-    <div class="card-toolbar">
-      <div class="d-flex justify-content-end">
-        <button mat-icon-button mat-dialog-close class="dialog-button-close">
-          <mat-icon>close</mat-icon>
-        </button>
+<mat-dialog-content>
+  <div class="card card-custom card-stretch">
+    <!-- start:: Card Header -->
+    <div class="card-header py-3">
+      <div class="card-title align-items-start flex-column">
+        <h1 class="tc-red">{{ sessionData.chapter }}</h1>
       </div>
+      <!-- start:: Card Toolbar -->
+      <div class="card-toolbar">
+        <div class="d-flex justify-content-end">
+          <button mat-icon-button mat-dialog-close class="dialog-button-close">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <!-- end:: Card Toolbar -->
     </div>
-    <!-- end:: Card Toolbar -->
-  </div>
-  <!-- end:: Card Header -->
+    <!-- end:: Card Header -->
 
-  <!-- start:: Card Body -->
-  <div class="card-body">
-    <!-- start:: Session Episode Title -->
-    <div *ngIf="sessionData.episode" class="row">
-      <div class="col">
-        <h3 class="font-italic mb-6">{{ sessionData.episode }}</h3>
+    <!-- start:: Card Body -->
+    <div class="card-body">
+      <!-- start:: Session Episode Title -->
+      <div *ngIf="sessionData.episode" class="row">
+        <div class="col">
+          <h3 class="font-italic mb-6">{{ sessionData.episode }}</h3>
+        </div>
       </div>
-    </div>
-    <!-- end:: Session Episode Title -->
+      <!-- end:: Session Episode Title -->
 
-    <!-- start:: Session Content -->
-    <div *ngIf="sessionData.content" class="row">
-      <div class="col">
-        <p>{{ sessionData.content }}</p>
+      <!-- start:: Session Content -->
+      <div *ngIf="sessionData.content" class="row">
+        <div class="col">
+          <p>{{ sessionData.content }}</p>
+        </div>
       </div>
+      <!-- end:: Content -->
     </div>
-    <!-- end:: Content -->
-  </div>
-  <!-- end:: Session Card Body -->
+    <!-- end:: Session Card Body -->
 
-  <!-- start:: Footer -->
-  <div class="card-footer">
-    <div class="d-flex justify-content-between">
-      <div class="mr-2"></div>
-      <div>
-        <button
-          type="button"
-          mat-raised-button
-          mat-dialog-close
-          cdkFocusInitial
-          (click)="editSession()"
-          matTooltip="Edit the session"
-        >
-          Edit</button
-        >&nbsp;
-        <button
-          type="button"
-          mat-raised-button
-          color="primary"
-          (click)="removeSession()"
-          matTooltip="Remove the session"
-        >
-          Remove
-        </button>
+    <!-- start:: Footer -->
+    <div class="card-footer">
+      <div class="d-flex justify-content-between">
+        <div class="mr-2"></div>
+        <div>
+          <button
+            type="button"
+            mat-raised-button
+            mat-dialog-close
+            cdkFocusInitial
+            (click)="editSession()"
+            matTooltip="Edit the session"
+          >
+            Edit</button
+          >&nbsp;
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="removeSession()"
+            matTooltip="Remove the session"
+          >
+            Remove
+          </button>
+        </div>
       </div>
     </div>
+    <!-- end:: Footer -->
   </div>
-  <!-- end:: Footer -->
-</div>
+</mat-dialog-content>
