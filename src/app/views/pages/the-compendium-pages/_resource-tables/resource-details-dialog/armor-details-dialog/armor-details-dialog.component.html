@@ -1,105 +1,110 @@
-<div class="wrapper">
-  <!-- start:: Header -->
-  <div class="details-dialog-header">
-    <div class="row">
-      <div class="col-10">
-        <h1 class="tc-red">{{ dialogData.name }}</h1>
+<mat-dialog-content>
+  <div class="wrapper">
+    <!-- start:: Header -->
+    <div class="details-dialog-header">
+      <div class="row">
+        <div class="col-10">
+          <h1 class="tc-red">{{ dialogData.name }}</h1>
+        </div>
+        <div class="d-flex justify-content-end col-2">
+          <button class="dialog-button-close" mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
       </div>
-      <div class="d-flex justify-content-end col-2">
-        <button class="dialog-button-close" mat-icon-button [mat-dialog-close]="true">
-          <mat-icon>close</mat-icon>
-        </button>
+    </div>
+    <!-- end:: Header -->
+
+    <!-- start::Armor Category -->
+    <div *ngIf="dialogData.armor_category" class="row">
+      <div class="col">
+        <span class="font-italic"> {{ dialogData.armor_category }} armor </span>
       </div>
     </div>
-  </div>
-  <!-- end:: Header -->
-
-  <!-- start::Armor Category -->
-  <div *ngIf="dialogData.armor_category" class="row">
-    <div class="col">
-      <span class="font-italic"> {{ dialogData.armor_category }} armor </span>
-    </div>
-  </div>
-  <!-- end::Armor Category -->
-
-  <!-- start:: DIVIDER -->
-  <div *ngIf="dialogData.armor_category" class="divider"></div>
-  <!-- end:: DIVIDER -->
-
-  <!-- start::Armor Class -->
-  <div *ngIf="dialogData.armor_class" class="row">
-    <div class="col-3">
-      <p class="font-weight-bolder">Armor Class:</p>
-    </div>
-    <div class="col">
-      <p>{{ dialogData.armor_class.base }}</p>
-    </div>
-  </div>
-  <!-- end::Armor Class -->
-
-  <!-- start::Stealth Disadvantage -->
-  <div *ngIf="dialogData.stealth_disadvantage || dialogData.stealth_disadvantage === false" class="row">
-    <div class="col-3">
-      <p class="font-weight-bolder">Stealth Disadvantage:</p>
-    </div>
-    <div class="col">
-      <p *ngIf="dialogData.stealth_disadvantage; else stealth_false">Yes</p>
-      <ng-template #stealth_false> No </ng-template>
-    </div>
-  </div>
-  <!-- end::Stealth Disadvantage -->
-
-  <!-- start::Strength Requirement -->
-  <div *ngIf="dialogData.str_minimum || dialogData.str_minimum === 0" class="row">
-    <div class="col-3">
-      <p class="font-weight-bolder">Strength Requirement:</p>
-    </div>
-    <div class="col">
-      <p>{{ dialogData.str_minimum }}</p>
-    </div>
-  </div>
-  <!-- end::Strength Requirement -->
-
-  <!-- start::Rarity -->
-  <div *ngIf="dialogData.rarity" class="row">
-    <div class="col-3">
-      <p class="font-weight-bolder">Rarity:</p>
-    </div>
-    <div class="col">
-      <p>{{ dialogData.rarity }}</p>
-    </div>
-  </div>
-  <!-- end::Rarity -->
-
-  <!-- start::Cost -->
-  <div *ngIf="dialogData.cost" class="row">
-    <div class="col-3">
-      <p class="font-weight-bolder">Value:</p>
-    </div>
-    <div class="col">
-      <p>{{ dialogData.cost.quantity }}{{ dialogData.cost.unit }}</p>
-    </div>
-  </div>
-  <!-- end::Cost-->
-
-  <!-- start::Description -->
-  <div *ngIf="dialogData.desc">
-    <h3 class="font-weight-bolder tc-red pt-5">Description</h3>
+    <!-- end::Armor Category -->
 
     <!-- start:: DIVIDER -->
-    <div class="divider"></div>
+    <div *ngIf="dialogData.armor_category" class="divider"></div>
     <!-- end:: DIVIDER -->
 
-    <div class="row">
+    <!-- start::Armor Class -->
+    <div *ngIf="dialogData.armor_class" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Armor Class:</p>
+      </div>
       <div class="col">
-        <p *ngFor="let item of dialogData.desc">
-          <span *ngIf="item === dialogData.desc[0]; else default" class="font-italic">
-            {{ item }}
-          </span>
-          <ng-template #default> {{ item }} </ng-template>
-        </p>
+        <p>{{ dialogData.armor_class.base }}</p>
       </div>
     </div>
+    <!-- end::Armor Class -->
+
+    <!-- start::Stealth Disadvantage -->
+    <div
+      *ngIf="dialogData.stealth_disadvantage || dialogData.stealth_disadvantage === false"
+      class="row"
+    >
+      <div class="col-3">
+        <p class="font-weight-bolder">Stealth Disadvantage:</p>
+      </div>
+      <div class="col">
+        <p *ngIf="dialogData.stealth_disadvantage; else stealth_false">Yes</p>
+        <ng-template #stealth_false> No </ng-template>
+      </div>
+    </div>
+    <!-- end::Stealth Disadvantage -->
+
+    <!-- start::Strength Requirement -->
+    <div *ngIf="dialogData.str_minimum || dialogData.str_minimum === 0" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Strength Requirement:</p>
+      </div>
+      <div class="col">
+        <p>{{ dialogData.str_minimum }}</p>
+      </div>
+    </div>
+    <!-- end::Strength Requirement -->
+
+    <!-- start::Rarity -->
+    <div *ngIf="dialogData.rarity" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Rarity:</p>
+      </div>
+      <div class="col">
+        <p>{{ dialogData.rarity }}</p>
+      </div>
+    </div>
+    <!-- end::Rarity -->
+
+    <!-- start::Cost -->
+    <div *ngIf="dialogData.cost" class="row">
+      <div class="col-3">
+        <p class="font-weight-bolder">Value:</p>
+      </div>
+      <div class="col">
+        <p>{{ dialogData.cost.quantity }}{{ dialogData.cost.unit }}</p>
+      </div>
+    </div>
+    <!-- end::Cost-->
+
+    <!-- start::Description -->
+    <div *ngIf="dialogData.desc">
+      <h3 class="font-weight-bolder tc-red pt-5">Description</h3>
+
+      <!-- start:: DIVIDER -->
+      <div class="divider"></div>
+      <!-- end:: DIVIDER -->
+
+      <div class="row">
+        <div class="col">
+          <p *ngFor="let item of dialogData.desc">
+            <span *ngIf="item === dialogData.desc[0]; else default" class="font-italic">
+              {{ item }}
+            </span>
+            <ng-template #default> {{ item }} </ng-template>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- end::Description -->
   </div>
-  <!-- end::Description -->
-</div>
+</mat-dialog-content>

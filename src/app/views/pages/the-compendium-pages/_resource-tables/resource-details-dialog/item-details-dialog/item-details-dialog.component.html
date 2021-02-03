@@ -1,89 +1,91 @@
-<div class="wrapper">
-  <!-- start:: Header -->
-  <div class="details-dialog-header">
-    <div class="row">
-      <div class="col-10">
-        <h1 class="tc-red">{{ dialogData.name }}</h1>
+<mat-dialog-content>
+  <div class="wrapper">
+    <!-- start:: Header -->
+    <div class="details-dialog-header">
+      <div class="row">
+        <div class="col-10">
+          <h1 class="tc-red">{{ dialogData.name }}</h1>
+        </div>
+        <div class="d-flex justify-content-end col-2">
+          <button class="dialog-button-close" mat-icon-button [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
       </div>
-      <div class="d-flex justify-content-end col-2">
-        <button class="dialog-button-close" mat-icon-button [mat-dialog-close]="true">
-          <mat-icon>close</mat-icon>
-        </button>
+    </div>
+    <!-- end:: Header -->
+
+    <!-- start::Equipment and Gear Category -->
+    <div *ngIf="dialogData.equipment_category || dialogData.gear_category" class="row">
+      <div class="col">
+        <span *ngIf="dialogData.equipment_category" class="font-italic">
+          {{ dialogData.equipment_category.name }}
+        </span>
+        <span *ngIf="dialogData.gear_category" class="font-italic">
+          ({{ lowercaseFirstLetter(dialogData.gear_category.name) }})
+        </span>
       </div>
     </div>
-  </div>
-  <!-- end:: Header -->
-
-  <!-- start::Equipment and Gear Category -->
-  <div *ngIf="dialogData.equipment_category || dialogData.gear_category" class="row">
-    <div class="col">
-      <span *ngIf="dialogData.equipment_category" class="font-italic">
-        {{ dialogData.equipment_category.name }}
-      </span>
-      <span *ngIf="dialogData.gear_category" class="font-italic">
-        ({{ lowercaseFirstLetter(dialogData.gear_category.name) }})
-      </span>
-    </div>
-  </div>
-  <!-- end::Equipment and Gear Category -->
-
-  <!-- start:: DIVIDER -->
-  <div *ngIf="dialogData.equipment_category || dialogData.gear_category" class="divider"></div>
-  <!-- end:: DIVIDER -->
-
-  <!-- start::Value -->
-  <div *ngIf="dialogData.cost" class="row">
-    <div class="col-2">
-      <p class="font-weight-bolder">Value:</p>
-    </div>
-    <div class="col">
-      <p>{{ dialogData.cost.quantity }}{{ dialogData.cost.unit }}</p>
-    </div>
-  </div>
-  <!-- end::Value -->
-
-  <!-- start::Weight -->
-  <div *ngIf="dialogData.weight" class="row">
-    <div class="col-2">
-      <p class="font-weight-bolder">Weight:</p>
-    </div>
-    <div class="col">
-      <p>{{ dialogData.weight }} pounds</p>
-    </div>
-  </div>
-  <!-- end::Weight -->
-
-  <!-- start::Description -->
-  <div *ngIf="dialogData.desc">
-    <h3 class="font-weight-bolder tc-red pt-5">Description</h3>
+    <!-- end::Equipment and Gear Category -->
 
     <!-- start:: DIVIDER -->
-    <div class="divider"></div>
+    <div *ngIf="dialogData.equipment_category || dialogData.gear_category" class="divider"></div>
     <!-- end:: DIVIDER -->
 
-    <div class="row">
+    <!-- start::Value -->
+    <div *ngIf="dialogData.cost" class="row">
+      <div class="col-2">
+        <p class="font-weight-bolder">Value:</p>
+      </div>
       <div class="col">
-        <p *ngFor="let item of dialogData.desc">{{ item }}</p>
+        <p>{{ dialogData.cost.quantity }}{{ dialogData.cost.unit }}</p>
       </div>
     </div>
-  </div>
-  <!-- end::Description -->
+    <!-- end::Value -->
 
-  <!-- start::Contents -->
-  <div *ngIf="dialogData.contents">
-    <h3 class="font-weight-bolder tc-red pt-5">Contents</h3>
-
-    <!-- start:: DIVIDER -->
-    <div class="divider"></div>
-    <!-- end:: DIVIDER -->
-
-    <div class="row pt-5">
+    <!-- start::Weight -->
+    <div *ngIf="dialogData.weight" class="row">
+      <div class="col-2">
+        <p class="font-weight-bolder">Weight:</p>
+      </div>
       <div class="col">
-        <p *ngFor="let element of dialogData.contents">
-          {{ element.quantity }} x {{ element.item.name }}
-        </p>
+        <p>{{ dialogData.weight }} pounds</p>
       </div>
     </div>
+    <!-- end::Weight -->
+
+    <!-- start::Description -->
+    <div *ngIf="dialogData.desc">
+      <h3 class="font-weight-bolder tc-red pt-5">Description</h3>
+
+      <!-- start:: DIVIDER -->
+      <div class="divider"></div>
+      <!-- end:: DIVIDER -->
+
+      <div class="row">
+        <div class="col">
+          <p *ngFor="let item of dialogData.desc">{{ item }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- end::Description -->
+
+    <!-- start::Contents -->
+    <div *ngIf="dialogData.contents">
+      <h3 class="font-weight-bolder tc-red pt-5">Contents</h3>
+
+      <!-- start:: DIVIDER -->
+      <div class="divider"></div>
+      <!-- end:: DIVIDER -->
+
+      <div class="row pt-5">
+        <div class="col">
+          <p *ngFor="let element of dialogData.contents">
+            {{ element.quantity }} x {{ element.item.name }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- end::Contents -->
   </div>
-  <!-- end::Contents -->
-</div>
+</mat-dialog-content>
