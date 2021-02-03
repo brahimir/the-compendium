@@ -84,10 +84,6 @@ export class EditPlotDialogComponent implements OnInit {
 
     // Close the dialog, and send the payload back to the StoryboardComponent.
     this.dialogRef.close(payload);
-
-    // Show confirmation snackbar message.
-    const message = "Plot successfully updated.";
-    this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
   }
 
   /**

@@ -78,10 +78,6 @@ export class AddPlotDialogComponent implements OnInit {
 
     // Close the dialog, and send the payload back to the StoryboardComponent.
     this.dialogRef.close(payload);
-
-    // Show confirmation snackbar message.
-    const message = "Plot successfully added.";
-    this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
   }
 
   /**

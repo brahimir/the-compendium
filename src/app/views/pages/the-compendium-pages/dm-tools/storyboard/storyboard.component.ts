@@ -23,6 +23,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { AddPlotDialogComponent } from "./storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
 import { EditPlotDialogComponent } from "./storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
 import { ConfirmationDialogComponent } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 
 /**
  * Storyboard Kanban Board.
@@ -53,7 +54,8 @@ export class StoryboardComponent implements OnInit {
     private store: Store<AppState>,
     private apiService: StoryboardService,
     private cdr: ChangeDetectorRef,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public layoutUtilsService: LayoutUtilsService
   ) {
     // todo - This is getting a "snapshot" of the user - on refresh, the User Observable doesn't have
     // todo - "data" to subscribe to - need to fix this.
@@ -76,7 +78,7 @@ export class StoryboardComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       // Update the user's storyboard on the server.
-      this.updateStoryBoard();
+      this.updateStoryBoard().subscribe();
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -85,7 +87,7 @@ export class StoryboardComponent implements OnInit {
         event.currentIndex
       );
       // Update the user's storyboard on the server.
-      this.updateStoryBoard();
+      this.updateStoryBoard().subscribe();
     }
   }
 
@@ -135,14 +137,36 @@ export class StoryboardComponent implements OnInit {
 
         // Subscribe to result after Dialog is closed, and push the new
         // plot to the corresponding local array.
-        dialogRef.afterClosed().subscribe((result) => {
-          if (!result) {
+        dialogRef.afterClosed().subscribe((plot: Plot) => {
+          if (!plot) {
             return;
           } else {
-            this.plotsMain.push(result);
+            this.plotsMain.push(plot);
 
             // Update plot arrays on the server and refresh the Storyboard.
-            this.updateStoryBoard();
+            this.updateStoryBoard().subscribe((res) => {
+              if (res.status === 200) {
+                // Show confirmation snackbar message.
+                const message = `"${plot.title}" successfully added.`;
+                this.layoutUtilsService.showActionNotification(
+                  message,
+                  MessageType.Create,
+                  5000,
+                  true,
+                  true
+                );
+              } else {
+                // Show error snackbar message.
+                const message = `There was a problem adding "${plot.title}". Please try again.`;
+                this.layoutUtilsService.showActionNotification(
+                  message,
+                  MessageType.Create,
+                  5000,
+                  true,
+                  true
+                );
+              }
+            });
             this.cdr.detectChanges();
           }
         });
@@ -156,14 +180,36 @@ export class StoryboardComponent implements OnInit {
 
         // Subscribe to result after Dialog is closed, and push the new
         // plot to the corresponding local array.
-        dialogRef.afterClosed().subscribe((result) => {
-          if (!result) {
+        dialogRef.afterClosed().subscribe((plot: Plot) => {
+          if (!plot) {
             return;
           } else {
-            this.plotsInProgress.push(result);
+            this.plotsInProgress.push(plot);
 
             // Update plot arrays on the server and refresh the Storyboard.
-            this.updateStoryBoard();
+            this.updateStoryBoard().subscribe((res) => {
+              if (res.status === 200) {
+                // Show confirmation snackbar message.
+                const message = `"${plot.title}" successfully added.`;
+                this.layoutUtilsService.showActionNotification(
+                  message,
+                  MessageType.Create,
+                  5000,
+                  true,
+                  true
+                );
+              } else {
+                // Show error snackbar message.
+                const message = `There was a problem adding "${plot.title}". Please try again.`;
+                this.layoutUtilsService.showActionNotification(
+                  message,
+                  MessageType.Create,
+                  5000,
+                  true,
+                  true
+                );
+              }
+            });
             this.cdr.detectChanges();
           }
         });
@@ -200,23 +246,39 @@ export class StoryboardComponent implements OnInit {
 
             // Subscribe to result after Dialog is closed, and push the new
             // plot to the corresponding local array.
-            dialogRef.afterClosed().subscribe((res) => {
+            dialogRef.afterClosed().subscribe((data) => {
               // Checks for null data return.
-              if (!res) return;
+              if (!data) return;
 
               // If the User confirms removal.
-              if (res.isConfirmed) {
+              if (data.isConfirmed) {
                 this.plotsMain.splice(plotIndex, 1);
                 // Update plot arrays on the server and refresh the Storyboard.
                 this.updateStoryBoard().subscribe((res) => {
-                  if ()
+                  if (res.status === 200) {
+                    // Show confirmation snackbar message.
+                    const message = `"${plot.title}" successfully removed.`;
+                    this.layoutUtilsService.showActionNotification(
+                      message,
+                      MessageType.Create,
+                      5000,
+                      true,
+                      true
+                    );
+                  } else {
+                    // Show error snackbar message.
+                    const message = `There was a problem removing "${plot.title}. Please try again.`;
+                    this.layoutUtilsService.showActionNotification(
+                      message,
+                      MessageType.Create,
+                      5000,
+                      true,
+                      true
+                    );
+                  }
                 });
                 this.cdr.detectChanges();
               }
-
-              // Update plot arrays on the server and refresh the Storyboard.
-              this.updateStoryBoard();
-              this.cdr.detectChanges();
             });
             break;
 
@@ -231,15 +293,37 @@ export class StoryboardComponent implements OnInit {
 
             // Subscribe to result after Dialog is closed, and push the new
             // plot to the corresponding local array.
-            dialogRef.afterClosed().subscribe((result) => {
-              if (!result) {
+            dialogRef.afterClosed().subscribe((updatedPlot: Plot) => {
+              if (!updatedPlot) {
                 return;
               } else {
                 // Check if the delete is confirmed by the user, then delete the plot from the array.
-                this.plotsMain.splice(plotIndex, 1, result);
+                this.plotsMain.splice(plotIndex, 1, updatedPlot);
 
                 // Update plot arrays on the server and refresh the Storyboard.
-                this.updateStoryBoard();
+                this.updateStoryBoard().subscribe((res) => {
+                  if (res.status === 200) {
+                    // Show confirmation snackbar message.
+                    const message = `Successfully updated "${updatedPlot.title}".`;
+                    this.layoutUtilsService.showActionNotification(
+                      message,
+                      MessageType.Create,
+                      5000,
+                      true,
+                      true
+                    );
+                  } else {
+                    // Show confirmation snackbar message.
+                    const message = `There was a problem updating "${updatedPlot.title}". Please try again.`;
+                    this.layoutUtilsService.showActionNotification(
+                      message,
+                      MessageType.Create,
+                      5000,
+                      true,
+                      true
+                    );
+                  }
+                });
                 this.cdr.detectChanges();
               }
             });
@@ -272,13 +356,31 @@ export class StoryboardComponent implements OnInit {
               if (res.isConfirmed) {
                 this.plotsInProgress.splice(plotIndex, 1);
                 // Update plot arrays on the server and refresh the Storyboard.
-                this.updateStoryBoard();
+                this.updateStoryBoard().subscribe((res) => {
+                  if (res.status === 200) {
+                    // Show confirmation snackbar message.
+                    const message = `Successfully removed "${plot.title}".`;
+                    this.layoutUtilsService.showActionNotification(
+                      message,
+                      MessageType.Create,
+                      5000,
+                      true,
+                      true
+                    );
+                  } else {
+                    // Show error snackbar message.
+                    const message = `There was a problem removing "${plot.title}". Please try again.`;
+                    this.layoutUtilsService.showActionNotification(
+                      message,
+                      MessageType.Create,
+                      5000,
+                      true,
+                      true
+                    );
+                  }
+                });
                 this.cdr.detectChanges();
               }
-
-              // Update plot arrays on the server and refresh the Storyboard.
-              this.updateStoryBoard();
-              this.cdr.detectChanges();
             });
             break;
 
@@ -293,15 +395,37 @@ export class StoryboardComponent implements OnInit {
 
             // Subscribe to result after Dialog is closed, and push the new
             // plot to the corresponding local array.
-            dialogRef.afterClosed().subscribe((result) => {
-              if (!result) {
+            dialogRef.afterClosed().subscribe((updatedPlot: Plot) => {
+              if (!updatedPlot) {
                 return;
               } else {
                 // Check if the delete is confirmed by the user, then delete the plot from the array.
-                this.plotsInProgress.splice(plotIndex, 1, result);
+                this.plotsInProgress.splice(plotIndex, 1, updatedPlot);
 
                 // Update plot arrays on the server and refresh the Storyboard.
-                this.updateStoryBoard();
+                this.updateStoryBoard().subscribe((res) => {
+                  if (res.status === 200) {
+                    // Show confirmation snackbar message.
+                    const message = `Successfully updated "${updatedPlot.title}".`;
+                    this.layoutUtilsService.showActionNotification(
+                      message,
+                      MessageType.Create,
+                      5000,
+                      true,
+                      true
+                    );
+                  } else {
+                    // Show error snackbar message.
+                    const message = `There was an problem updating "${updatedPlot.title}". Please try again.`;
+                    this.layoutUtilsService.showActionNotification(
+                      message,
+                      MessageType.Create,
+                      5000,
+                      true,
+                      true
+                    );
+                  }
+                });
                 this.cdr.detectChanges();
               }
             });
@@ -327,21 +451,39 @@ export class StoryboardComponent implements OnInit {
 
             // Subscribe to result after Dialog is closed, and push the new
             // plot to the corresponding local array.
-            dialogRef.afterClosed().subscribe((res) => {
+            dialogRef.afterClosed().subscribe((data) => {
               // Checks for null data return.
-              if (!res) return;
+              if (!data) return;
 
               // If the User confirms removal.
-              if (res.isConfirmed) {
+              if (data.isConfirmed) {
                 this.plotsDone.splice(plotIndex, 1);
                 // Update plot arrays on the server and refresh the Storyboard.
-                this.updateStoryBoard();
+                this.updateStoryBoard().subscribe((res) => {
+                  if (res.status === 200) {
+                    // Show confirmation snackbar message.
+                    const message = `Successfully removed "${plot.title}".`;
+                    this.layoutUtilsService.showActionNotification(
+                      message,
+                      MessageType.Create,
+                      5000,
+                      true,
+                      true
+                    );
+                  } else {
+                    // Show error snackbar message.
+                    const message = `There was an problem removing "${plot.title}". Please try again.`;
+                    this.layoutUtilsService.showActionNotification(
+                      message,
+                      MessageType.Create,
+                      5000,
+                      true,
+                      true
+                    );
+                  }
+                });
                 this.cdr.detectChanges();
               }
-
-              // Update plot arrays on the server and refresh the Storyboard.
-              this.updateStoryBoard();
-              this.cdr.detectChanges();
             });
             break;
 
@@ -356,15 +498,37 @@ export class StoryboardComponent implements OnInit {
 
             // Subscribe to result after Dialog is closed, and push the new
             // plot to the corresponding local array.
-            dialogRef.afterClosed().subscribe((result) => {
-              if (!result) {
+            dialogRef.afterClosed().subscribe((updatedPlot: Plot) => {
+              if (!updatedPlot) {
                 return;
               } else {
                 // Check if the delete is confirmed by the user, then delete the plot from the array.
-                this.plotsDone.splice(plotIndex, 1, result);
+                this.plotsDone.splice(plotIndex, 1, updatedPlot);
 
                 // Update plot arrays on the server and refresh the Storyboard.
-                this.updateStoryBoard();
+                this.updateStoryBoard().subscribe((res) => {
+                  if (res.status === 200) {
+                    // Show confirmation snackbar message.
+                    const message = `Successfully updated "${updatedPlot.title}".`;
+                    this.layoutUtilsService.showActionNotification(
+                      message,
+                      MessageType.Create,
+                      5000,
+                      true,
+                      true
+                    );
+                  } else {
+                    // Show error snackbar message.
+                    const message = `There was an problem updating "${updatedPlot.title}". Please try again.`;
+                    this.layoutUtilsService.showActionNotification(
+                      message,
+                      MessageType.Create,
+                      5000,
+                      true,
+                      true
+                    );
+                  }
+                });
                 this.cdr.detectChanges();
               }
             });
