@@ -3,6 +3,7 @@ export const API_ROUTES = {
   // * Auth
   AUTH: {
     USERS: {
+      LOGIN: "", // todo
       GET_ALL_USERS: "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/",
       REGISTER_USER:
         "https://us-central1-the-compendium-server.cloudfunctions.net/app/api/users/register-user",
