@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 // Models
 import { currentUser, User } from "src/app/core/auth";
 import { Session } from "./_models - todo/session.model";
@@ -13,18 +13,19 @@ import { MatSort } from "@angular/material/sort";
 // Dialog Component
 import { SessionSummariesDetailsDialogComponent } from "./session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component";
 // RxJS
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 // NGRX
 import { select, Store } from "@ngrx/store";
 // State
 import { AppState } from "src/app/core/reducers";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: "kt-session-summaries",
   templateUrl: "./session-summaries.component.html",
   styleUrls: ["./session-summaries.component.scss"],
 })
-export class SessionSummariesComponent implements OnInit {
+export class SessionSummariesComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -32,6 +33,9 @@ export class SessionSummariesComponent implements OnInit {
   user$: Observable<User>;
   userId: string;
   userSessionSummaries: Session[];
+
+  // ? Implement this in other Components that subscribe to the User State.
+  destroy: Subject<any> = new Subject();
 
   columnsToDisplay: any[] = ["chapter", "episode", "date"];
 
@@ -47,17 +51,22 @@ export class SessionSummariesComponent implements OnInit {
     public dateService: DateService,
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     // todo - This is getting a "snapshot" of the user - on refresh, the User Observable doesn't have
     // todo - "data" to subscribe to - need to fix this.
+    // ?
     this.user$ = this.store.pipe(select(currentUser));
-    this.user$.subscribe((data) => {
+    this.user$.pipe(takeUntil(this.destroy)).subscribe((data) => {
       this.userId = data._id;
     });
+  }
 
+  ngOnInit(): void {
     this.refreshSessions();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy.next();
   }
 
   refreshSessions(): void {
