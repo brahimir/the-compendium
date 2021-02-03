@@ -499,6 +499,17 @@ export class MenuConfig {
           page: "/create",
           permission: "accessToDMTools",
         },
+        // ! Keep this entry here until you fix the scrollbar bug - for some reason, the scrollbar bug
+        // ! cuts off the last menu item, so having this "empty" item fixes it for now.
+        {
+          title: " ",
+          bullet: " ",
+          icon: " ",
+          root: true,
+          page: " ",
+        },
+        // ! Keep this entry here until you fix the scrollbar bug - for some reason, the scrollbar bug
+        // ! cuts off the last menu item, so having this "empty" item fixes it for now.
       ],
     },
   };
