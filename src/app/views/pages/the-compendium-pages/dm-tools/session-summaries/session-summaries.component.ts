@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 // Models
 import { currentUser, User } from "src/app/core/auth";
-import { Session } from "./_models - todo/session.model";
+import { Session } from "./_models/session.model";
 // Services
 import { SessionSummariesService } from "./session-summaries.service";
 import { DateService } from "src/app/core/resources/_services/date.service";

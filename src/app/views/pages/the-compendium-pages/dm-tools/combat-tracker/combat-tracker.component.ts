@@ -82,21 +82,8 @@ export class CombatTrackerComponent implements OnInit, AfterViewInit {
       this.userCombatTrackers = data;
       this.isLoading = false;
     });
-  }
 
-  /**
-   * Updates the User's Combat Trackers on the server.
-   */
-  updateCombatTrackers(): void {
-    this.apiService
-      .updateUserCombatTrackers(this.userId, this.userCombatTrackers)
-      .subscribe((res: any) => {
-        if (res.status === 200) {
-          // todo - show confirmation snackbar message
-        } else {
-          // todo - show error snackbar message
-        }
-      });
+    this.cdr.detectChanges();
   }
 
   /**

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 // Models
-import { Session } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/_models - todo/session.model";
+import { Session } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/_models/session.model";
 // Routes
 import { API_ROUTES } from "../../../../../../environments/app-secrets";
 // Http

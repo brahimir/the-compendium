@@ -5,7 +5,7 @@ import { CONSTANTS_CREATE_DIALOG } from "../../../create/constants";
 import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // Models
 import { User } from "src/app/core/auth";
-import { Session } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/_models - todo/session.model";
+import { Session } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/_models/session.model";
 // MatDialog
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 // FormBuilder

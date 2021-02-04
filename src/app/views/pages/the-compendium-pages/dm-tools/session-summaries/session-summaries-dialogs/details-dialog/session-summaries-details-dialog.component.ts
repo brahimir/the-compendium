@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Inject, OnInit } from "@angular/core";
 // Models
 import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
 import { currentUser, User } from "src/app/core/auth";
-import { Session } from "../../_models - todo/session.model";
+import { Session } from "../../_models/session.model";
 // Services
 import { SessionSummariesService } from "src/app/views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries.service";
 import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
@@ -116,6 +116,7 @@ export class SessionSummariesDetailsDialogComponent implements OnInit {
           this.dialog.closeAll();
         });
       }
+      this.cdr.detectChanges();
     });
   }
 

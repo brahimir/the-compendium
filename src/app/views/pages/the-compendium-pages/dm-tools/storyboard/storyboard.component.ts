@@ -102,6 +102,8 @@ export class StoryboardComponent implements OnInit {
       this.plotsDone = storyboard.plotsDone;
       this.isLoading = false;
     });
+
+    this.cdr.detectChanges();
   }
 
   /**
