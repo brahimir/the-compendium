@@ -84,6 +84,7 @@ export class VirtualScreenComponent implements OnInit {
       this.userVirtualScreen = res.virtualScreen;
       this.isLoading = false;
     });
+    this.cdr.detectChanges();
   }
 
   /**
