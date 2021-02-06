@@ -9,12 +9,12 @@ export class Weapon {
     unit: string;
   };
   damage: {
-      damage_dice: string;
-      damage_type: string;
+    damage_dice: string;
+    damage_type: string;
   };
   range: {
-      normal: number;
-      long: number;
+    normal: number;
+    long: number;
   };
   weight: number;
   properties: string[];
@@ -23,6 +23,10 @@ export class Weapon {
   rarity: string;
   desc: string[];
   ratings: number[];
+  throw_range?: {
+    normal: number;
+    long: number;
+  };
 
   /**
    * Creates an instance of a Weapon.
@@ -34,16 +38,16 @@ export class Weapon {
     weapon_category: string,
     weapon_range: string,
     cost: {
-      quantity: number,
-      unit: string,
+      quantity: number;
+      unit: string;
     },
     damage: {
-        damage_dice: string,
-        damage_type: string,
+      damage_dice: string;
+      damage_type: string;
     },
     range: {
-        normal: number,
-        long: number,
+      normal: number;
+      long: number;
     },
     weight: number,
     properties: string[],
@@ -52,6 +56,10 @@ export class Weapon {
     rarity: string,
     desc: string[],
     ratings: number[],
+    throw_range?: {
+      normal: number;
+      long: number;
+    }
   ) {
     this.id = id;
     this.name = name;
@@ -66,5 +74,6 @@ export class Weapon {
     this.rarity = rarity;
     this.desc = desc;
     this.ratings = ratings;
+    if (throw_range) this.throw_range = throw_range;
   }
 }

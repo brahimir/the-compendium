@@ -51,20 +51,39 @@ export class WeaponService {
    * @returns {Armor[]} The array of Weapon Objects.
    */
   generateWeaponObject(element: any): Weapon {
-    return new Weapon(
-      element._id,
-      element.name,
-      element.weapon_category,
-      element.weapon_range,
-      element.cost,
-      element.damage,
-      element.range,
-      element.weight,
-      element.properties,
-      element.requires_attunement,
-      element.rarity,
-      element.desc,
-      element.rarity
-    );
+    if (element.throw_range) {
+      return new Weapon(
+        element._id,
+        element.name,
+        element.weapon_category,
+        element.weapon_range,
+        element.cost,
+        element.damage,
+        element.range,
+        element.weight,
+        element.properties,
+        element.requires_attunement,
+        element.rarity,
+        element.desc,
+        element.rarity,
+        element.throw_range
+      );
+    } else {
+      return new Weapon(
+        element._id,
+        element.name,
+        element.weapon_category,
+        element.weapon_range,
+        element.cost,
+        element.damage,
+        element.range,
+        element.weight,
+        element.properties,
+        element.requires_attunement,
+        element.rarity,
+        element.desc,
+        element.rarity
+      );
+    }
   }
 }

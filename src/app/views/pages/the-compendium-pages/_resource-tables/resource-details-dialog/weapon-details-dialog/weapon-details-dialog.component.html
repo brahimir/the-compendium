@@ -97,6 +97,17 @@
     </div>
     <!-- end::Weight -->
 
+    <!-- start:: If Thrown Range-->
+    <div *ngIf="dialogData.throw_range" class="row">
+      <div class="col-2">
+        <p class="font-weight-bolder">Throw Range:</p>
+      </div>
+      <div class="col">
+        <p>{{ dialogData.throw_range.normal }}/{{ dialogData.throw_range.long }}</p>
+      </div>
+    </div>
+    <!-- end:: If Thrown Range -->
+
     <!-- start::Description-->
     <div *ngIf="dialogData.desc">
       <h3 class="font-weight-bolder tc-red pt-5">Description</h3>
