@@ -4,13 +4,7 @@ import { CONSTANTS_CREATE_DIALOG } from "../../constants";
 // 5E Resources
 import { FIFTH_EDITION_RESOURCES } from "src/environments/app-secrets";
 // FormBuilder
-import {
-  FormGroup,
-  Validators,
-  FormBuilder,
-  FormControl,
-  FormArray,
-} from "@angular/forms";
+import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 // Services
 import { HomebrewNpcsService } from "../../../../../../../core/resources/_services/homebrew-services/homebrew-npcs.service";
@@ -92,16 +86,12 @@ export class CreateNpcDialogComponent implements OnInit {
     private layoutUtilsService: LayoutUtilsService
   ) {
     // Format resources.
-    this.SENSES = this.formattingService.arrayReplaceSpacesWithUnderscores(
-      this.SENSES
-    );
+    this.SENSES = this.formattingService.arrayReplaceSpacesWithUnderscores(this.SENSES);
 
     // Filtered languages
     this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
       startWith(""),
-      map((language: string | null) =>
-        language ? this.filter(language) : this.LANGUAGES.slice()
-      )
+      map((language: string | null) => (language ? this.filter(language) : this.LANGUAGES.slice()))
     );
   }
 
@@ -201,13 +191,7 @@ export class CreateNpcDialogComponent implements OnInit {
 
     // Show confirmation snackbar message.
     const message = "Homebrew Monster successfully added.";
-    this.layoutUtilsService.showActionNotification(
-      message,
-      MessageType.Create,
-      5000,
-      true,
-      true
-    );
+    this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
   }
 
   preparePayload(): any {
@@ -221,6 +205,7 @@ export class CreateNpcDialogComponent implements OnInit {
     // Set objects for payload.
     let payload_speeds = this.getSpeeds(formSpeed);
     let payload_senses = this.getSenses(formSenses);
+    let payload_languages = this.getLanguages(this.languages);
 
     // Prepare payload to POST.
     let payload: any = {
@@ -231,9 +216,7 @@ export class CreateNpcDialogComponent implements OnInit {
       alignment: formGeneralInformation.alignment,
       armor_class: formGeneralInformation.armor_class,
       hit_points: formGeneralInformation.hit_points,
-      hit_dice:
-        formGeneralInformation.hit_dice_number +
-        formGeneralInformation.hit_dice_die,
+      hit_dice: formGeneralInformation.hit_dice_number + formGeneralInformation.hit_dice_die,
       speed: payload_speeds,
       strength: formAbilityScores.ability_scores_STR,
       dexterity: formAbilityScores.ability_scores_DEX,
@@ -247,7 +230,7 @@ export class CreateNpcDialogComponent implements OnInit {
       damage_immunities: this.damage_immunities,
       condition_immunities: this.condition_immunities,
       senses: payload_senses,
-      languages: this.languages,
+      languages: payload_languages,
       challenge_rating: formGeneralInformation.challenge_rating,
       xp: formGeneralInformation.xp,
       special_abilities: formAbilitiesAndActions.special_abilities,
@@ -301,21 +284,15 @@ export class CreateNpcDialogComponent implements OnInit {
    */
   addActionOrAbility(identifier: string): void {
     if (identifier === "special_ability") {
-      const control = <FormArray>(
-        this.form.controls.abilitiesAndActions.get("special_abilities")
-      );
+      const control = <FormArray>this.form.controls.abilitiesAndActions.get("special_abilities");
       control.push(this.initSpecialAbilities());
     }
     if (identifier === "action") {
-      const control = <FormArray>(
-        this.form.controls.abilitiesAndActions.get("actions")
-      );
+      const control = <FormArray>this.form.controls.abilitiesAndActions.get("actions");
       control.push(this.initActions());
     }
     if (identifier === "legendary_action") {
-      const control = <FormArray>(
-        this.form.controls.abilitiesAndActions.get("legendary_actions")
-      );
+      const control = <FormArray>this.form.controls.abilitiesAndActions.get("legendary_actions");
       control.push(this.initLegendaryActions());
     }
   }
@@ -327,23 +304,17 @@ export class CreateNpcDialogComponent implements OnInit {
    */
   removeActionOrAbility(i: number, identifier: string): void {
     if (identifier === "special_ability") {
-      const control = <FormArray>(
-        this.form.controls.abilitiesAndActions.get("special_abilities")
-      );
+      const control = <FormArray>this.form.controls.abilitiesAndActions.get("special_abilities");
       control.removeAt(i);
     }
 
     if (identifier === "action") {
-      const control = <FormArray>(
-        this.form.controls.abilitiesAndActions.get("actions")
-      );
+      const control = <FormArray>this.form.controls.abilitiesAndActions.get("actions");
       control.removeAt(i);
     }
 
     if (identifier === "legendary_action") {
-      const control = <FormArray>(
-        this.form.controls.abilitiesAndActions.get("legendary_actions")
-      );
+      const control = <FormArray>this.form.controls.abilitiesAndActions.get("legendary_actions");
       control.removeAt(i);
     }
   }
@@ -355,33 +326,33 @@ export class CreateNpcDialogComponent implements OnInit {
    * @returns {Object} An Object of senses
    */
   getSenses(control: any): Object {
-    let blindsight = null;
-    let darkvision = null;
-    let tremorsense = null;
-    let passive_perception = null;
+    let blindsight: number = null;
+    let darkvision: number = null;
+    let tremorsense: number = null;
+    let passive_perception: number = null;
 
-    if (control.senses_Blindsight) {
-      blindsight = control.senses_Blindsight;
-    }
+    if (control.senses_Blindsight) blindsight = control.senses_Blindsight;
 
-    if (control.senses_Darkvision) {
-      darkvision = control.senses_Darkvision;
-    }
+    if (control.senses_Darkvision) darkvision = control.senses_Darkvision;
 
-    if (control.senses_Tremorsense) {
-      tremorsense = control.senses_Tremorsense;
-    }
+    if (control.senses_Tremorsense) tremorsense = control.senses_Tremorsense;
 
-    if (control.senses_Passive_Perception) {
-      passive_perception = control.senses_Passive_Perception;
-    }
+    if (control.senses_Passive_Perception) passive_perception = control.senses_Passive_Perception;
 
-    return {
-      blindsight: blindsight,
-      darkvision: darkvision,
-      tremorsense: tremorsense,
-      passive_perception: passive_perception,
-    };
+    if (
+      blindsight === null &&
+      darkvision === null &&
+      tremorsense === null &&
+      passive_perception === null
+    )
+      return null;
+    else
+      return {
+        blindsight: blindsight,
+        darkvision: darkvision,
+        tremorsense: tremorsense,
+        passive_perception: passive_perception,
+      };
   }
 
   /**
@@ -391,9 +362,9 @@ export class CreateNpcDialogComponent implements OnInit {
    * @returns {Object} An Object of speeds
    */
   getSpeeds(control: any): Object {
-    let walk = null;
-    let fly = null;
-    let swim = null;
+    let walk: string = null;
+    let fly: string = null;
+    let swim: string = null;
 
     if (control.speed_Walk) {
       walk = control.speed_Walk + "ft.";
@@ -407,11 +378,24 @@ export class CreateNpcDialogComponent implements OnInit {
       swim = control.speed_Swim + "ft.";
     }
 
-    return {
-      walk: walk,
-      fly: fly,
-      swim: swim,
-    };
+    if (walk === null && fly === null && swim === null) return null;
+    else
+      return {
+        walk: walk,
+        fly: fly,
+        swim: swim,
+      };
+  }
+
+  /**
+   * Gets the languages and prepares them for the payload. Returns null if the languages array is empty.
+   *
+   * @param {string[]} languages The languages.
+   * @returns {string[]} The languages array, and null if the array is empty.
+   */
+  getLanguages(languages: string[]): string[] {
+    if (!languages.length) return null;
+    else return languages;
   }
 
   /**
@@ -508,9 +492,7 @@ export class CreateNpcDialogComponent implements OnInit {
    * @returns
    */
   filter(data: string) {
-    return this.LANGUAGES.filter(
-      (element) => element.toLowerCase().indexOf(data.toLowerCase()) === 0
-    );
+    return this.LANGUAGES.filter((element) => element.toLowerCase().indexOf(data.toLowerCase()) === 0);
   }
 
   /**

@@ -18,7 +18,7 @@
     <!-- start::Size and Alignment -->
     <div *ngIf="dialogData.size || dialogData.alignment" class="row">
       <div class="col">
-        <span class="font-italic"> {{ dialogData.size }} </span>
+        <span class="font-italic">{{ dialogData.size }}</span>
         <span *ngIf="dialogData.alignment" class="font-italic">, {{ dialogData.alignment }} </span>
       </div>
     </div>
@@ -233,7 +233,7 @@
     <!-- end::Challenge Rating -->
 
     <!-- start::Special Abilities -->
-    <div *ngIf="dialogData.special_abilities">
+    <div *ngIf="dialogData.special_abilities.length">
       <h3 class="tc-red pt-5 font-weight-bolder">Special Abilities</h3>
 
       <!-- start:: DIVIDER -->
@@ -245,7 +245,7 @@
           <p>
             <span class="font-italic font-weight-bolder">
               {{ item.name }}
-              <span *ngIf="item.usage"> ({{ item.usage.times }} {{ item.usage.type }}) </span>.
+              <span *ngIf="item.usage"> ({{ item.usage.times }} {{ item.usage.type }})</span>.
             </span>
             {{ item.desc }}
           </p>
@@ -255,7 +255,7 @@
     <!-- end::Special Abilities-->
 
     <!-- start:: Actions -->
-    <div *ngIf="dialogData.actions">
+    <div *ngIf="dialogData.actions.length">
       <h3 class="tc-red pt-5 font-weight-bolder">Actions</h3>
 
       <!-- start:: DIVIDER -->
@@ -276,7 +276,7 @@
     <!-- end:: Actions-->
 
     <!-- start:: Legendary Actions -->
-    <div *ngIf="dialogData.legendary_actions">
+    <div *ngIf="dialogData.legendary_actions.length">
       <h3 class="tc-red pt-5 font-weight-bolder">Legendary Actions</h3>
 
       <!-- start:: DIVIDER -->
