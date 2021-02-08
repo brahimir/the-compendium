@@ -7,6 +7,7 @@ import { Storyboard } from "./_models/storyboard.model";
 import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
 // Services
 import { StoryboardService } from "src/app/views/pages/the-compendium-pages/dm-tools/storyboard/storyboard.service";
+import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 // CdkDragDrop
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 // RxJS
@@ -23,7 +24,6 @@ import { MatDialog } from "@angular/material/dialog";
 import { AddPlotDialogComponent } from "./storyboard-dialogs/add-plot-dialog/add-plot-dialog.component";
 import { EditPlotDialogComponent } from "./storyboard-dialogs/edit-plot-dialog/edit-plot-dialog.component";
 import { ConfirmationDialogComponent } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
-import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 
 /**
  * Storyboard Kanban Board.
@@ -95,8 +95,8 @@ export class StoryboardComponent implements OnInit {
    * Gets the most current version of the user's Storyboard.
    */
   refreshStoryboard(): void {
-    this.isLoading = true;
     this.apiService.getStoryboard(this.userId).subscribe((storyboard: Storyboard) => {
+      this.isLoading = true;
       this.plotsMain = storyboard.plotsMain;
       this.plotsInProgress = storyboard.plotsInProgress;
       this.plotsDone = storyboard.plotsDone;
