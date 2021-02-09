@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from "@angular/core";
 // Models
-import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
+import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/_models/confirmation-dialog.model";
 import { currentUser, User } from "src/app/core/auth";
 import { Session } from "../../_models/session.model";
 // Services

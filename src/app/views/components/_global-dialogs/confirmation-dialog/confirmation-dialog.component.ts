@@ -3,7 +3,8 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { CONSTANTS_GLOBAL } from "../../../pages/the-compendium-pages/constants";
 // MatDialog
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { ConfirmationDialog } from "./confirmation-dialog.model";
+import { ConfirmationDialog } from "./_models/confirmation-dialog.model";
+import { ConfirmationDialogResponse } from "./_models/confirmation-dialog-response.model";
 
 @Component({
   selector: "kt-confirmation-dialog",
@@ -39,7 +40,7 @@ export class ConfirmationDialogComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    let payload: any = {
+    let payload: ConfirmationDialogResponse = {
       isConfirmed: true,
     };
 

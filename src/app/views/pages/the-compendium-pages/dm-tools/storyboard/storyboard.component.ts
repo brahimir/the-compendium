@@ -4,7 +4,7 @@ import { CONSTANTS_STORYBOARD } from "./constants";
 // Models
 import { Plot } from "./_models/plot.model";
 import { Storyboard } from "./_models/storyboard.model";
-import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
+import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/_models/confirmation-dialog.model";
 // Services
 import { StoryboardService } from "src/app/views/pages/the-compendium-pages/dm-tools/storyboard/storyboard.service";
 import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";

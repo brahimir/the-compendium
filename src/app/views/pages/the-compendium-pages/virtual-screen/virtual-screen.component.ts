@@ -12,7 +12,7 @@ import { FormattingService } from "src/app/core/resources/_services/formatting.s
 import { VirtualScreenService } from "./virtual-screen.service";
 // Dialogs
 import { ConfirmationDialogComponent } from "../../../components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
-import { ConfirmationDialog } from "../../../components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
+import { ConfirmationDialog } from "../../../components/_global-dialogs/confirmation-dialog/_models/confirmation-dialog.model";
 import { CardDialogComponent } from "./card-dialog/card-dialog.component";
 // Material
 import { MatDialog } from "@angular/material/dialog";

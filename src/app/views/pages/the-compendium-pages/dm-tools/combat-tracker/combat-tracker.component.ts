@@ -21,7 +21,7 @@ import { AddCombatInstanceComponent } from "./_dialogs/add-combat-instance/add-c
 import { AddUnitDialogComponent } from "./_dialogs/add-unit-dialog/add-unit-dialog.component";
 import { EditUnitDialogComponent } from "./_dialogs/edit-unit-dialog/edit-unit-dialog.component";
 import { ConfirmationDialogComponent } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.component";
-import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/confirmation-dialog.model";
+import { ConfirmationDialog } from "src/app/views/components/_global-dialogs/confirmation-dialog/_models/confirmation-dialog.model";
 // MatTable
 import { MatSort, MatSortable, Sort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
