@@ -2,7 +2,6 @@
 // Main init file of global bootstrap and theme functions, mixins, variables and config
 //
 
-
 // Functions
 @import "base/functions";
 
@@ -24,3 +23,6 @@
 
 // Theme layout variables
 @import "layout/variables";
+
+// The Compendium Globals
+@import "./pages/tc-pages/init";
