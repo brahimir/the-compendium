@@ -10,88 +10,84 @@
   <!-- start:: Card Body -->
   <div class="card-body">
     <!-- start:: Resources-->
-    <div class="wrapper">
-      <div class="resources">
-        <h2 class="header-create">Resource</h2>
+    <div class="resources">
+      <h2 class="header-create">Resource</h2>
 
-        <div class="row">
-          <!-- start:: Create Weapon -->
-          <div class="col-6">
-            <button (click)="openCreateDialog('weapon')" mat-raised-button class="button">
-              <i class="fas fa-hammer"></i>
-              Weapon
-            </button>
-          </div>
-          <!-- end:: Create Weapon -->
-
-          <!-- start:: Create Armor -->
-          <div class="col-6">
-            <button (click)="openCreateDialog('armor')" mat-raised-button class="button">
-              <i class="fas fa-shield-alt"></i>
-              Armor
-            </button>
-          </div>
-          <!-- end:: Create Armor -->
+      <div class="row">
+        <!-- start:: Create Weapon -->
+        <div class="col-6">
+          <button (click)="openCreateDialog('weapon')" mat-raised-button class="button">
+            <i class="fas fa-hammer"></i>
+            Weapon
+          </button>
         </div>
+        <!-- end:: Create Weapon -->
 
-        <div class="row">
-          <!-- start:: Create Item -->
-          <div class="col-6">
-            <button (click)="openCreateDialog('item')" mat-raised-button class="button">
-              <i class="fas fa-glass-martini"></i>
-              Item
-            </button>
-          </div>
-          <!-- end:: Create Item -->
-
-          <!-- start:: Create Spell -->
-          <div class="col-6">
-            <button (click)="openCreateDialog('spell')" mat-raised-button class="button">
-              <i class="fas fa-hat-wizard"></i>
-              Spell
-            </button>
-          </div>
-          <!-- end:: Create Spell -->
+        <!-- start:: Create Armor -->
+        <div class="col-6">
+          <button (click)="openCreateDialog('armor')" mat-raised-button class="button">
+            <i class="fas fa-shield-alt"></i>
+            Armor
+          </button>
         </div>
+        <!-- end:: Create Armor -->
+      </div>
 
-        <div class="row">
-          <!-- start:: Create Monster -->
-          <div class="col">
-            <button (click)="openCreateDialog('npc')" mat-raised-button class="button">
-              <i class="fab fa-optin-monster"></i>
-              Monster
-            </button>
-          </div>
-          <!-- start:: Create Monster -->
+      <div class="row">
+        <!-- start:: Create Item -->
+        <div class="col-6">
+          <button (click)="openCreateDialog('item')" mat-raised-button class="button">
+            <i class="fas fa-glass-martini"></i>
+            Item
+          </button>
         </div>
+        <!-- end:: Create Item -->
+
+        <!-- start:: Create Spell -->
+        <div class="col-6">
+          <button (click)="openCreateDialog('spell')" mat-raised-button class="button">
+            <i class="fas fa-hat-wizard"></i>
+            Spell
+          </button>
+        </div>
+        <!-- end:: Create Spell -->
+      </div>
+
+      <div class="row">
+        <!-- start:: Create Monster -->
+        <div class="col">
+          <button (click)="openCreateDialog('npc')" mat-raised-button class="button">
+            <i class="fab fa-optin-monster"></i>
+            Monster
+          </button>
+        </div>
+        <!-- start:: Create Monster -->
       </div>
     </div>
     <!-- end:: Resources-->
 
     <!-- start:: Adventures -->
-    <div class="wrapper">
-      <div class="adventures">
-        <h2 class="header-create">Story</h2>
+    <div class="adventures">
+      <h2 class="header-create">Story</h2>
 
-        <div class="row">
-          <!-- start:: Create Session Summary -->
-          <div class="col-6">
-            <button (click)="openCreateDialog('session')" mat-raised-button class="button">
-              <i class="fas fa-clipboard-list"></i>
-              Session
-            </button>
-          </div>
-          <!-- end:: Create Session Summary -->
-
-          <!-- start:: Create Adventure -->
-          <div class="col-6">
-            <button (click)="openCreateDialog('adventure')" mat-raised-button disabled class="button">
-              <i class="fas fa-globe-americas"></i>
-              Adventure (coming soon)
-            </button>
-          </div>
-          <!-- end:: Create Adventure -->
+      <div class="row">
+        <!-- start:: Create Session Summary -->
+        <div class="col-6">
+          <button (click)="openCreateDialog('session')" mat-raised-button class="button">
+            <i class="fas fa-clipboard-list"></i>
+            Session
+          </button>
         </div>
+        <!-- end:: Create Session Summary -->
+
+        <!-- start:: Create Adventure -->
+        <div class="col-6">
+          <button (click)="openCreateDialog('adventure')" mat-raised-button disabled class="button">
+            <i class="fas fa-globe-americas"></i>
+            Adventure (coming soon)
+          </button>
+        </div>
+        <!-- end:: Create Adventure -->
       </div>
     </div>
     <!-- end:: Adventures -->
