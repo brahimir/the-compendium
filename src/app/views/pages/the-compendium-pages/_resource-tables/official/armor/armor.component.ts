@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
 import { Armor } from "../../../../../../core/resources/_models/armor.model";
 // Services
+import { armors } from "../../../../../../core/resources/_server/armors.table";
 import { ArmorsService } from "../../../../../../core/resources/_services/official-services/armors.service";
 // Angular Material
 import { MatTableDataSource } from "@angular/material/table";
@@ -53,7 +54,19 @@ export class ArmorsComponent implements OnInit, AfterViewInit {
    *
    * TODO - refactor to set the datasource AFTER getting data from the service.
    */
-  updateArmors(): void {}
+  updateArmors(): void {
+    this.TABLE_DATA = armors;
+
+    // Set the DataSource for MatTableData.
+    this.dataSource = new MatTableDataSource<Armor>(this.TABLE_DATA);
+
+    // Set Paginators and Sorts.
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+    // const blob = new Blob([JSON.stringify(this.TABLE_DATA)], { type: "application/json" });
+    // saveAs(blob, "Armors.json");
+  }
 
   /**
    * Opens Details Dialog for a Armor.

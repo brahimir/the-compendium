@@ -1,5 +1,4 @@
 export interface Armor {
-  id: number;
   // start:: Official Schema
   name: string;
   armor_category: string;
@@ -16,8 +15,9 @@ export interface Armor {
     unit: string;
   };
   // end:: Official Schema
-  requires_attunement: boolean;
-  rarity: string;
-  desc: string[];
-  ratings: number[];
+  id?: number;
+  requires_attunement?: boolean;
+  rarity?: string;
+  desc?: string[];
+  ratings?: number[];
 }
