@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 // Models
 import { Weapon } from "../../_models/weapon.model";
 // Routes
-import { API_ROUTES } from "../../../../../environments/app-secrets";
+import { API_ROUTES } from "../../../../../../../environments/app-secrets";
 // Http
 import { HttpClient } from "@angular/common/http";
 // RXJS
@@ -13,7 +13,7 @@ const BASE_URL = API_ROUTES.OFFICIAL.BASE;
 const WEAPON_URL = API_ROUTES.OFFICIAL.WEAPONS;
 
 @Injectable({
-  providedIn: "root",
+  providedIn: "root"
 })
 export class WeaponService {
   constructor(private http: HttpClient) {}
@@ -51,39 +51,6 @@ export class WeaponService {
    * @returns {Armor[]} The array of Weapon Objects.
    */
   generateWeaponObject(element: any): Weapon {
-    if (element.throw_range) {
-      return new Weapon(
-        element._id,
-        element.name,
-        element.weapon_category,
-        element.weapon_range,
-        element.cost,
-        element.damage,
-        element.range,
-        element.weight,
-        element.properties,
-        element.requires_attunement,
-        element.rarity,
-        element.desc,
-        element.rarity,
-        element.throw_range
-      );
-    } else {
-      return new Weapon(
-        element._id,
-        element.name,
-        element.weapon_category,
-        element.weapon_range,
-        element.cost,
-        element.damage,
-        element.range,
-        element.weight,
-        element.properties,
-        element.requires_attunement,
-        element.rarity,
-        element.desc,
-        element.rarity
-      );
-    }
+    return element;
   }
 }

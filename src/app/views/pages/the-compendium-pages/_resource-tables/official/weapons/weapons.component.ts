@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
-import { Weapon } from "../../../../../../core/resources/_models/weapon.model";
+import { Weapon } from "../../_models/weapon.model";
 // Services
-import { WeaponService } from "../../../../../../core/resources/_services/official-services/weapons.service";
+import { WeaponService } from "./weapons.service";
 // MatTable
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
@@ -11,25 +11,21 @@ import { MatDialog } from "@angular/material/dialog";
 // Details Dialog
 import { WeaponDetailsDialogComponent } from "../../resource-details-dialog/weapon-details-dialog/weapon-details-dialog.component";
 
+import { saveAs } from "file-saver";
+
 /**
  * @title Weapons table with Pagination
  */
 @Component({
   selector: "kt-weapons",
   templateUrl: "./weapons.component.html",
-  styleUrls: ["./weapons.component.scss"],
+  styleUrls: ["./weapons.component.scss"]
 })
 export class WeaponsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  columnsToDisplay: any[] = [
-    "name",
-    "weapon_category",
-    "damage",
-    "range",
-    "cost",
-  ];
+  columnsToDisplay: any[] = ["name", "weapon_category", "damage", "range", "cost"];
 
   // Datasource for MatTable
   dataSource: any;
@@ -37,10 +33,7 @@ export class WeaponsComponent implements OnInit, AfterViewInit {
   // Weapons
   TABLE_DATA: Weapon[] = [];
 
-  constructor(
-    private weaponsService: WeaponService,
-    public dialog: MatDialog
-  ) {}
+  constructor(private weaponsService: WeaponService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.updateWeapons();
@@ -58,17 +51,18 @@ export class WeaponsComponent implements OnInit, AfterViewInit {
   updateWeapons(): void {
     this.weaponsService.getAllWeapons().subscribe((equipmentData: any) => {
       equipmentData.forEach((element) => {
-        this.weaponsService
-          .getWeaponObject(element.url)
-          .subscribe((weaponData: any) => {
-            this.TABLE_DATA.push(weaponData);
-            // Set the DataSource for MatTableData.
-            this.dataSource = new MatTableDataSource<Weapon>(this.TABLE_DATA);
+        this.weaponsService.getWeaponObject(element.url).subscribe((weaponData: any) => {
+          this.TABLE_DATA.push(weaponData);
+          // Set the DataSource for MatTableData.
+          this.dataSource = new MatTableDataSource<Weapon>(this.TABLE_DATA);
 
-            // Set Paginators and Sorts.
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-          });
+          // Set Paginators and Sorts.
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+
+          const blob = new Blob([JSON.stringify(this.TABLE_DATA)], { type: "application/json" });
+          saveAs(blob, "Weapons.json");
+        });
       });
     });
   }
@@ -83,14 +77,11 @@ export class WeaponsComponent implements OnInit, AfterViewInit {
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData,
+      data: dialogData
     };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      WeaponDetailsDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(WeaponDetailsDialogComponent, dialogOptions);
 
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe((result) => {});

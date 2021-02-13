@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 // Models
-import { Weapon } from "../../_models/weapon.model";
+import { Weapon } from "../../../../views/pages/the-compendium-pages/_resource-tables/_models/weapon.model";
 // Routes
 import { API_ROUTES } from "../../../../../environments/app-secrets";
 // Http
@@ -13,7 +13,7 @@ import { map, catchError } from "rxjs/operators";
 const BASE_URL = API_ROUTES.HOMEBREW.WEAPONS;
 
 @Injectable({
-  providedIn: "root",
+  providedIn: "root"
 })
 export class HomebrewWeaponsService {
   constructor(private http: HttpClient) {}
@@ -58,31 +58,15 @@ export class HomebrewWeaponsService {
 
   /**
    * Returns an array of Weapon Objects (defined by the model).
-   * 
+   *
    * @param data Raw data from API.
    * @returns {Weapon[]} The array of Weapon Objects.
    */
   generateWeaponObjects(data: any): Weapon[] {
     let weaponObjects: Weapon[] = [];
 
-    data.forEach((element) => {
-      weaponObjects.push(
-        new Weapon(
-          element._id,
-          element.name,
-          element.weapon_category,
-          element.weapon_range,
-          element.cost,
-          element.damage,
-          element.range,
-          element.weight,
-          element.properties,
-          element.requires_attunement,
-          element.rarity,
-          element.desc,
-          element.rarity
-        )
-      );
+    data.forEach((element: Weapon) => {
+      weaponObjects.push(element);
     });
 
     return weaponObjects;

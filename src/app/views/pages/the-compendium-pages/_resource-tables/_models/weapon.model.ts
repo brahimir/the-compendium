@@ -1,26 +1,26 @@
 export interface Weapon {
-  id: number;
+  id?: number;
   // start:: Official Schema
   name: string;
-  weapon_category: string;
-  weapon_range: string;
-  cost: {
+  weapon_category?: string;
+  weapon_range?: string;
+  cost?: {
     quantity: number;
     unit: string;
   };
-  damage: {
+  damage?: {
     damage_dice: string;
     damage_type: string;
   };
-  range: {
+  range?: {
     normal: number;
     long: number;
   };
-  weight: number;
-  properties: string[];
+  weight?: number;
+  properties?: string[];
   // end:: Official Schema
-  requires_attunement: boolean;
-  rarity: string;
-  desc: string[];
-  ratings: number[];
+  requires_attunement?: boolean;
+  rarity?: string;
+  desc?: string[];
+  ratings?: number[];
 }
