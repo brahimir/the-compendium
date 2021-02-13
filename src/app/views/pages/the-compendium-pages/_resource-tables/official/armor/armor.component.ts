@@ -17,7 +17,7 @@ import { ArmorDetailsDialogComponent } from "../../resource-details-dialog/armor
 @Component({
   selector: "kt-armor",
   templateUrl: "./armor.component.html",
-  styleUrls: ["./armor.component.scss"],
+  styleUrls: ["./armor.component.scss"]
 })
 export class ArmorsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -29,7 +29,7 @@ export class ArmorsComponent implements OnInit, AfterViewInit {
     "armor_class.base",
     "stealth_disadvantage",
     "str_minimum",
-    "cost",
+    "cost"
   ];
 
   // Datasource for MatTable
@@ -53,22 +53,7 @@ export class ArmorsComponent implements OnInit, AfterViewInit {
    *
    * TODO - refactor to set the datasource AFTER getting data from the service.
    */
-  updateArmors(): void {
-    this.armorsService.getAllArmors().subscribe((equipmentData: any) => {
-      equipmentData.forEach((element) => {
-        this.armorsService.getArmorObject(element.url).subscribe((armorData: any) => {
-          this.TABLE_DATA.push(armorData);
-
-          // Set the DataSource for MatTableData.
-          this.dataSource = new MatTableDataSource<Armor>(this.TABLE_DATA);
-
-          // Set Paginators and Sorts.
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        });
-      });
-    });
-  }
+  updateArmors(): void {}
 
   /**
    * Opens Details Dialog for a Armor.
@@ -80,7 +65,7 @@ export class ArmorsComponent implements OnInit, AfterViewInit {
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData,
+      data: dialogData
     };
 
     // Opens the dialog window.
