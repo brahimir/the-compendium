@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
 import { Weapon } from "../../_models/weapon.model";
 // Services
-import { WeaponService } from "./weapons.service";
+import { weapons } from "./weapons.table";
 // MatTable
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
@@ -10,8 +10,6 @@ import { MatSort } from "@angular/material/sort";
 import { MatDialog } from "@angular/material/dialog";
 // Details Dialog
 import { WeaponDetailsDialogComponent } from "../../resource-details-dialog/weapon-details-dialog/weapon-details-dialog.component";
-
-import { saveAs } from "file-saver";
 
 /**
  * @title Weapons table with Pagination
@@ -33,38 +31,26 @@ export class WeaponsComponent implements OnInit, AfterViewInit {
   // Weapons
   TABLE_DATA: Weapon[] = [];
 
-  constructor(private weaponsService: WeaponService, public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.updateWeapons();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    // Set the DataSource for MatTableData.
+    this.dataSource = new MatTableDataSource<Weapon>(this.TABLE_DATA);
+
+    // Set Paginators and Sorts.
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   /**
-   * Get all Homebrew Armors from API.
-   * Set up DataSource for MatTableData.
-   * Set up Paginators and Sorts.
-   *
-   * TODO - refactor to set the datasource AFTER getting data from the service.
+   * Update weapons
    */
   updateWeapons(): void {
-    this.weaponsService.getAllWeapons().subscribe((equipmentData: any) => {
-      equipmentData.forEach((element) => {
-        this.weaponsService.getWeaponObject(element.url).subscribe((weaponData: any) => {
-          this.TABLE_DATA.push(weaponData);
-          // Set the DataSource for MatTableData.
-          this.dataSource = new MatTableDataSource<Weapon>(this.TABLE_DATA);
-
-          // Set Paginators and Sorts.
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-
-          const blob = new Blob([JSON.stringify(this.TABLE_DATA)], { type: "application/json" });
-          saveAs(blob, "Weapons.json");
-        });
-      });
-    });
+    this.TABLE_DATA = weapons;
   }
 
   /**

@@ -10,17 +10,18 @@ export interface Weapon {
   };
   damage?: {
     damage_dice: string;
-    damage_type: string;
+    damage_type: Object;
   };
   range?: {
     normal: number;
     long: number;
   };
   weight?: number;
-  properties?: string[];
+  properties?: Object[];
   // end:: Official Schema
   requires_attunement?: boolean;
   rarity?: string;
   desc?: string[];
   ratings?: number[];
+  throw_range?: Object;
 }

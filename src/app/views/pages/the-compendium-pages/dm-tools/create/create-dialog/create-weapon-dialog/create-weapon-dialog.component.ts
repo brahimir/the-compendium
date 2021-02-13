@@ -14,7 +14,7 @@ import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 @Component({
   selector: "kt-create-weapon-dialog",
   templateUrl: "./create-weapon-dialog.component.html",
-  styleUrls: ["./create-weapon-dialog.component.scss"],
+  styleUrls: ["./create-weapon-dialog.component.scss"]
 })
 export class CreateWeaponDialogComponent implements OnInit {
   // Public properties
@@ -63,14 +63,14 @@ export class CreateWeaponDialogComponent implements OnInit {
         weight: [""],
         requires_attunement: [""],
         rarity: ["", Validators.required],
-        description: ["", Validators.required],
+        description: ["", Validators.required]
       }),
       damageAndRange: this.fb.group({
         damage_dice_number: ["", Validators.required],
         damage_dice_die: ["", Validators.required],
         damage_type: ["", Validators.required],
         range_normal: [""],
-        range_long: [""],
+        range_long: [""]
       }),
       properties: this.fb.group({
         properties_Ammunition: [false],
@@ -83,8 +83,8 @@ export class CreateWeaponDialogComponent implements OnInit {
         properties_Special: [false],
         properties_Thrown: [false],
         properties_Two_Handed: [false],
-        properties_Versatile: [false],
-      }),
+        properties_Versatile: [false]
+      })
     });
   }
 
@@ -118,21 +118,19 @@ export class CreateWeaponDialogComponent implements OnInit {
       (res) => {
         this.isSubmitted = true;
         this.dialogRef.close({ isisSubmitted: this.isSubmitted });
+
+        // Show confirmation snackbar message.
+        const message = "Homebrew Weapon successfully added.";
+        this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
       },
       (err) => {
         this.dialogRef.close({ isisSubmitted: this.isSubmitted });
         console.log(err);
-      }
-    );
 
-    // Show confirmation snackbar message.
-    const message = "Homebrew Weapon successfully added.";
-    this.layoutUtilsService.showActionNotification(
-      message,
-      MessageType.Create,
-      5000,
-      true,
-      true
+        // Show error snackbar message.
+        const message = "There was a problem adding your Homebrew Weapon. Please try again.";
+        this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
+      }
     );
   }
 
@@ -149,25 +147,24 @@ export class CreateWeaponDialogComponent implements OnInit {
       weapon_range: generalInformation.weapon_range,
       cost: {
         quantity: generalInformation.cost_quantity,
-        unit: generalInformation.cost_unit,
+        unit: generalInformation.cost_unit
       },
       damage: {
-        damage_dice:
-          damageAndRange.damage_dice_number + damageAndRange.damage_dice_die,
+        damage_dice: damageAndRange.damage_dice_number + damageAndRange.damage_dice_die,
         damage_type: {
-          name: damageAndRange.damage_type,
-        },
+          name: damageAndRange.damage_type
+        }
       },
       range: {
         normal: damageAndRange.range_normal,
-        long: damageAndRange.range_long,
+        long: damageAndRange.range_long
       },
       weight: generalInformation.weight,
       properties: this.getPropertiesArray(properties),
       // end:: Official Schema
       requires_attunement: generalInformation.requires_attunement,
       rarity: generalInformation.rarity,
-      desc: [generalInformation.description],
+      desc: [generalInformation.description]
     };
 
     return payload;
@@ -188,7 +185,7 @@ export class CreateWeaponDialogComponent implements OnInit {
         propertyName = property.split("_")[1];
 
         results.push({
-          name: propertyName,
+          name: propertyName
         });
       }
     }
