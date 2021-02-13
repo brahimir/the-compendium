@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 // Models
-import { Armor } from "../../_models/armor.model";
+import { Armor } from "../../../../views/pages/the-compendium-pages/_resource-tables/_models/armor.model";
 // Routes
 import { API_ROUTES } from "../../../../../environments/app-secrets";
 // Http
@@ -13,7 +13,7 @@ import { map, catchError } from "rxjs/operators";
 const BASE_URL = API_ROUTES.HOMEBREW.ARMORS;
 
 @Injectable({
-  providedIn: "root",
+  providedIn: "root"
 })
 export class HomebrewArmorsService {
   constructor(private http: HttpClient) {}
@@ -48,10 +48,6 @@ export class HomebrewArmorsService {
     return this.http.delete(`${BASE_URL}/${id}`);
   }
 
-  deleteAll(): Observable<any> {
-    return this.http.delete(BASE_URL);
-  }
-
   findByTitle(title): Observable<any> {
     return this.http.get(`${BASE_URL}?title=${title}`);
   }
@@ -65,23 +61,8 @@ export class HomebrewArmorsService {
   generateArmorObjects(data: any): Armor[] {
     let armorObjects: Armor[] = [];
 
-    data.forEach((element) => {
-      armorObjects.push(
-        new Armor(
-          element._id,
-          element.name,
-          element.armor_category,
-          element.armor_class,
-          element.str_minimum,
-          element.stealth_disadvantage,
-          element.weight,
-          element.cost,
-          element.requires_attunement,
-          element.rarity,
-          element.desc,
-          element.ratings
-        )
-      );
+    data.forEach((element: Armor) => {
+      armorObjects.push(element);
     });
 
     return armorObjects;

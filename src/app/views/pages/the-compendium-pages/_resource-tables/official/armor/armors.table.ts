@@ -1,4 +1,4 @@
-import { Armor } from "../_models/armor.model";
+import { Armor } from "../../_models/armor.model";
 
 export const armors: Armor[] = [
   {

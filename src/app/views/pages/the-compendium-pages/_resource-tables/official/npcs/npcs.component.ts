@@ -18,16 +18,10 @@ import { NpcDetailsDialogComponent } from "../../resource-details-dialog/npc-det
 @Component({
   selector: "kt-npcs",
   templateUrl: "./npcs.component.html",
-  styleUrls: ["./npcs.component.scss"],
+  styleUrls: ["./npcs.component.scss"]
 })
 export class NpcsComponent implements OnInit, AfterViewInit {
-  columnsToDisplay: any[] = [
-    "name",
-    "alignment",
-    "armor_class",
-    "hit_points",
-    "challenge_rating",
-  ];
+  columnsToDisplay: any[] = ["name", "alignment", "armor_class", "hit_points", "challenge_rating"];
 
   // DataSource for MatTable
   dataSource: any;
@@ -69,6 +63,9 @@ export class NpcsComponent implements OnInit, AfterViewInit {
           // Set Paginators and Sorts.
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+
+          // const blob = new Blob([JSON.stringify(this.TABLE_DATA)], { type: "application/json" });
+          // saveAs(blob, "Armors.json");
         });
       });
     });
@@ -84,14 +81,11 @@ export class NpcsComponent implements OnInit, AfterViewInit {
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData,
+      data: dialogData
     };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      NpcDetailsDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(NpcDetailsDialogComponent, dialogOptions);
 
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe((result) => {});

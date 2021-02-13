@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
-import { Armor } from "../../../../../../core/resources/_models/armor.model";
+import { Armor } from "../../_models/armor.model";
 // Services
 import { HomebrewArmorsService } from "../../../../../../core/resources/_services/homebrew-services/homebrew-armors.service";
 // MatTable
@@ -14,7 +14,7 @@ import { ArmorDetailsDialogComponent } from "../../resource-details-dialog/armor
 @Component({
   selector: "kt-homebrew-armor",
   templateUrl: "../../official/armor/armor.component.html",
-  styleUrls: ["./homebrew-armor.component.scss"],
+  styleUrls: ["./homebrew-armor.component.scss"]
 })
 export class HomebrewArmorsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -26,7 +26,7 @@ export class HomebrewArmorsComponent implements OnInit, AfterViewInit {
     "armor_class.base",
     "stealth_disadvantage",
     "str_minimum",
-    "cost",
+    "cost"
   ];
 
   // Datasource for MatTable
@@ -71,7 +71,7 @@ export class HomebrewArmorsComponent implements OnInit, AfterViewInit {
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData,
+      data: dialogData
     };
 
     // Opens the dialog window.

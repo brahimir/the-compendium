@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 // Models
 import { Armor } from "../../_models/armor.model";
 // Routes
-import { API_ROUTES } from "../../../../../environments/app-secrets";
+import { API_ROUTES } from "../../../../../../../environments/app-secrets";
 // Http
 import { HttpClient } from "@angular/common/http";
 // RXJS

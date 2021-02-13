@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
-import { Item } from "../../../../../../core/resources/_models/item.model";
+import { Item } from "../../_models/item.model";
 // Services
-import { ItemsService } from "../../../../../../core/resources/_services/official-services/items.service";
+import { items } from "./items.table";
 // Angular Material
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
@@ -11,23 +11,21 @@ import { MatSort } from "@angular/material/sort";
 // Dialog Component
 import { ItemDetailsDialogComponent } from "../../resource-details-dialog/item-details-dialog/item-details-dialog.component";
 
+import { saveAs } from "file-saver";
+
 /**
  * @title Items table with Pagination
  */
 @Component({
   selector: "kt-items",
   templateUrl: "./items.component.html",
-  styleUrls: ["./items.component.scss"],
+  styleUrls: ["./items.component.scss"]
 })
 export class ItemsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  columnsToDisplay: any[] = [
-    "name", 
-    "weight",
-    "cost"
-  ];
+  columnsToDisplay: any[] = ["name", "weight", "cost"];
 
   // Datasource for MatTable
   dataSource: any;
@@ -35,13 +33,20 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   // Items
   TABLE_DATA: Item[] = [];
 
-  constructor(private itemsService: ItemsService, public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.updateItems();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    // Set the DataSource for MatTableData.
+    this.dataSource = new MatTableDataSource<Item>(this.TABLE_DATA);
+
+    // Set Paginators and Sorts.
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   /**
    * Get all Homebrew Items from API.
@@ -51,28 +56,7 @@ export class ItemsComponent implements OnInit, AfterViewInit {
    * TODO - refactor to set the datasource AFTER getting data from the service.
    */
   updateItems(): void {
-    this.itemsService.getAllEquipment().subscribe((equipmentData: any) => {
-      this.itemsService.getAllMagicItems().subscribe((magicItemsData: any) => {
-        equipmentData.push(...magicItemsData);
-        
-        let itemData = equipmentData;
-
-        itemData.forEach((element) => {
-          this.itemsService
-            .getItemObject(element.url)
-            .subscribe((itemData: any) => {
-              this.TABLE_DATA.push(itemData);
-
-              // Set the DataSource for MatTableData.
-              this.dataSource = new MatTableDataSource<Item>(this.TABLE_DATA);
-
-              // Set Paginators and Sorts.
-              this.dataSource.paginator = this.paginator;
-              this.dataSource.sort = this.sort;
-            });
-        });
-      });
-    });
+    this.TABLE_DATA = items;
   }
 
   /**
@@ -85,14 +69,11 @@ export class ItemsComponent implements OnInit, AfterViewInit {
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData,
+      data: dialogData
     };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      ItemDetailsDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(ItemDetailsDialogComponent, dialogOptions);
 
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe((result) => {});
