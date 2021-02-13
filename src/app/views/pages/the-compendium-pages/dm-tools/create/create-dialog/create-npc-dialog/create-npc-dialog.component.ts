@@ -22,7 +22,7 @@ import { FormattingService } from "src/app/core/resources/_services/formatting.s
 @Component({
   selector: "kt-create-npc-dialog",
   templateUrl: "./create-npc-dialog.component.html",
-  styleUrls: ["./create-npc-dialog.component.scss"],
+  styleUrls: ["./create-npc-dialog.component.scss"]
 })
 export class CreateNpcDialogComponent implements OnInit {
   // Public properties
@@ -117,12 +117,12 @@ export class CreateNpcDialogComponent implements OnInit {
         languages: [""],
         challenge_rating: [""],
         proficiencies: [""],
-        xp: [""],
+        xp: [""]
       }),
       speed: this.fb.group({
         speed_Walk: [""],
         speed_Fly: [""],
-        speed_Swim: [""],
+        speed_Swim: [""]
       }),
       abilityScores: this.fb.group({
         ability_scores_STR: [10],
@@ -130,26 +130,26 @@ export class CreateNpcDialogComponent implements OnInit {
         ability_scores_CON: [10],
         ability_scores_INT: [10],
         ability_scores_WIS: [10],
-        ability_scores_CHA: [10],
+        ability_scores_CHA: [10]
       }),
       resistancesAndVulnerabilities: this.fb.group({
         rav_damage_vulnerabilities: [""],
         rav_damage_resistances: [""],
         rav_damage_immunities: [""],
-        rav_condition_immunities: [""],
+        rav_condition_immunities: [""]
       }),
       senses: this.fb.group({
         senses_Blindsight: [""],
         senses_Darkvision: [""],
         senses_Tremorsense: [""],
         senses_Truesight: [""],
-        senses_Passive_Perception: [""],
+        senses_Passive_Perception: [""]
       }),
       abilitiesAndActions: this.fb.group({
         special_abilities: this.fb.array([]),
         actions: this.fb.array([]),
-        legendary_actions: this.fb.array([]),
-      }),
+        legendary_actions: this.fb.array([])
+      })
     });
   }
 
@@ -178,20 +178,25 @@ export class CreateNpcDialogComponent implements OnInit {
 
     let payload = this.preparePayload();
 
+    // Save to server.
     this.apiService.create(payload).subscribe(
       (res) => {
         this.isSubmitted = true;
         this.dialogRef.close({ isSubmitted: this.isSubmitted });
+
+        // Show confirmation snackbar message.
+        const message = "Homebrew Monster successfully added.";
+        this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
       },
       (err) => {
         this.dialogRef.close({ isSubmitted: this.isSubmitted });
+
         console.log(err);
+        // Show error snackbar message.
+        const message = "There was a problem creating the Homebrew Monster. Please try again.";
+        this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
       }
     );
-
-    // Show confirmation snackbar message.
-    const message = "Homebrew Monster successfully added.";
-    this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
   }
 
   preparePayload(): any {
@@ -207,8 +212,14 @@ export class CreateNpcDialogComponent implements OnInit {
     let payload_senses = this.getSenses(formSenses);
     let payload_languages = this.getLanguages(this.languages);
 
+    // Set Actions and Abilities for payload.
+    let payload_special_abilities = this.checkArrayEmpty(formAbilitiesAndActions.special_abilities);
+    let payload_actions = this.checkArrayEmpty(formAbilitiesAndActions.actions);
+    let payload_legendary_actions = this.checkArrayEmpty(formAbilitiesAndActions.legendary_actions);
+
     // Prepare payload to POST.
     let payload: any = {
+      // General Information
       name: formGeneralInformation.name,
       size: formGeneralInformation.size,
       type: formGeneralInformation.type,
@@ -217,25 +228,35 @@ export class CreateNpcDialogComponent implements OnInit {
       armor_class: formGeneralInformation.armor_class,
       hit_points: formGeneralInformation.hit_points,
       hit_dice: formGeneralInformation.hit_dice_number + formGeneralInformation.hit_dice_die,
+      languages: payload_languages,
+      proficiencies: this.proficiencies,
+      challenge_rating: formGeneralInformation.challenge_rating,
+      xp: formGeneralInformation.xp,
+
+      // Speed
       speed: payload_speeds,
+
+      // Ability Scores
       strength: formAbilityScores.ability_scores_STR,
       dexterity: formAbilityScores.ability_scores_DEX,
       constitution: formAbilityScores.ability_scores_CON,
       intelligence: formAbilityScores.ability_scores_INT,
       wisdom: formAbilityScores.ability_scores_WIS,
       charisma: formAbilityScores.ability_scores_CHA,
-      proficiencies: this.proficiencies,
+
+      // Resistances and Vulnerabilities
       damage_vulnerabilities: this.damage_vulnerabilities,
       damage_resistances: this.damage_resistances,
       damage_immunities: this.damage_immunities,
       condition_immunities: this.condition_immunities,
+
+      // Senses
       senses: payload_senses,
-      languages: payload_languages,
-      challenge_rating: formGeneralInformation.challenge_rating,
-      xp: formGeneralInformation.xp,
-      special_abilities: formAbilitiesAndActions.special_abilities,
-      actions: formAbilitiesAndActions.actions,
-      legendary_actions: formAbilitiesAndActions.legendary_actions,
+
+      // Abilties and Actions
+      special_abilities: payload_special_abilities,
+      actions: payload_actions,
+      legendary_actions: payload_legendary_actions
     };
 
     return payload;
@@ -249,7 +270,7 @@ export class CreateNpcDialogComponent implements OnInit {
   initSpecialAbilities(): FormGroup {
     return this.fb.group({
       name: ["", Validators.required],
-      desc: ["", Validators.required],
+      desc: ["", Validators.required]
     });
   }
 
@@ -261,7 +282,7 @@ export class CreateNpcDialogComponent implements OnInit {
   initActions(): FormGroup {
     return this.fb.group({
       name: ["", Validators.required],
-      desc: ["", Validators.required],
+      desc: ["", Validators.required]
     });
   }
 
@@ -273,25 +294,25 @@ export class CreateNpcDialogComponent implements OnInit {
   initLegendaryActions(): FormGroup {
     return this.fb.group({
       name: ["", Validators.required],
-      desc: ["", Validators.required],
+      desc: ["", Validators.required]
     });
   }
 
   /**
    * Adds a new FromGroup control to the abilitiesAndActions FormArray.
    *
-   * @param {string} identifier Which FormGroup control to add.
+   * @param {string} index Which FormGroup control to add.
    */
-  addActionOrAbility(identifier: string): void {
-    if (identifier === "special_ability") {
+  addActionOrAbility(index: string): void {
+    if (index === "special_ability") {
       const control = <FormArray>this.form.controls.abilitiesAndActions.get("special_abilities");
       control.push(this.initSpecialAbilities());
     }
-    if (identifier === "action") {
+    if (index === "action") {
       const control = <FormArray>this.form.controls.abilitiesAndActions.get("actions");
       control.push(this.initActions());
     }
-    if (identifier === "legendary_action") {
+    if (index === "legendary_action") {
       const control = <FormArray>this.form.controls.abilitiesAndActions.get("legendary_actions");
       control.push(this.initLegendaryActions());
     }
@@ -351,7 +372,7 @@ export class CreateNpcDialogComponent implements OnInit {
         blindsight: blindsight,
         darkvision: darkvision,
         tremorsense: tremorsense,
-        passive_perception: passive_perception,
+        passive_perception: passive_perception
       };
   }
 
@@ -383,8 +404,19 @@ export class CreateNpcDialogComponent implements OnInit {
       return {
         walk: walk,
         fly: fly,
-        swim: swim,
+        swim: swim
       };
+  }
+
+  /**
+   * Checks if the passed array is empty; returns null if it is.
+   *
+   * @param {string} array The array to check
+   * @returns {Object} The array if not empty; null if empty.
+   */
+  checkArrayEmpty(array: Object[]): Object[] {
+    if (array.length) return array;
+    else return null;
   }
 
   /**
