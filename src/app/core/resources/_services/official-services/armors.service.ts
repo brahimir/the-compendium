@@ -13,7 +13,7 @@ const BASE_URL = API_ROUTES.OFFICIAL.BASE;
 const ARMOR_URL = API_ROUTES.OFFICIAL.ARMORS;
 
 @Injectable({
-  providedIn: "root",
+  providedIn: "root"
 })
 export class ArmorsService {
   constructor(private http: HttpClient) {}
@@ -22,7 +22,7 @@ export class ArmorsService {
    *
    * @returns {Observable<any>} Observable of equipments.
    */
-  getAllArmors(): Observable<any> {
+  getAllEquipments(): Observable<any> {
     return this.http.get(ARMOR_URL).pipe(
       map((data: any) => {
         return data.equipment;
@@ -37,9 +37,11 @@ export class ArmorsService {
    * @returns {Observable<any>} Observable Armor Object.
    */
   getArmorObject(url: string): Observable<any> {
-    return this.http.get(BASE_URL + url).pipe(map((data: any) => {
-      return this.generateArmorObject(data);
-    }));
+    return this.http.get(BASE_URL + url).pipe(
+      map((data: any) => {
+        return this.generateArmorObject(data);
+      })
+    );
   }
 
   /**
