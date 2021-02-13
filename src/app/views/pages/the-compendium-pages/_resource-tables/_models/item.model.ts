@@ -1,7 +1,8 @@
 export interface Item {
-  id?: number;
-  // start:: Official Schema
+  // Required
   name: string;
+  // Optional
+  id?: number;
   equipment_category?: Object;
   gear_category?: Object;
   cost?: {
@@ -11,5 +12,4 @@ export interface Item {
   weight?: number;
   desc?: string[];
   contents?: Object;
-  // end:: Official Schema
 }

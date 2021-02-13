@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
-import { Npc } from "src/app/core/resources/_models/npc.model";
+import { Npc } from "../../_models/npc.model";
 // Services
-import { NpcsService } from "src/app/core/resources/_services//official-services/npcs.service";
+import { npcs } from "./npcs.table";
 import { FormattingService } from "src/app/core/resources/_services/formatting.service";
 // Angular Material
 import { MatTableDataSource } from "@angular/material/table";
@@ -11,6 +11,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatSort } from "@angular/material/sort";
 // Dialog Component
 import { NpcDetailsDialogComponent } from "../../resource-details-dialog/npc-details-dialog/npc-details-dialog.component";
+
+// import { saveAs } from "file-saver";
 
 /**
  * @title Npcs table with Pagination
@@ -32,17 +34,20 @@ export class NpcsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(
-    private npcsService: NpcsService,
-    public dialog: MatDialog,
-    private formattingService: FormattingService
-  ) {}
+  constructor(public dialog: MatDialog, private formattingService: FormattingService) {}
 
   ngOnInit(): void {
     this.updateNpcs();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    // Set the DataSource for MatTableData.
+    this.dataSource = new MatTableDataSource<Npc>(this.TABLE_DATA);
+
+    // Set Paginators and Sorts.
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   /**
    * Get all Homebrew Armors from API.
@@ -52,23 +57,7 @@ export class NpcsComponent implements OnInit, AfterViewInit {
    * TODO - refactor to set the datasource AFTER getting data from the service.
    */
   updateNpcs(): void {
-    this.npcsService.getAllArmors().subscribe((monstersData: any) => {
-      monstersData.forEach((element) => {
-        this.npcsService.getNpcObject(element.url).subscribe((npcData: any) => {
-          this.TABLE_DATA.push(npcData);
-
-          // Set the DataSource for MatTableData.
-          this.dataSource = new MatTableDataSource<Npc>(this.TABLE_DATA);
-
-          // Set Paginators and Sorts.
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-
-          // const blob = new Blob([JSON.stringify(this.TABLE_DATA)], { type: "application/json" });
-          // saveAs(blob, "Armors.json");
-        });
-      });
-    });
+    this.TABLE_DATA = npcs;
   }
 
   /**

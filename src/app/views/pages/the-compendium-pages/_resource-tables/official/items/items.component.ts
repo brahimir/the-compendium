@@ -11,8 +11,6 @@ import { MatSort } from "@angular/material/sort";
 // Dialog Component
 import { ItemDetailsDialogComponent } from "../../resource-details-dialog/item-details-dialog/item-details-dialog.component";
 
-import { saveAs } from "file-saver";
-
 /**
  * @title Items table with Pagination
  */
@@ -49,11 +47,7 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Get all Homebrew Items from API.
-   * Set up DataSource for MatTableData.
-   * Set up Paginators and Sorts.
-   *
-   * TODO - refactor to set the datasource AFTER getting data from the service.
+   * Update the TABLE_DATA.
    */
   updateItems(): void {
     this.TABLE_DATA = items;

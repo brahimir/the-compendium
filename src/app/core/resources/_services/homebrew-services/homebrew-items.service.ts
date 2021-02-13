@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 // Models
-import { Item } from "../../_models/item.model";
+import { Item } from "../../../../views/pages/the-compendium-pages/_resource-tables/_models/item.model";
 // Routes
 import { API_ROUTES } from "../../../../../environments/app-secrets";
 // Http
@@ -13,7 +13,7 @@ import { map, catchError } from "rxjs/operators";
 const BASE_URL = API_ROUTES.HOMEBREW.ITEMS;
 
 @Injectable({
-  providedIn: "root",
+  providedIn: "root"
 })
 export class HomebrewItemsService {
   constructor(private http: HttpClient) {}
@@ -65,19 +65,8 @@ export class HomebrewItemsService {
   generateItemObjects(data: any): Item[] {
     let itemObjects: Item[] = [];
 
-    data.forEach((element) => {
-      itemObjects.push(
-        new Item(
-          element._id,
-          element.name,
-          element.equipment_category,
-          element.gear_category,
-          element.cost,
-          element.weight,
-          element.desc,
-          element.contents
-        )
-      );
+    data.forEach((element: Item) => {
+      itemObjects.push(element);
     });
 
     return itemObjects;

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 // Models
-import { Spell } from "../../_models/spell.model";
+import { Spell } from "../../../../views/pages/the-compendium-pages/_resource-tables/_models/spell.model";
 // Routes
 import { API_ROUTES } from "../../../../../environments/app-secrets";
 // Http
@@ -13,7 +13,7 @@ import { map, catchError } from "rxjs/operators";
 const BASE_URL = API_ROUTES.HOMEBREW.SPELLS;
 
 @Injectable({
-  providedIn: "root",
+  providedIn: "root"
 })
 export class HomebrewSpellsService {
   constructor(private http: HttpClient) {}
@@ -65,29 +65,8 @@ export class HomebrewSpellsService {
   generateSpellObjects(data: any): Spell[] {
     let spellObjects: Spell[] = [];
 
-    data.forEach((element) => {
-      spellObjects.push(
-        new Spell(
-          element._id,
-          element.name,
-          element.desc,
-          element.higher_level,
-          element.range,
-          element.components,
-          element.material,
-          element.ritual,
-          element.duration,
-          element.concentration,
-          element.casting_time,
-          element.level,
-          element.attack_type,
-          element.damage,
-          element.school,
-          element.classes,
-          element.subclasses,
-          element.ratings
-        )
-      );
+    data.forEach((element: Spell) => {
+      spellObjects.push(element);
     });
 
     return spellObjects;

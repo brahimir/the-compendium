@@ -54,6 +54,7 @@ export class ArmorsComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * Update the TABLE_DATA.
    */
   updateArmors(): void {
     this.TABLE_DATA = armors;

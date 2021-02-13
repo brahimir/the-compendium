@@ -1,6 +1,7 @@
 export interface Armor {
-  // start:: Official Schema
+  // Required
   name: string;
+  // Optional
   armor_category?: string;
   armor_class?: {
     base: number;
@@ -14,7 +15,6 @@ export interface Armor {
     quantity: number;
     unit: string;
   };
-  // end:: Official Schema
   id?: number;
   requires_attunement?: boolean;
   rarity?: string;
