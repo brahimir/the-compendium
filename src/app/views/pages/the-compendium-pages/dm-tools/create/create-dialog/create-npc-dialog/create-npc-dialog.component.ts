@@ -105,24 +105,24 @@ export class CreateNpcDialogComponent implements OnInit {
   initForm(): void {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
-        name: [, Validators.required],
-        size: ["", Validators.required],
-        type: [""],
-        subtype: [""],
-        alignment: ["", Validators.required],
-        armor_class: ["", Validators.required],
-        hit_points: [""],
-        hit_dice_number: [""],
-        hit_dice_die: [""],
-        languages: [""],
-        challenge_rating: [""],
-        proficiencies: [""],
-        xp: [""]
+        name: [null, Validators.required],
+        size: [null, Validators.required],
+        type: [null],
+        subtype: [null],
+        alignment: [null, Validators.required],
+        armor_class: [null, Validators.required],
+        hit_points: [null],
+        hit_dice_number: [null],
+        hit_dice_die: [null],
+        languages: [null],
+        challenge_rating: [null],
+        proficiencies: [null],
+        xp: [null]
       }),
       speed: this.fb.group({
-        speed_Walk: [""],
-        speed_Fly: [""],
-        speed_Swim: [""]
+        speed_Walk: [null],
+        speed_Fly: [null],
+        speed_Swim: [null]
       }),
       abilityScores: this.fb.group({
         ability_scores_STR: [10],
@@ -133,17 +133,17 @@ export class CreateNpcDialogComponent implements OnInit {
         ability_scores_CHA: [10]
       }),
       resistancesAndVulnerabilities: this.fb.group({
-        rav_damage_vulnerabilities: [""],
-        rav_damage_resistances: [""],
-        rav_damage_immunities: [""],
-        rav_condition_immunities: [""]
+        rav_damage_vulnerabilities: [null],
+        rav_damage_resistances: [null],
+        rav_damage_immunities: [null],
+        rav_condition_immunities: [null]
       }),
       senses: this.fb.group({
-        senses_Blindsight: [""],
-        senses_Darkvision: [""],
-        senses_Tremorsense: [""],
-        senses_Truesight: [""],
-        senses_Passive_Perception: [""]
+        senses_Blindsight: [null],
+        senses_Darkvision: [null],
+        senses_Tremorsense: [null],
+        senses_Truesight: [null],
+        senses_Passive_Perception: [null]
       }),
       abilitiesAndActions: this.fb.group({
         special_abilities: this.fb.array([]),
@@ -269,8 +269,8 @@ export class CreateNpcDialogComponent implements OnInit {
    */
   initSpecialAbilities(): FormGroup {
     return this.fb.group({
-      name: ["", Validators.required],
-      desc: ["", Validators.required]
+      name: [null, Validators.required],
+      desc: [null, Validators.required]
     });
   }
 
@@ -281,8 +281,8 @@ export class CreateNpcDialogComponent implements OnInit {
    */
   initActions(): FormGroup {
     return this.fb.group({
-      name: ["", Validators.required],
-      desc: ["", Validators.required]
+      name: [null, Validators.required],
+      desc: [null, Validators.required]
     });
   }
 
@@ -293,8 +293,8 @@ export class CreateNpcDialogComponent implements OnInit {
    */
   initLegendaryActions(): FormGroup {
     return this.fb.group({
-      name: ["", Validators.required],
-      desc: ["", Validators.required]
+      name: [null, Validators.required],
+      desc: [null, Validators.required]
     });
   }
 
