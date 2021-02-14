@@ -2559,7 +2559,7 @@ export const items: Item[] = [
     weight: 10
   },
   {
-    name: "Potion of healing",
+    name: "Potion of Healing",
     equipment_category: {
       index: "adventuring-gear",
       name: "Adventuring Gear",
@@ -2574,6 +2574,60 @@ export const items: Item[] = [
     weight: 0.5,
     desc: [
       "A character who drinks the magical red fluid in this vial regains 2d4 + 2 hit points. Drinking or administering a potion takes an action."
+    ]
+  },
+  {
+    name: "Potion of Greater Healing",
+    equipment_category: {
+      index: "adventuring-gear",
+      name: "Adventuring Gear",
+      url: "/api/equipment-categories/adventuring-gear"
+    },
+    gear_category: {
+      index: "standard-gear",
+      name: "Standard Gear",
+      url: "/api/equipment-categories/standard-gear"
+    },
+    cost: { quantity: 200, unit: "gp" },
+    weight: 0.5,
+    desc: [
+      "A character who drinks the magical red fluid in this vial regains 4d4 + 4 hit points. Drinking or administering a potion takes an action."
+    ]
+  },
+  {
+    name: "Potion of Superior Healing",
+    equipment_category: {
+      index: "adventuring-gear",
+      name: "Adventuring Gear",
+      url: "/api/equipment-categories/adventuring-gear"
+    },
+    gear_category: {
+      index: "standard-gear",
+      name: "Standard Gear",
+      url: "/api/equipment-categories/standard-gear"
+    },
+    cost: { quantity: 2000, unit: "gp" },
+    weight: 0.5,
+    desc: [
+      "A character who drinks the magical red fluid in this vial regains 8d4 + 8 hit points. Drinking or administering a potion takes an action."
+    ]
+  },
+  {
+    name: "Potion of Supreme Healing",
+    equipment_category: {
+      index: "adventuring-gear",
+      name: "Adventuring Gear",
+      url: "/api/equipment-categories/adventuring-gear"
+    },
+    gear_category: {
+      index: "standard-gear",
+      name: "Standard Gear",
+      url: "/api/equipment-categories/standard-gear"
+    },
+    cost: { quantity: 200000, unit: "gp" },
+    weight: 0.5,
+    desc: [
+      "A character who drinks the magical red fluid in this vial regains 10d4 + 20 hit points. Drinking or administering a potion takes an action."
     ]
   },
   {
@@ -5823,25 +5877,6 @@ export const items: Item[] = [
     desc: [
       "Potion, uncommon",
       'When you drink this potion, you gain the "enlarge" effect of the enlarge/reduce spell for 1d4 hours (no concentration required). The red in the potion\'s liquid continuously expands from a tiny bead to color the clear liquid around it and then contracts. Shaking the bottle fails to interrupt this process.'
-    ]
-  },
-  {
-    name: "Potion of Healing",
-    equipment_category: {
-      index: "potion",
-      name: "Potion",
-      url: "/api/equipment-categories/potion"
-    },
-    desc: [
-      "Potion, varies",
-      "You regain hit points when you drink this potion. The number of hit points depends on the potion's rarity, as shown in the Potions of Healing table. Whatever its potency, the potion's red liquid glimmers when agitated.",
-      "Potions of Healing (table)",
-      "| Potion of ... | Rarity | HP Regained |",
-      "|---|---|---|",
-      "| Healing | Common | 2d4 + 2 |",
-      "| Greater healing | Uncommon | 4d4 + 4 |",
-      "| Superior healing | Rare | 8d4 + 8 |",
-      "| Supreme healing | Very rare | 10d4 + 20 |"
     ]
   },
   {
