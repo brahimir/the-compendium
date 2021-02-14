@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
-import { Npc } from "../../../../../../core/resources/_models/npc.model";
+import { Npc } from "../../_models/npc.model";
 // Services
 import { HomebrewNpcsService } from "../../../../../../core/resources/_services/homebrew-services/homebrew-npcs.service";
 import { FormattingService } from "src/app/core/resources/_services/formatting.service";
@@ -15,7 +15,7 @@ import { NpcDetailsDialogComponent } from "../../resource-details-dialog/npc-det
 @Component({
   selector: "kt-homebrew-npcs",
   templateUrl: "../../official/npcs/npcs.component.html",
-  styleUrls: ["./homebrew-npcs.component.scss"],
+  styleUrls: ["./homebrew-npcs.component.scss"]
 })
 export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -69,7 +69,7 @@ export class HomebrewNpcsComponent implements OnInit, AfterViewInit {
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData,
+      data: dialogData
     };
 
     // Opens the dialog window.

@@ -105,7 +105,7 @@ export class CreateNpcDialogComponent implements OnInit {
   initForm(): void {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
-        name: [null, Validators.required],
+        name: [, Validators.required],
         size: [null, Validators.required],
         type: [null],
         subtype: [null],

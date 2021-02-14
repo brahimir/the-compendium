@@ -58,7 +58,7 @@ export class CreateWeaponDialogComponent implements OnInit {
         name: [null, Validators.required],
         weapon_category: [null],
         weapon_range: [null],
-        cost_quantity: ["", Validators.required],
+        cost_quantity: [null, Validators.required],
         cost_unit: ["gp", Validators.required],
         weight: [null],
         requires_attunement: [false],
@@ -129,7 +129,7 @@ export class CreateWeaponDialogComponent implements OnInit {
         console.log(err);
 
         // Show error snackbar message.
-        const message = "There was a problem creating your Homebrew Weapon. Please try again.";
+        const message = "There was a problem adding your Homebrew Weapon. Please try again.";
         this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
       }
     );

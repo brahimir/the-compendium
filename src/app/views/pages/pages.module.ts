@@ -38,7 +38,7 @@ import { MatIconModule } from "@angular/material/icon";
 import {
   MatBottomSheetModule,
   MatBottomSheetRef,
-  MAT_BOTTOM_SHEET_DATA,
+  MAT_BOTTOM_SHEET_DATA
 } from "@angular/material/bottom-sheet";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatDividerModule } from "@angular/material/divider";
@@ -82,7 +82,6 @@ import { EditPlotDialogComponent } from "./the-compendium-pages/dm-tools/storybo
 import { SessionSummariesDetailsDialogComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/details-dialog/session-summaries-details-dialog.component";
 import { CreateSessionDialogComponent } from "./the-compendium-pages/dm-tools/create/create-dialog/create-session-dialog/create-session-dialog.component";
 import { EditSessionDialogComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
-import { RemoveSessionDialogComponent } from "./the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
 
 // * Homebrew Pages
 import { HomebrewWeaponsComponent } from "./the-compendium-pages/_resource-tables/homebrew/homebrew-weapons/homebrew-weapons.component";
@@ -158,10 +157,9 @@ import { AddCombatInstanceComponent } from "./the-compendium-pages/dm-tools/comb
     SessionSummariesComponent,
     SessionSummariesDetailsDialogComponent,
     EditSessionDialogComponent,
-    RemoveSessionDialogComponent,
     AddUnitDialogComponent,
     EditUnitDialogComponent,
-    AddCombatInstanceComponent,
+    AddCombatInstanceComponent
   ],
   exports: [],
   imports: [
@@ -207,8 +205,8 @@ import { AddCombatInstanceComponent } from "./the-compendium-pages/dm-tools/comb
     CoreModule,
     PartialsModule,
     // Router
-    RouterModule,
+    RouterModule
   ],
-  providers: [],
+  providers: []
 })
 export class PagesModule {}

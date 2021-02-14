@@ -77,7 +77,7 @@ export class CreateSpellDialogComponent implements OnInit {
           spellComponent_V: [false],
           spellComponent_S: [false],
           spellComponent_M: [false],
-          material: [""]
+          material: [null]
         }),
         description: [, Validators.required],
         higher_level: [null]
@@ -116,16 +116,20 @@ export class CreateSpellDialogComponent implements OnInit {
       (res) => {
         this.isSubmitted = true;
         this.dialogRef.close({ isisSubmitted: this.isSubmitted });
+
+        // Show confirmation snackbar message.
+        const message = "Homebrew Spell successfully added.";
+        this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
       },
       (err) => {
         this.dialogRef.close({ isisSubmitted: this.isSubmitted });
         console.log(err);
+
+        // Show error snackbar message.
+        const message = "There was a problem adding your Homebrew Spell. Please try again.";
+        this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
       }
     );
-
-    // Show confirmation snackbar message.
-    const message = "Homebrew Spell successfully added.";
-    this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
   }
 
   preparePayload(): any {

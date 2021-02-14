@@ -1,60 +1,62 @@
-<div class="card card-custom">
-  <!-- start:: Card Header -->
-  <div class="card-header">
-    <div class="card-title">
-      <div class="card-label">
-        <h2>{{ headerTitle }}</h2>
-      </div>
-    </div>
-
-    <!-- start:: Card Toolbar -->
-    <div class="card-toolbar">
-      <div class="d-flex justify-content-end">
-        <button mat-icon-button mat-dialog-close class="dialog-button-close">
-          <mat-icon>close</mat-icon>
-        </button>
-      </div>
-    </div>
-    <!-- end:: Card Toolbar -->
-  </div>
-  <!-- end:: Card Header -->
-
-  <!-- start:: Card Body -->
-  <div class="card-body">
-    <p class="mb-5">{{ confirmationMessage }}</p>
-  </div>
-  <!-- end:: Card Body -->
-
-  <!-- start:: Footer -->
-  <div class="card-footer">
-    <div class="row">
-      <div class="col-6">
-        <div *ngIf="warnNoUndo" class="mr-2">
-          <p class="tc-red font-weight-bold m-0">{{ WARNING_NO_UNDO }}</p>
-          <mat-checkbox color="primary" [(ngModel)]="isAgree"> I understand. </mat-checkbox>
+<mat-dialog-content>
+  <div class="card card-custom">
+    <!-- start:: Card Header -->
+    <div class="card-header">
+      <div class="card-title">
+        <div class="card-label">
+          <h2>{{ headerTitle }}</h2>
         </div>
       </div>
-      <div class="col-6">
-        <div class="d-flex justify-content-between">
-          <div class="mr-2"></div>
-          <div>
-            <button type="button" mat-raised-button mat-dialog-close cdkFocusInitial>
-              {{ textCancelButton }}
-            </button>
-            &nbsp;
-            <button
-              type="button"
-              [disabled]="warnNoUndo && !isAgree"
-              mat-raised-button
-              color="primary"
-              (click)="onSubmit()"
-            >
-              {{ textAgreeButton }}
-            </button>
+
+      <!-- start:: Card Toolbar -->
+      <div class="card-toolbar">
+        <div class="d-flex justify-content-end">
+          <button mat-icon-button mat-dialog-close class="dialog-button-close">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <!-- end:: Card Toolbar -->
+    </div>
+    <!-- end:: Card Header -->
+
+    <!-- start:: Card Body -->
+    <div class="card-body">
+      <p class="mb-5">{{ confirmationMessage }}</p>
+    </div>
+    <!-- end:: Card Body -->
+
+    <!-- start:: Footer -->
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-6">
+          <div *ngIf="warnNoUndo" class="mr-2">
+            <p class="tc-red font-weight-bold m-0">{{ WARNING_NO_UNDO }}</p>
+            <mat-checkbox color="primary" [(ngModel)]="isAgree"> I understand. </mat-checkbox>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="d-flex justify-content-between">
+            <div class="mr-2"></div>
+            <div>
+              <button type="button" mat-raised-button mat-dialog-close cdkFocusInitial>
+                {{ textCancelButton }}
+              </button>
+              &nbsp;
+              <button
+                type="button"
+                [disabled]="warnNoUndo && !isAgree"
+                mat-raised-button
+                color="primary"
+                (click)="onSubmit()"
+              >
+                {{ textAgreeButton }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- end:: Footer -->
   </div>
-  <!-- end:: Footer -->
-</div>
+</mat-dialog-content>

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 // Models
-import { Npc } from "../../_models/npc.model";
+import { Npc } from "../../../../views/pages/the-compendium-pages/_resource-tables/_models/npc.model";
 // Routes
 import { API_ROUTES } from "../../../../../environments/app-secrets";
 // Http
@@ -13,7 +13,7 @@ import { map, catchError } from "rxjs/operators";
 const BASE_URL = API_ROUTES.HOMEBREW.NPCS;
 
 @Injectable({
-  providedIn: "root",
+  providedIn: "root"
 })
 export class HomebrewNpcsService {
   constructor(private http: HttpClient) {}
@@ -65,40 +65,8 @@ export class HomebrewNpcsService {
   generateNpcObjects(data: any): Npc[] {
     let npcObjects: Npc[] = [];
 
-    data.forEach((element) => {
-      npcObjects.push(
-        new Npc(
-          element._id,
-          element.name,
-          element.size,
-          element.type,
-          element.subtype,
-          element.alignment,
-          element.armor_class,
-          element.hit_points,
-          element.hit_dice,
-          element.speed,
-          element.strength,
-          element.dexterity,
-          element.constitution,
-          element.intelligence,
-          element.wisdom,
-          element.charisma,
-          element.proficiencies,
-          element.damage_vulnerabilities,
-          element.damage_resistances,
-          element.damage_immunities,
-          element.condition_immunities,
-          element.senses,
-          element.languages,
-          element.challenge_rating,
-          element.xp,
-          element.special_abilities,
-          element.actions,
-          element.legendary_actions,
-          element.ratings
-        )
-      );
+    data.forEach((element: Npc) => {
+      npcObjects.push(element);
     });
 
     return npcObjects;

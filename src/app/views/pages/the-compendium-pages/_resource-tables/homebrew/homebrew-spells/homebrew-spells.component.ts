@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
-import { Spell } from "../../../../../../core/resources/_models/spell.model";
+import { Spell } from "../../../../../../views/pages/the-compendium-pages/_resource-tables/_models/spell.model";
 // Services
 import { HomebrewSpellsService } from "../../../../../../core/resources/_services/homebrew-services/homebrew-spells.service";
 // MatTable
@@ -14,7 +14,7 @@ import { SpellDetailsDialogComponent } from "../../resource-details-dialog/spell
 @Component({
   selector: "kt-homebrew-spells",
   templateUrl: "../../official/spells/spells.component.html",
-  styleUrls: ["./homebrew-spells.component.scss"],
+  styleUrls: ["./homebrew-spells.component.scss"]
 })
 export class HomebrewSpellsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -64,7 +64,7 @@ export class HomebrewSpellsComponent implements OnInit, AfterViewInit {
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData,
+      data: dialogData
     };
 
     // Opens the dialog window.

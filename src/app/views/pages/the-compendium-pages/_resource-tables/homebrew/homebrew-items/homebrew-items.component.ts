@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
-import { Weapon } from "../../../../../../core/resources/_models/weapon.model";
+import { Item } from "../../../_resource-tables/_models/item.model";
 // Services
 import { HomebrewItemsService } from "../../../../../../core/resources/_services/homebrew-services/homebrew-items.service";
 // MatTable
@@ -14,7 +14,7 @@ import { ItemDetailsDialogComponent } from "../../resource-details-dialog/item-d
 @Component({
   selector: "kt-homebrew-items",
   templateUrl: "../../official/items/items.component.html",
-  styleUrls: ["./homebrew-items.component.scss"],
+  styleUrls: ["./homebrew-items.component.scss"]
 })
 export class HomebrewItemsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -26,12 +26,12 @@ export class HomebrewItemsComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   // Weapons
-  TABLE_DATA: Weapon[] = [];
+  TABLE_DATA: Item[] = [];
 
   constructor(private homebrewItemsService: HomebrewItemsService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.updateHomebrewWeapons();
+    this.updateHomebrewItems();
   }
 
   ngAfterViewInit(): void {}
@@ -41,12 +41,12 @@ export class HomebrewItemsComponent implements OnInit, AfterViewInit {
    * Set up DataSource for MatTableData.
    * Set up Paginators and Sorts.
    */
-  updateHomebrewWeapons(): void {
+  updateHomebrewItems(): void {
     this.homebrewItemsService.getAll().subscribe((data: any) => {
       this.TABLE_DATA = data;
 
       // Set the DataSource for MatTableData.
-      this.dataSource = new MatTableDataSource<Weapon>(this.TABLE_DATA);
+      this.dataSource = new MatTableDataSource<Item>(this.TABLE_DATA);
 
       // Set Paginators and Sorts.
       this.dataSource.paginator = this.paginator;
@@ -58,13 +58,13 @@ export class HomebrewItemsComponent implements OnInit, AfterViewInit {
    * Opens Details Dialog for an Item.
    * @param element The Item that was clicked.
    */
-  openDetails(element: Weapon): void {
+  openDetails(element: Item): void {
     // Pass the Armor object to the dialog here.
     const dialogData = element;
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData,
+      data: dialogData
     };
 
     // Opens the dialog window.

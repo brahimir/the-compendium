@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
-import { Spell } from "src/app/core/resources/_models/spell.model";
+import { Spell } from "../../_models/spell.model";
 // Services
-import { SpellService } from "../../../../../../core/resources/_services//official-services/spells.service";
+import { spells } from "./spells.table";
 // Angular Material
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
@@ -11,22 +11,18 @@ import { MatSort } from "@angular/material/sort";
 // Dialog Component
 import { SpellDetailsDialogComponent } from "../../resource-details-dialog/spell-details-dialog/spell-details-dialog.component";
 
+// import { saveAs } from "file-saver";
+
 @Component({
   selector: "kt-spells",
   templateUrl: "./spells.component.html",
-  styleUrls: ["./spells.component.scss"],
+  styleUrls: ["./spells.component.scss"]
 })
 export class SpellsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  columnsToDisplay: any[] = [
-    "name",
-    "level",
-    "classes",
-    "casting_time",
-    "range",
-  ];
+  columnsToDisplay: any[] = ["name", "level", "classes", "casting_time", "range"];
 
   // Datasource for MatTable
   dataSource: any;
@@ -34,38 +30,23 @@ export class SpellsComponent implements OnInit, AfterViewInit {
   // Spells
   TABLE_DATA: Spell[] = [];
 
-  constructor(private spellsService: SpellService, public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.updateSpells();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    // Set the DataSource for MatTableData.
+    this.dataSource = new MatTableDataSource<Spell>(this.TABLE_DATA);
 
-  /**
-   * Get all Homebrew Spells from API.
-   * Set up DataSource for MatTableData.
-   * Set up Paginators and Sorts.
-   *
-   * TODO - refactor to set the datasource AFTER getting data from the service.
-   */
+    // Set Paginators and Sorts.
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   updateSpells(): void {
-    this.spellsService.getAllSpells().subscribe((equipmentData: any) => {
-      equipmentData.forEach((element) => {
-        this.spellsService
-          .getSpellObject(element.url)
-          .subscribe((spellData: any) => {
-            this.TABLE_DATA.push(spellData);
-            
-            // Set the DataSource for MatTableData.
-            this.dataSource = new MatTableDataSource<Spell>(this.TABLE_DATA);
-
-            // Set Paginators and Sorts.
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-          });
-      });
-    });
+    this.TABLE_DATA = spells;
   }
 
   /**
@@ -78,14 +59,11 @@ export class SpellsComponent implements OnInit, AfterViewInit {
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData,
+      data: dialogData
     };
 
     // Opens the dialog window.
-    const dialogRef = this.dialog.open(
-      SpellDetailsDialogComponent,
-      dialogOptions
-    );
+    const dialogRef = this.dialog.open(SpellDetailsDialogComponent, dialogOptions);
 
     // Handles dialog closing - can do something when the dialog is closed.
     dialogRef.afterClosed().subscribe((result) => {});

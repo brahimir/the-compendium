@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
-import { Armor } from "../../../../../../core/resources/_models/armor.model";
+import { Armor } from "../../_models/armor.model";
 // Services
-import { ArmorsService } from "../../../../../../core/resources/_services/official-services/armors.service";
+import { armors } from "./armors.table";
 // Angular Material
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
@@ -38,36 +38,26 @@ export class ArmorsComponent implements OnInit, AfterViewInit {
   // Armors
   TABLE_DATA: Armor[] = [];
 
-  constructor(private armorsService: ArmorsService, public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.updateArmors();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    // Set the DataSource for MatTableData.
+    this.dataSource = new MatTableDataSource<Armor>(this.TABLE_DATA);
+
+    // Set Paginators and Sorts.
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   /**
-   * Get all Homebrew Armors from API.
-   * Set up DataSource for MatTableData.
-   * Set up Paginators and Sorts.
-   *
-   * TODO - refactor to set the datasource AFTER getting data from the service.
+   * Update the TABLE_DATA.
    */
   updateArmors(): void {
-    this.armorsService.getAllEquipments().subscribe((equipmentData: any) => {
-      equipmentData.forEach((element) => {
-        this.armorsService.getArmorObject(element.url).subscribe((armorData: any) => {
-          this.TABLE_DATA.push(armorData);
-
-          // Set the DataSource for MatTableData.
-          this.dataSource = new MatTableDataSource<Armor>(this.TABLE_DATA);
-
-          // Set Paginators and Sorts.
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        });
-      });
-    });
+    this.TABLE_DATA = armors;
   }
 
   /**
