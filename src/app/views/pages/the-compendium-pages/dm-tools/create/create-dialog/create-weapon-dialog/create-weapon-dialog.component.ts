@@ -55,22 +55,22 @@ export class CreateWeaponDialogComponent implements OnInit {
   initForm(): void {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
-        name: ["", Validators.required],
-        weapon_category: [""],
-        weapon_range: [""],
-        cost_quantity: ["", Validators.required],
+        name: [null, Validators.required],
+        weapon_category: [null],
+        weapon_range: [null],
+        cost_quantity: [null, Validators.required],
         cost_unit: ["gp", Validators.required],
-        weight: [""],
-        requires_attunement: [""],
-        rarity: ["", Validators.required],
-        description: ["", Validators.required]
+        weight: [null],
+        requires_attunement: [false],
+        rarity: [null, Validators.required],
+        description: [null, Validators.required]
       }),
       damageAndRange: this.fb.group({
-        damage_dice_number: ["", Validators.required],
-        damage_dice_die: ["", Validators.required],
-        damage_type: ["", Validators.required],
-        range_normal: [""],
-        range_long: [""]
+        damage_dice_number: [null, Validators.required],
+        damage_dice_die: [null, Validators.required],
+        damage_type: [null, Validators.required],
+        range_normal: [null],
+        range_long: [null]
       }),
       properties: this.fb.group({
         properties_Ammunition: [false],

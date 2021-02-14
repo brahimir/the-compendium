@@ -20,7 +20,7 @@ import { Observable } from "rxjs";
 @Component({
   selector: "kt-create-session-dialog",
   templateUrl: "./create-session-dialog.component.html",
-  styleUrls: ["./create-session-dialog.component.scss"],
+  styleUrls: ["./create-session-dialog.component.scss"]
 })
 export class CreateSessionDialogComponent implements OnInit {
   // Public properties
@@ -67,9 +67,9 @@ export class CreateSessionDialogComponent implements OnInit {
    */
   initForm(): void {
     this.form = this.fb.group({
-      chapter: ["", Validators.required],
-      episode: ["", Validators.required],
-      content: ["", Validators.required],
+      chapter: [null, Validators.required],
+      episode: [null, Validators.required],
+      content: [null, Validators.required]
       // todo - implement a datepicker here to let the user select their own date (recording a session form the past?)
     });
   }
@@ -92,7 +92,7 @@ export class CreateSessionDialogComponent implements OnInit {
       chapter: formValues.chapter,
       episode: formValues.episode,
       date: new Date().toISOString(),
-      content: formValues.content,
+      content: formValues.content
     };
 
     return payload;
@@ -121,17 +121,20 @@ export class CreateSessionDialogComponent implements OnInit {
     newArray.push(payload);
 
     // Update User Session Summaries on server.
-    this.apiService.updateSessionSummaries(this.userId, newArray).subscribe((res) => {
-      if (res.status === 200) {
+    this.apiService.updateSessionSummaries(this.userId, newArray).subscribe(
+      (res) => {
         // Show confirmation snackbar message.
         const message = "Session Summary successfully added.";
         this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
-      } else {
+      },
+      (err) => {
+        console.log(err);
+
         // Show error snackbar message.
         const message = "There was a problem adding your Session Summary. Please try again.";
         this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
       }
-    });
+    );
 
     this.dialogRef.close();
   }

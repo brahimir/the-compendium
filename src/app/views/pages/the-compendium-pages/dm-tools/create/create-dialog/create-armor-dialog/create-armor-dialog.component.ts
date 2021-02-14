@@ -13,7 +13,7 @@ import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 @Component({
   selector: "kt-create-armor-dialog",
   templateUrl: "./create-armor-dialog.component.html",
-  styleUrls: ["./create-armor-dialog.component.scss"],
+  styleUrls: ["./create-armor-dialog.component.scss"]
 })
 export class CreateArmorDialogComponent implements OnInit {
   // Public properties
@@ -47,22 +47,22 @@ export class CreateArmorDialogComponent implements OnInit {
   initForm(): void {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
-        name: ["", Validators.required],
-        armor_category: ["", Validators.required],
-        weight: [""],
-        cost_quantity: ["", Validators.required],
+        name: [null, Validators.required],
+        armor_category: [null, Validators.required],
+        weight: [null],
+        cost_quantity: [null, Validators.required],
         cost_unit: ["gp", Validators.required],
         requires_attunement: [false],
-        rarity: ["", Validators.required],
-        description: ["", Validators.required],
+        rarity: [null, Validators.required],
+        description: [null, Validators.required]
       }),
       armorClassAndRequirements: this.fb.group({
-        armor_class_base: ["", Validators.required],
+        armor_class_base: [null, Validators.required],
         armor_class_dex_bonus: [false],
-        armor_class_max_bonus: [""],
+        armor_class_max_bonus: [null],
         stealth_disadvantage: [false],
-        str_minimum: [0],
-      }),
+        str_minimum: [0]
+      })
     });
   }
 
@@ -106,21 +106,14 @@ export class CreateArmorDialogComponent implements OnInit {
 
     // Show confirmation snackbar message.
     const message = "Homebrew Armor successfully added.";
-    this.layoutUtilsService.showActionNotification(
-      message,
-      MessageType.Create,
-      5000,
-      true,
-      true
-    );
+    this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
   }
 
   preparePayload(): any {
     let formValues: any = this.form.value;
 
     let generalInformation: any = this.form.value.generalInformation;
-    let armorClassAndRequirements: any = this.form.value
-      .armorClassAndRequirements;
+    let armorClassAndRequirements: any = this.form.value.armorClassAndRequirements;
 
     let payload: any = {
       name: generalInformation.name,
@@ -128,18 +121,18 @@ export class CreateArmorDialogComponent implements OnInit {
       armor_class: {
         base: armorClassAndRequirements.armor_class_base,
         dex_bonus: armorClassAndRequirements.armor_class_dex_bonus,
-        max_bonus: armorClassAndRequirements.armor_class_max_bonus,
+        max_bonus: armorClassAndRequirements.armor_class_max_bonus
       },
       str_minimum: armorClassAndRequirements.str_minimum,
       stealth_disadvantage: armorClassAndRequirements.stealth_disadvantage,
       weight: generalInformation.weight,
       cost: {
         quantity: generalInformation.cost_quantity,
-        unit: generalInformation.cost_unit,
+        unit: generalInformation.cost_unit
       },
       requires_attunement: generalInformation.requires_attunement,
       rarity: generalInformation.rarity,
-      desc: [generalInformation.description],
+      desc: [generalInformation.description]
     };
 
     return payload;

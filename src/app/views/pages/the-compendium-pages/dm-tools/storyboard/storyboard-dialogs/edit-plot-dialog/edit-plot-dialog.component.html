@@ -1,27 +1,83 @@
-<div class="card card-custom card-stretch">
-  <!-- start:: Card Header -->
-  <div class="card-header py-3">
-    <div class="card-title align-items-start flex-column">
-      <h2 class="text-dark">
-        Edit <span class="tc-red">{{ plot }}</span>
-      </h2>
-    </div>
-    <!-- start:: Card Toolbar -->
-    <div class="card-toolbar">
-      <div class="d-flex justify-content-end">
-        <button mat-icon-button mat-dialog-close class="dialog-button-close">
-          <mat-icon>close</mat-icon>
-        </button>
+<mat-dialog-content>
+  <div class="card card-custom">
+    <!-- start:: Card Header -->
+    <div class="card-header py-3">
+      <div class="card-title align-items-start flex-column">
+        <h2 class="text-dark">
+          Edit <span class="tc-red">{{ plot }}</span>
+        </h2>
       </div>
+      <!-- start:: Card Toolbar -->
+      <div class="card-toolbar">
+        <div class="d-flex justify-content-end">
+          <button mat-icon-button mat-dialog-close class="dialog-button-close">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <!-- end:: Card Toolbar -->
     </div>
-    <!-- end:: Card Toolbar -->
-  </div>
-  <!-- end:: Card Header -->
+    <!-- end:: Card Header -->
 
-  <!-- start:: Card Body -->
-  <div class="card-body">
-    <!-- start:: Form -->
-    <form [formGroup]="form" class="form-group">
+    <!-- start:: Card Body -->
+    <div class="card-body">
+      <!-- start:: Form -->
+      <form [formGroup]="form" class="form-group">
+        <!-- start:: KT Alert if form has errors. -->
+        <kt-alert
+          *ngIf="hasFormErrors"
+          type="warn"
+          [duration]="30000"
+          [showCloseButton]="true"
+          (close)="onAlertClose($event)"
+        >
+          {{ errorMessage }}
+        </kt-alert>
+        <!-- start:: KT Alert if form has errors. -->
+
+        <!-- start:: Plot Title -->
+        <div class="form-group row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Title</mat-label>
+              <input
+                formControlName="title"
+                matInput
+                [value]="plotTitle"
+                placeholder="Eg. Bandits and Witchers"
+                type="text"
+              />
+              <mat-error> Plot title is <strong>required.</strong> </mat-error>
+              <mat-hint align="start"> The <strong>title</strong> of the plot. </mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- end:: Plot Title -->
+
+        <!-- start:: Plot Description -->
+        <div class="form-group row">
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <textarea
+                matInput
+                [value]="plotDescription"
+                rows="10"
+                formControlName="description"
+                placeholder="Eg. Bandit fled after finding out Cora was a Witcher: reporting to Clasp that there is another Witcher alive and heading to Westruun."
+              ></textarea>
+              <mat-error> The description of the plot is <strong>required.</strong> </mat-error>
+              <mat-hint align="start"> The <strong>description</strong> of the plot. </mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- end:: Plot Description -->
+      </form>
+      <!-- end:: Form -->
+    </div>
+    <!-- end:: Card Body -->
+
+    <!-- start:: Footer -->
+    <div class="card-footer">
       <!-- start:: KT Alert if form has errors. -->
       <kt-alert
         *ngIf="hasFormErrors"
@@ -34,84 +90,30 @@
       </kt-alert>
       <!-- start:: KT Alert if form has errors. -->
 
-      <!-- start:: Plot Title -->
-      <div class="form-group row">
-        <div class="col">
-          <mat-form-field>
-            <mat-label>Title</mat-label>
-            <input
-              formControlName="title"
-              matInput
-              [value]="plotTitle"
-              placeholder="Eg. Bandits and Witchers"
-              type="text"
-            />
-            <mat-error> Plot title is <strong>required.</strong> </mat-error>
-            <mat-hint align="start"> The <strong>title</strong> of the plot. </mat-hint>
-          </mat-form-field>
+      <div class="d-flex justify-content-between">
+        <div class="mr-2"></div>
+        <div>
+          <button
+            type="button"
+            mat-raised-button
+            mat-dialog-close
+            cdkFocusInitial
+            matTooltip="Discard changes"
+          >
+            Cancel</button
+          >&nbsp;
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="onSubmit()"
+            matTooltip="Update plot"
+          >
+            Update
+          </button>
         </div>
-      </div>
-      <!-- end:: Plot Title -->
-
-      <!-- start:: Plot Description -->
-      <div class="form-group row">
-        <div class="col">
-          <mat-form-field appearance="outline">
-            <textarea
-              matInput
-              [value]="plotDescription"
-              rows="10"
-              formControlName="description"
-              placeholder="Eg. Bandit fled after finding out Cora was a Witcher: reporting to Clasp that there is another Witcher alive and heading to Westruun."
-            ></textarea>
-            <mat-error> The description of the plot is <strong>required.</strong> </mat-error>
-            <mat-hint align="start"> The <strong>description</strong> of the plot. </mat-hint>
-          </mat-form-field>
-        </div>
-      </div>
-      <!-- end:: Plot Description -->
-    </form>
-    <!-- end:: Form -->
-  </div>
-  <!-- end:: Card Body -->
-
-  <!-- start:: Footer -->
-  <div class="card-footer">
-    <!-- start:: KT Alert if form has errors. -->
-    <kt-alert
-      *ngIf="hasFormErrors"
-      type="warn"
-      [duration]="30000"
-      [showCloseButton]="true"
-      (close)="onAlertClose($event)"
-    >
-      {{ errorMessage }}
-    </kt-alert>
-    <!-- start:: KT Alert if form has errors. -->
-
-    <div class="d-flex justify-content-between">
-      <div class="mr-2"></div>
-      <div>
-        <button
-          type="button"
-          mat-raised-button
-          mat-dialog-close
-          cdkFocusInitial
-          matTooltip="Discard changes"
-        >
-          Cancel</button
-        >&nbsp;
-        <button
-          type="button"
-          mat-raised-button
-          color="primary"
-          (click)="onSubmit()"
-          matTooltip="Update plot"
-        >
-          Update
-        </button>
       </div>
     </div>
+    <!-- end:: Footer -->
   </div>
-  <!-- end:: Footer -->
-</div>
+</mat-dialog-content>
