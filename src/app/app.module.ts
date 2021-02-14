@@ -47,7 +47,7 @@ import {
   MenuHorizontalService,
   PageConfigService,
   SplashScreenService,
-  SubheaderService,
+  SubheaderService
 } from "./core/_base/layout";
 // Auth
 import { AuthModule } from "./views/pages/auth/auth.module";
@@ -95,7 +95,6 @@ import { EditPlotDialogComponent } from "./views/pages/the-compendium-pages/dm-t
 // Session Summaries
 import { CreateSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/create/create-dialog/create-session-dialog/create-session-dialog.component";
 import { EditSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/edit-session-dialog/edit-session-dialog.component";
-import { RemoveSessionDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/session-summaries/session-summaries-dialogs/remove-session-dialog/remove-session-dialog.component";
 // Combact Tracker
 import { AddCombatInstanceComponent } from "./views/pages/the-compendium-pages/dm-tools/combat-tracker/_dialogs/add-combat-instance/add-combat-instance.component";
 import { AddUnitDialogComponent } from "./views/pages/the-compendium-pages/dm-tools/combat-tracker/_dialogs/add-unit-dialog/add-unit-dialog.component";
@@ -108,7 +107,7 @@ import { ActionNotificationComponent } from "./views/partials/content/crud";
 const MAT_DIALOG_DEFAULTS: MatDialogConfig = {
   minWidth: "60%",
   maxWidth: "60%",
-  hasBackdrop: true,
+  hasBackdrop: true
 };
 
 // tslint:disable-next-line:class-name
@@ -116,7 +115,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelSpeed: 0.5,
   swipeEasing: true,
   minScrollbarLength: 40,
-  maxScrollbarLength: 300,
+  maxScrollbarLength: 300
 };
 
 export function initializeLayoutConfig(appConfig: LayoutConfigService) {
@@ -137,7 +136,7 @@ export function getHighlightLanguages() {
     { name: "typescript", func: typescript },
     { name: "scss", func: scss },
     { name: "xml", func: xml },
-    { name: "json", func: json },
+    { name: "json", func: json }
   ];
 }
 
@@ -152,7 +151,7 @@ export function getHighlightLanguages() {
     environment.isMockEnabled
       ? HttpClientInMemoryWebApiModule.forRoot(FakeApiService, {
           passThruUnknownUrl: true,
-          dataEncapsulation: false,
+          dataEncapsulation: false
         })
       : [],
     NgxPermissionsModule.forRoot(),
@@ -168,7 +167,7 @@ export function getHighlightLanguages() {
     TranslateModule.forRoot(),
     MatProgressSpinnerModule,
     InlineSVGModule.forRoot(),
-    ThemeModule,
+    ThemeModule
   ],
   // ! Add DialogComponents here
   entryComponents: [
@@ -187,7 +186,6 @@ export function getHighlightLanguages() {
     // Sessions Details Dialogs
     SessionSummariesDetailsDialogComponent,
     EditSessionDialogComponent,
-    RemoveSessionDialogComponent,
     // * Storyboard Dialogs
     // Plot Dialogs
     AddPlotDialogComponent,
@@ -207,7 +205,7 @@ export function getHighlightLanguages() {
     EditUnitDialogComponent,
 
     // ! Add Partials Modules here - need to fix this in the future.
-    ActionNotificationComponent,
+    ActionNotificationComponent
   ],
   exports: [],
   providers: [
@@ -222,29 +220,29 @@ export function getHighlightLanguages() {
     // ! start:: MatDialog Defaults
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
-      useValue: MAT_DIALOG_DEFAULTS,
+      useValue: MAT_DIALOG_DEFAULTS
     },
     // ! end:: MatDialog Defaults
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
     {
       provide: HAMMER_GESTURE_CONFIG,
-      useClass: GestureConfig,
+      useClass: GestureConfig
     },
     {
       // layout config initializer
       provide: APP_INITIALIZER,
       useFactory: initializeLayoutConfig,
       deps: [LayoutConfigService],
-      multi: true,
+      multi: true
     },
     {
       provide: HIGHLIGHT_OPTIONS,
       useValue: {
-        languages: getHighlightLanguages,
-      },
+        languages: getHighlightLanguages
+      }
     },
     // template services
     SubheaderService,
@@ -252,8 +250,8 @@ export function getHighlightLanguages() {
     MenuAsideService,
     HttpUtilsService,
     TypesUtilsService,
-    LayoutUtilsService,
+    LayoutUtilsService
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
