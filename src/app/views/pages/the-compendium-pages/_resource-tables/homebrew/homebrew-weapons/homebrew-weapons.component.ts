@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 // Models
-import { Weapon } from "../../../../../../core/resources/_models/weapon.model";
+import { Weapon } from "../../../../../../views/pages/the-compendium-pages/_resource-tables/_models/weapon.model";
 // Services
 import { HomebrewWeaponsService } from "../../../../../../core/resources/_services/homebrew-services/homebrew-weapons.service";
 // MatTable
@@ -14,7 +14,7 @@ import { WeaponDetailsDialogComponent } from "../../resource-details-dialog/weap
 @Component({
   selector: "kt-homebrew-weapons",
   templateUrl: "../../official/weapons/weapons.component.html",
-  styleUrls: ["./homebrew-weapons.component.scss"],
+  styleUrls: ["./homebrew-weapons.component.scss"]
 })
 export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -64,7 +64,7 @@ export class HomebrewWeaponsComponent implements OnInit, AfterViewInit {
 
     // Set the dialog window options here.
     const dialogOptions = {
-      data: dialogData,
+      data: dialogData
     };
 
     // Opens the dialog window.

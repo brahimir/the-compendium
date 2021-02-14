@@ -1,25 +1,26 @@
 export interface Spell {
-  id: number;
-  // start:: Official Schema
+  // Required
   name: string;
-  desc: string[];
-  higher_level: string[];
-  range: string;
-  components: string[];
-  material: string;
-  ritual: boolean;
-  duration: string;
-  concentration: boolean;
-  casting_time: string;
   level: number;
-  attack_type: string;
-  damage: {
-    damage_type: Object;
-    damage_at_slot_level: Object;
+  desc: string[];
+  // Optional
+  id?: number;
+  higher_level?: string[];
+  range?: string;
+  components?: string[];
+  material?: string;
+  ritual?: boolean;
+  duration?: string;
+  concentration?: boolean;
+  casting_time?: string;
+  attack_type?: string;
+  damage?: {
+    damage_type?: Object;
+    damage_at_slot_level?: Object;
+    damage_at_character_level?: Object;
   };
-  school: Object;
-  classes: Object[];
-  subclasses: Object[];
-  // end:: Official Schema
-  ratings: number[];
+  school?: Object;
+  classes?: Object[];
+  subclasses?: Object[];
+  ratings?: number[];
 }

@@ -121,17 +121,20 @@ export class CreateSessionDialogComponent implements OnInit {
     newArray.push(payload);
 
     // Update User Session Summaries on server.
-    this.apiService.updateSessionSummaries(this.userId, newArray).subscribe((res) => {
-      if (res.status === 200) {
+    this.apiService.updateSessionSummaries(this.userId, newArray).subscribe(
+      (res) => {
         // Show confirmation snackbar message.
         const message = "Session Summary successfully added.";
         this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
-      } else {
+      },
+      (err) => {
+        console.log(err);
+
         // Show error snackbar message.
         const message = "There was a problem adding your Session Summary. Please try again.";
         this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
       }
-    });
+    );
 
     this.dialogRef.close();
   }
