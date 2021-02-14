@@ -13,7 +13,7 @@ import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 @Component({
   selector: "kt-create-item-dialog",
   templateUrl: "./create-item-dialog.component.html",
-  styleUrls: ["./create-item-dialog.component.scss"],
+  styleUrls: ["./create-item-dialog.component.scss"]
 })
 export class CreateItemDialogComponent implements OnInit {
   // Public properties
@@ -46,13 +46,13 @@ export class CreateItemDialogComponent implements OnInit {
   initForm(): void {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
-        name: ["", Validators.required],
-        equipment_category: [""],
-        cost_quantity: ["", Validators.required],
+        name: [null, Validators.required],
+        equipment_category: [null],
+        cost_quantity: [null, Validators.required],
         cost_unit: ["gp", Validators.required],
-        weight: [""],
-        description: ["", Validators.required],
-      }),
+        weight: [null],
+        description: [null, Validators.required]
+      })
     });
   }
 
@@ -96,13 +96,7 @@ export class CreateItemDialogComponent implements OnInit {
 
     // Show confirmation snackbar message.
     const message = "Homebrew Item successfully added.";
-    this.layoutUtilsService.showActionNotification(
-      message,
-      MessageType.Create,
-      5000,
-      true,
-      true
-    );
+    this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
   }
 
   preparePayload(): any {
@@ -112,15 +106,15 @@ export class CreateItemDialogComponent implements OnInit {
     let payload = {
       name: generalInformation.name,
       equipment_category: {
-        name: generalInformation.equipment_category,
+        name: generalInformation.equipment_category
       },
       gear_category: {},
       cost: {
         quantity: generalInformation.cost_quantity,
-        unit: generalInformation.cost_unit,
+        unit: generalInformation.cost_unit
       },
       weight: generalInformation.weight,
-      desc: generalInformation.description,
+      desc: generalInformation.description
     };
 
     return payload;

@@ -20,7 +20,7 @@ import { Observable } from "rxjs";
 @Component({
   selector: "kt-create-session-dialog",
   templateUrl: "./create-session-dialog.component.html",
-  styleUrls: ["./create-session-dialog.component.scss"],
+  styleUrls: ["./create-session-dialog.component.scss"]
 })
 export class CreateSessionDialogComponent implements OnInit {
   // Public properties
@@ -67,9 +67,9 @@ export class CreateSessionDialogComponent implements OnInit {
    */
   initForm(): void {
     this.form = this.fb.group({
-      chapter: ["", Validators.required],
-      episode: ["", Validators.required],
-      content: ["", Validators.required],
+      chapter: [null, Validators.required],
+      episode: [null, Validators.required],
+      content: [null, Validators.required]
       // todo - implement a datepicker here to let the user select their own date (recording a session form the past?)
     });
   }
@@ -92,7 +92,7 @@ export class CreateSessionDialogComponent implements OnInit {
       chapter: formValues.chapter,
       episode: formValues.episode,
       date: new Date().toISOString(),
-      content: formValues.content,
+      content: formValues.content
     };
 
     return payload;

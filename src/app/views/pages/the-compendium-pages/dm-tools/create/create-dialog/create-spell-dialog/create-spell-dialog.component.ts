@@ -20,7 +20,7 @@ export interface DnD_Class {
 @Component({
   selector: "kt-create-spell-dialog",
   templateUrl: "./create-spell-dialog.component.html",
-  styleUrls: ["./create-spell-dialog.component.scss"],
+  styleUrls: ["./create-spell-dialog.component.scss"]
 })
 export class CreateSpellDialogComponent implements OnInit {
   // Public properties
@@ -61,27 +61,27 @@ export class CreateSpellDialogComponent implements OnInit {
   initForm(): void {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
-        name: [, Validators.required],
-        level: ["", Validators.required],
-        range: ["", Validators.required],
-        casting_time: ["", Validators.required],
-        duration: ["", Validators.required],
+        name: [null, Validators.required],
+        level: [null, Validators.required],
+        range: [null, Validators.required],
+        casting_time: [null, Validators.required],
+        duration: [null, Validators.required],
         is_attack_spell: [false],
         concentration: [false],
         ritual: [false],
-        damage_type: [""],
-        attack_type: [""],
-        school: [""],
-        classes: [""],
+        damage_type: [null],
+        attack_type: [null],
+        school: [null],
+        classes: [null],
         spellComponents: this.fb.group({
           spellComponent_V: [false],
           spellComponent_S: [false],
           spellComponent_M: [false],
-          material: [""],
+          material: [""]
         }),
         description: [, Validators.required],
-        higher_level: [""],
-      }),
+        higher_level: [null]
+      })
     });
   }
 
@@ -125,13 +125,7 @@ export class CreateSpellDialogComponent implements OnInit {
 
     // Show confirmation snackbar message.
     const message = "Homebrew Spell successfully added.";
-    this.layoutUtilsService.showActionNotification(
-      message,
-      MessageType.Create,
-      5000,
-      true,
-      true
-    );
+    this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
   }
 
   preparePayload(): any {
@@ -156,13 +150,13 @@ export class CreateSpellDialogComponent implements OnInit {
       attack_type: generalInformation.attack_type,
       damage: {
         damage_type: {
-          name: generalInformation.damage_type,
-        },
+          name: generalInformation.damage_type
+        }
       },
       school: {
-        name: generalInformation.school,
+        name: generalInformation.school
       },
-      classes: this.spell_classes,
+      classes: this.spell_classes
     };
 
     // Check if higher_level has a value - if not, set it to null.

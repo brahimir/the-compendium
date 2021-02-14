@@ -14,7 +14,7 @@ import { LayoutUtilsService, MessageType } from "src/app/core/_base/crud";
 @Component({
   selector: "kt-create-weapon-dialog",
   templateUrl: "./create-weapon-dialog.component.html",
-  styleUrls: ["./create-weapon-dialog.component.scss"],
+  styleUrls: ["./create-weapon-dialog.component.scss"]
 })
 export class CreateWeaponDialogComponent implements OnInit {
   // Public properties
@@ -55,22 +55,22 @@ export class CreateWeaponDialogComponent implements OnInit {
   initForm(): void {
     this.form = this.fb.group({
       generalInformation: this.fb.group({
-        name: ["", Validators.required],
-        weapon_category: [""],
-        weapon_range: [""],
+        name: [null, Validators.required],
+        weapon_category: [null],
+        weapon_range: [null],
         cost_quantity: ["", Validators.required],
         cost_unit: ["gp", Validators.required],
-        weight: [""],
-        requires_attunement: [""],
-        rarity: ["", Validators.required],
-        description: ["", Validators.required],
+        weight: [null],
+        requires_attunement: [false],
+        rarity: [null, Validators.required],
+        description: [null, Validators.required]
       }),
       damageAndRange: this.fb.group({
-        damage_dice_number: ["", Validators.required],
-        damage_dice_die: ["", Validators.required],
-        damage_type: ["", Validators.required],
-        range_normal: [""],
-        range_long: [""],
+        damage_dice_number: [null, Validators.required],
+        damage_dice_die: [null, Validators.required],
+        damage_type: [null, Validators.required],
+        range_normal: [null],
+        range_long: [null]
       }),
       properties: this.fb.group({
         properties_Ammunition: [false],
@@ -83,8 +83,8 @@ export class CreateWeaponDialogComponent implements OnInit {
         properties_Special: [false],
         properties_Thrown: [false],
         properties_Two_Handed: [false],
-        properties_Versatile: [false],
-      }),
+        properties_Versatile: [false]
+      })
     });
   }
 
@@ -113,26 +113,25 @@ export class CreateWeaponDialogComponent implements OnInit {
     }
 
     let payload = this.preparePayload();
+    console.log(payload);
 
     this.apiService.create(payload).subscribe(
       (res) => {
         this.isSubmitted = true;
         this.dialogRef.close({ isisSubmitted: this.isSubmitted });
+
+        // Show confirmation snackbar message.
+        const message = "Homebrew Weapon successfully added.";
+        this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
       },
       (err) => {
         this.dialogRef.close({ isisSubmitted: this.isSubmitted });
         console.log(err);
-      }
-    );
 
-    // Show confirmation snackbar message.
-    const message = "Homebrew Weapon successfully added.";
-    this.layoutUtilsService.showActionNotification(
-      message,
-      MessageType.Create,
-      5000,
-      true,
-      true
+        // Show error snackbar message.
+        const message = "There was a problem creating your Homebrew Weapon. Please try again.";
+        this.layoutUtilsService.showActionNotification(message, MessageType.Create, 5000, true, true);
+      }
     );
   }
 
@@ -149,25 +148,24 @@ export class CreateWeaponDialogComponent implements OnInit {
       weapon_range: generalInformation.weapon_range,
       cost: {
         quantity: generalInformation.cost_quantity,
-        unit: generalInformation.cost_unit,
+        unit: generalInformation.cost_unit
       },
       damage: {
-        damage_dice:
-          damageAndRange.damage_dice_number + damageAndRange.damage_dice_die,
+        damage_dice: damageAndRange.damage_dice_number + damageAndRange.damage_dice_die,
         damage_type: {
-          name: damageAndRange.damage_type,
-        },
+          name: damageAndRange.damage_type
+        }
       },
       range: {
         normal: damageAndRange.range_normal,
-        long: damageAndRange.range_long,
+        long: damageAndRange.range_long
       },
       weight: generalInformation.weight,
       properties: this.getPropertiesArray(properties),
       // end:: Official Schema
       requires_attunement: generalInformation.requires_attunement,
       rarity: generalInformation.rarity,
-      desc: [generalInformation.description],
+      desc: [generalInformation.description]
     };
 
     return payload;
@@ -188,7 +186,7 @@ export class CreateWeaponDialogComponent implements OnInit {
         propertyName = property.split("_")[1];
 
         results.push({
-          name: propertyName,
+          name: propertyName
         });
       }
     }
