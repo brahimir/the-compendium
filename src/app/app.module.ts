@@ -106,7 +106,7 @@ import { ActionNotificationComponent } from "./views/partials/content/crud";
 // MatDialog Defaults
 const MAT_DIALOG_DEFAULTS: MatDialogConfig = {
   minWidth: "60%",
-  maxWidth: "60%",
+  maxWidth: "80%",
   hasBackdrop: true
 };
 
